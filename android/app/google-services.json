@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1036447352166",
+    "project_id": "sneakerapp-f4de5",
+    "storage_bucket": "sneakerapp-f4de5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1036447352166:android:9785640a3654ad265ff4a7",
+        "android_client_info": {
+          "package_name": "com.example.sneaker_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1036447352166-1pqi5feh9eoms54lauvb9er2p4sa85nh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sneaker_app",
+            "certificate_hash": "c8bbf4a92d13d5a38c41ee3ef64483e7ce84d383"
+          }
+        },
+        {
+          "client_id": "1036447352166-5kaulgnqit9dtvc5knr8csn56es767no.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMD_EZwZBSN1iq3vmNEXZeXJOrENpgXn4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1036447352166-5kaulgnqit9dtvc5knr8csn56es767no.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
