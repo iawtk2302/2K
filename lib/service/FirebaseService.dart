@@ -1,7 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+
+import '../router/routes.dart';
 
 class FirebaseService {
   final _auth = FirebaseAuth.instance;
@@ -49,6 +52,42 @@ class FirebaseService {
     }
   }
 
+  createAccount(String email, String password, BuildContext context) async {
+    try {
+      final credential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      await FirebaseAuth.instance.currentUser?.sendEmailVerification();
+      Navigator.pushReplacementNamed(context, Routes.login);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+        const snackBar = SnackBar(
+          content: Text('The password provided is too weak.'),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
+        const snackBar = SnackBar(
+          content: Text('The account already exists for that email.'),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+  resetPass(String email,BuildContext context)async{
+    await FirebaseAuth.instance
+    .sendPasswordResetEmail(email: email);
+    const snackBar = SnackBar(
+          backgroundColor: Colors.green,
+          content: Text('Please check your email.'),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
   signOut() async {
     await _auth.signOut();
     await _googleSignIn.signOut();

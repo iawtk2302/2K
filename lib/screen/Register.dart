@@ -1,60 +1,28 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
-import 'package:sneaker_app/router/routes.dart';
-import 'package:sneaker_app/service/FirebaseService.dart';
-import 'package:sneaker_app/widget/AuthButton.dart';
 
+import '../router/routes.dart';
+import '../service/FirebaseService.dart';
+import '../widget/AuthButton.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
+  final _formKey = GlobalKey<FormState>();
   bool isHiddenPassword = true;
   final _emailController = TextEditingController();
   final _passController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
-  bool validateEmail = true;
-  bool validatePass = true;
-  bool isChecked = false;
-  late Box box;
-@override
-  void initState() {
-    super.initState();
-    createBox();
-  }
-
-  void createBox()async{
-    box=await Hive.openBox('login');
-    getData();
-  }
-  void getData()async{
-    if(box.get('email')!=null&&box.get('pass')!=null){
-      _emailController.text=box.get('email');
-      _passController.text=box.get('pass');
-      setState(() {
-        isChecked=box.get('remember');
-      });
-    }
-  }
-  rememberMe(){
-    if(isChecked){
-      box.put('email', _emailController.text);
-      box.put('pass', _passController.text);
-      box.put('remember',isChecked);
-    }
-    else{
-      box.put('email', null);
-      box.put('pass', null);
-      box.put('remember',isChecked);
-    }
-  }
+  final _nameController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    CollectionReference users = FirebaseFirestore.instance.collection('User');
     return Scaffold(
         backgroundColor: Colors.white,
         body: Center(
@@ -70,12 +38,58 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const Padding(
                   padding: EdgeInsets.only(bottom:30),
-                  child: Text("Login To Your Account", style: TextStyle(fontSize: 28, fontWeight: FontWeight.w700),),
+                  child: Text("Create Your Account", style: TextStyle(fontSize: 28, fontWeight: FontWeight.w700),),
                 ),
                 Form(
                     key: _formKey,
                     child: Column(
                       children: [
+                        Theme(
+                          data: Theme.of(context).copyWith(
+                        colorScheme: ThemeData().colorScheme.copyWith(
+                              primary: Colors.black,
+                            ),
+                          ),
+                          child: SizedBox(
+                        width: size.width * 0.8,
+                        child: TextFormField(
+                          controller: _nameController,
+                          validator: (value) {
+                            if(value == null ||value.isEmpty){
+                              return "Required";
+                            }
+                            return null;
+                          },
+                          keyboardType: TextInputType.emailAddress,
+                          textAlignVertical: TextAlignVertical.center,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                              hintText: "Name",
+                              prefixIcon: const Icon(
+                                Icons.person,
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: const BorderSide(
+                                  width: 1.5,
+                                ),
+                              ),
+                              contentPadding:
+                                  const EdgeInsets.symmetric(vertical: 20),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: const BorderSide(
+                                    width: 1.5, color: Color(0xFFFAFAFA)),
+                              ),
+                              filled: true,
+                              fillColor: const Color(0xFFFAFAFA)),
+                        ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
                         Theme(
                           data: Theme.of(context).copyWith(
                             colorScheme: ThemeData().colorScheme.copyWith(
@@ -179,37 +193,29 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                         ),
+                        const SizedBox(
+                          height: 20,
+                        ),
                       ],
                     )),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Checkbox(value: isChecked,
-                      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5.0))), 
-                      checkColor: Colors.white,
-                      activeColor: Colors.black,
-                      onChanged: (bool? value){setState(() {
-                        isChecked=value!;
-                      });}),
-                      const Text("Remember me",style: TextStyle(fontWeight: FontWeight.w600),),
-                      SizedBox(width:size.width*0.08)
-                    ],
-                  ),
-                ),
-                Padding(
                   padding: const EdgeInsets.only(bottom: 20),
                   child: InkWell(
-                    onTap: () {
+                    onTap: () async{
                       if (_formKey.currentState!.validate()) {
-                        signInWithEmailPassword(context, _emailController.text.trim(), _passController.text.trim());
-                        rememberMe();
+                        showDialog(context: context, builder: (context) => const Center(child: CircularProgressIndicator(color: Colors.black),),);
+                        FirebaseService().createAccount(_emailController.text, _passController.text, context);
+                        await users.add({
+                          "id":FirebaseAuth.instance.currentUser!.uid,
+                          "name":_nameController.text,
+                          "email":_emailController.text.trim()
+                        }).then((value) => print("User Added"))
+                        .catchError((error) => print("Failed to add user: $error"));
                       }
                     },
                     child: Container(                
                       child: Center(
-                          child: Text("Sign In",
+                          child: Text("Sign Up",
                               style: TextStyle(
                                   fontWeight: FontWeight.w700,
                                   color: Colors.white))),
@@ -218,19 +224,6 @@ class _LoginPageState extends State<LoginPage> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
                           color: Colors.black),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.pushReplacementNamed(context, Routes.forgot);
-                    },
-                    child: const Text(
-                      "Forgot the password?",
-                      style: TextStyle(
-                          fontFamily: "Urbanist", fontWeight: FontWeight.w600),
                     ),
                   ),
                 ),
@@ -282,14 +275,14 @@ class _LoginPageState extends State<LoginPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text(
-                        "Don't have an account? ",
+                        "Already have an account? ",
                       ),
                       InkWell(
                         onTap: () {
-                          Navigator.pushReplacementNamed(context, Routes.register);
+                          Navigator.pushReplacementNamed(context, Routes.login);
                         },
                         child: const Text(
-                          "Sign up",
+                          "Sign in",
                           style: TextStyle(
                               color: Colors.black, fontWeight: FontWeight.w700),
                         ),
@@ -303,7 +296,6 @@ class _LoginPageState extends State<LoginPage> {
         ));
   }
 }
-
 signInWithGG(BuildContext context) async {
   await FirebaseService().signInWithGoole();
   if (FirebaseAuth.instance.currentUser != null)
@@ -315,28 +307,3 @@ signInWithFB(BuildContext context) async {
   if (FirebaseAuth.instance.currentUser != null)
     Navigator.pushReplacementNamed(context, Routes.home);
 }
-
-signInWithEmailPassword(BuildContext context, String email, String password) async {
-  showDialog(
-    context: context,
-    builder: (context) => const Center(
-      child: CircularProgressIndicator(
-        color: Colors.black,
-      ),
-    ),
-  );
-  await FirebaseService().signInWithEmailPassword(email, password);
-  // ignore: use_build_context_synchronously
-  if (FirebaseAuth.instance.currentUser != null&&FirebaseAuth.instance.currentUser!.emailVerified)
-    Navigator.pushReplacementNamed(context, Routes.home);
-  else{
-    Navigator.of(context).pop();
-    const snackBar = SnackBar(
-      backgroundColor: Colors.red,
-          content: Text('Please verify your email!'),
-        );
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-  }   
-}
-
-  
