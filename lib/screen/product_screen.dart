@@ -13,42 +13,14 @@ class ProductScreen extends StatefulWidget {
 }
 
 List<Map<String, String>> catagoryBrand = [
-  {
-    'imgUri': 'https://cdn-icons-png.flaticon.com/512/732/732229.png',
-    'name': 'Nike'
-  },
-  {
-    'imgUri': 'https://cdn-icons-png.flaticon.com/128/732/732160.png',
-    'name': 'Adidas'
-  },
-  {
-    'imgUri': 'https://cdn-icons-png.flaticon.com/128/47/47137.png',
-    'name': 'Puma'
-  },
-  {
-    'imgUri':
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Vans-logo.svg/2560px-Vans-logo.svg.png',
-    'name': 'Vans'
-  },
-  {
-    'imgUri':
-        'https://logos-world.net/wp-content/uploads/2021/08/Balenciaga-Logo.png',
-    'name': 'Balenciaga'
-  },
-  {
-    'imgUri':
-        'https://1000logos.net/wp-content/uploads/2016/12/Converse-Logo-2007.png',
-    'name': 'Converse'
-  },
-  {
-    'imgUri':
-        'https://brademar.com/wp-content/uploads/2022/05/New-Balance-Logo-PNG-2008-%E2%80%93-Now-2.png',
-    'name': 'New balance'
-  },
-  {
-    'imgUri': 'https://cdn-icons-png.flaticon.com/512/8469/8469246.png',
-    'name': 'More'
-  },
+  {'name': 'Men'},
+  {'name': 'Woman'},
+  {'name': 'Kids'},
+  {'name': 'Jordan'},
+  // {'name': 'Balenciaga'},
+  // {'name': 'Converse'},
+  // {'name': 'New balance'},
+  // {'name': 'More'},
 ];
 
 class _ProductScreenState extends State<ProductScreen>
@@ -106,10 +78,10 @@ class _ProductScreenState extends State<ProductScreen>
           Padding(
             padding: const EdgeInsets.only(top: 16.0, bottom: 16, left: 16),
             child: SizedBox(
-              height: 40,
+              height: 38,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: 8,
+                itemCount: catagoryBrand.length,
                 itemBuilder: ((context, index) => Row(
                       children: [
                         InkWell(

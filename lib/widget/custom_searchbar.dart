@@ -25,50 +25,52 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
     return ClipRRect(
       borderRadius: BorderRadius.circular(10.0),
       child: Container(
-        color: Color(0xFFF5F5F5),
         child: Theme(
           data: Theme.of(context).copyWith(
             colorScheme: ThemeData().colorScheme.copyWith(
                   primary: Colors.black,
                 ),
           ),
-          child: TextField(
-              controller: controller,
-              onTap: () async {
-                controller.text = await showSearch(
-                    context: context,
-                    delegate: CustomSearchScreen(controller.text));
-              },
-              keyboardType: TextInputType.none,
-              obscureText: !widget.isPassword
-                  ? false
-                  : isShowPassword
-                      ? true
-                      : false,
-              decoration: InputDecoration(
-                focusColor: Colors.black,
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide(width: 1, color: Colors.white),
-                ),
-                prefixIcon: widget.icon,
-                suffixIcon: widget.isPassword
-                    ? IconButton(
-                        padding: const EdgeInsets.all(1.0),
-                        icon: Icon(Icons.tune),
-                        onPressed: () {
-                          setState(() {
-                            isShowPassword = !isShowPassword;
-                          });
-                        },
-                      )
-                    : null,
-                hintText: widget.hintText,
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide(width: 1, color: Colors.white),
-                ),
-              )),
+          child: Material(
+            color: Color(0xFFF5F5F5),
+            child: TextField(
+                controller: controller,
+                onTap: () async {
+                  controller.text = await showSearch(
+                      context: context,
+                      delegate: CustomSearchScreen(controller.text));
+                },
+                keyboardType: TextInputType.none,
+                obscureText: !widget.isPassword
+                    ? false
+                    : isShowPassword
+                        ? true
+                        : false,
+                decoration: InputDecoration(
+                  focusColor: Colors.black,
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(width: 1, color: Colors.white),
+                  ),
+                  prefixIcon: widget.icon,
+                  suffixIcon: widget.isPassword
+                      ? IconButton(
+                          padding: const EdgeInsets.all(1.0),
+                          icon: Icon(Icons.tune),
+                          onPressed: () {
+                            setState(() {
+                              isShowPassword = !isShowPassword;
+                            });
+                          },
+                        )
+                      : null,
+                  hintText: widget.hintText,
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(width: 1, color: Colors.white),
+                  ),
+                )),
+          ),
         ),
       ),
     );

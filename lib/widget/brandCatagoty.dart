@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sneaker_app/screen/product_screen.dart';
+
+import '../bloc/brand_bloc.dart';
 
 class BrandCatagory extends StatelessWidget {
   const BrandCatagory({

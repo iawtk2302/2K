@@ -2,8 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
 
+import '../bloc/brand_bloc.dart';
 import '../widget/item_product_without_anim.dart';
 import '../widget/brandCatagoty.dart';
 import '../widget/custom_searchbar.dart';
@@ -85,7 +87,7 @@ class _HomePageState extends State<HomePage> {
                   'Good morning',
                   style: TextStyle(
                       color: Color(0xFF757475),
-                      fontSize: 17,
+                      fontSize: 16,
                       fontFamily: 'Urbanist',
                       fontWeight: FontWeight.w600),
                 ),
@@ -94,7 +96,8 @@ class _HomePageState extends State<HomePage> {
                   style: TextStyle(
                       color: Colors.black,
                       fontFamily: 'Urbanist',
-                      fontWeight: FontWeight.w600),
+                      fontWeight: FontWeight.w500,
+                      fontSize: 19),
                 )
               ]),
           actions: [
@@ -140,11 +143,18 @@ class _HomePageState extends State<HomePage> {
                           fontWeight: FontWeight.bold,
                           fontSize: 22,
                           fontFamily: 'Urbanist')),
-                  Text('See all',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                          fontFamily: 'Urbanist'))
+                  TextButton(
+                    style: ButtonStyle(
+                        overlayColor: MaterialStateProperty.all(
+                            Color.fromARGB(255, 238, 234, 234))),
+                    onPressed: () {},
+                    child: Text('See all',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            fontFamily: 'Urbanist',
+                            color: Colors.black)),
+                  )
                 ],
               ),
               SizedBox(
@@ -158,25 +168,18 @@ class _HomePageState extends State<HomePage> {
               SizedBox(
                 height: 20,
               ),
-              Row(children: [
-                Expanded(
-                  child: SizedBox(
-                    height: 200,
-                    child: GridView.builder(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          childAspectRatio:
-                              440 / MediaQuery.of(context).size.width,
-                          crossAxisCount: 2,
-                        ),
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 8,
-                        itemBuilder: ((context, index) => BrandCatagory(
-                              imgUri: catagoryBrand[index]['imgUri']!,
-                              name: catagoryBrand[index]['name']!,
-                            ))),
-                  ),
-                ),
-              ]),
+              BlocBuilder<BrandBloc, BrandState>(
+                builder: (context, state) {
+                  if (state is BrandLoading) {
+                    return BrandCatagoryLoading(context, state);
+                  } else if (state is BrandLoaded) {
+                    return BrandCatagoryLoaded(context, state);
+                    ;
+                  } else {
+                    return Scaffold();
+                  }
+                },
+              ),
               SizedBox(
                 height: 20,
               ),
@@ -188,18 +191,27 @@ class _HomePageState extends State<HomePage> {
                           fontWeight: FontWeight.bold,
                           fontSize: 22,
                           fontFamily: 'Urbanist')),
-                  Text('See all',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                          fontFamily: 'Urbanist'))
+                  TextButton(
+                    style: ButtonStyle(
+                        overlayColor: MaterialStateProperty.all(
+                            Color.fromARGB(255, 238, 234, 234))),
+                    onPressed: () {
+                      print('aa');
+                    },
+                    child: Text('See all',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            fontFamily: 'Urbanist',
+                            color: Colors.black)),
+                  )
                 ],
               ),
               SizedBox(
                 height: 20,
               ),
               SizedBox(
-                  height: 40,
+                  height: 38,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: 8,
@@ -258,9 +270,76 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
+              SizedBox(
+                height: 50,
+              )
             ]),
           ),
         ));
+  }
+
+  Row BrandCatagoryLoaded(BuildContext context, BrandLoaded state) {
+    return Row(children: [
+      Expanded(
+        child: SizedBox(
+          height: 200,
+          child: GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                childAspectRatio: 440 / MediaQuery.of(context).size.width,
+                crossAxisCount: 2,
+              ),
+              scrollDirection: Axis.horizontal,
+              itemCount: state.listBrand.length,
+              itemBuilder: ((context, index) => BrandCatagory(
+                    imgUri: state.listBrand[index].imageUrl,
+                    name: state.listBrand[index].name,
+                  ))),
+        ),
+      ),
+    ]);
+  }
+
+  Row BrandCatagoryLoading(BuildContext context, BrandLoading state) {
+    return Row(children: [
+      Expanded(
+        child: SizedBox(
+          height: 200,
+          child: GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                childAspectRatio: 440 / MediaQuery.of(context).size.width,
+                crossAxisCount: 2,
+              ),
+              scrollDirection: Axis.horizontal,
+              itemCount: 8,
+              itemBuilder: ((context, index) => Column(
+                    children: [
+                      RawMaterialButton(
+                        onPressed: () {},
+                        elevation: 2.0,
+                        fillColor: Color(0xFFECECEC),
+                        child: Container(
+                          height: 30,
+                          width: 30,
+                        ),
+                        padding: EdgeInsets.all(12.0),
+                        shape: CircleBorder(),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        width: 45,
+                        height: 10,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(4)),
+                          color: Theme.of(context).highlightColor,
+                        ),
+                      )
+                    ],
+                  ))),
+        ),
+      ),
+    ]);
   }
 }
 

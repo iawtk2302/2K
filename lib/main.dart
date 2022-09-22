@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:sneaker_app/bloc/brand_bloc.dart';
 import 'package:sneaker_app/router/routes.dart';
 import 'package:sneaker_app/screen/ForgotPassPage.dart';
 import 'package:sneaker_app/screen/HomePage.dart';
@@ -20,32 +22,41 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: '2K',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        fontFamily: "Urbanist"
+    return BlocProvider(
+      create: (context) => BrandBloc()..add(LoadBrand()),
+      child: MaterialApp(
+        title: '2K',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(fontFamily: "Urbanist"),
+        home: const SplashScreen(),
+        onGenerateRoute: getRoute,
       ),
-      home: const SplashScreen(),
-      onGenerateRoute: getRoute,
     );
   }
 }
 
 Route? getRoute(RouteSettings settings) {
-    switch (settings.name) {
-      case Routes.login:{
-        return MaterialPageRoute(builder: (context) => const LoginPage(),settings: settings);
+  switch (settings.name) {
+    case Routes.login:
+      {
+        return MaterialPageRoute(
+            builder: (context) => const LoginPage(), settings: settings);
       }
-      case Routes.register:{
-        return MaterialPageRoute(builder: (context) => const RegisterPage(),settings: settings);
+    case Routes.register:
+      {
+        return MaterialPageRoute(
+            builder: (context) => const RegisterPage(), settings: settings);
       }
-      case Routes.forgot:{
-        return MaterialPageRoute(builder: (context) => const ForgotPassPage(),settings: settings);
+    case Routes.forgot:
+      {
+        return MaterialPageRoute(
+            builder: (context) => const ForgotPassPage(), settings: settings);
       }
-      case Routes.home:{
-        return MaterialPageRoute(builder: (context) => const HomePage(),settings: settings);
-      }    
-    }
-    return null;
+    case Routes.home:
+      {
+        return MaterialPageRoute(
+            builder: (context) => const HomePage(), settings: settings);
+      }
+  }
+  return null;
 }

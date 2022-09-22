@@ -41,7 +41,9 @@ class _ProductDetailState extends State<ProductDetail> {
               Icons.arrow_back,
               color: Colors.black,
             ),
-            onPressed: (() {}),
+            onPressed: (() {
+              Navigator.pop(context);
+            }),
           )),
       body: Column(
         children: [
