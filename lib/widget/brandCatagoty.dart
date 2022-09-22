@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sneaker_app/screen/product_screen.dart';
 
 class BrandCatagory extends StatelessWidget {
   const BrandCatagory({
@@ -13,7 +14,10 @@ class BrandCatagory extends StatelessWidget {
     return Column(
       children: [
         RawMaterialButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: ((context) => ProductScreen())));
+          },
           elevation: 2.0,
           fillColor: Color(0xFFECECEC),
           child: Image(

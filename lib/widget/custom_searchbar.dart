@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../screen/SearchScreen.dart';
 
-class CustomSearch extends StatefulWidget {
-  const CustomSearch({
+class CustomSearchBar extends StatefulWidget {
+  const CustomSearchBar({
     super.key,
     required this.hintText,
     required this.icon,
@@ -13,10 +13,10 @@ class CustomSearch extends StatefulWidget {
   final Icon icon;
   final bool isPassword;
   @override
-  State<CustomSearch> createState() => _CustomSearchState();
+  State<CustomSearchBar> createState() => _CustomSearchBarState();
 }
 
-class _CustomSearchState extends State<CustomSearch> {
+class _CustomSearchBarState extends State<CustomSearchBar> {
   final TextEditingController controller = TextEditingController();
   String searchtext = '';
   bool isShowPassword = false;

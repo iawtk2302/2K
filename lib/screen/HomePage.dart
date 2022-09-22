@@ -4,9 +4,9 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:ionicons/ionicons.dart';
 
-import '../widget/ItemProductWithoutAnim.dart';
+import '../widget/item_product_without_anim.dart';
 import '../widget/brandCatagoty.dart';
-import '../widget/custom_search.dart';
+import '../widget/custom_searchbar.dart';
 import '../widget/item_SpecialOffer.dart';
 import 'SearchScreen.dart';
 
@@ -124,7 +124,7 @@ class _HomePageState extends State<HomePage> {
             child: Column(mainAxisSize: MainAxisSize.min, children: [
               Padding(
                 padding: const EdgeInsets.only(top: 16.0),
-                child: CustomSearch(
+                child: CustomSearchBar(
                     hintText: 'Search',
                     icon: Icon(Icons.search),
                     isPassword: true),
@@ -203,10 +203,26 @@ class _HomePageState extends State<HomePage> {
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: 8,
-                    itemBuilder: ((context, index) => BrandItem(
-                          name: catagoryBrand[index]['name']!,
-                          isChoose: isChoose,
-                          index: index,
+                    itemBuilder: ((context, index) => Row(
+                          children: [
+                            InkWell(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20)),
+                              onTap: () {
+                                setState(() {
+                                  isChoose = index;
+                                });
+                              },
+                              child: BrandItem(
+                                name: catagoryBrand[index]['name']!,
+                                isChoose: isChoose,
+                                index: index,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 8,
+                            )
+                          ],
                         )),
                   )),
               SizedBox(
@@ -261,24 +277,21 @@ class BrandItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: EdgeInsets.only(right: 8),
+        // margin: EdgeInsets.only(right: 8),
         alignment: Alignment.center,
         decoration: BoxDecoration(
             border: Border.all(color: Colors.black, width: 1.9),
             color: isChoose == index ? Colors.black : Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(20))),
-        child: InkWell(
-          onTap: () {},
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Text(
-              name,
-              style: TextStyle(
-                  color: isChoose == index ? Colors.white : Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Urbanist',
-                  fontSize: 16),
-            ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Text(
+            name,
+            style: TextStyle(
+                color: isChoose == index ? Colors.white : Colors.black,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Urbanist',
+                fontSize: 16),
           ),
         ));
   }
