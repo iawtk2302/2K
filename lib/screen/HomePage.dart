@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
 
 import '../bloc/brand_bloc.dart';
+import '../bloc/home/home_bloc.dart';
 import '../widget/item_product_without_anim.dart';
 import '../widget/brandCatagoty.dart';
 import '../widget/custom_searchbar.dart';
@@ -122,163 +123,284 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
         body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Column(mainAxisSize: MainAxisSize.min, children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 16.0),
-                child: CustomSearchBar(
-                    hintText: 'Search',
-                    icon: Icon(Icons.search),
-                    isPassword: true),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('Special Offers',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 22,
-                          fontFamily: 'Urbanist')),
-                  TextButton(
-                    style: ButtonStyle(
-                        overlayColor: MaterialStateProperty.all(
-                            Color.fromARGB(255, 238, 234, 234))),
-                    onPressed: () {},
-                    child: Text('See all',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            fontFamily: 'Urbanist',
-                            color: Colors.black)),
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Item_SpecialOffer(
-                percentDiscount: '25%',
-                imgUri:
-                    'https://www.banlegiasistore.com/images/upload/icon-image/photo-1542291026-7eec264c27ff.jpg',
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              BlocBuilder<BrandBloc, BrandState>(
-                builder: (context, state) {
-                  if (state is BrandLoading) {
-                    return BrandCatagoryLoading(context, state);
-                  } else if (state is BrandLoaded) {
-                    return BrandCatagoryLoaded(context, state);
-                    ;
-                  } else {
-                    return Scaffold();
-                  }
-                },
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('More Popular',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 22,
-                          fontFamily: 'Urbanist')),
-                  TextButton(
-                    style: ButtonStyle(
-                        overlayColor: MaterialStateProperty.all(
-                            Color.fromARGB(255, 238, 234, 234))),
-                    onPressed: () {
-                      print('aa');
-                    },
-                    child: Text('See all',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            fontFamily: 'Urbanist',
-                            color: Colors.black)),
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              SizedBox(
-                  height: 38,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 8,
-                    itemBuilder: ((context, index) => Row(
-                          children: [
-                            InkWell(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
-                              onTap: () {
-                                setState(() {
-                                  isChoose = index;
-                                });
-                              },
-                              child: BrandItem(
-                                name: catagoryBrand[index]['name']!,
-                                isChoose: isChoose,
-                                index: index,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 8,
-                            )
-                          ],
-                        )),
-                  )),
-              SizedBox(
-                height: 20,
-              ),
-
-              // Container(
-              //   height: 150,
-              //   child: PageView.builder(
-              //       itemBuilder: ((context, index) => Container(
-              //             height: 100,
-              //             color: Colors.red,
-              //             child: Text(index.toString()),
-              //           ))),
-              // )
-
-              Row(
-                children: [
-                  Expanded(
-                    child: SizedBox(
-                      child: GridView.count(
-                        physics: NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        mainAxisSpacing: 20,
-                        childAspectRatio: 0.65,
-                        crossAxisSpacing: 10,
-                        crossAxisCount: 2,
-                        children: List.generate(4, (index) {
-                          return ItemProductWithoutAnim(isLiked: true);
-                        }),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 50,
-              )
-            ]),
+          child: BlocBuilder<HomeBloc, HomeState>(
+            builder: (context, state) {
+              if (state is HomeLoading)
+                return HomeLoad();
+              else if (state is HomeLoaded)
+                return HomeLoadCompleted(state);
+              else
+                return Scaffold();
+            },
           ),
         ));
   }
 
-  Row BrandCatagoryLoaded(BuildContext context, BrandLoaded state) {
+  Padding HomeLoad() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Column(mainAxisSize: MainAxisSize.min, children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 16.0),
+          child: CustomSearchBar(
+              hintText: 'Search', icon: Icon(Icons.search), isPassword: true),
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text('Special Offers',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22,
+                    fontFamily: 'Urbanist')),
+            TextButton(
+              style: ButtonStyle(
+                  overlayColor: MaterialStateProperty.all(
+                      Color.fromARGB(255, 238, 234, 234))),
+              onPressed: () {},
+              child: Text('See all',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      fontFamily: 'Urbanist',
+                      color: Colors.black)),
+            )
+          ],
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        Container(
+            width: MediaQuery.of(context).size.width - 32,
+            height: 180,
+            decoration: BoxDecoration(
+                color: Color(0xFFECECEC),
+                borderRadius: BorderRadius.all(Radius.circular(30))),
+            child: Container()),
+        SizedBox(
+          height: 20,
+        ),
+        BrandCatagoryLoading(),
+        SizedBox(
+          height: 20,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text('More Popular',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22,
+                    fontFamily: 'Urbanist')),
+            TextButton(
+              style: ButtonStyle(
+                  overlayColor: MaterialStateProperty.all(
+                      Color.fromARGB(255, 238, 234, 234))),
+              onPressed: () {
+                print('aa');
+              },
+              child: Text('See all',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      fontFamily: 'Urbanist',
+                      color: Colors.black)),
+            )
+          ],
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        SizedBox(
+            height: 38,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: 8,
+              itemBuilder: ((context, index) => Row(
+                    children: [
+                      InkWell(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        onTap: () {
+                          setState(() {
+                            isChoose = index;
+                          });
+                        },
+                        child: BrandItem(
+                          name: catagoryBrand[index]['name']!,
+                          isChoose: isChoose,
+                          index: index,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 8,
+                      )
+                    ],
+                  )),
+            )),
+        SizedBox(
+          height: 20,
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: SizedBox(
+                child: GridView.count(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  mainAxisSpacing: 20,
+                  childAspectRatio: 0.65,
+                  crossAxisSpacing: 10,
+                  crossAxisCount: 2,
+                  children: List.generate(4, (index) {
+                    return ItemProductWithoutAnim(isLiked: true);
+                  }),
+                ),
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 50,
+        )
+      ]),
+    );
+  }
+
+  Padding HomeLoadCompleted(HomeLoaded state) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Column(mainAxisSize: MainAxisSize.min, children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 16.0),
+          child: CustomSearchBar(
+              hintText: 'Search', icon: Icon(Icons.search), isPassword: true),
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text('Special Offers',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22,
+                    fontFamily: 'Urbanist')),
+            TextButton(
+              style: ButtonStyle(
+                  overlayColor: MaterialStateProperty.all(
+                      Color.fromARGB(255, 238, 234, 234))),
+              onPressed: () {},
+              child: Text('See all',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      fontFamily: 'Urbanist',
+                      color: Colors.black)),
+            )
+          ],
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        Item_SpecialOffer(
+          percentDiscount: '25%',
+          imgUri:
+              'https://www.banlegiasistore.com/images/upload/icon-image/photo-1542291026-7eec264c27ff.jpg',
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        BrandCatagoryLoaded(context, state),
+        SizedBox(
+          height: 20,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text('More Popular',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22,
+                    fontFamily: 'Urbanist')),
+            TextButton(
+              style: ButtonStyle(
+                  overlayColor: MaterialStateProperty.all(
+                      Color.fromARGB(255, 238, 234, 234))),
+              onPressed: () {
+                print('aa');
+              },
+              child: Text('See all',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      fontFamily: 'Urbanist',
+                      color: Colors.black)),
+            )
+          ],
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        SizedBox(
+            height: 38,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: 8,
+              itemBuilder: ((context, index) => Row(
+                    children: [
+                      InkWell(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        onTap: () {
+                          setState(() {
+                            isChoose = index;
+                          });
+                        },
+                        child: BrandItem(
+                          name: catagoryBrand[index]['name']!,
+                          isChoose: isChoose,
+                          index: index,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 8,
+                      )
+                    ],
+                  )),
+            )),
+        SizedBox(
+          height: 20,
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: SizedBox(
+                child: GridView.count(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  mainAxisSpacing: 20,
+                  childAspectRatio: 0.65,
+                  crossAxisSpacing: 10,
+                  crossAxisCount: 2,
+                  children: List.generate(4, (index) {
+                    return ItemProductWithoutAnim(isLiked: true);
+                  }),
+                ),
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 50,
+        )
+      ]),
+    );
+  }
+
+  Row BrandCatagoryLoaded(BuildContext context, HomeLoaded state) {
     return Row(children: [
       Expanded(
         child: SizedBox(
@@ -299,7 +421,7 @@ class _HomePageState extends State<HomePage> {
     ]);
   }
 
-  Row BrandCatagoryLoading(BuildContext context, BrandLoading state) {
+  Row BrandCatagoryLoading() {
     return Row(children: [
       Expanded(
         child: SizedBox(
@@ -342,6 +464,17 @@ class _HomePageState extends State<HomePage> {
     ]);
   }
 }
+// BlocBuilder<BrandBloc, BrandState>(
+//                 builder: (context, state) {
+//                   if (state is BrandLoading) {
+//                     return BrandCatagoryLoading(context, state);
+//                   } else if (state is BrandLoaded) {
+//                     return BrandCatagoryLoaded(context, state);
+//                   } else {
+//                     return Scaffold();
+//                   }
+//                 },
+//               ),
 
 class BrandItem extends StatelessWidget {
   const BrandItem({

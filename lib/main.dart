@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:sneaker_app/bloc/brand_bloc.dart';
+import 'package:sneaker_app/bloc/home/home_bloc.dart';
 import 'package:sneaker_app/router/routes.dart';
 import 'package:sneaker_app/screen/ForgotPassPage.dart';
 import 'package:sneaker_app/screen/HomePage.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => BrandBloc()..add(LoadBrand()),
+      create: (context) => HomeBloc()..add(LoadHome()),
       child: MaterialApp(
         title: '2K',
         debugShowCheckedModeBanner: false,
