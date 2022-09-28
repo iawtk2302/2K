@@ -120,7 +120,8 @@ class CustomSearchScreen extends SearchDelegate {
             Spacer(),
             Image(
               width: MediaQuery.of(context).size.width - 120,
-              image: AssetImage('assets/images/clipboard.png'),
+              image: NetworkImage(
+                  'https://firebasestorage.googleapis.com/v0/b/sneakerapp-f4de5.appspot.com/o/clipboard.png?alt=media&token=18e3b67e-a0f2-49bb-b1dc-eb78caeb138e'),
             ),
             Spacer(),
             Text(

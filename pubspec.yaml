@@ -47,10 +47,16 @@ dependencies:
   hive_flutter: ^1.1.0
   cloud_firestore: ^3.4.8
   ionicons: ^0.2.1
+<<<<<<< HEAD
   image_picker: ^0.8.5+3
   path_provider: ^2.0.11
   firebase_storage: ^10.3.8
   flutter_spinkit: ^5.1.0
+=======
+  bloc: ^8.1.0
+  flutter_bloc: ^8.1.1
+  equatable: ^2.0.5
+>>>>>>> Khanh
 
 dev_dependencies:
   flutter_test:

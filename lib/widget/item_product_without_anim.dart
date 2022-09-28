@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:sneaker_app/screen/product_detail.dart';
 
 class ItemProductWithoutAnim extends StatefulWidget {
   const ItemProductWithoutAnim({super.key, this.isLiked});
@@ -22,7 +23,8 @@ class _ItemProductWithoutAnimState extends State<ItemProductWithoutAnim> {
     return InkWell(
       borderRadius: BorderRadius.all(Radius.circular(16)),
       onTap: () {
-        print(isLike);
+        Navigator.push(context,
+            MaterialPageRoute(builder: ((context) => ProductDetail())));
       },
       // width: MediaQuery.of(context).size.width / 2,
       // height: 275,
