@@ -3,4 +3,6 @@ class Routes{
   static const register='/RegisterPage';
   static const forgot='/ForgotPassPage';
   static const home='/HomePage';
+  static const main='/MainPage';
+  static const fillProfilePage='/FillProfilePage';
 }

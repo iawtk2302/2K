@@ -18,7 +18,7 @@ class _RegisterPageState extends State<RegisterPage> {
   bool isHiddenPassword = true;
   final _emailController = TextEditingController();
   final _passController = TextEditingController();
-  final _nameController = TextEditingController();
+  final _confirmPassController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -44,52 +44,6 @@ class _RegisterPageState extends State<RegisterPage> {
                     key: _formKey,
                     child: Column(
                       children: [
-                        Theme(
-                          data: Theme.of(context).copyWith(
-                        colorScheme: ThemeData().colorScheme.copyWith(
-                              primary: Colors.black,
-                            ),
-                          ),
-                          child: SizedBox(
-                        width: size.width * 0.8,
-                        child: TextFormField(
-                          controller: _nameController,
-                          validator: (value) {
-                            if(value == null ||value.isEmpty){
-                              return "Required";
-                            }
-                            return null;
-                          },
-                          keyboardType: TextInputType.emailAddress,
-                          textAlignVertical: TextAlignVertical.center,
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                              hintText: "Name",
-                              prefixIcon: const Icon(
-                                Icons.person,
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: const BorderSide(
-                                  width: 1.5,
-                                ),
-                              ),
-                              contentPadding:
-                                  const EdgeInsets.symmetric(vertical: 20),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: const BorderSide(
-                                    width: 1.5, color: Color(0xFFFAFAFA)),
-                              ),
-                              filled: true,
-                              fillColor: const Color(0xFFFAFAFA)),
-                        ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
                         Theme(
                           data: Theme.of(context).copyWith(
                             colorScheme: ThemeData().colorScheme.copyWith(
@@ -196,6 +150,69 @@ class _RegisterPageState extends State<RegisterPage> {
                         const SizedBox(
                           height: 20,
                         ),
+                        Theme(
+                          data: Theme.of(context).copyWith(
+                            colorScheme: ThemeData().colorScheme.copyWith(
+                                  primary: Colors.black,
+                                ),
+                          ),
+                          child: SizedBox(
+                            width: size.width * 0.8,
+                            child: TextFormField(
+                              controller: _confirmPassController,
+                              validator: (value) {
+                                if (value!.isEmpty || value.length < 8){
+                                  return "Password at least 8 characters";
+                                }
+                                else if(value!=_passController.text){
+                                  return "The password confirmation does not match";
+                                }
+                              },
+                              textAlignVertical: TextAlignVertical.center,
+                              decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  hintText: "Confirm Password",
+                                  prefixIcon: const Icon(
+                                    Icons.lock,
+                                  ),
+                                  suffixIcon: InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        isHiddenPassword = !isHiddenPassword;
+                                      });
+                                    },
+                                    child: Icon(
+                                      isHiddenPassword
+                                          ? Icons.visibility_off
+                                          : Icons.visibility,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: const BorderSide(
+                                      width: 1.5,
+                                    ),
+                                  ),
+                                  contentPadding:
+                                      const EdgeInsets.symmetric(vertical: 20),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: const BorderSide(
+                                        width: 1.5, color: Color(0xFFFAFAFA)),
+                                  ),
+                                  filled: true,
+                                  fillColor: const Color(0xFFFAFAFA),
+                                  ),
+                              obscureText: isHiddenPassword,
+                              obscuringCharacter: '●',
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
                       ],
                     )),
                 Padding(
@@ -205,12 +222,6 @@ class _RegisterPageState extends State<RegisterPage> {
                       if (_formKey.currentState!.validate()) {
                         showDialog(context: context, builder: (context) => const Center(child: CircularProgressIndicator(color: Colors.black),),);
                         FirebaseService().createAccount(_emailController.text, _passController.text, context);
-                        await users.add({
-                          "id":FirebaseAuth.instance.currentUser!.uid,
-                          "name":_nameController.text,
-                          "email":_emailController.text.trim()
-                        }).then((value) => print("User Added"))
-                        .catchError((error) => print("Failed to add user: $error"));
                       }
                     },
                     child: Container(                
@@ -299,11 +310,38 @@ class _RegisterPageState extends State<RegisterPage> {
 signInWithGG(BuildContext context) async {
   await FirebaseService().signInWithGoole();
   if (FirebaseAuth.instance.currentUser != null)
-    Navigator.pushReplacementNamed(context, Routes.home);
+    {
+    // await FirebaseFirestore.instance
+    // .collection('User')
+    // .doc(FirebaseAuth.instance.currentUser!.uid)
+    // .get()
+    // .then((DocumentSnapshot documentSnapshot) {
+    //   if (documentSnapshot.exists) {
+    //     print('Document data: ${documentSnapshot.data()}');
+    //     Navigator.pushReplacementNamed(context, Routes.main);
+    //   } else {
+    //     Navigator.pushReplacementNamed(context, Routes.fillProfilePage);
+    //   }
+    // });
+    Navigator.pushReplacementNamed(context, Routes.main);
+  }
 }
 
 signInWithFB(BuildContext context) async {
   await FirebaseService().signInWithFB();
-  if (FirebaseAuth.instance.currentUser != null)
-    Navigator.pushReplacementNamed(context, Routes.home);
+  if (FirebaseAuth.instance.currentUser != null){
+    // await FirebaseFirestore.instance
+    // .collection('User')
+    // .doc(FirebaseAuth.instance.currentUser!.uid)
+    // .get()
+    // .then((DocumentSnapshot documentSnapshot) {
+    //   if (documentSnapshot.exists) {
+    //     print('Document data: ${documentSnapshot.data()}');
+    //     Navigator.pushReplacementNamed(context, Routes.main);
+    //   } else {
+    //     Navigator.pushReplacementNamed(context, Routes.fillProfilePage);
+    //   }
+    // });
+    Navigator.pushReplacementNamed(context, Routes.main);
+  }
 }

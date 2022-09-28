@@ -70,11 +70,11 @@ class _HomePageState extends State<HomePage> {
             child: CircleAvatar(
               radius: 50,
               backgroundColor: Colors.transparent,
-              backgroundImage:
-                  // height: 100,
-                  // width: 100,
-                  NetworkImage(
-                      FirebaseAuth.instance.currentUser!.photoURL.toString()),
+              // backgroundImage:
+              //     // height: 100,
+              //     // width: 100,
+              //     NetworkImage(
+              //         FirebaseAuth.instance.currentUser!.photoURL.toString()),
             ),
           ),
           title: Column(
