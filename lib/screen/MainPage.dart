@@ -13,7 +13,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  final pages=[
+  final pages = [
     const HomePage(),
     const CartPage(),
     const OrdersPage(),
@@ -29,9 +29,6 @@ class _MainPageState extends State<MainPage> {
   //   super.initState();
   //   _checkFirstAuth();
   // }
-
-
-
 
   // _checkFirstAuth()async{
   // await FirebaseFirestore.instance
@@ -52,31 +49,34 @@ class _MainPageState extends State<MainPage> {
   //     }
   //   });
   // }
-  int currentIndex=0;
-  onTap(int index){
+  int currentIndex = 0;
+  onTap(int index) {
     setState(() {
-      currentIndex=index;
+      currentIndex = index;
     });
   }
+
   @override
   Widget build(BuildContext context) {
-      return Scaffold(
+    return Scaffold(
       body: pages[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.white,
-        currentIndex: currentIndex,
-        onTap: onTap,
-        elevation: 0,
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.grey,
-        showUnselectedLabels: true,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home),label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.shopping_bag),label: "Cart"),
-          BottomNavigationBarItem(icon: Icon(Icons.shopping_cart),label: "Orders"),
-          BottomNavigationBarItem(icon: Icon(Icons.person),label: "Profile"),
-        ]),
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Colors.white,
+          currentIndex: currentIndex,
+          onTap: onTap,
+          elevation: 0,
+          selectedItemColor: Colors.black,
+          unselectedItemColor: Colors.grey,
+          showUnselectedLabels: true,
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.shopping_bag), label: "Cart"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.shopping_cart), label: "Orders"),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+          ]),
     );
-    }
+  }
 }
