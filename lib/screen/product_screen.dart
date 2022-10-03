@@ -1,27 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sneaker_app/modal/brand.dart';
+import 'package:sneaker_app/widget/Loading.dart';
 
+import '../bloc/product/product_bloc.dart';
 import '../widget/item_product.dart';
 import 'HomePage.dart';
 
 class ProductScreen extends StatefulWidget {
-  const ProductScreen({super.key});
-
+  const ProductScreen({super.key, required this.brand});
+  final Brand brand;
   @override
   State<ProductScreen> createState() => _ProductScreenState();
 }
 
-List<Map<String, String>> catagoryBrand = [
-  {'name': 'Men'},
-  {'name': 'Woman'},
-  {'name': 'Kids'},
-  {'name': 'Jordan'},
-  // {'name': 'Balenciaga'},
-  // {'name': 'Converse'},
-  // {'name': 'New balance'},
-  // {'name': 'More'},
-];
+// List<Map<String, String>> catagoryBrand = [
+//   {'name': 'Men'},
+//   {'name': 'Woman'},
+//   {'name': 'Kids'},
+//   {'name': 'Jordan'},
+//   // {'name': 'Balenciaga'},
+//   // {'name': 'Converse'},
+//   // {'name': 'New balance'},
+//   // {'name': 'More'},
+// ];
 
 class _ProductScreenState extends State<ProductScreen>
     with TickerProviderStateMixin {
@@ -31,7 +35,9 @@ class _ProductScreenState extends State<ProductScreen>
   @override
   void initState() {
     animationController = AnimationController(
-        duration: const Duration(milliseconds: 1000), vsync: this);
+        duration: const Duration(milliseconds: 2500), vsync: this);
+    context.read<ProductBloc>()
+      ..add(LoadProduct(idBrand: widget.brand.id, context: context));
     super.initState();
   }
 
@@ -50,6 +56,7 @@ class _ProductScreenState extends State<ProductScreen>
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
+            // context.read<ProductBloc>()..emit(ProductLoading());
           },
           icon: Icon(
             Icons.arrow_back,
@@ -57,7 +64,7 @@ class _ProductScreenState extends State<ProductScreen>
           ),
         ),
         title: Text(
-          'Nike',
+          widget.brand.name.toUpperCase(),
           style: TextStyle(color: Colors.black),
         ),
         actions: [
@@ -73,76 +80,89 @@ class _ProductScreenState extends State<ProductScreen>
           )
         ],
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 16.0, bottom: 16, left: 16),
-            child: SizedBox(
-              height: 38,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: catagoryBrand.length,
-                itemBuilder: ((context, index) => Row(
-                      children: [
-                        InkWell(
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
-                          onTap: () {
-                            setState(() {
-                              isChoose = index;
-                            });
+      body: BlocBuilder<ProductBloc, ProductState>(
+        builder: (context, state) {
+          if (state is ProductLoading) {
+            return const Loading();
+          } else if (state is ProductLoaded) {
+            return Column(
+              children: [
+                Padding(
+                  padding:
+                      const EdgeInsets.only(top: 16.0, bottom: 16, left: 16),
+                  child: SizedBox(
+                    height: 38,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: state.listCategory.length,
+                      itemBuilder: ((context, index) => Row(
+                            children: [
+                              InkWell(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20)),
+                                onTap: () {
+                                  setState(() {
+                                    isChoose = index;
+                                  });
+                                },
+                                child: BrandItem(
+                                  name: state.listCategory[index].name!,
+                                  isChoose: isChoose,
+                                  index: index,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 8,
+                              )
+                            ],
+                          )),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      child: GridView(
+                        shrinkWrap: true,
+                        // padding: const EdgeInsets.only(top: 0, left: 12, right: 12),
+                        physics: const BouncingScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        children: List<Widget>.generate(
+                          state.listProduct.length,
+                          (int index) {
+                            final int count = 10;
+                            final Animation<double> animation =
+                                Tween<double>(begin: 0.0, end: 1.0).animate(
+                              CurvedAnimation(
+                                parent: animationController!,
+                                curve: Interval((1 / count) * index, 1.0,
+                                    curve: Curves.fastOutSlowIn),
+                              ),
+                            );
+                            animationController?.forward();
+                            return ItemProduct(
+                              isLiked: false,
+                              animation: animation,
+                              animationController: animationController,
+                              callBack: () {},
+                              product: state.listProduct[index],
+                            );
                           },
-                          child: BrandItem(
-                            name: catagoryBrand[index]['name']!,
-                            isChoose: isChoose,
-                            index: index,
-                          ),
                         ),
-                        SizedBox(
-                          width: 8,
-                        )
-                      ],
-                    )),
-              ),
-            ),
-          ),
-          Expanded(
-            child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: GridView(
-                  shrinkWrap: true,
-                  // padding: const EdgeInsets.only(top: 0, left: 12, right: 12),
-                  physics: const BouncingScrollPhysics(),
-                  scrollDirection: Axis.vertical,
-                  children: List<Widget>.generate(
-                    10,
-                    (int index) {
-                      final int count = 10;
-                      final Animation<double> animation =
-                          Tween<double>(begin: 0.0, end: 1.0).animate(
-                        CurvedAnimation(
-                          parent: animationController!,
-                          curve: Interval((1 / count) * index, 1.0,
-                              curve: Curves.fastOutSlowIn),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          mainAxisSpacing: 20,
+                          childAspectRatio: 0.65,
+                          crossAxisSpacing: 10,
+                          crossAxisCount: 2,
                         ),
-                      );
-                      animationController?.forward();
-                      return ItemProduct(
-                        isLiked: false,
-                        animation: animation,
-                        animationController: animationController,
-                        callBack: () {},
-                      );
-                    },
-                  ),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    mainAxisSpacing: 20,
-                    childAspectRatio: 0.65,
-                    crossAxisSpacing: 10,
-                    crossAxisCount: 2,
-                  ),
-                )),
-          ),
-        ],
+                      )),
+                ),
+              ],
+            );
+          } else {
+            return Scaffold();
+          }
+        },
       ),
     );
   }

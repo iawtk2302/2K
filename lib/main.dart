@@ -2,7 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:sneaker_app/bloc/brand_bloc.dart';
 import 'package:sneaker_app/bloc/home/home_bloc.dart';
 import 'package:sneaker_app/router/routes.dart';
 import 'package:sneaker_app/screen/FillProfilePage.dart';
@@ -12,6 +11,8 @@ import 'package:sneaker_app/screen/LoginPage.dart';
 import 'package:sneaker_app/screen/MainPage.dart';
 import 'package:sneaker_app/screen/Register.dart';
 import 'package:sneaker_app/screen/SplashScreen.dart';
+
+import 'bloc/product/product_bloc.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,22 +26,26 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => HomeBloc()..add(LoadHome()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => HomeBloc()..add(LoadHome())),
+        BlocProvider(create: (context) => ProductBloc())
+      ],
       child: MaterialApp(
         title: '2K',
         debugShowCheckedModeBanner: false,
         home: const SplashScreen(),
         onGenerateRoute: getRoute,
         theme: ThemeData(
-        fontFamily: "Urbanist",
-        textSelectionTheme: const TextSelectionThemeData(
-        cursorColor: Colors.black,
-        selectionColor: Colors.black,
-        selectionHandleColor: Colors.black,
-     ),
+          fontFamily: "Urbanist",
+          textSelectionTheme: const TextSelectionThemeData(
+            cursorColor: Colors.black,
+            selectionColor: Colors.black,
+            selectionHandleColor: Colors.black,
+          ),
+        ),
       ),
-    ));
+    );
   }
 }
 
@@ -61,15 +66,21 @@ Route? getRoute(RouteSettings settings) {
         return MaterialPageRoute(
             builder: (context) => const ForgotPassPage(), settings: settings);
       }
-      case Routes.home:{
-        return MaterialPageRoute(builder: (context) => const HomePage(),settings: settings);
-      }    
-      case Routes.main:{
-        return MaterialPageRoute(builder: (context) => const MainPage(),settings: settings);
+    case Routes.home:
+      {
+        return MaterialPageRoute(
+            builder: (context) => const HomePage(), settings: settings);
       }
-      case Routes.fillProfilePage:{
-        return MaterialPageRoute(builder: (context) => const FillProfilePage(),settings: settings);
+    case Routes.main:
+      {
+        return MaterialPageRoute(
+            builder: (context) => const MainPage(), settings: settings);
       }
-    }
-    return null;
+    case Routes.fillProfilePage:
+      {
+        return MaterialPageRoute(
+            builder: (context) => const FillProfilePage(), settings: settings);
+      }
+  }
+  return null;
 }

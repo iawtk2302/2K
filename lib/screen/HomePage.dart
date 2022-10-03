@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -5,13 +7,13 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
 
-import '../bloc/brand_bloc.dart';
 import '../bloc/home/home_bloc.dart';
 import '../widget/item_product_without_anim.dart';
 import '../widget/brandCatagoty.dart';
 import '../widget/custom_searchbar.dart';
 import '../widget/item_SpecialOffer.dart';
 import 'SearchScreen.dart';
+import 'SpecialOffer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -20,46 +22,51 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-List<Map<String, String>> catagoryBrand = [
-  {
-    'imgUri': 'https://cdn-icons-png.flaticon.com/512/732/732229.png',
-    'name': 'Nike'
-  },
-  {
-    'imgUri': 'https://cdn-icons-png.flaticon.com/128/732/732160.png',
-    'name': 'Adidas'
-  },
-  {
-    'imgUri': 'https://cdn-icons-png.flaticon.com/128/47/47137.png',
-    'name': 'Puma'
-  },
-  {
-    'imgUri':
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Vans-logo.svg/2560px-Vans-logo.svg.png',
-    'name': 'Vans'
-  },
-  {
-    'imgUri':
-        'https://logos-world.net/wp-content/uploads/2021/08/Balenciaga-Logo.png',
-    'name': 'Balenciaga'
-  },
-  {
-    'imgUri':
-        'https://1000logos.net/wp-content/uploads/2016/12/Converse-Logo-2007.png',
-    'name': 'Converse'
-  },
-  {
-    'imgUri':
-        'https://brademar.com/wp-content/uploads/2022/05/New-Balance-Logo-PNG-2008-%E2%80%93-Now-2.png',
-    'name': 'New balance'
-  },
-  {
-    'imgUri': 'https://cdn-icons-png.flaticon.com/512/8469/8469246.png',
-    'name': 'More'
-  },
-];
+// List<Map<String, String>> catagoryBrand = [
+//   {
+//     'imgUri': 'https://cdn-icons-png.flaticon.com/512/732/732229.png',
+//     'name': 'Nike'
+//   },
+//   {
+//     'imgUri': 'https://cdn-icons-png.flaticon.com/128/732/732160.png',
+//     'name': 'Adidas'
+//   },
+//   {
+//     'imgUri': 'https://cdn-icons-png.flaticon.com/128/47/47137.png',
+//     'name': 'Puma'
+//   },
+//   {
+//     'imgUri':
+//         'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Vans-logo.svg/2560px-Vans-logo.svg.png',
+//     'name': 'Vans'
+//   },
+//   {
+//     'imgUri':
+//         'https://logos-world.net/wp-content/uploads/2021/08/Balenciaga-Logo.png',
+//     'name': 'Balenciaga'
+//   },
+//   {
+//     'imgUri':
+//         'https://1000logos.net/wp-content/uploads/2016/12/Converse-Logo-2007.png',
+//     'name': 'Converse'
+//   },
+//   {
+//     'imgUri':
+//         'https://brademar.com/wp-content/uploads/2022/05/New-Balance-Logo-PNG-2008-%E2%80%93-Now-2.png',
+//     'name': 'New balance'
+//   },
+//   {
+//     'imgUri': 'https://cdn-icons-png.flaticon.com/512/8469/8469246.png',
+//     'name': 'More'
+//   },
+// ];
 
 class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   int isChoose = 0;
   @override
   Widget build(BuildContext context) {
@@ -214,32 +221,32 @@ class _HomePageState extends State<HomePage> {
         SizedBox(
           height: 20,
         ),
-        SizedBox(
-            height: 38,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: 8,
-              itemBuilder: ((context, index) => Row(
-                    children: [
-                      InkWell(
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                        onTap: () {
-                          setState(() {
-                            isChoose = index;
-                          });
-                        },
-                        child: BrandItem(
-                          name: catagoryBrand[index]['name']!,
-                          isChoose: isChoose,
-                          index: index,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 8,
-                      )
-                    ],
-                  )),
-            )),
+        // SizedBox(
+        //     height: 38,
+        //     child: ListView.builder(
+        //       scrollDirection: Axis.horizontal,
+        //       itemCount: 8,
+        //       itemBuilder: ((context, index) => Row(
+        //             children: [
+        //               InkWell(
+        //                 borderRadius: BorderRadius.all(Radius.circular(20)),
+        //                 onTap: () {
+        //                   setState(() {
+        //                     isChoose = index;
+        //                   });
+        //                 },
+        //                 child: BrandItem(
+        //                   name: [index]['name']!,
+        //                   isChoose: isChoose,
+        //                   index: index,
+        //                 ),
+        //               ),
+        //               SizedBox(
+        //                 width: 8,
+        //               )
+        //             ],
+        //           )),
+        //     )),
         SizedBox(
           height: 20,
         ),
@@ -293,7 +300,13 @@ class _HomePageState extends State<HomePage> {
               style: ButtonStyle(
                   overlayColor: MaterialStateProperty.all(
                       Color.fromARGB(255, 238, 234, 234))),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            SpecialOffer(listBanner: state.banner)));
+              },
               child: Text('See all',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -303,13 +316,11 @@ class _HomePageState extends State<HomePage> {
             )
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
         Item_SpecialOffer(
-          percentDiscount: '25%',
-          imgUri:
-              'https://www.banlegiasistore.com/images/upload/icon-image/photo-1542291026-7eec264c27ff.jpg',
+          imgUri: state.banner[Random().nextInt(state.banner.length - 1)].image,
         ),
         SizedBox(
           height: 20,
@@ -360,7 +371,7 @@ class _HomePageState extends State<HomePage> {
                           });
                         },
                         child: BrandItem(
-                          name: catagoryBrand[index]['name']!,
+                          name: state.listBrand[index].name,
                           isChoose: isChoose,
                           index: index,
                         ),
@@ -412,10 +423,8 @@ class _HomePageState extends State<HomePage> {
               ),
               scrollDirection: Axis.horizontal,
               itemCount: state.listBrand.length,
-              itemBuilder: ((context, index) => BrandCatagory(
-                    imgUri: state.listBrand[index].imageUrl,
-                    name: state.listBrand[index].name,
-                  ))),
+              itemBuilder: ((context, index) =>
+                  BrandCatagory(brand: state.listBrand[index]))),
         ),
       ),
     ]);

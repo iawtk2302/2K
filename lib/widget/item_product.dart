@@ -1,5 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:sneaker_app/modal/product.dart';
+
+import '../screen/product_detail.dart';
 
 class ItemProduct extends StatefulWidget {
   const ItemProduct(
@@ -7,11 +11,13 @@ class ItemProduct extends StatefulWidget {
       required this.isLiked,
       this.callBack,
       this.animationController,
-      this.animation});
+      this.animation,
+      required this.product});
   final bool isLiked;
   final VoidCallback? callBack;
   final AnimationController? animationController;
   final Animation<double>? animation;
+  final Product product;
   @override
   State<ItemProduct> createState() => _ItemProductState();
 }
@@ -36,7 +42,12 @@ class _ItemProductState extends State<ItemProduct> {
                   0.0, 50 * (1.0 - widget.animation!.value), 0.0),
               child: InkWell(
                 onTap: () {
-                  print(isLike);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ProductDetail(
+                                product: widget.product,
+                              )));
                 },
                 // width: MediaQuery.of(context).size.width / 2,
                 // height: 275,
@@ -50,11 +61,14 @@ class _ItemProductState extends State<ItemProduct> {
                         width: double.infinity,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(16.0),
-                          child: const Image(
-                              width: double.infinity,
-                              fit: BoxFit.cover,
-                              image: NetworkImage(
-                                  'https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/09087d4d-6300-44ad-be5f-6e9ebf8d3790/infinity-run-3-air-x-hola-lou-mens-road-running-shoes-1bRq75.png')),
+                          child: Hero(
+                            tag: widget.product.image![0],
+                            child: Image(
+                                width: double.infinity,
+                                fit: BoxFit.cover,
+                                image: CachedNetworkImageProvider(
+                                    widget.product.image![0])),
+                          ),
                         ),
                       ),
                       Align(
@@ -87,8 +101,9 @@ class _ItemProductState extends State<ItemProduct> {
                       children: [
                         // const Spacer(),
                         Expanded(
-                          child: const Text(
-                            'K-Swiss Vista Train',
+                          child: Text(
+                            widget.product.name!.toUpperCase(),
+                            maxLines: 1,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 15),
                             // textAlign: TextAlign.left,
@@ -128,8 +143,8 @@ class _ItemProductState extends State<ItemProduct> {
                         Expanded(
                           child: Align(
                             alignment: Alignment.bottomLeft,
-                            child: const Text(
-                              '\$110.00',
+                            child: Text(
+                              '\$' + '${widget.product.price}' + '.00',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 18),
                             ),

@@ -1,14 +1,16 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:sneaker_app/modal/product.dart';
 
 import '../widget/custom_textbutton.dart';
 import '../widget/product_description.dart';
 import '../widget/product_detail_header.dart';
 
 class ProductDetail extends StatefulWidget {
-  const ProductDetail({super.key});
-
+  const ProductDetail({super.key, required this.product});
+  final Product product;
   @override
   State<ProductDetail> createState() => _ProductDetailState();
 }
@@ -45,76 +47,83 @@ class _ProductDetailState extends State<ProductDetail> {
               Navigator.pop(context);
             }),
           )),
-      body: Column(
-        children: [
-          Stack(alignment: Alignment.center, children: [
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height / 2 - 150,
-              child: PageView.builder(
-                onPageChanged: (value) => {
-                  print(value),
-                  setState(() {
-                    currentIndex = value;
-                  })
-                },
-                controller: pageController,
-                itemCount: 3,
-                itemBuilder: (context, index) => Container(
-                  child: Image(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(
-                        'https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/09087d4d-6300-44ad-be5f-6e9ebf8d3790/infinity-run-3-air-x-hola-lou-mens-road-running-shoes-1bRq75.png'),
-                  ),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Stack(alignment: Alignment.center, children: [
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height / 2 - 150,
+                child: PageView.builder(
+                  onPageChanged: (value) => {
+                    print(value),
+                    setState(() {
+                      currentIndex = value;
+                    })
+                  },
+                  controller: pageController,
+                  itemCount: widget.product.image!.length,
+                  itemBuilder: (context, index) => Hero(
+                      tag: widget.product.image![index],
+                      child: CachedNetworkImage(
+                        fit: BoxFit.cover,
+                        imageUrl: widget.product.image![index],
+                      )),
+                  // Image(
+                  //     fit: BoxFit.cover,
+                  //     image: NetworkImage(widget.product.image![index]),
+                  //   ),
                 ),
               ),
+              Positioned(
+                bottom: 10,
+                child: Row(
+                  children: List.generate(
+                      widget.product.image!.length,
+                      (index) => Padding(
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: currentIndex == index
+                                      ? Colors.black
+                                      : Colors.grey,
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(5),
+                                  )),
+                              height: 10,
+                              width: currentIndex == index ? 25 : 10,
+                            ),
+                          )),
+                ),
+              )
+            ]),
+            SizedBox(
+              height: 10,
             ),
-            Positioned(
-              bottom: 10,
-              child: Row(
-                children: List.generate(
-                    3,
-                    (index) => Padding(
-                          padding: const EdgeInsets.only(right: 8.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: currentIndex == index
-                                    ? Colors.black
-                                    : Colors.grey,
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(5),
-                                )),
-                            height: 10,
-                            width: currentIndex == index ? 25 : 10,
-                          ),
-                        )),
-              ),
-            )
-          ]),
-          SizedBox(
-            height: 16,
-          ),
-          Expanded(
-            child: Padding(
+            Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(child: ProductDetailHeader()),
-                  // SizedBox(
-                  //   height: 10,
-                  // ),
+                  ProductDetailHeader(
+                    name: widget.product.name.toString(),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Divider(
                     height: 1,
                   ),
-                  Expanded(child: ProductDescription()),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  ProductDescription(
+                      description: widget.product.description.toString()),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10.0),
+                    child: SizedBox(
+                      height: 65,
                       child: Row(
                         children: [
-                          getCategorySize(),
-                          SizedBox(
+                          Expanded(child: getCategorySize()),
+                          const SizedBox(
                             width: 20,
                           ),
                           Expanded(
@@ -124,107 +133,238 @@ class _ProductDetailState extends State<ProductDetail> {
                       ),
                     ),
                   ),
-                  // SizedBox(
-                  //   height: 10,
-                  // ),
-                  Expanded(
-                    child: Row(
-                      children: [
-                        Text(
-                          'Quantity',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              fontFamily: 'Urbanist'),
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Material(
-                          color: Color(0xFFF3F3F3),
-                          borderRadius: BorderRadius.all(Radius.circular(25)),
-                          child: Container(
-                            width: 140,
-                            height: 45,
-                            decoration: BoxDecoration(
-                                // color: Color(0xFFF3F3F3),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(25))),
-                            child: Row(children: [
-                              Expanded(
-                                child: IconButton(
-                                  splashRadius: 23,
-                                  icon: Icon(Icons.horizontal_rule),
-                                  onPressed: () {},
-                                ),
-                              ),
-                              Expanded(
-                                child: Center(
-                                    child: Text(
-                                  '3',
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: 'Urbanist'),
-                                )),
-                              ),
-                              Expanded(
-                                child: IconButton(
-                                  splashRadius: 23,
-                                  icon: Icon(Icons.add),
-                                  onPressed: () {},
-                                ),
-                              )
-                            ]),
-                          ),
-                        ),
-                      ],
-                    ),
+                  SizedBox(
+                    height: 10,
                   ),
-                  // SizedBox(
-                  //   height: 10,
-                  // ),
+                  Row(
+                    children: [
+                      Text(
+                        'Quantity',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            fontFamily: 'Urbanist'),
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Material(
+                        color: Color(0xFFF3F3F3),
+                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                        child: Container(
+                          width: 140,
+                          height: 45,
+                          decoration: BoxDecoration(
+                              // color: Color(0xFFF3F3F3),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(25))),
+                          child: Row(children: [
+                            Expanded(
+                              child: IconButton(
+                                splashRadius: 23,
+                                icon: Icon(Icons.horizontal_rule),
+                                onPressed: () {},
+                              ),
+                            ),
+                            Expanded(
+                              child: Center(
+                                  child: Text(
+                                '3',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Urbanist'),
+                              )),
+                            ),
+                            Expanded(
+                              child: IconButton(
+                                splashRadius: 23,
+                                icon: Icon(Icons.add),
+                                onPressed: () {},
+                              ),
+                            )
+                          ]),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Divider(
                     height: 1,
                   ),
-                  // SizedBox(
-                  //   height: 10,
-                  // ),
-                  Expanded(
-                    child: Row(
-                      // mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('Total price'),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              '\$100.00',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 25,
-                                  fontFamily: 'Urbanist'),
-                            )
-                          ],
-                        ),
-                        Expanded(
-                          child: Align(
-                              alignment: Alignment.centerRight,
-                              child: CustomTextButton(
-                                  onPressed: () {}, text: 'Add to Card')),
-                        )
-                      ],
-                    ),
-                  )
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    // mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('Total price'),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            '\$${widget.product.price}' + '.00',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 25,
+                                fontFamily: 'Urbanist'),
+                          )
+                        ],
+                      ),
+                      Expanded(
+                        child: Align(
+                            alignment: Alignment.centerRight,
+                            child: CustomTextButton(
+                                onPressed: () {}, text: 'Add to Card')),
+                      )
+                    ],
+                  ),
                 ],
               ),
-            ),
-          ),
-        ],
+            )
+
+            // Expanded(
+            //   child: Padding(
+            //     padding: const EdgeInsets.symmetric(horizontal: 16),
+            //     child: Column(
+            //       crossAxisAlignment: CrossAxisAlignment.start,
+            //       children: [
+            //         Expanded(
+            //             child: ProductDetailHeader(
+            //           name: widget.product.name.toString(),
+            //         )),
+            //         // SizedBox(
+            //         //   height: 10,
+            //         // ),
+            //         Divider(
+            //           height: 1,
+            //         ),
+            //         Expanded(child: ProductDescription()),
+            //         Expanded(
+            //           child: Padding(
+            //             padding: const EdgeInsets.symmetric(vertical: 10.0),
+            //             child: Row(
+            //               children: [
+            //                 getCategorySize(),
+            //                 SizedBox(
+            //                   width: 20,
+            //                 ),
+            //                 Expanded(
+            //                   child: getCategoryColor(),
+            //                 )
+            //               ],
+            //             ),
+            //           ),
+            //         ),
+            //         // SizedBox(
+            //         //   height: 10,
+            //         // ),
+            //         Expanded(
+            //           child: Row(
+            //             children: [
+            //               Text(
+            //                 'Quantity',
+            //                 style: TextStyle(
+            //                     fontWeight: FontWeight.bold,
+            //                     fontSize: 20,
+            //                     fontFamily: 'Urbanist'),
+            //               ),
+            //               SizedBox(
+            //                 width: 20,
+            //               ),
+            //               Material(
+            //                 color: Color(0xFFF3F3F3),
+            //                 borderRadius: BorderRadius.all(Radius.circular(25)),
+            //                 child: Container(
+            //                   width: 140,
+            //                   height: 45,
+            //                   decoration: BoxDecoration(
+            //                       // color: Color(0xFFF3F3F3),
+            //                       borderRadius:
+            //                           BorderRadius.all(Radius.circular(25))),
+            //                   child: Row(children: [
+            //                     Expanded(
+            //                       child: IconButton(
+            //                         splashRadius: 23,
+            //                         icon: Icon(Icons.horizontal_rule),
+            //                         onPressed: () {},
+            //                       ),
+            //                     ),
+            //                     Expanded(
+            //                       child: Center(
+            //                           child: Text(
+            //                         '3',
+            //                         style: TextStyle(
+            //                             fontSize: 20,
+            //                             fontWeight: FontWeight.bold,
+            //                             fontFamily: 'Urbanist'),
+            //                       )),
+            //                     ),
+            //                     Expanded(
+            //                       child: IconButton(
+            //                         splashRadius: 23,
+            //                         icon: Icon(Icons.add),
+            //                         onPressed: () {},
+            //                       ),
+            //                     )
+            //                   ]),
+            //                 ),
+            //               ),
+            //             ],
+            //           ),
+            //         ),
+            //         // SizedBox(
+            //         //   height: 10,
+            //         // ),
+            //         Divider(
+            //           height: 1,
+            //         ),
+            //         // SizedBox(
+            //         //   height: 10,
+            //         // ),
+            //         Expanded(
+            //           child: Row(
+            //             // mainAxisAlignment: MainAxisAlignment.center,
+            //             children: [
+            //               Column(
+            //                 crossAxisAlignment: CrossAxisAlignment.start,
+            //                 mainAxisAlignment: MainAxisAlignment.center,
+            //                 children: [
+            //                   Text('Total price'),
+            //                   SizedBox(
+            //                     height: 5,
+            //                   ),
+            //                   Text(
+            //                     '\$100.00',
+            //                     style: TextStyle(
+            //                         fontWeight: FontWeight.bold,
+            //                         fontSize: 25,
+            //                         fontFamily: 'Urbanist'),
+            //                   )
+            //                 ],
+            //               ),
+            //               Expanded(
+            //                 child: Align(
+            //                     alignment: Alignment.centerRight,
+            //                     child: CustomTextButton(
+            //                         onPressed: () {}, text: 'Add to Card')),
+            //               )
+            //             ],
+            //           ),
+            //         )
+            //       ],
+            //     ),
+            //   ),
+            // ),
+          ],
+        ),
       ),
     );
   }
@@ -253,35 +393,6 @@ class _ProductDetailState extends State<ProductDetail> {
     );
   }
 
-  InkWell ColorItem(int index) {
-    return InkWell(
-      borderRadius: BorderRadius.all(Radius.circular(20)),
-      onTap: () {
-        setState(() {
-          indexColor = index;
-        });
-      },
-      child: Stack(children: [
-        Container(
-          height: 40,
-          width: 40,
-          decoration: BoxDecoration(
-              color: ColorData[index],
-              borderRadius: BorderRadius.all(Radius.circular(20))),
-        ),
-        if (indexColor == index)
-          Container(
-            height: 40,
-            width: 40,
-            child: Icon(
-              Icons.check,
-              color: Colors.white,
-            ),
-          )
-      ]),
-    );
-  }
-
   Widget getCategorySize() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -294,9 +405,16 @@ class _ProductDetailState extends State<ProductDetail> {
               fontFamily: 'Urbanist'),
         ),
         Expanded(
-          child: Row(
-            children: List.generate(3, (index) => SizeItem(index)),
-          ),
+          child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: 3,
+              itemBuilder: ((context, index) => Padding(
+                    padding: const EdgeInsets.only(right: 5.0),
+                    child: SizeItem(index),
+                  ))),
+          // child: Row(
+          //   children: List.generate(3, (index) => SizeItem(index)),
+          // ),
         )
       ],
     );
@@ -329,6 +447,35 @@ class _ProductDetailState extends State<ProductDetail> {
           ),
         ),
       ),
+    );
+  }
+
+  InkWell ColorItem(int index) {
+    return InkWell(
+      borderRadius: BorderRadius.all(Radius.circular(20)),
+      onTap: () {
+        setState(() {
+          indexColor = index;
+        });
+      },
+      child: Stack(children: [
+        Container(
+          height: 40,
+          width: 40,
+          decoration: BoxDecoration(
+              color: ColorData[index],
+              borderRadius: BorderRadius.all(Radius.circular(20))),
+        ),
+        if (indexColor == index)
+          Container(
+            height: 40,
+            width: 40,
+            child: Icon(
+              Icons.check,
+              color: Colors.white,
+            ),
+          )
+      ]),
     );
   }
 }

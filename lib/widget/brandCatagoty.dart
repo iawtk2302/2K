@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sneaker_app/modal/brand.dart';
 import 'package:sneaker_app/screen/product_screen.dart';
-
-import '../bloc/brand_bloc.dart';
 
 class BrandCatagory extends StatelessWidget {
   const BrandCatagory({
     Key? key,
-    required this.imgUri,
-    required this.name,
+    required this.brand,
   }) : super(key: key);
-  final String imgUri;
-  final String name;
+  final Brand brand;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         RawMaterialButton(
           onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: ((context) => ProductScreen())));
+            if (brand.name != 'More')
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: ((context) => ProductScreen(
+                            brand: brand,
+                          ))));
           },
           elevation: 2.0,
           fillColor: Color(0xFFECECEC),
@@ -27,7 +29,7 @@ class BrandCatagory extends StatelessWidget {
             height: 30,
             width: 30,
             fit: BoxFit.scaleDown,
-            image: NetworkImage(imgUri),
+            image: NetworkImage(brand.imageUrl),
           ),
           padding: EdgeInsets.all(12.0),
           shape: CircleBorder(),
@@ -36,7 +38,7 @@ class BrandCatagory extends StatelessWidget {
           height: 10,
         ),
         Text(
-          name,
+          brand.name,
           softWrap: false,
           style: TextStyle(
             fontWeight: FontWeight.w500,

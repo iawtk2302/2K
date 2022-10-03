@@ -33,7 +33,7 @@ class _FillProfilePageState extends State<FillProfilePage> {
   final _formKey = GlobalKey<FormState>();
   String dateOfbirth = "Date of Birth";
   final storage = FirebaseStorage.instance.ref();
-  final id=FirebaseAuth.instance.currentUser!.uid;
+  final id = FirebaseAuth.instance.currentUser!.uid;
   final firestore = FirebaseFirestore.instance;
   @override
   Widget build(BuildContext context) {
@@ -214,9 +214,9 @@ class _FillProfilePageState extends State<FillProfilePage> {
                 CustomButton(
                   text: "Submit",
                   onTap: () {
-                    if (_formKey.currentState!.validate()){
+                    if (_formKey.currentState!.validate()) {
                       _submit();
-                    }          
+                    }
                   },
                 )
               ],
@@ -319,17 +319,24 @@ class _FillProfilePageState extends State<FillProfilePage> {
 
   Future _submit() async {
     try {
-      final task=await storage
-          .child("$id.jpg")
-          .putFile(_file!);
-      final linkImage=await task.ref.getDownloadURL();
-      final user=Customer(id: id, dateOfbirth: dateOfbirth, email: _emailController.text.trim(), firstName: _firstNameController.text.trim(), gender: dropdownValue, image: linkImage, lastName: _lastNameController.text.trim(), phone: _phoneController.text);
+      final task = await storage.child("$id.jpg").putFile(_file!);
+      final linkImage = await task.ref.getDownloadURL();
+      final user = Customer(
+          id: id,
+          dateOfbirth: dateOfbirth,
+          email: _emailController.text.trim(),
+          firstName: _firstNameController.text.trim(),
+          gender: dropdownValue,
+          image: linkImage,
+          lastName: _lastNameController.text.trim(),
+          phone: _phoneController.text);
       await firestore.collection('User').doc(id).set(user.toJson());
       Navigator.pushReplacementNamed(context, Routes.main);
     } on FirebaseException catch (e) {
       print(e);
     }
   }
+
   Future _goback() async {
     await FirebaseService().signOut();
     Navigator.pushReplacementNamed(context, Routes.login);

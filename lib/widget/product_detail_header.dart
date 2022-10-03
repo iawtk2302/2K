@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 class ProductDetailHeader extends StatelessWidget {
   const ProductDetailHeader({
     Key? key,
+    required this.name,
   }) : super(key: key);
-
+  final String name;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -12,12 +13,15 @@ class ProductDetailHeader extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              'Air Jordan 3 Retro',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 25,
-                  fontFamily: 'Urbanist'),
+            Expanded(
+              child: Text(
+                name,
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25,
+                    fontFamily: 'Urbanist'),
+                maxLines: 2,
+              ),
             ),
             IconButton(onPressed: () {}, icon: Icon(Icons.favorite_border))
           ],

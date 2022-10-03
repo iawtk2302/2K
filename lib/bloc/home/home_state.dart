@@ -11,7 +11,7 @@ class HomeLoading extends HomeState {}
 
 class HomeLoaded extends HomeState {
   final List<Brand> listBrand;
-  final Banner banner;
+  final List<CustomBanner> banner;
   HomeLoaded({required this.banner, required this.listBrand});
   @override
   List<Object> get props => [listBrand, banner];

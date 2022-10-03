@@ -14,7 +14,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       emit(HomeLoading());
 
       List<Brand> tempList = [];
-      late Banner tempBanner;
+      List<CustomBanner> tempBanner = [];
       final docBrand = await FirebaseFirestore.instance.collection('Brand');
       final docBanner = await FirebaseFirestore.instance.collection('Banner');
       await docBrand.get().then((value) => value.docs.forEach((element) {
@@ -25,15 +25,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           }));
 
       await docBanner
-          .limit(1)
+          // .limit(1)
           .get()
           .then((value) => value.docs.forEach((element) {
-                tempBanner = Banner(
-                    id: element.get('id'),
-                    image: element.get('image'),
-                    percent: element.get('percent'),
-                    title: element.get('title'),
-                    content: element.get('content'));
+                tempBanner.add(CustomBanner(
+                  id: element.get('id'),
+                  image: element.get('image'),
+                ));
               }));
       tempList.add(Brand(
           id: 'jasfw',
