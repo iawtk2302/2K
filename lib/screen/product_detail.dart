@@ -114,8 +114,11 @@ class _ProductDetailState extends State<ProductDetail> {
                   Divider(
                     height: 1,
                   ),
-                  ProductDescription(
-                      description: widget.product.description.toString()),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: ProductDescription(
+                        description: widget.product.description.toString()),
+                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10.0),
                     child: SizedBox(

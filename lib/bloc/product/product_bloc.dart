@@ -16,42 +16,50 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       BuildContext context1;
       emit(ProductLoading());
 
-      int count = 0;
+      // int count = 0;
       List<Product> listProduct = [];
+
       final docCategory =
           await FirebaseFirestore.instance.collection('Category');
+      final docProduct = await FirebaseFirestore.instance.collection('Product');
+
       final List<String> idCategory = [];
       final List<Category> listCategory = [];
+
       await docCategory
           .where('idBrand', isEqualTo: event.idBrand)
           .get()
           .then((value) => value.docs.forEach((element) {
                 idCategory.add(element.data()['idCatagory']);
-                listCategory.add(Category(
-                  idBrand: element.get('idBrand'),
-                  idCategory: element.get('idCatagory'),
-                  name: element.get('name'),
-                ));
+                // listCategory.add(Category(
+                //   idBrand: element.get('idBrand'),
+                //   idCategory: element.get('idCatagory'),
+                //   name: element.get('name'),
+                // ));
+                listCategory.add(Category.fromJson(element.data()));
               }));
-      final docProduct = await FirebaseFirestore.instance.collection('Product');
+
       await docProduct
           .where('idCategory', whereIn: idCategory)
           .get()
           .then((value) => value.docs.forEach((element) {
                 // print(element.id + element.data().toString());
-                listProduct.add(Product(
-                    gender: element.get('gender') as List<dynamic>,
-                    idCategory: element.get('idCategory'),
-                    description: element.get('description'),
-                    name: element.get('name'),
-                    image: element.get('image') as List<dynamic>,
-                    price: element.get('price')));
+                // listProduct.add(Product(
+                //     gender: element.get('gender') as List<dynamic>,
+                //     idCategory: element.get('idCategory'),
+                //     description: element.get('description'),
+                //     name: element.get('name'),
+                //     image: element.get('image') as List<dynamic>,
+                //     price: element.get('price')));
+                listProduct.add(Product.fromJson(element.data()));
               }));
+
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
         await Future.wait(listProduct
             .map((e) => cacheImage(event.context, e.image![0]))
             .toList());
       });
+
       emit(ProductLoaded(listCategory: listCategory, listProduct: listProduct));
     });
   }
