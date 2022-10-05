@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:sneaker_app/modal/product.dart';
@@ -26,7 +27,17 @@ class _ItemProductState extends State<ItemProduct> {
   bool isLike = false;
   @override
   void initState() {
-    isLike = widget.isLiked;
+    final docFavorite = FirebaseFirestore.instance.collection('Favorite');
+    final doc = docFavorite
+        .where('idProduct', isEqualTo: widget.product.idProduct)
+        .get()
+        .then((value) {
+      if (value.docs.length != 0) {
+        setState(() {
+          isLike = true;
+        });
+      }
+    });
     super.initState();
   }
 
@@ -64,6 +75,8 @@ class _ItemProductState extends State<ItemProduct> {
                           child: Hero(
                             tag: widget.product.image![0],
                             child: Image(
+                                errorBuilder: (context, error, stackTrace) =>
+                                    Icon(Icons.label_important),
                                 width: double.infinity,
                                 fit: BoxFit.cover,
                                 image: CachedNetworkImageProvider(

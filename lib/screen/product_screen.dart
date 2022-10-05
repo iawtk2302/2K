@@ -35,9 +35,10 @@ class _ProductScreenState extends State<ProductScreen>
   @override
   void initState() {
     animationController = AnimationController(
-        duration: const Duration(milliseconds: 2500), vsync: this);
-    context.read<ProductBloc>()
-      ..add(LoadProduct(idBrand: widget.brand.id, context: context));
+        duration: const Duration(milliseconds: 2000), vsync: this);
+    context
+        .read<ProductBloc>()
+        .add(LoadProduct(idBrand: widget.brand.id, context: context));
     super.initState();
   }
 
@@ -58,7 +59,7 @@ class _ProductScreenState extends State<ProductScreen>
             Navigator.pop(context);
             // context.read<ProductBloc>()..emit(ProductLoading());
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: Colors.black,
           ),
@@ -72,7 +73,7 @@ class _ProductScreenState extends State<ProductScreen>
             padding: const EdgeInsets.only(right: 8.0),
             child: IconButton(
               onPressed: () {},
-              icon: Icon(
+              icon: const Icon(
                 Icons.search,
                 color: Colors.black,
               ),
@@ -85,6 +86,7 @@ class _ProductScreenState extends State<ProductScreen>
           if (state is ProductLoading) {
             return const Loading();
           } else if (state is ProductLoaded) {
+            Future.delayed(Duration(seconds: 1));
             return Column(
               children: [
                 Padding(
@@ -104,6 +106,11 @@ class _ProductScreenState extends State<ProductScreen>
                                   setState(() {
                                     isChoose = index;
                                   });
+                                  context.read<ProductBloc>().add(ReLoadProduct(
+                                      listCategory: state.listCategory,
+                                      context: context,
+                                      idCategory: state
+                                          .listCategory[index].idCategory!));
                                 },
                                 child: BrandItem(
                                   name: state.listCategory[index].name!,
@@ -111,7 +118,7 @@ class _ProductScreenState extends State<ProductScreen>
                                   index: index,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 8,
                               )
                             ],
