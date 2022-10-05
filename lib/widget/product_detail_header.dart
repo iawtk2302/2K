@@ -1,11 +1,20 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../bloc/product/product_bloc.dart';
+import '../modal/product.dart';
 
 class ProductDetailHeader extends StatelessWidget {
   const ProductDetailHeader({
     Key? key,
-    required this.name,
+    required this.product,
+    required this.isLiked,
+    required this.onPressed,
   }) : super(key: key);
-  final String name;
+  final Product product;
+  final bool isLiked;
+  final Function onPressed;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -15,7 +24,7 @@ class ProductDetailHeader extends StatelessWidget {
           children: [
             Expanded(
               child: Text(
-                name,
+                product.name!,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 25,
@@ -23,7 +32,15 @@ class ProductDetailHeader extends StatelessWidget {
                 maxLines: 2,
               ),
             ),
-            IconButton(onPressed: () {}, icon: Icon(Icons.favorite_border))
+            IconButton(
+                onPressed: () {
+                  context.read<ProductBloc>().add(ReactProduct(
+                        idProduct: product.idProduct!,
+                        idUser: FirebaseAuth.instance.currentUser!.uid,
+                      ));
+                  onPressed();
+                },
+                icon: Icon(!isLiked ? Icons.favorite_border : Icons.favorite))
           ],
         ),
         Row(

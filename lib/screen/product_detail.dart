@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -30,7 +31,25 @@ class _ProductDetailState extends State<ProductDetail> {
   int currentIndex = 0;
   int indexSize = 0;
   int indexColor = 0;
+  bool isLiked = false;
   PageController pageController = PageController();
+
+  @override
+  void initState() {
+    final docFavorite = FirebaseFirestore.instance.collection('Favorite');
+    final doc = docFavorite
+        .where('idProduct', isEqualTo: widget.product.idProduct)
+        .get()
+        .then((value) {
+      if (value.docs.length != 0) {
+        setState(() {
+          isLiked = true;
+        });
+      }
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +68,8 @@ class _ProductDetailState extends State<ProductDetail> {
           )),
       body: SingleChildScrollView(
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.max,
           children: [
             Stack(alignment: Alignment.center, children: [
               Container(
@@ -106,7 +126,13 @@ class _ProductDetailState extends State<ProductDetail> {
               child: Column(
                 children: [
                   ProductDetailHeader(
-                    name: widget.product.name.toString(),
+                    product: widget.product,
+                    isLiked: isLiked,
+                    onPressed: () {
+                      setState(() {
+                        isLiked = !isLiked;
+                      });
+                    },
                   ),
                   SizedBox(
                     height: 10,
@@ -114,8 +140,11 @@ class _ProductDetailState extends State<ProductDetail> {
                   Divider(
                     height: 1,
                   ),
-                  ProductDescription(
-                      description: widget.product.description.toString()),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: ProductDescription(
+                        description: widget.product.description.toString()),
+                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10.0),
                     child: SizedBox(
@@ -198,8 +227,8 @@ class _ProductDetailState extends State<ProductDetail> {
                     height: 15,
                   ),
                   Row(
-                    // mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    // crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -210,7 +239,7 @@ class _ProductDetailState extends State<ProductDetail> {
                             height: 5,
                           ),
                           Text(
-                            '\$${widget.product.price}' + '.00',
+                            '\$${widget.product.price}' '.00',
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 25,
@@ -228,7 +257,7 @@ class _ProductDetailState extends State<ProductDetail> {
                   ),
                 ],
               ),
-            )
+            ),
 
             // Expanded(
             //   child: Padding(

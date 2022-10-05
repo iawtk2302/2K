@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:sneaker_app/modal/brand.dart';
 import 'package:sneaker_app/modal/category.dart';
 import 'package:sneaker_app/modal/product.dart';
+import 'package:sneaker_app/model/favorite.dart';
 
 part 'product_event.dart';
 part 'product_state.dart';
@@ -16,43 +17,105 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       BuildContext context1;
       emit(ProductLoading());
 
-      int count = 0;
+      // int count = 0;
       List<Product> listProduct = [];
       final docCategory =
           await FirebaseFirestore.instance.collection('Category');
+      final docProduct = await FirebaseFirestore.instance.collection('Product');
+
       final List<String> idCategory = [];
       final List<Category> listCategory = [];
+
       await docCategory
           .where('idBrand', isEqualTo: event.idBrand)
           .get()
           .then((value) => value.docs.forEach((element) {
                 idCategory.add(element.data()['idCatagory']);
-                listCategory.add(Category(
-                  idBrand: element.get('idBrand'),
-                  idCategory: element.get('idCatagory'),
-                  name: element.get('name'),
-                ));
+                // listCategory.add(Category(
+                //   idBrand: element.get('idBrand'),
+                //   idCategory: element.get('idCatagory'),
+                //   name: element.get('name'),
+                // ));
+                listCategory.add(Category.fromJson(element.data()));
               }));
-      final docProduct = await FirebaseFirestore.instance.collection('Product');
+
       await docProduct
           .where('idCategory', whereIn: idCategory)
           .get()
           .then((value) => value.docs.forEach((element) {
                 // print(element.id + element.data().toString());
-                listProduct.add(Product(
-                    gender: element.get('gender') as List<dynamic>,
-                    idCategory: element.get('idCategory'),
-                    description: element.get('description'),
-                    name: element.get('name'),
-                    image: element.get('image') as List<dynamic>,
-                    price: element.get('price')));
+                // listProduct.add(Product(
+                //     gender: element.get('gender') as List<dynamic>,
+                //     idCategory: element.get('idCategory'),
+                //     description: element.get('description'),
+                //     name: element.get('name'),
+                //     image: element.get('image') as List<dynamic>,
+                //     price: element.get('price')));
+                listProduct.add(Product.fromJson(element.data()));
               }));
+
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
         await Future.wait(listProduct
             .map((e) => cacheImage(event.context, e.image![0]))
             .toList());
       });
+      listCategory.insert(
+          0, Category(idCategory: 'All', idBrand: 'null', name: 'All'));
+      // await Future.delayed(Duration(seconds: 1));
       emit(ProductLoaded(listCategory: listCategory, listProduct: listProduct));
+    });
+
+    on<ReLoadProduct>((event, emit) async {
+      List<Product> listProduct = [];
+      // emit(ProductLoading());
+      final docProduct = await FirebaseFirestore.instance.collection('Product');
+      if (event.idCategory != 'All') {
+        await docProduct
+            .where('idCategory', isEqualTo: event.idCategory)
+            .get()
+            .then((value) => value.docs.forEach((element) {
+                  listProduct.add(Product.fromJson(element.data()));
+                }));
+      } else {
+        List<String> listIdCategory = [];
+        event.listCategory.forEach((element) {
+          listIdCategory.add(element.idCategory!);
+        });
+        await docProduct
+            .where('idCategory', whereIn: listIdCategory)
+            .get()
+            .then((value) => value.docs.forEach((element) {
+                  listProduct.add(Product.fromJson(element.data()));
+                }));
+      }
+      emit(ProductLoaded(
+          listCategory: event.listCategory, listProduct: listProduct));
+    });
+
+    on<ReactProduct>((event, emit) async {
+      final docFavorite =
+          await FirebaseFirestore.instance.collection('Favorite');
+
+      final doc = docFavorite
+          .where('idProduct', isEqualTo: event.idProduct)
+          .get()
+          .then((value) {
+        if (value.docs.length == 0) {
+          docFavorite
+              .add({'idUser': event.idUser, 'idProduct': event.idProduct})
+              .then((value) =>
+                  docFavorite.doc(value.id).update({'idFavorite': value.id}))
+              .then((value) => print('successful'));
+        } else {
+          docFavorite
+              .where('idProduct', isEqualTo: event.idProduct)
+              .where('idUser', isEqualTo: event.idUser)
+              .get()
+              .then((value) => value.docs.forEach((element) {
+                    element.reference.delete();
+                  }));
+        }
+      });
     });
   }
 
