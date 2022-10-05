@@ -1,32 +1,35 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:sneaker_app/modal/product.dart';
+import 'package:sneaker_app/widget/Loading.dart';
+
+import '../widget/item_product_without_anim.dart';
 
 class CustomSearchScreen extends SearchDelegate {
   CustomSearchScreen(this.hintText);
   final String hintText;
-  List<String> allData = [
-    'Nike',
-    'Adidas',
-    'Puma',
-    'Vans',
-    'Balenciaga',
-    'Converse',
-    'New balance'
-  ];
-
+  final _firestore=FirebaseFirestore.instance.collection('Product');
+  
+                           
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [
       IconButton(
           onPressed: () {
-            query = '';
+            if(query.isEmpty){
+              close(context, query);
+            }
+            else{
+              query='';
+              showSuggestions(context);
+            }
           },
           icon: const Icon(
-            Icons.tune,
+            Icons.clear,
           ))
     ];
   }
-
+  
   @override
   Widget? buildLeading(BuildContext context) {
     return IconButton(
@@ -40,77 +43,51 @@ class CustomSearchScreen extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    print('1');
-
-    List<String> matchQuery = [];
-    for (var item in allData) {
-      if (item.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(item);
-      }
-    }
-    if (matchQuery.length != 0) {
-      return ListView.builder(
-          itemCount: matchQuery.length,
-          itemBuilder: ((context, index) {
-            var results = matchQuery[index];
-            return ListTile(
-              title: Container(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: Text('results'),
-              ),
-            );
-          }));
-    } else
-      return Center(
-        child: Text('bnu;;'),
+    if(query!=''){
+      return StreamBuilder<QuerySnapshot>(
+    stream: _firestore.snapshots().asBroadcastStream(),
+    builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+      if (!snapshot.hasData){
+        return const Loading();
+      } 
+      else{
+        // final results = snapshot.data?.docs.where((QueryDocumentSnapshot a) => a['name'].toString().toLowerCase().contains(query.toLowerCase())).map((e) => Product.fromJson(e));
+        print(snapshot.data);
+      final results=snapshot.data!.docs.where((QueryDocumentSnapshot<Object?> a) => a['name'].toString().toLowerCase().contains(query.toLowerCase()));
+      if(!results.isEmpty){
+        return Column(
+        children: [
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+              child: GridView(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                            mainAxisSpacing: 20,
+                            childAspectRatio: 0.65,
+                            crossAxisSpacing: 10,
+                            crossAxisCount: 2,
+                          ),
+                  children: results.map((QueryDocumentSnapshot<Object?> element) {
+                  final data=Product(
+                            gender: element.get('gender') as List<dynamic>,
+                            idCategory: element.get('idCategory'),
+                            description: element.get('description'),
+                            name: element.get('name'),
+                            image: element.get('image') as List<dynamic>,
+                            price: element.get('price'));
+                    return ItemProductWithoutAnim(
+                      product: data,
+                      isLiked: false,
+                    );
+                    // return Text(data.image![0].toString());
+                  }).toList(),),
+            ),
+          ),
+        ],
       );
-  }
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    List<String> matchQuery = [];
-    for (var item in allData) {
-      if (item.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(item);
       }
-    }
-    if (matchQuery.length != 0) {
-      return ListView.builder(
-          itemCount: matchQuery.length,
-          itemBuilder: ((context, index) {
-            var results = matchQuery[index];
-            return InkWell(
-              onTap: () {
-                final snackBar = SnackBar(
-                  content: const Text('Yay! A SnackBar!'),
-                  action: SnackBarAction(
-                    label: 'Undo',
-                    onPressed: () {},
-                  ),
-                );
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-              },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      results,
-                      style:
-                          TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
-                    ),
-                    IconButton(
-                        splashRadius: 25,
-                        onPressed: () {},
-                        icon: Icon(Icons.cancel_presentation))
-                  ],
-                ),
-              ),
-            );
-          }));
-    } else
-      return Center(
+      else{
+        return Center(
         child: Column(
           children: [
             Spacer(),
@@ -120,8 +97,8 @@ class CustomSearchScreen extends SearchDelegate {
             Spacer(),
             Image(
               width: MediaQuery.of(context).size.width - 120,
-              image: NetworkImage(
-                  'https://firebasestorage.googleapis.com/v0/b/sneakerapp-f4de5.appspot.com/o/clipboard.png?alt=media&token=18e3b67e-a0f2-49bb-b1dc-eb78caeb138e'),
+              image: AssetImage(
+                  'assets/images/clipboard.png'),
             ),
             Spacer(),
             Text(
@@ -145,8 +122,33 @@ class CustomSearchScreen extends SearchDelegate {
           ],
         ),
       );
+      }
+      }  
+    },
+  );
+    }
+    else{
+      return Container();
+    }
   }
 
   @override
-  void showResults(BuildContext context) {}
+  Widget buildSuggestions(BuildContext context) {
+  //   return StreamBuilder(
+  //   stream: FirebaseFirestore.instance.collection('Product').snapshots(),
+  //   builder: (context, snapshot) {
+  //     if (!snapshot.hasData) return const Loading();
+  //     final results = snapshot.data?.docs.where((DocumentSnapshot a) => a['name'].toString().toLowerCase().contains(query.toLowerCase()));
+  //     return ListView(
+  //       children: results!.map<Widget>((a) => InkWell(onTap: () {
+          
+  //         // query=a['name'];
+  //         // buildResults(context);
+  //       }, child: Text(a['name']))).toList(),
+  //     );
+  //   },
+  // );
+  return Container();
+  }
+  
 }

@@ -250,25 +250,25 @@ class _HomePageState extends State<HomePage> {
         SizedBox(
           height: 20,
         ),
-        Row(
-          children: [
-            Expanded(
-              child: SizedBox(
-                child: GridView.count(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  mainAxisSpacing: 20,
-                  childAspectRatio: 0.65,
-                  crossAxisSpacing: 10,
-                  crossAxisCount: 2,
-                  children: List.generate(4, (index) {
-                    return ItemProductWithoutAnim(isLiked: true);
-                  }),
-                ),
-              ),
-            ),
-          ],
-        ),
+        // Row(
+        //   children: [
+        //     Expanded(
+        //       child: SizedBox(
+        //         child: GridView.count(
+        //           physics: NeverScrollableScrollPhysics(),
+        //           shrinkWrap: true,
+        //           mainAxisSpacing: 20,
+        //           childAspectRatio: 0.65,
+        //           crossAxisSpacing: 10,
+        //           crossAxisCount: 2,
+        //           children: List.generate(4, (index) {
+        //             return ItemProductWithoutAnim(isLiked: true);
+        //           }),
+        //         ),
+        //       ),
+        //     ),
+        //   ],
+        // ),
         SizedBox(
           height: 50,
         )
@@ -385,25 +385,25 @@ class _HomePageState extends State<HomePage> {
         SizedBox(
           height: 20,
         ),
-        Row(
-          children: [
-            Expanded(
-              child: SizedBox(
-                child: GridView.count(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  mainAxisSpacing: 20,
-                  childAspectRatio: 0.65,
-                  crossAxisSpacing: 10,
-                  crossAxisCount: 2,
-                  children: List.generate(4, (index) {
-                    return ItemProductWithoutAnim(isLiked: true);
-                  }),
-                ),
-              ),
-            ),
-          ],
-        ),
+        // Row(
+        //   children: [
+        //     Expanded(
+        //       child: SizedBox(
+        //         child: GridView.count(
+        //           physics: NeverScrollableScrollPhysics(),
+        //           shrinkWrap: true,
+        //           mainAxisSpacing: 20,
+        //           childAspectRatio: 0.65,
+        //           crossAxisSpacing: 10,
+        //           crossAxisCount: 2,
+        //           children: List.generate(4, (index) {
+        //             return ItemProductWithoutAnim(isLiked: true);
+        //           }),
+        //         ),
+        //       ),
+        //     ),
+        //   ],
+        // ),
         SizedBox(
           height: 50,
         )
