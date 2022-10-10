@@ -2,7 +2,7 @@ class Product {
   String? idProduct;
   String? idCategory;
   String? name;
-  String? price;
+  int? price;
   List<dynamic>? image;
   String? description;
   List<dynamic>? gender;

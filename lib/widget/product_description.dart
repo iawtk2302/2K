@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
-class ProductDescription extends StatelessWidget {
-  const ProductDescription({
-    Key? key,
-    required this.description,
-  }) : super(key: key);
+class ProductDescription extends StatefulWidget {
+  const ProductDescription({super.key, required this.description});
   final String description;
+  @override
+  State<ProductDescription> createState() => _ProductDescriptionState();
+}
+
+class _ProductDescriptionState extends State<ProductDescription> {
+  bool isExpand = false;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -22,12 +25,30 @@ class ProductDescription extends StatelessWidget {
             // textAlign: TextAlign.left,
           ),
         ),
-        Text(
-          description,
-          maxLines: 2,
-          textAlign: TextAlign.left,
-          overflow: TextOverflow.ellipsis,
-          style: TextStyle(fontFamily: 'Urbanist'),
+        Column(
+          children: [
+            Text(
+              widget.description,
+              maxLines: isExpand ? 10 : 2,
+              textAlign: TextAlign.left,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(fontFamily: 'Urbanist'),
+            ),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: InkWell(
+                onTap: () {
+                  setState(() {
+                    isExpand = !isExpand;
+                  });
+                },
+                child: Text(
+                  !isExpand ? "See more..." : "See less...",
+                  style: TextStyle(color: Colors.blue, fontFamily: 'Urbanist'),
+                ),
+              ),
+            )
+          ],
         )
       ],
     );
