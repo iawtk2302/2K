@@ -63,14 +63,18 @@ class FirebaseService {
       Navigator.pushReplacementNamed(context, Routes.login);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
+        Navigator.of(context).pop();
         print('The password provided is too weak.');
         const snackBar = SnackBar(
+          backgroundColor: Colors.red,
           content: Text('The password provided is too weak.'),
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       } else if (e.code == 'email-already-in-use') {
+        Navigator.of(context).pop();
         print('The account already exists for that email.');
         const snackBar = SnackBar(
+        backgroundColor: Colors.red,
           content: Text('The account already exists for that email.'),
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -90,6 +94,6 @@ class FirebaseService {
   }
   signOut() async {
     await _auth.signOut();
-    await _googleSignIn.signOut();
+    // await _googleSignIn.signOut();
   }
 }
