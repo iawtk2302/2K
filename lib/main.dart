@@ -2,8 +2,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:sneaker_app/bloc/cart/card_bloc.dart';
 import 'package:sneaker_app/bloc/home/home_bloc.dart';
 import 'package:sneaker_app/router/routes.dart';
+import 'package:sneaker_app/screen/CartPage.dart';
 import 'package:sneaker_app/screen/FillProfilePage.dart';
 import 'package:sneaker_app/screen/ForgotPassPage.dart';
 import 'package:sneaker_app/screen/HomePage.dart';
@@ -29,7 +31,8 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => HomeBloc()..add(LoadHome())),
-        BlocProvider(create: (context) => ProductBloc())
+        BlocProvider(create: (context) => ProductBloc()),
+        BlocProvider(create: (context) => CartBloc()..add(LoadCart())),
       ],
       child: MaterialApp(
         title: '2K',

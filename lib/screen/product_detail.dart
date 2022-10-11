@@ -2,8 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sneaker_app/modal/product.dart';
 
+import '../bloc/cart/card_bloc.dart';
 import '../widget/custom_textbutton.dart';
 import '../widget/product_description.dart';
 import '../widget/product_detail_header.dart';
@@ -292,16 +294,24 @@ class _ProductDetailState extends State<ProductDetail> {
                   SizedBox(
                     width: 40,
                   ),
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: CustomTextButton(
-                        hasIcon: true,
-                        onPressed: () {},
-                        text: 'Add to Card',
-                        isDark: true,
-                      ),
-                    ),
+                  BlocBuilder<CartBloc, CartState>(
+                    builder: (context, state) {
+                      return Expanded(
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: CustomTextButton(
+                            hasIcon: true,
+                            onPressed: () {
+                              context
+                                  .read<CartBloc>()
+                                  .add(CartProductAdd(product: widget.product));
+                            },
+                            text: 'Add to Card',
+                            isDark: true,
+                          ),
+                        ),
+                      );
+                    },
                   )
                 ],
               ),
