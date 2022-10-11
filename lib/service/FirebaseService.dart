@@ -94,6 +94,6 @@ class FirebaseService {
   }
   signOut() async {
     await _auth.signOut();
-    await _googleSignIn.signOut();
+    // await _googleSignIn.signOut();
   }
 }

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:sneaker_app/modal/product.dart';
 import 'package:sneaker_app/screen/product_detail.dart';
@@ -45,7 +46,7 @@ class _ItemProductWithoutAnimState extends State<ItemProductWithoutAnim> {
                             child: Image(
                                 width: double.infinity,
                                 fit: BoxFit.cover,
-                                image: NetworkImage(
+                                image: CachedNetworkImageProvider(
                                     widget.product.image![0])),
                           ),
                         ),

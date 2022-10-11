@@ -2,12 +2,12 @@ import 'dart:math';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:sneaker_app/router/routes.dart';
 
 import '../bloc/home/home_bloc.dart';
+import '../widget/CustomSearch.dart';
 import '../widget/item_product_without_anim.dart';
 import '../widget/brandCatagoty.dart';
 import '../widget/custom_searchbar.dart';
@@ -68,6 +68,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   int isChoose = 0;
+  _onTapSearchbar(BuildContext context){
+    Navigator.pushNamed(context, Routes.search);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -141,6 +144,7 @@ class _HomePageState extends State<HomePage> {
             },
           ),
         ));
+  
   }
 
   Padding HomeLoad() {
@@ -149,9 +153,7 @@ class _HomePageState extends State<HomePage> {
       child: Column(mainAxisSize: MainAxisSize.min, children: [
         Padding(
           padding: const EdgeInsets.only(top: 16.0),
-          child: CustomSearchBar(
-              hintText: 'Search', icon: Icon(Icons.search), isPassword: true),
-        ),
+          child: CustomSearch(hintText: 'Search', prefixIcon: Icon(Icons.search),suffixIcon: Icon(Icons.tune),),),
         SizedBox(
           height: 20,
         ),
@@ -282,9 +284,12 @@ class _HomePageState extends State<HomePage> {
       child: Column(mainAxisSize: MainAxisSize.min, children: [
         Padding(
           padding: const EdgeInsets.only(top: 16.0),
-          child: CustomSearchBar(
-              hintText: 'Search', icon: Icon(Icons.search), isPassword: true),
-        ),
+          child: CustomSearch(
+            hintText: 'Search', 
+            prefixIcon: Icon(Icons.search),
+            suffixIcon: Icon(Icons.tune),
+            onTap: ()=>_onTapSearchbar(context),
+            ),),
         SizedBox(
           height: 20,
         ),
@@ -356,54 +361,52 @@ class _HomePageState extends State<HomePage> {
         SizedBox(
           height: 20,
         ),
-        SizedBox(
-            height: 38,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: 8,
-              itemBuilder: ((context, index) => Row(
-                    children: [
-                      InkWell(
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                        onTap: () {
-                          setState(() {
-                            isChoose = index;
-                          });
-                        },
-                        child: BrandItem(
-                          name: state.listBrand[index].name,
-                          isChoose: isChoose,
-                          index: index,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 8,
-                      )
-                    ],
-                  )),
-            )),
-        SizedBox(
-          height: 20,
-        ),
-        // Row(
-        //   children: [
-        //     Expanded(
-        //       child: SizedBox(
-        //         child: GridView.count(
-        //           physics: NeverScrollableScrollPhysics(),
-        //           shrinkWrap: true,
-        //           mainAxisSpacing: 20,
-        //           childAspectRatio: 0.65,
-        //           crossAxisSpacing: 10,
-        //           crossAxisCount: 2,
-        //           children: List.generate(4, (index) {
-        //             return ItemProductWithoutAnim(isLiked: true);
-        //           }),
-        //         ),
-        //       ),
-        //     ),
-        //   ],
+        // SizedBox(
+        //     height: 38,
+        //     child: ListView.builder(
+        //       scrollDirection: Axis.horizontal,
+        //       itemCount: 8,
+        //       itemBuilder: ((context, index) => Row(
+        //             children: [
+        //               InkWell(
+        //                 borderRadius: BorderRadius.all(Radius.circular(20)),
+        //                 onTap: () {
+        //                   setState(() {
+        //                     isChoose = index;
+        //                   });
+        //                 },
+        //                 child: BrandItem(
+        //                   name: state.listBrand[index].name,
+        //                   isChoose: isChoose,
+        //                   index: index,
+        //                 ),
+        //               ),
+        //               SizedBox(
+        //                 width: 8,
+        //               )
+        //             ],
+        //           )),
+        //     )),
+        // SizedBox(
+        //   height: 20,
         // ),
+        Row(
+          children: [
+            Expanded(
+              child: SizedBox(
+                child: GridView.count(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  mainAxisSpacing: 20,
+                  childAspectRatio: 0.65,
+                  crossAxisSpacing: 10,
+                  crossAxisCount: 2,
+                  children: state.listProduct.map((e) => ItemProductWithoutAnim(isLiked: false, product: e,)).toList()
+                ),
+              ),
+            ),
+          ],
+        ),
         SizedBox(
           height: 50,
         )

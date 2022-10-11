@@ -225,9 +225,9 @@ class _LoginPageState extends State<LoginPage> {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 20),
                       child: InkWell(
-                        onTap: () {
+                        onTap: () async {
                           if (_formKey.currentState!.validate()) {
-                            signInWithEmailPassword(
+                          await signInWithEmailPassword(
                                 context,
                                 _emailController.text.trim(),
                                 _passController.text.trim());
@@ -345,9 +345,9 @@ class _LoginPageState extends State<LoginPage> {
     //     ),
     //   ),
     // );
-    setState(() {
-      isLoading = true;
-    });
+    // setState(() {
+    //   isLoading = true;
+    // });
     await FirebaseService().signInWithEmailPassword(email, password);
     // ignore: use_build_context_synchronously
     if (FirebaseAuth.instance.currentUser != null &&
@@ -364,14 +364,16 @@ class _LoginPageState extends State<LoginPage> {
       //     Navigator.pushReplacementNamed(context, Routes.fillProfilePage);
       //   }
       // });
-      Navigator.pushReplacementNamed(context, Routes.main);
+      Navigator.pushReplacementNamed(context, Routes.auth);
     } else {
-      Navigator.of(context).pop();
+      // setState(() {
+      //   isLoading=false;
+      // });
       const snackBar = SnackBar(
         backgroundColor: Colors.red,
         content: Text('Please verify your email!'),
       );
-      // ignore: use_build_context_synchronously
+      // ignore: use_build_context_synchronously     
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
   }
@@ -393,7 +395,7 @@ signInWithGG(BuildContext context) async {
     //   }
     // });
     // ignore: use_build_context_synchronously
-    Navigator.pushReplacementNamed(context, Routes.main);
+    Navigator.pushReplacementNamed(context, Routes.auth);
   }
 }
 
@@ -413,6 +415,6 @@ signInWithFB(BuildContext context) async {
     //   }
     // });
     // ignore: use_build_context_synchronously
-    Navigator.pushReplacementNamed(context, Routes.main);
+    Navigator.pushReplacementNamed(context, Routes.auth);
   }
 }

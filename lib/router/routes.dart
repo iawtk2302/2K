@@ -4,5 +4,9 @@ class Routes{
   static const forgot='/ForgotPassPage';
   static const home='/HomePage';
   static const main='/MainPage';
+  static const auth='/AuthPage';
   static const fillProfilePage='/FillProfilePage';
+  static const search='/SearchPage';
+  static const searchResult='/SearchResultPage';
+  static const searchResult1='/PageTest';
 }

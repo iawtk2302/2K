@@ -16,7 +16,6 @@ class AuthPage extends StatefulWidget {
 }
 
 class _AuthPageState extends State<AuthPage> {
-  final FirebaseFirestore firestore = FirebaseFirestore.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,14 +25,13 @@ class _AuthPageState extends State<AuthPage> {
           if(snapshot.connectionState==ConnectionState.waiting){
             return const Center(child: CircularProgressIndicator(),);
           }
-          else if(snapshot.hasData&&snapshot.data!.emailVerified){
-            print("12");  
+          else if(snapshot.hasData){
             return const MainPage();
           }
           else if(snapshot.hasData){
             return const LoginPage();
           }
-          else{
+          else {
             return const OnBoardingPage();
           }
       },),

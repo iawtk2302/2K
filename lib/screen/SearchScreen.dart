@@ -68,17 +68,19 @@ class CustomSearchScreen extends SearchDelegate {
                             crossAxisCount: 2,
                           ),
                   children: results.map((QueryDocumentSnapshot<Object?> element) {
-                  final data=Product(
-                            gender: element.get('gender') as List<dynamic>,
-                            idCategory: element.get('idCategory'),
-                            description: element.get('description'),
-                            name: element.get('name'),
-                            image: element.get('image') as List<dynamic>,
-                            price: element.get('price'));
-                    return ItemProductWithoutAnim(
-                      product: data,
-                      isLiked: false,
-                    );
+                  // final data=Product(
+                  //           gender: element.get('gender') as List<dynamic>,
+                  //           idCategory: element.get('idCategory'),
+                  //           description: element.get('description'),
+                  //           name: element.get('name'),
+                  //           idProduct: element.get('idProduct'),
+                  //           image: element.get('image') as List<dynamic>,
+                  //           price: element.get('price'));
+                    // return ItemProductWithoutAnim(
+                    //   product: data,
+                    //   isLiked: false,
+                    // );
+                    return Container();
                     // return Text(data.image![0].toString());
                   }).toList(),),
             ),

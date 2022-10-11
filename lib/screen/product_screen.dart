@@ -38,7 +38,7 @@ class _ProductScreenState extends State<ProductScreen>
         duration: const Duration(milliseconds: 2000), vsync: this);
     context
         .read<ProductBloc>()
-        .add(LoadProduct(idBrand: widget.brand.id, context: context));
+        .add(LoadProduct(idBrand: widget.brand.id.toString(), context: context));
     super.initState();
   }
 
@@ -65,7 +65,7 @@ class _ProductScreenState extends State<ProductScreen>
           ),
         ),
         title: Text(
-          widget.brand.name.toUpperCase(),
+          widget.brand.name.toString().toUpperCase(),
           style: TextStyle(color: Colors.black),
         ),
         actions: [

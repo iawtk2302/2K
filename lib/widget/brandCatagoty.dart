@@ -29,7 +29,7 @@ class BrandCatagory extends StatelessWidget {
             height: 30,
             width: 30,
             fit: BoxFit.scaleDown,
-            image: NetworkImage(brand.imageUrl),
+            image: NetworkImage(brand.imageUrl.toString()),
           ),
           padding: EdgeInsets.all(12.0),
           shape: CircleBorder(),
@@ -38,7 +38,7 @@ class BrandCatagory extends StatelessWidget {
           height: 10,
         ),
         Text(
-          brand.name,
+          brand.name.toString(),
           softWrap: false,
           style: TextStyle(
             fontWeight: FontWeight.w500,
