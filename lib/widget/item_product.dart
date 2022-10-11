@@ -1,9 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:sneaker_app/modal/product.dart';
 
+import '../bloc/product/product_bloc.dart';
 import '../screen/product_detail.dart';
 
 class ItemProduct extends StatefulWidget {
@@ -25,6 +29,20 @@ class ItemProduct extends StatefulWidget {
 
 class _ItemProductState extends State<ItemProduct> {
   bool isLike = false;
+  void moveToDetailProduct(Product product) async {
+    final information = await Navigator.push(
+      context,
+      CupertinoPageRoute(
+          fullscreenDialog: true,
+          builder: (context) => ProductDetail(
+                product: product,
+              )),
+    );
+    setState(() {
+      isLike = information;
+    });
+  }
+
   @override
   void initState() {
     final docFavorite = FirebaseFirestore.instance.collection('Favorite');
@@ -36,6 +54,8 @@ class _ItemProductState extends State<ItemProduct> {
         setState(() {
           isLike = true;
         });
+      } else {
+        isLike = false;
       }
     });
     super.initState();
@@ -53,12 +73,13 @@ class _ItemProductState extends State<ItemProduct> {
                   0.0, 50 * (1.0 - widget.animation!.value), 0.0),
               child: InkWell(
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ProductDetail(
-                                product: widget.product,
-                              )));
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => ProductDetail(
+                  //               product: widget.product,
+                  //             )));
+                  moveToDetailProduct(widget.product);
                 },
                 // width: MediaQuery.of(context).size.width / 2,
                 // height: 275,
@@ -95,9 +116,25 @@ class _ItemProductState extends State<ItemProduct> {
                                 ? const Icon(Icons.favorite)
                                 : const Icon(Icons.favorite_border),
                             onPressed: () {
+                              context.read<ProductBloc>().add(ReactProduct(
+                                  idProduct: widget.product.idProduct!,
+                                  idUser:
+                                      FirebaseAuth.instance.currentUser!.uid));
                               setState(() {
                                 isLike = !isLike;
                               });
+                              if (isLike) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        duration: Duration(milliseconds: 400),
+                                        content: Text("Added to favorites")));
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        duration: Duration(milliseconds: 400),
+                                        content:
+                                            Text("Removed from favorites")));
+                              }
                             },
                           ),
                         ),

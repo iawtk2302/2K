@@ -14,7 +14,6 @@ part 'product_state.dart';
 class ProductBloc extends Bloc<ProductEvent, ProductState> {
   ProductBloc() : super(ProductLoading()) {
     on<LoadProduct>((event, emit) async {
-      BuildContext context1;
       emit(ProductLoading());
 
       // int count = 0;
@@ -62,12 +61,15 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       listCategory.insert(
           0, Category(idCategory: 'All', idBrand: 'null', name: 'All'));
       // await Future.delayed(Duration(seconds: 1));
-      emit(ProductLoaded(listCategory: listCategory, listProduct: listProduct));
+      emit(ProductLoaded(
+          gender: event.gender,
+          listCategory: listCategory,
+          listProduct: listProduct,
+          sortBy: event.sortBy));
     });
 
     on<ReLoadProduct>((event, emit) async {
       List<Product> listProduct = [];
-      // emit(ProductLoading());
       final docProduct = await FirebaseFirestore.instance.collection('Product');
       if (event.idCategory != 'All') {
         await docProduct
@@ -88,8 +90,24 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
                   listProduct.add(Product.fromJson(element.data()));
                 }));
       }
+
+      print(event.gender);
+
+      List<Product> rsListProduct = [];
+
+      listProduct.forEach((element) {
+        if (element.gender!
+            .any((element1) => event.gender.contains(element1))) {
+          rsListProduct.add(element);
+        }
+      });
+
+      // print(event.sortBy);
       emit(ProductLoaded(
-          listCategory: event.listCategory, listProduct: listProduct));
+          gender: event.gender,
+          listCategory: event.listCategory,
+          listProduct: rsListProduct,
+          sortBy: event.sortBy));
     });
 
     on<ReactProduct>((event, emit) async {
@@ -117,6 +135,15 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         }
       });
     });
+    on<Sort_Filter_Product>((event, emit) => {
+          emit(ProductLoading()),
+          // print(event.gender),
+          // emit(ProductLoaded(
+          //     gender: event.gender,
+          //     listCategory: event.listCategory,
+          //     listProduct: event.listProduct,
+          //     sortBy: event.sortBy))
+        });
   }
 
   Future cacheImage(BuildContext context, String e) =>

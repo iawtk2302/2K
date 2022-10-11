@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sneaker_app/modal/brand.dart';
 import 'package:sneaker_app/screen/product_screen.dart';
 
+import '../bloc/product/product_bloc.dart';
+
 class BrandCatagory extends StatelessWidget {
   const BrandCatagory({
     Key? key,
@@ -15,13 +17,19 @@ class BrandCatagory extends StatelessWidget {
       children: [
         RawMaterialButton(
           onPressed: () {
-            if (brand.name != 'More')
+            if (brand.name != 'More') {
+              context.read<ProductBloc>().add(LoadProduct(
+                  idBrand: brand.id!,
+                  context: context,
+                  gender: ["Women", "Men"],
+                  sortBy: SortBy.featured));
               Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: ((context) => ProductScreen(
                             brand: brand,
                           ))));
+            }
           },
           elevation: 2.0,
           fillColor: Color(0xFFECECEC),

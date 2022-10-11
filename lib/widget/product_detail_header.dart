@@ -24,7 +24,7 @@ class ProductDetailHeader extends StatelessWidget {
           children: [
             Expanded(
               child: Text(
-                product.name!,
+                product.name!.toUpperCase(),
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 25,
