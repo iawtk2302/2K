@@ -33,14 +33,17 @@ class _SearchPageState extends State<SearchPage> {
   check()async{
     await firestore.where('idUser',isEqualTo: FirebaseAuth.instance.currentUser!.uid).get().then((value)async{
       if(value.docs.isEmpty){
-        await firestore.add(HistorySearch(idUser: FirebaseAuth.instance.currentUser!.uid, search: []));
+        await firestore.doc(FirebaseAuth.instance.currentUser!.uid).set(HistorySearch(idUser: FirebaseAuth.instance.currentUser!.uid, search: []));
         // listSearch=[];
+        listSearchLocal=[];
       }
       // else{
       //   listSearch=value.docs.first.data().search;
       // }
       // return listSearch;
-      listSearchLocal=value.docs.first.data().search.map((e) => e as String).toList();
+      else{
+        listSearchLocal=value.docs.first.data().search.map((e) => e as String).toList();
+      }    
     });
   }
   
@@ -86,15 +89,21 @@ class _SearchPageState extends State<SearchPage> {
                 stream: firestore.doc(FirebaseAuth.instance.currentUser!.uid).snapshots(),     
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                          return Loading();
+                          return const Loading();
                   }
-                  final data=snapshot.data!.data();
-                  final listSearch=data!.search.map((e) => e as String).toList();
-                  return ListView.builder(
+                    final data=snapshot.data!.data();
+                    if(data?.search!=null)
+                    {
+                      final listSearch=data!.search.map((e) => e as String).toList();              
+                    return ListView.builder(
                     itemCount: data.search.length,
                     itemBuilder: (context, index) {
                     return ItemSearch(data.search[index], index,listSearch);
-                  },);
+                  },); 
+                    }
+                     else{
+                      return Container();
+                     }        
                 },
               ),
             ),
@@ -118,8 +127,9 @@ class _SearchPageState extends State<SearchPage> {
   _onSubmitted(String text)async{
     listSearchLocal.insert(0, text);
     // listSearchLocal.add(text);
+    
     Navigator.pushNamed(context, Routes.searchResult1, arguments: text);
-    await firestore.doc(FirebaseAuth.instance.currentUser!.uid).update({'search':listSearchLocal});   
+    await firestore.doc(FirebaseAuth.instance.currentUser!.uid).update({'search':listSearchLocal});  
   }
   Widget ItemSearch(String text,int index, List<String>data){
   return InkWell(

@@ -22,45 +22,6 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-// List<Map<String, String>> catagoryBrand = [
-//   {
-//     'imgUri': 'https://cdn-icons-png.flaticon.com/512/732/732229.png',
-//     'name': 'Nike'
-//   },
-//   {
-//     'imgUri': 'https://cdn-icons-png.flaticon.com/128/732/732160.png',
-//     'name': 'Adidas'
-//   },
-//   {
-//     'imgUri': 'https://cdn-icons-png.flaticon.com/128/47/47137.png',
-//     'name': 'Puma'
-//   },
-//   {
-//     'imgUri':
-//         'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Vans-logo.svg/2560px-Vans-logo.svg.png',
-//     'name': 'Vans'
-//   },
-//   {
-//     'imgUri':
-//         'https://logos-world.net/wp-content/uploads/2021/08/Balenciaga-Logo.png',
-//     'name': 'Balenciaga'
-//   },
-//   {
-//     'imgUri':
-//         'https://1000logos.net/wp-content/uploads/2016/12/Converse-Logo-2007.png',
-//     'name': 'Converse'
-//   },
-//   {
-//     'imgUri':
-//         'https://brademar.com/wp-content/uploads/2022/05/New-Balance-Logo-PNG-2008-%E2%80%93-Now-2.png',
-//     'name': 'New balance'
-//   },
-//   {
-//     'imgUri': 'https://cdn-icons-png.flaticon.com/512/8469/8469246.png',
-//     'name': 'More'
-//   },
-// ];
-
 class _HomePageState extends State<HomePage> {
   @override
   void initState() {
