@@ -238,8 +238,9 @@ class _BottomSheet_Sort_FilterState extends State<BottomSheet_Sort_Filter> {
                             child: CustomTextButton(
                               onPressed: () {},
                               text: 'Reset',
-                              hasIcon: false,
+                              hasLeftIcon: false,
                               isDark: false,
+                              hasRightIcon: false,
                             )),
                         Container(
                             // height: 80,
@@ -271,8 +272,9 @@ class _BottomSheet_Sort_FilterState extends State<BottomSheet_Sort_Filter> {
                                     );
                               },
                               text: 'Apply',
-                              hasIcon: false,
+                              hasLeftIcon: false,
                               isDark: true,
+                              hasRightIcon: false,
                             )),
                       ],
                     ),

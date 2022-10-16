@@ -6,13 +6,15 @@ class CustomTextButton extends StatelessWidget {
     Key? key,
     required this.onPressed,
     required this.text,
-    required this.hasIcon,
+    required this.hasLeftIcon,
     required this.isDark,
+    required this.hasRightIcon,
   }) : super(key: key);
   final String text;
   final Function onPressed;
-  final bool hasIcon;
+  final bool hasLeftIcon;
   final bool isDark;
+  final bool hasRightIcon;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -37,7 +39,7 @@ class CustomTextButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            hasIcon
+            hasLeftIcon
                 ? Row(
                     children: [
                       Icon(
@@ -58,6 +60,15 @@ class CustomTextButton extends StatelessWidget {
                   color: isDark ? Colors.white : Colors.black,
                   fontWeight: FontWeight.w600),
             ),
+            hasRightIcon
+                ? Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Icon(
+                      Icons.double_arrow,
+                      color: Colors.white,
+                    ),
+                  )
+                : SizedBox()
           ],
         ),
       ),

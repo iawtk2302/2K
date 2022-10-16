@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sneaker_app/modal/product.dart';
+import 'package:sneaker_app/model/product_cart.dart';
 
 import '../bloc/cart/card_bloc.dart';
 import '../widget/custom_textbutton.dart';
@@ -300,14 +301,16 @@ class _ProductDetailState extends State<ProductDetail> {
                         child: Align(
                           alignment: Alignment.centerRight,
                           child: CustomTextButton(
-                            hasIcon: true,
+                            hasLeftIcon: true,
                             onPressed: () {
-                              context
-                                  .read<CartBloc>()
-                                  .add(CartProductAdd(product: widget.product));
+                              context.read<CartBloc>().add(CartProductAdd(
+                                  product: ProductCart(
+                                      product: widget.product,
+                                      amount: quantity)));
                             },
                             text: 'Add to Card',
                             isDark: true,
+                            hasRightIcon: false,
                           ),
                         ),
                       );
