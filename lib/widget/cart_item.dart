@@ -111,7 +111,7 @@ class _CartItemState extends State<CartItem> {
                         width: 10,
                       ),
                       Text(
-                        'Size = 42',
+                        'Size = ' + '${widget.product.size}',
                         style: TextStyle(
                             fontFamily: 'Urbanist',
                             fontWeight: FontWeight.w500),

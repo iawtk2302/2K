@@ -12,12 +12,16 @@ part 'user_state.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
   UserBloc() : super(UserInitial()) {
-    on<LoadInfoUser>((event, emit) async{
+    on<LoadInfoUser>((event, emit) async {
       emit(UserLoading());
-      await FirebaseFirestore.instance.collection('User').doc(FirebaseAuth.instance.currentUser!.uid).get().then((value){
-        if(value.exists){
-          print(value.data()!.length.toString());
-          final user= Customer(
+      await FirebaseFirestore.instance
+          .collection('User')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .get()
+          .then((value) {
+        if (value.exists) {
+          // print(value.data()!.length.toString());
+          final user = Customer(
             idUser: value.get('idUser').toString(),
             lastName: value.get('lastName').toString(),
             firstName: value.get('firstName').toString(),
@@ -28,8 +32,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
             dateOfbirth: value.get('dateOfbirth').toString(),
           );
           emit(UserExist(user));
-        }
-        else{
+        } else {
           emit(UserNotExist());
         }
       });

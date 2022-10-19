@@ -26,7 +26,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final time=DateTime.now().hour;
+  final time = DateTime.now().hour;
   String? quote;
   @override
   void initState() {
@@ -34,24 +34,23 @@ class _HomePageState extends State<HomePage> {
     // BlocProvider.of<HomeBloc>(context).add(LoadHome());
     _checkTime();
     super.initState();
-    
   }
 
   int isChoose = 0;
   _onTapSearchbar(BuildContext context) {
     Navigator.pushNamed(context, Routes.search);
   }
-  _checkTime(){
-    if(time>6&&time<=12){
-      quote="Good Morning";
-    }
-    else if(time>12&&time<18){
-      quote="Good Afternoon";
-    }
-    else{
-      quote="Good Everning";
+
+  _checkTime() {
+    if (time > 6 && time <= 12) {
+      quote = "Good Morning";
+    } else if (time > 12 && time < 18) {
+      quote = "Good Afternoon";
+    } else {
+      quote = "Good Everning";
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,21 +62,18 @@ class _HomePageState extends State<HomePage> {
             padding: const EdgeInsets.only(left: 16.0),
             child: BlocBuilder<UserBloc, UserState>(
               builder: (context, state) {
-                if (state is UserExist){
+                if (state is UserExist) {
                   return CircleAvatar(
-              radius: 50,
-              backgroundColor: Colors.transparent,
-              backgroundImage:
-                  // height: 100,
-                  // width: 100,
-                  NetworkImage(
-                      state.user.image.toString()),
-            );   
-                }
-                else if(state is UserLoading){
+                    radius: 50,
+                    backgroundColor: Colors.transparent,
+                    backgroundImage:
+                        // height: 100,
+                        // width: 100,
+                        NetworkImage(state.user.image.toString()),
+                  );
+                } else if (state is UserLoading) {
                   return Container();
-                }
-                else{
+                } else {
                   return Container();
                 }
               },
@@ -97,27 +93,26 @@ class _HomePageState extends State<HomePage> {
                 ),
                 BlocBuilder<UserBloc, UserState>(
                   builder: (context, state) {
-                    if(state is UserExist){
-                      print(state.user.firstName.toString());
+                    if (state is UserExist) {
+                      // print(state.user.firstName.toString());
                       return Text(
-                      state.user.firstName.toString(),
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'Urbanist',
-                          fontWeight: FontWeight.w500,
-                          fontSize: 19),
-                    );
-                    }
-                    else if(state is UserLoading){
+                        state.user.firstName.toString(),
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'Urbanist',
+                            fontWeight: FontWeight.w500,
+                            fontSize: 19),
+                      );
+                    } else if (state is UserLoading) {
                       return Text(
-                      "",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'Urbanist',
-                          fontWeight: FontWeight.w500,
-                          fontSize: 19),
-                    );}
-                    else{
+                        "",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'Urbanist',
+                            fontWeight: FontWeight.w500,
+                            fontSize: 19),
+                      );
+                    } else {
                       return Container();
                     }
                   },
@@ -225,7 +220,7 @@ class _HomePageState extends State<HomePage> {
                   overlayColor: MaterialStateProperty.all(
                       Color.fromARGB(255, 238, 234, 234))),
               onPressed: () {
-                print('aa');
+                // print('aa');
               },
               child: Text('See all',
                   style: TextStyle(
@@ -364,7 +359,7 @@ class _HomePageState extends State<HomePage> {
                   overlayColor: MaterialStateProperty.all(
                       Color.fromARGB(255, 238, 234, 234))),
               onPressed: () {
-                print('aa');
+                // print('aa');
               },
               child: Text('See all',
                   style: TextStyle(

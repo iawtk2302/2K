@@ -87,7 +87,8 @@ class BottomSheet_RemoveProductState extends State<BottomSheet_RemoveProduct> {
                             ..add(CartProductRemove(
                                 product: ProductCart(
                                     product: widget.product.product,
-                                    amount: widget.product.amount)));
+                                    amount: widget.product.amount,
+                                    size: widget.product.size)));
                           Navigator.pop(context);
                         },
                         text: 'Yes, Remove',

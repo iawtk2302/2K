@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sneaker_app/model/detail_product.dart';
 import 'package:sneaker_app/model/product_cart.dart';
 
 import '../bloc/cart/card_bloc.dart';
@@ -18,16 +19,15 @@ class ProductDetail extends StatefulWidget {
   State<ProductDetail> createState() => _ProductDetailState();
 }
 
-List<Color> ColorData = [
-  Colors.black,
-  Colors.purple,
-  Colors.brown,
-  Colors.yellow,
-  Colors.blue,
-  Colors.green,
-  Colors.pink,
-];
-List<int> sizeData = [31, 32, 33, 34, 35];
+// List<Color> ColorData = [
+//   Colors.black,
+//   Colors.purple,
+//   Colors.brown,
+//   Colors.yellow,
+//   Colors.blue,
+//   Colors.green,
+//   Colors.pink,
+// ];
 
 class _ProductDetailState extends State<ProductDetail> {
   int currentIndex = 0;
@@ -36,11 +36,13 @@ class _ProductDetailState extends State<ProductDetail> {
   bool isLiked = false;
   int quantity = 1;
   PageController pageController = PageController();
-
+  List<DetailProduct> listDetailProduct = [];
   @override
   void initState() {
+    // print(widget.product.idProduct);
     final docFavorite = FirebaseFirestore.instance.collection('Favorite');
-    final doc = docFavorite
+
+    docFavorite
         .where('idProduct', isEqualTo: widget.product.idProduct)
         .get()
         .then((value) {
@@ -50,7 +52,29 @@ class _ProductDetailState extends State<ProductDetail> {
         });
       }
     });
+
+    getDetail();
+
     super.initState();
+  }
+
+  getDetail() async {
+    final docDetailProduct =
+        FirebaseFirestore.instance.collection('DetailProduct');
+    await docDetailProduct
+        .where('idProduct', isEqualTo: widget.product.idProduct)
+        .get()
+        .then((value) => value.docs.forEach((element) {
+              listDetailProduct.add(DetailProduct(
+                idDetailProduct: element.get('idDetailProduct'),
+                idProduct: element.get('idProduct'),
+                amount: element.get('amount') as int,
+                size: double.tryParse(element.get('size').toString()) ?? 0,
+              ));
+              // print(element.data());
+            }));
+    listDetailProduct.sort((a, b) => a.size!.compareTo(b.size!));
+    setState(() {});
   }
 
   @override
@@ -166,20 +190,20 @@ class _ProductDetailState extends State<ProductDetail> {
                                   widget.product.description.toString()),
                         ),
                         Align(
-                          alignment: Alignment.centerRight,
+                          alignment: Alignment.center,
                           child: Padding(
                             padding: const EdgeInsets.symmetric(vertical: 10.0),
                             child: SizedBox(
                               height: 65,
                               child: Row(
-                                // mainAxisAlignment: MainAxisAlignment.end,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 // crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Expanded(child: getCategorySize()),
                                   const SizedBox(
                                     width: 20,
                                   ),
-                                  Expanded(child: getCategoryColor()),
+                                  // Expanded(child: getCategoryColor()),
                                 ],
                               ),
                             ),
@@ -217,6 +241,8 @@ class _ProductDetailState extends State<ProductDetail> {
                                       splashRadius: 23,
                                       icon: Icon(Icons.horizontal_rule),
                                       onPressed: () {
+                                        print(listDetailProduct[indexSize]
+                                            .idDetailProduct);
                                         setState(() {
                                           if (quantity > 0) quantity--;
                                         });
@@ -238,9 +264,12 @@ class _ProductDetailState extends State<ProductDetail> {
                                       splashRadius: 23,
                                       icon: Icon(Icons.add),
                                       onPressed: () {
-                                        setState(() {
-                                          quantity++;
-                                        });
+                                        if (listDetailProduct[indexSize]
+                                                .amount! >
+                                            quantity)
+                                          setState(() {
+                                            quantity++;
+                                          });
                                       },
                                     ),
                                   )
@@ -306,7 +335,9 @@ class _ProductDetailState extends State<ProductDetail> {
                               context.read<CartBloc>().add(CartProductAdd(
                                   product: ProductCart(
                                       product: widget.product,
-                                      amount: quantity)));
+                                      amount: quantity,
+                                      size:
+                                          listDetailProduct[indexSize].size)));
                             },
                             text: 'Add to Card',
                             isDark: true,
@@ -325,29 +356,29 @@ class _ProductDetailState extends State<ProductDetail> {
     );
   }
 
-  Column getCategoryColor() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Color',
-          style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-              fontFamily: 'Urbanist'),
-        ),
-        Expanded(
-          child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: 7,
-              itemBuilder: ((context, index) => Padding(
-                    padding: const EdgeInsets.only(right: 5.0),
-                    child: ColorItem(index),
-                  ))),
-        )
-      ],
-    );
-  }
+  // Column getCategoryColor() {
+  //   return Column(
+  //     crossAxisAlignment: CrossAxisAlignment.start,
+  //     children: [
+  //       Text(
+  //         'Color',
+  //         style: TextStyle(
+  //             fontWeight: FontWeight.bold,
+  //             fontSize: 20,
+  //             fontFamily: 'Urbanist'),
+  //       ),
+  //       Expanded(
+  //         child: ListView.builder(
+  //             scrollDirection: Axis.horizontal,
+  //             itemCount: 7,
+  //             itemBuilder: ((context, index) => Padding(
+  //                   padding: const EdgeInsets.only(right: 5.0),
+  //                   child: ColorItem(index),
+  //                 ))),
+  //       )
+  //     ],
+  //   );
+  // }
 
   Widget getCategorySize() {
     return Column(
@@ -363,7 +394,7 @@ class _ProductDetailState extends State<ProductDetail> {
         Expanded(
           child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: 5,
+              itemCount: listDetailProduct.length,
               itemBuilder: ((context, index) => Padding(
                     padding: const EdgeInsets.only(right: 5.0),
                     child: SizeItem(index),
@@ -383,6 +414,7 @@ class _ProductDetailState extends State<ProductDetail> {
         onTap: () {
           setState(() {
             indexSize = index;
+            quantity = 1;
           });
         },
         borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -396,7 +428,7 @@ class _ProductDetailState extends State<ProductDetail> {
           child: Align(
             alignment: Alignment.center,
             child: Text(
-              '${sizeData[index]}',
+              '${listDetailProduct[index].size}',
               style: TextStyle(
                   color: indexSize == index ? Colors.white : Colors.black),
             ),
@@ -406,167 +438,32 @@ class _ProductDetailState extends State<ProductDetail> {
     );
   }
 
-  InkWell ColorItem(int index) {
-    return InkWell(
-      borderRadius: BorderRadius.all(Radius.circular(20)),
-      onTap: () {
-        setState(() {
-          indexColor = index;
-        });
-      },
-      child: Stack(children: [
-        Container(
-          height: 40,
-          width: 40,
-          decoration: BoxDecoration(
-              color: ColorData[index],
-              borderRadius: BorderRadius.all(Radius.circular(20))),
-        ),
-        if (indexColor == index)
-          Container(
-            height: 40,
-            width: 40,
-            child: Icon(
-              Icons.check,
-              color: Colors.white,
-            ),
-          )
-      ]),
-    );
-  }
+  // InkWell ColorItem(int index) {
+  //   return InkWell(
+  //     borderRadius: BorderRadius.all(Radius.circular(20)),
+  //     onTap: () {
+  //       setState(() {
+  //         indexColor = index;
+  //       });
+  //     },
+  //     child: Stack(children: [
+  //       Container(
+  //         height: 40,
+  //         width: 40,
+  //         decoration: BoxDecoration(
+  //             color: ColorData[index],
+  //             borderRadius: BorderRadius.all(Radius.circular(20))),
+  //       ),
+  //       if (indexColor == index)
+  //         Container(
+  //           height: 40,
+  //           width: 40,
+  //           child: Icon(
+  //             Icons.check,
+  //             color: Colors.white,
+  //           ),
+  //         )
+  //     ]),
+  //   );
+  // }
 }
-
-
-// Expanded(
-                //   child: Padding(
-                //     padding: const EdgeInsets.symmetric(horizontal: 16),
-                //     child: Column(
-                //       crossAxisAlignment: CrossAxisAlignment.start,
-                //       children: [
-                //         Expanded(
-                //             child: ProductDetailHeader(
-                //           name: widget.product.name.toString(),
-                //         )),
-                //         // SizedBox(
-                //         //   height: 10,
-                //         // ),
-                //         Divider(
-                //           height: 1,
-                //         ),
-                //         Expanded(child: ProductDescription()),
-                //         Expanded(
-                //           child: Padding(
-                //             padding: const EdgeInsets.symmetric(vertical: 10.0),
-                //             child: Row(
-                //               children: [
-                //                 getCategorySize(),
-                //                 SizedBox(
-                //                   width: 20,
-                //                 ),
-                //                 Expanded(
-                //                   child: getCategoryColor(),
-                //                 )
-                //               ],
-                //             ),
-                //           ),
-                //         ),
-                //         // SizedBox(
-                //         //   height: 10,
-                //         // ),
-                //         Expanded(
-                //           child: Row(
-                //             children: [
-                //               Text(
-                //                 'Quantity',
-                //                 style: TextStyle(
-                //                     fontWeight: FontWeight.bold,
-                //                     fontSize: 20,
-                //                     fontFamily: 'Urbanist'),
-                //               ),
-                //               SizedBox(
-                //                 width: 20,
-                //               ),
-                //               Material(
-                //                 color: Color(0xFFF3F3F3),
-                //                 borderRadius: BorderRadius.all(Radius.circular(25)),
-                //                 child: Container(
-                //                   width: 140,
-                //                   height: 45,
-                //                   decoration: BoxDecoration(
-                //                       // color: Color(0xFFF3F3F3),
-                //                       borderRadius:
-                //                           BorderRadius.all(Radius.circular(25))),
-                //                   child: Row(children: [
-                //                     Expanded(
-                //                       child: IconButton(
-                //                         splashRadius: 23,
-                //                         icon: Icon(Icons.horizontal_rule),
-                //                         onPressed: () {},
-                //                       ),
-                //                     ),
-                //                     Expanded(
-                //                       child: Center(
-                //                           child: Text(
-                //                         '3',
-                //                         style: TextStyle(
-                //                             fontSize: 20,
-                //                             fontWeight: FontWeight.bold,
-                //                             fontFamily: 'Urbanist'),
-                //                       )),
-                //                     ),
-                //                     Expanded(
-                //                       child: IconButton(
-                //                         splashRadius: 23,
-                //                         icon: Icon(Icons.add),
-                //                         onPressed: () {},
-                //                       ),
-                //                     )
-                //                   ]),
-                //                 ),
-                //               ),
-                //             ],
-                //           ),
-                //         ),
-                //         // SizedBox(
-                //         //   height: 10,
-                //         // ),
-                //         Divider(
-                //           height: 1,
-                //         ),
-                //         // SizedBox(
-                //         //   height: 10,
-                //         // ),
-                //         Expanded(
-                //           child: Row(
-                //             // mainAxisAlignment: MainAxisAlignment.center,
-                //             children: [
-                //               Column(
-                //                 crossAxisAlignment: CrossAxisAlignment.start,
-                //                 mainAxisAlignment: MainAxisAlignment.center,
-                //                 children: [
-                //                   Text('Total price'),
-                //                   SizedBox(
-                //                     height: 5,
-                //                   ),
-                //                   Text(
-                //                     '\$100.00',
-                //                     style: TextStyle(
-                //                         fontWeight: FontWeight.bold,
-                //                         fontSize: 25,
-                //                         fontFamily: 'Urbanist'),
-                //                   )
-                //                 ],
-                //               ),
-                //               Expanded(
-                //                 child: Align(
-                //                     alignment: Alignment.centerRight,
-                //                     child: CustomTextButton(
-                //                         onPressed: () {}, text: 'Add to Card')),
-                //               )
-                //             ],
-                //           ),
-                //         )
-                //       ],
-                //     ),
-                //   ),
-                // ),
