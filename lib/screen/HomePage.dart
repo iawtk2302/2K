@@ -5,8 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:sneaker_app/router/routes.dart';
+import 'package:sneaker_app/screen/FillProfilePage.dart';
+import 'package:sneaker_app/widget/Loading.dart';
 
 import '../bloc/home/home_bloc.dart';
+import '../bloc/home/user_bloc.dart';
 import '../widget/CustomSearch.dart';
 import '../widget/item_product_without_anim.dart';
 import '../widget/brandCatagoty.dart';
@@ -23,14 +26,31 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final time=DateTime.now().hour;
+  String? quote;
   @override
   void initState() {
+    // BlocProvider.of<UserBloc>(context).add(LoadInfoUser());
+    // BlocProvider.of<HomeBloc>(context).add(LoadHome());
+    _checkTime();
     super.initState();
+    
   }
 
   int isChoose = 0;
-  _onTapSearchbar(BuildContext context){
+  _onTapSearchbar(BuildContext context) {
     Navigator.pushNamed(context, Routes.search);
+  }
+  _checkTime(){
+    if(time>6&&time<=12){
+      quote="Good Morning";
+    }
+    else if(time>12&&time<18){
+      quote="Good Afternoon";
+    }
+    else{
+      quote="Good Everning";
+    }
   }
   @override
   Widget build(BuildContext context) {
@@ -41,14 +61,26 @@ class _HomePageState extends State<HomePage> {
           elevation: 0,
           leading: Padding(
             padding: const EdgeInsets.only(left: 16.0),
-            child: CircleAvatar(
+            child: BlocBuilder<UserBloc, UserState>(
+              builder: (context, state) {
+                if (state is UserExist){
+                  return CircleAvatar(
               radius: 50,
               backgroundColor: Colors.transparent,
-              // backgroundImage:
-              //     // height: 100,
-              //     // width: 100,
-              //     NetworkImage(
-              //         FirebaseAuth.instance.currentUser!.photoURL.toString()),
+              backgroundImage:
+                  // height: 100,
+                  // width: 100,
+                  NetworkImage(
+                      state.user.image.toString()),
+            );   
+                }
+                else if(state is UserLoading){
+                  return Container();
+                }
+                else{
+                  return Container();
+                }
+              },
             ),
           ),
           title: Column(
@@ -56,20 +88,39 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Good morning',
+                  quote!,
                   style: TextStyle(
                       color: Color(0xFF757475),
                       fontSize: 16,
                       fontFamily: 'Urbanist',
                       fontWeight: FontWeight.w600),
                 ),
-                Text(
-                  'Andrew Ainsley',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontFamily: 'Urbanist',
-                      fontWeight: FontWeight.w500,
-                      fontSize: 19),
+                BlocBuilder<UserBloc, UserState>(
+                  builder: (context, state) {
+                    if(state is UserExist){
+                      print(state.user.firstName.toString());
+                      return Text(
+                      state.user.firstName.toString(),
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'Urbanist',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 19),
+                    );
+                    }
+                    else if(state is UserLoading){
+                      return Text(
+                      "",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'Urbanist',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 19),
+                    );}
+                    else{
+                      return Container();
+                    }
+                  },
                 )
               ]),
           actions: [
@@ -105,7 +156,6 @@ class _HomePageState extends State<HomePage> {
             },
           ),
         ));
-  
   }
 
   Padding HomeLoad() {
@@ -114,7 +164,12 @@ class _HomePageState extends State<HomePage> {
       child: Column(mainAxisSize: MainAxisSize.min, children: [
         Padding(
           padding: const EdgeInsets.only(top: 16.0),
-          child: CustomSearch(hintText: 'Search', prefixIcon: Icon(Icons.search),suffixIcon: Icon(Icons.tune),),),
+          child: CustomSearch(
+            hintText: 'Search',
+            prefixIcon: Icon(Icons.search),
+            suffixIcon: Icon(Icons.tune),
+          ),
+        ),
         SizedBox(
           height: 20,
         ),
@@ -246,11 +301,12 @@ class _HomePageState extends State<HomePage> {
         Padding(
           padding: const EdgeInsets.only(top: 16.0),
           child: CustomSearch(
-            hintText: 'Search', 
+            hintText: 'Search',
             prefixIcon: Icon(Icons.search),
             suffixIcon: Icon(Icons.tune),
-            onTap: ()=>_onTapSearchbar(context),
-            ),),
+            onTap: () => _onTapSearchbar(context),
+          ),
+        ),
         SizedBox(
           height: 20,
         ),
@@ -356,14 +412,18 @@ class _HomePageState extends State<HomePage> {
             Expanded(
               child: SizedBox(
                 child: GridView.count(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  mainAxisSpacing: 20,
-                  childAspectRatio: 0.65,
-                  crossAxisSpacing: 10,
-                  crossAxisCount: 2,
-                  children: state.listProduct.map((e) => ItemProductWithoutAnim(isLiked: false, product: e,)).toList()
-                ),
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    mainAxisSpacing: 20,
+                    childAspectRatio: 0.65,
+                    crossAxisSpacing: 10,
+                    crossAxisCount: 2,
+                    children: state.listProduct
+                        .map((e) => ItemProductWithoutAnim(
+                              isLiked: false,
+                              product: e,
+                            ))
+                        .toList()),
               ),
             ),
           ],

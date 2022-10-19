@@ -25,7 +25,7 @@ class _AuthPageState extends State<AuthPage> {
           if(snapshot.connectionState==ConnectionState.waiting){
             return const Center(child: CircularProgressIndicator(),);
           }
-          else if(snapshot.hasData){
+          else if(snapshot.hasData&&snapshot.data!.emailVerified){
             return const MainPage();
           }
           else if(snapshot.hasData){

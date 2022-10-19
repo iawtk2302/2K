@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:image_picker/image_picker.dart';
 import 'package:sneaker_app/service/FirebaseService.dart';
@@ -11,6 +12,7 @@ import 'package:sneaker_app/widget/CustomButton.dart';
 import 'package:sneaker_app/widget/InfoInput.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
+import '../bloc/home/user_bloc.dart';
 import '../model/User.dart';
 import '../router/routes.dart';
 
@@ -40,19 +42,13 @@ class _FillProfilePageState extends State<FillProfilePage> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        leading: InkWell(
-          onTap: _goback,
-          child: Icon(
-            Icons.chevron_left,
-            color: Colors.black,
-            size: 42,
-          ),
-        ),
         backgroundColor: Colors.white,
         elevation: 0,
-        title: Text(
-          "Fill Your Profile",
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
+        title: Center(
+          child: Text(
+            "Fill Your Profile",
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
+          ),
         ),
       ),
       body: Container(
@@ -322,7 +318,7 @@ class _FillProfilePageState extends State<FillProfilePage> {
       final task = await storage.child("$id.jpg").putFile(_file!);
       final linkImage = await task.ref.getDownloadURL();
       final user = Customer(
-          id: id,
+          idUser: id,
           dateOfbirth: dateOfbirth,
           email: _emailController.text.trim(),
           firstName: _firstNameController.text.trim(),
@@ -331,14 +327,10 @@ class _FillProfilePageState extends State<FillProfilePage> {
           lastName: _lastNameController.text.trim(),
           phone: _phoneController.text);
       await firestore.collection('User').doc(id).set(user.toJson());
-      Navigator.pushReplacementNamed(context, Routes.main);
+      // ignore: use_build_context_synchronously
+      BlocProvider.of<UserBloc>(context).add(SubmitInfoUser(user: user));
     } on FirebaseException catch (e) {
       print(e);
     }
-  }
-
-  Future _goback() async {
-    await FirebaseService().signOut();
-    Navigator.pushReplacementNamed(context, Routes.login);
   }
 }

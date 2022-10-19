@@ -9,4 +9,5 @@ class Routes{
   static const search='/SearchPage';
   static const searchResult='/SearchResultPage';
   static const searchResult1='/PageTest';
+  static const checkout='/CheckoutPage';
 }

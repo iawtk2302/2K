@@ -4,10 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:sneaker_app/bloc/cart/card_bloc.dart';
 import 'package:sneaker_app/bloc/home/home_bloc.dart';
+import 'package:sneaker_app/bloc/home/user_bloc.dart';
 import 'package:sneaker_app/bloc/seach/bloc/search_bloc.dart';
 import 'package:sneaker_app/router/routes.dart';
 import 'package:sneaker_app/screen/AuthPage.dart';
 import 'package:sneaker_app/screen/CartPage.dart';
+import 'package:sneaker_app/screen/CheckoutPage.dart';
 import 'package:sneaker_app/screen/FillProfilePage.dart';
 import 'package:sneaker_app/screen/ForgotPassPage.dart';
 import 'package:sneaker_app/screen/HomePage.dart';
@@ -38,6 +40,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => HomeBloc()..add(LoadHome())),
         BlocProvider(create: (context) => ProductBloc()),
         BlocProvider(create: (context) => SearchBloc()),
+        BlocProvider(create: (context) => UserBloc()..add(LoadInfoUser())),
         BlocProvider(create: (context) => CartBloc()..add(LoadCart())),
       ],
       child: MaterialApp(
@@ -111,6 +114,11 @@ Route? getRoute(RouteSettings settings) {
         final value = settings.arguments as String;
         return MaterialPageRoute(
             builder: (context) => PageTest(searchText: value,), settings: settings);
+      }
+      case Routes.checkout:
+      {
+        return MaterialPageRoute(
+            builder: (context) => const CheckoutPage(), settings: settings);
       }
   }
   return null;
