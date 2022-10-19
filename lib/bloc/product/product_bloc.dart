@@ -3,10 +3,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:sneaker_app/modal/brand.dart';
-import 'package:sneaker_app/modal/category.dart';
-import 'package:sneaker_app/modal/product.dart';
 import 'package:sneaker_app/model/favorite.dart';
+
+import '../../model/category.dart';
+import '../../model/product.dart';
 
 part 'product_event.dart';
 part 'product_state.dart';

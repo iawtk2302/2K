@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:sneaker_app/modal/product.dart';
+import 'package:sneaker_app/model/product.dart';
 import 'package:sneaker_app/screen/product_detail.dart';
 
 class ItemProductWithoutAnim extends StatefulWidget {

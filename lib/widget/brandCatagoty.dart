@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sneaker_app/modal/brand.dart';
+import 'package:sneaker_app/model/brand.dart';
 import 'package:sneaker_app/screen/product_screen.dart';
 
 import '../bloc/product/product_bloc.dart';

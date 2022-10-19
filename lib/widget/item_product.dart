@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:sneaker_app/modal/product.dart';
+import 'package:sneaker_app/model/product.dart';
 
 import '../bloc/product/product_bloc.dart';
 import '../screen/product_detail.dart';

@@ -3,8 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-import '../../../modal/brand.dart';
-import '../../../modal/product.dart';
+
+import '../../../model/brand.dart';
+import '../../../model/product.dart';
 import '../../../service/SearchReponsitory.dart';
 
 

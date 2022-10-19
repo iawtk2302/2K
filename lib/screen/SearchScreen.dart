@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:sneaker_app/modal/product.dart';
+import 'package:sneaker_app/model/product.dart';
 import 'package:sneaker_app/widget/Loading.dart';
 
 import '../widget/item_product_without_anim.dart';

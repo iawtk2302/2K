@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:sneaker_app/modal/product.dart';
+import 'package:sneaker_app/model/product.dart';
 
 class SearchReponsitory{
   searchProduct(String queryText)async{

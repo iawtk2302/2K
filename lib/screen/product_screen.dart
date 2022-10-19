@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sneaker_app/modal/brand.dart';
 import 'package:sneaker_app/widget/Loading.dart';
 import 'package:sneaker_app/widget/bottomsheet_sort_filter.dart';
 
 import '../bloc/product/product_bloc.dart';
+import '../model/brand.dart';
 import '../widget/item_product.dart';
 import 'HomePage.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sneaker_app/modal/banner.dart';
+import 'package:sneaker_app/model/banner.dart';
 
 import 'package:sneaker_app/widget/item_SpecialOffer.dart';
 

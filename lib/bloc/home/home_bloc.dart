@@ -1,10 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
-import 'package:sneaker_app/modal/banner.dart';
-import 'package:sneaker_app/modal/product.dart';
-
-import '../../modal/brand.dart';
+import '../../model/banner.dart';
+import '../../model/brand.dart';
+import '../../model/product.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';

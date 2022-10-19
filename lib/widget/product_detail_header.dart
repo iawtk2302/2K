@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/product/product_bloc.dart';
-import '../modal/product.dart';
+import '../model/product.dart';
 
 class ProductDetailHeader extends StatelessWidget {
   const ProductDetailHeader({

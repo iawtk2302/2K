@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sneaker_app/bloc/seach/bloc/search_bloc.dart';
-import 'package:sneaker_app/modal/brand.dart';
-import 'package:sneaker_app/modal/product.dart';
 import 'package:sneaker_app/widget/Loading.dart';
 import 'package:sneaker_app/widget/item_product_without_anim.dart';
+
+import '../model/product.dart';
 
 class PageTest extends StatefulWidget {
   const PageTest({super.key, this.searchText});
