@@ -37,7 +37,7 @@ class _CartItemState extends State<CartItem> {
       child: Container(
         decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(20))),
+            borderRadius: BorderRadius.all(Radius.circular(30))),
         height: 160,
         width: double.infinity,
         child: Padding(
@@ -45,9 +45,9 @@ class _CartItemState extends State<CartItem> {
           child: Row(children: [
             Container(
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
+                  borderRadius: BorderRadius.all(Radius.circular(30))),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(8.0),
+                borderRadius: BorderRadius.circular(16.0),
                 child: CachedNetworkImage(
                     fit: BoxFit.cover,
                     imageUrl: widget.product.product!.image![0]),
@@ -75,14 +75,14 @@ class _CartItemState extends State<CartItem> {
                               style: TextStyle(
                                   fontFamily: 'Urbanist',
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 18),
+                                  fontSize: 16),
                             ),
                           ),
                           Expanded(
                             child: Material(
                                 color: Colors.transparent,
                                 child: IconButton(
-                                    splashRadius: 20,
+                                    splashRadius: 18,
                                     onPressed: () {
                                       showModalBottomSheet(
                                           context: context,
@@ -98,18 +98,9 @@ class _CartItemState extends State<CartItem> {
                         ],
                       )),
                   Expanded(
+                    flex: 3,
                       child: Row(
                     children: [
-                      Container(
-                        height: 20,
-                        width: 20,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            color: Colors.grey),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
                       Text(
                         'Size = ' + '${widget.product.size}',
                         style: TextStyle(
@@ -119,7 +110,7 @@ class _CartItemState extends State<CartItem> {
                     ],
                   )),
                   Expanded(
-                      flex: 2,
+                      flex: 3,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -128,7 +119,7 @@ class _CartItemState extends State<CartItem> {
                             style: TextStyle(
                                 fontFamily: 'Urbanist',
                                 fontWeight: FontWeight.bold,
-                                fontSize: 18),
+                                fontSize: 16),
                           ),
                           SizedBox(
                             width: 10,
@@ -215,6 +206,5 @@ class _CartItemState extends State<CartItem> {
         ),
       ),
     );
-    ;
   }
 }

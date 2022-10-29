@@ -8,7 +8,7 @@ class OrdersPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Column(children: [
-        ElevatedButton(onPressed: (){Navigator.pushNamed(context, Routes.checkout);}, child: Text("checkout"))
+        
       ]),
     );
   }

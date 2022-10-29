@@ -3,15 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sneaker_app/bloc/address/address_bloc.dart';
 import 'package:sneaker_app/bloc/cart/card_bloc.dart';
 import 'package:sneaker_app/bloc/home/home_bloc.dart';
 import 'package:sneaker_app/bloc/home/user_bloc.dart';
+import 'package:sneaker_app/bloc/order/order_bloc.dart';
 import 'package:sneaker_app/bloc/seach/bloc/search_bloc.dart';
 import 'package:sneaker_app/model/product.dart';
+import 'package:sneaker_app/model/product_cart.dart';
 import 'package:sneaker_app/router/routes.dart';
+import 'package:sneaker_app/screen/AddAddress.dart';
 import 'package:sneaker_app/screen/AuthPage.dart';
 import 'package:sneaker_app/screen/CartPage.dart';
 import 'package:sneaker_app/screen/CheckoutPage.dart';
+import 'package:sneaker_app/screen/ChooseAddressPage.dart';
 import 'package:sneaker_app/screen/FillProfilePage.dart';
 import 'package:sneaker_app/screen/ForgotPassPage.dart';
 import 'package:sneaker_app/screen/HomePage.dart';
@@ -41,6 +46,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => HomeBloc()..add(LoadHome())),
         BlocProvider(create: (context) => ProductBloc()),
         BlocProvider(create: (context) => SearchBloc()),
+        BlocProvider(create: (context) => OrderBloc()),
+        BlocProvider(create: (context) => AddressBloc()),
         BlocProvider(create: (context) => UserBloc()..add(LoadInfoUser())),
         BlocProvider(create: (context) => CartBloc()..add(LoadCart())),
       ],
@@ -113,6 +120,12 @@ Route? getRoute(RouteSettings settings) {
                 ),
             settings: settings);
       }
+      case Routes.addAddress:
+      {
+        return MaterialPageRoute(
+            builder: (context) => const AddAddressPage(),
+            settings: settings);
+      }
     case Routes.searchResult1:
       {
         final value = settings.arguments as String;
@@ -124,8 +137,15 @@ Route? getRoute(RouteSettings settings) {
       }
       case Routes.checkout:
       {
+        final listProduct = settings.arguments as List<ProductCart>;
         return MaterialPageRoute(
-            builder: (context) => const CheckoutPage(), settings: settings);
+            builder: (context) => CheckoutPage(listProduct: listProduct),
+            settings: settings);
+      }
+      case Routes.chooseAddress:
+      {
+        return MaterialPageRoute(
+            builder: (context) => const ChooseAddressPage(), settings: settings);
       }
   }
   return null;

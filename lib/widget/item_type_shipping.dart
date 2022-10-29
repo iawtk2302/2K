@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:sneaker_app/bloc/order/orderReponsitory.dart';
 import 'package:sneaker_app/model/address.dart';
 
-class ItemAddress extends StatelessWidget {
-  const ItemAddress({super.key, required this.address,this.icon,this.onTap});
-  final Address address;
+class ItemTypeShipping extends StatelessWidget {
+  const ItemTypeShipping({super.key,this.icon,this.onTap, required this.typeShipping, required this.address});
   final IconButton? icon;
+  final TypeShipping typeShipping;
+  final Address address;
   final Function()? onTap;
   @override
   Widget build(BuildContext context) {
@@ -48,26 +50,11 @@ class ItemAddress extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(children: [
-                    Text(address.name!,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
-                    Padding(
-                      padding: const EdgeInsets.only(left:6.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Color(0xFFEDEDED),
-                          borderRadius: BorderRadius.circular(6)
-                        ),
-                        child:address.isDefault==true ? const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 6,vertical: 4),
-                          child: Text("Default",style: TextStyle(fontSize: 12,fontWeight: FontWeight.w500),),
-                        ):Container(),
-                      ),
-                    )
-                  ],),
+                  Text(typeShipping.shortName.toString(),style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
                   SizedBox(height: 4,),
                   Container(
                     width: 180,
-                    child: Text(address.detail.toString(),
+                    child: Text('',
                     overflow: TextOverflow.ellipsis,
                     ),
                   )

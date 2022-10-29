@@ -7,6 +7,7 @@ import 'package:sneaker_app/widget/Loading.dart';
 import 'package:sneaker_app/widget/custom_textbutton.dart';
 
 import '../bloc/cart/card_bloc.dart';
+import '../router/routes.dart';
 import '../widget/cart_item.dart';
 
 class CartPage extends StatefulWidget {
@@ -82,7 +83,11 @@ class _CartPageState extends State<CartPage> {
                               width: 220,
                               height: 55,
                               child: CustomTextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  if(state.cart.products.isNotEmpty){
+                                    Navigator.pushNamed(context, Routes.checkout,arguments: state.cart.products);
+                                  }  
+                                },
                                 text: 'Checkout',
                                 hasLeftIcon: false,
                                 isDark: true,
