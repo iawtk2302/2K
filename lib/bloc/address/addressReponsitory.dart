@@ -76,10 +76,10 @@ class AddressReponsitory{
           addresses.doc(element.id).update({'isDefault':false});
         });
       });
-      await addresses.add(address.toJson());
+      await addresses.add(address.toJson()).then((value) => addresses.doc(value.id).update({'idAddress':value.id}));
     }
     else{
-      await addresses.add(address.toJson());
+      await addresses.add(address.toJson()).then((value) => addresses.doc(value.id).update({'idAddress':value.id}));
     }  
   }
   checkHaveAddress()async{

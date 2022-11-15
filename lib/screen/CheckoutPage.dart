@@ -203,7 +203,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 15),
-                        child: CustomElevatedButton(text: "Payment", onTap: (){},color: Colors.black,),
+                        child: CustomElevatedButton(text: "Payment", onTap: (){
+                          BlocProvider.of<OrderBloc>(context).add(const CreateOrder());
+                        },color: Colors.black,),
                       )
                   ]),
             ),

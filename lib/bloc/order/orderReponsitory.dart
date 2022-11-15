@@ -1,10 +1,15 @@
 import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sneaker_app/model/order.dart';
 import '../../model/address.dart';
 import '../../model/product_cart.dart';
 
 class OrderReponsitory{
+  final order = FirebaseFirestore.instance.collection('Order');
+  final detailOrder = FirebaseFirestore.instance.collection('DetailOrder');
   caculateTotalProduct(List<ProductCart> listProduct){
     final totalProduct=listProduct.map((e) => e.product!.price).reduce((value, element) => value!+element!)!.toDouble();
     return totalProduct;
@@ -74,6 +79,23 @@ class OrderReponsitory{
     });
     
     return listTypeShipping;
+  }
+  createOrder(List<ProductCart> list,String idVoucher, double totalPrice, String note, String idAddress)async{
+    String? idOrder;
+    await order.add({'idUser':FirebaseAuth.instance.currentUser!.uid,
+    'idAddress':idAddress,
+    'idVoucher':idVoucher,
+    'state':'packing','note':note,
+    'dateCreated':DateTime.now(),
+    'dateCompleted':DateTime.now(),
+    'dateCanceled':DateTime.now(),
+    'total':totalPrice}).then((value) {
+      idOrder=value.id;
+      order.doc(value.id).update({'idOrder':value.id});
+    });
+    for(ProductCart i in list){
+      detailOrder.add({'idOrder':idOrder,'idProduct':i.product!.idProduct,'amount':i.amount,'size':i.size,}).then((value) {detailOrder.doc(value.id).update({'idDetailOrder':value.id});});
+    }
   }
 }
 

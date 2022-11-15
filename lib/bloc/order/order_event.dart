@@ -25,4 +25,10 @@ class ApplyAddress extends OrderEvent {
   List<Object> get props => [];
 }
 
+class CreateOrder extends OrderEvent {
+  const CreateOrder();
+  @override
+  List<Object> get props => [];
+}
+
 

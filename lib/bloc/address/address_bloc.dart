@@ -37,7 +37,7 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
     });
     on<AddAddress>((event, emit) async {
       final state= this.state as AddressLoaded;
-      Address temp=Address(FirebaseAuth.instance.currentUser!.uid,event.name,event.phone,event.province.provinceName,event.province.provinceID,event.district.districtName,event.district.districtID,event.ward.wardName,event.ward.wardCode,event.detail,event.isDefault);
+      Address temp=Address(null,FirebaseAuth.instance.currentUser!.uid,event.name,event.phone,event.province.provinceName,event.province.provinceID,event.district.districtName,event.district.districtID,event.ward.wardName,event.ward.wardCode,event.detail,event.isDefault);
       await AddressReponsitory().addAddress(temp); 
       List<Province>listProvince=state.listProvince; 
       List<District>listDistrict=state.listDistrict;

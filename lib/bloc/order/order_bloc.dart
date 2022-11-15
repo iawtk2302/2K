@@ -54,5 +54,9 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
       final total=shipping+totalProduct;
       emit(OrderLoaded(selectedAddress,tempAddress,listAddress,totalProduct,shipping,total,listProduct,listTypeShipping));
     });
+    on<CreateOrder>((event, emit) async {
+      final state=this.state as OrderLoaded;
+      await OrderReponsitory().createOrder(state.listProduct, "idVoucher", state.total, "Coi chung be",state.selectedAddress!.idAddress!.toString());
+    });
   }
 }
