@@ -17,6 +17,7 @@ import 'package:sneaker_app/screen/AuthPage.dart';
 import 'package:sneaker_app/screen/CartPage.dart';
 import 'package:sneaker_app/screen/CheckoutPage.dart';
 import 'package:sneaker_app/screen/ChooseAddressPage.dart';
+import 'package:sneaker_app/screen/ChooseVoucherPage.dart';
 import 'package:sneaker_app/screen/FillProfilePage.dart';
 import 'package:sneaker_app/screen/ForgotPassPage.dart';
 import 'package:sneaker_app/screen/HomePage.dart';
@@ -146,6 +147,11 @@ Route? getRoute(RouteSettings settings) {
       {
         return MaterialPageRoute(
             builder: (context) => const ChooseAddressPage(), settings: settings);
+      }
+      case Routes.chooseVoucher:
+      {
+        return MaterialPageRoute(
+            builder: (context) => const ChooseVoucherPage(), settings: settings);
       }
   }
   return null;

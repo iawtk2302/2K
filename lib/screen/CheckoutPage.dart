@@ -13,6 +13,7 @@ import 'package:sneaker_app/widget/custom_button.dart';
 
 import '../bloc/cart/card_bloc.dart';
 import '../bloc/order/order_bloc.dart';
+import '../model/voucher.dart';
 import '../widget/cart_item.dart';
 
 class CheckoutPage extends StatefulWidget {
@@ -28,7 +29,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
     BlocProvider.of<OrderBloc>(context).add(LoadOrder());
     super.initState();
   }
-
+  final _note = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -108,6 +109,15 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       ),
                     ),
                     Padding(
+                      padding: const EdgeInsets.only(bottom: 16),
+                      child: Text(
+                        "Promo",
+                        style:
+                            TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                      ),
+                    ),
+                    state.selectedVoucher!=null?_ItemShowVoucher(state.selectedVoucher!):AddNewVoucher(),
+                    Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       child: Container(
                         height: 1,
@@ -115,26 +125,23 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       ),
                     ),
                     Text(
-                      "Promo Code",
+                      "Note",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: 260,
+                      child: Container(
                             height: 60,
                             child: Align(
                               alignment: Alignment.centerLeft,
                               child: Padding(
                                 padding: const EdgeInsets.only(left: 10.0),
                                 child: TextField(
+                                  controller: _note,
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
-                                    hintText: 'Enter Promo Code',
+                                    hintText: 'Enter Note',
                                     hintStyle: TextStyle(
                                       color: Color(0xFF9F9E9E),
                                     ),
@@ -146,21 +153,6 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                 color: Color(0xFFF9F9FA),
                                 borderRadius: BorderRadius.circular(16)),
                           ),
-                          InkWell(
-                            onTap: () {},
-                            child: Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
-                                    color: Colors.black),
-                                child: Icon(
-                                  Icons.add,
-                                  color: Colors.white,
-                                )),
-                          )
-                        ],
-                      ),
                     ),
                     Container(
                         height: 150,
@@ -188,6 +180,15 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                 Text(state.priceShipping.toStringAsFixed(2))
                               ],),
                             ),
+                            state.priceVoucher>0?Expanded(
+                              flex: 1,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                Text('Promo',style: TextStyle(color: Color(0xFF605F5D), fontWeight: FontWeight.w600),),
+                                Text("-"+state.priceVoucher.toStringAsFixed(2))
+                              ],),
+                            ):Container(),
                             Divider(),
                             Expanded(
                               flex: 1,
@@ -203,10 +204,12 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 15),
-                        child: CustomElevatedButton(text: "Payment", onTap: (){
-                          BlocProvider.of<OrderBloc>(context).add(const CreateOrder());
-                        },color: Colors.black,),
-                      )
+                        child: Center(
+                          child: CustomElevatedButton(text: "Payment", onTap: (){
+                            BlocProvider.of<OrderBloc>(context).add(CreateOrder(_note.text,context));
+                          },color: Colors.black,),
+                        ),
+                      ),
                   ]),
             ),
           );
@@ -270,6 +273,59 @@ class _CheckoutPageState extends State<CheckoutPage> {
           ),
         ));
   }
+  Widget AddNewVoucher() {
+    return InkWell(
+        onTap: () {
+          Navigator.pushNamed(context, Routes.chooseVoucher);
+        },
+        child: Container(
+          height: 70,
+          decoration: BoxDecoration(
+              color: Colors.white, borderRadius: BorderRadius.circular(20)),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Icon(Icons.confirmation_number),
+                      SizedBox(width: 10),
+                      Text("Choose voucher",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 18))
+                    ],
+                  ),
+                  Icon(
+                    Icons.chevron_right,
+                    size: 32,
+                  )
+                ]),
+          ),
+        ));
+  }
+  Widget _ItemShowVoucher(Voucher voucher){
+  return Container(
+    height: 55,
+    decoration: BoxDecoration(
+      color: Colors.black,
+      borderRadius: BorderRadius.circular(20)
+    ),
+    child: Padding(
+      padding: const EdgeInsets.only(left: 16),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+        Text(voucher.name.toString(),style: TextStyle(color: Colors.white, fontSize: 16,fontWeight: FontWeight.w500),),
+        IconButton(onPressed: (){
+          BlocProvider.of<OrderBloc>(context).add(RemoveVoucher());
+        }, icon: Icon(Icons.close,color: Colors.white))
+      ]),
+    ),
+  );
 }
+}
+
 
 
