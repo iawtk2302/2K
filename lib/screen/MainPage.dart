@@ -70,36 +70,34 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return BlocBuilder<UserBloc, UserState>(
       builder: (context, state) {
-        if(state is UserInitial){
+        if (state is UserInitial) {
           return Loading();
-        }
-        else if(state is UserNotExist){
+        } else if (state is UserNotExist) {
           return FillProfilePage();
-        }
-        else if(state is UserExist){
+        } else if (state is UserExist) {
           return Scaffold(
-          body: pages[currentIndex],
-          bottomNavigationBar: BottomNavigationBar(
-              type: BottomNavigationBarType.fixed,
-              backgroundColor: Colors.white,
-              currentIndex: currentIndex,
-              onTap: onTap,
-              elevation: 0,
-              selectedItemColor: Colors.black,
-              unselectedItemColor: Colors.grey,
-              showUnselectedLabels: true,
-              items: const [
-                BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.shopping_bag), label: "Cart"),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.shopping_cart), label: "Orders"),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.person), label: "Profile"),
-              ]),
-        );
-        }
-        else{
+            body: pages[currentIndex],
+            bottomNavigationBar: BottomNavigationBar(
+                type: BottomNavigationBarType.fixed,
+                backgroundColor: Colors.white,
+                currentIndex: currentIndex,
+                onTap: onTap,
+                elevation: 0,
+                selectedItemColor: Colors.black,
+                unselectedItemColor: Colors.grey,
+                showUnselectedLabels: true,
+                items: const [
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.home), label: "Home"),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.shopping_bag), label: "Cart"),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.shopping_cart), label: "Orders"),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.person), label: "Profile"),
+                ]),
+          );
+        } else {
           return Scaffold();
         }
       },

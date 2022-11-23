@@ -19,7 +19,7 @@ class CustomTextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       // width: MediaQuery.of(context).size.width / 2 + 40,
-      height: 55,
+      height: 50,
       child: ElevatedButton(
         style: ButtonStyle(
             elevation: MaterialStateProperty.all(10),
