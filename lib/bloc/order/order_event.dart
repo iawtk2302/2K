@@ -25,4 +25,31 @@ class ApplyAddress extends OrderEvent {
   List<Object> get props => [];
 }
 
+class ChooseVoucher extends OrderEvent {
+  const ChooseVoucher(this.newVoucher);
+  final Voucher? newVoucher;
+  @override
+  List<Object> get props => [newVoucher!];
+}
+
+class ApplyVoucher extends OrderEvent {
+  const ApplyVoucher();
+  @override
+  List<Object> get props => [];
+}
+
+class RemoveVoucher extends OrderEvent {
+  const RemoveVoucher();
+  @override
+  List<Object> get props => [];
+}
+
+class CreateOrder extends OrderEvent {
+  const CreateOrder(this.note, this.context);
+  final String note;
+  final BuildContext context;
+  @override
+  List<Object> get props => [];
+}
+
 

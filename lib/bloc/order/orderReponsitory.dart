@@ -1,13 +1,27 @@
 import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sneaker_app/bloc/cart/card_bloc.dart';
+import 'package:sneaker_app/model/order.dart';
 import '../../model/address.dart';
 import '../../model/product_cart.dart';
+import '../../router/routes.dart';
+import '../../widget/custom_button.dart';
 
 class OrderReponsitory{
+  final order = FirebaseFirestore.instance.collection('Order');
+  final detailOrder = FirebaseFirestore.instance.collection('DetailOrder');
   caculateTotalProduct(List<ProductCart> listProduct){
     final totalProduct=listProduct.map((e) => e.product!.price).reduce((value, element) => value!+element!)!.toDouble();
     return totalProduct;
+  }
+  clearProduct()async{
+    final prefs = await SharedPreferences.getInstance();
+    prefs.remove('products');
   }
   getProduct()async{
     final prefs = await SharedPreferences.getInstance();
@@ -75,6 +89,80 @@ class OrderReponsitory{
     
     return listTypeShipping;
   }
+  createOrder(List<ProductCart> list,String idVoucher, double totalPrice, String note, String idAddress)async{
+    String? idOrder;
+    await order.add({'idUser':FirebaseAuth.instance.currentUser!.uid,
+    'idAddress':idAddress,
+    'idVoucher':idVoucher,
+    'state':'packing','note':note,
+    'dateCreated':DateTime.now(),
+    'dateCompleted':DateTime.now(),
+    'dateCanceled':DateTime.now(),
+    'total':totalPrice}).then((value) {
+      idOrder=value.id;
+      order.doc(value.id).update({'idOrder':value.id});
+    });
+    for(ProductCart i in list){
+      detailOrder.add({'idOrder':idOrder,'idProduct':i.product!.idProduct,'amount':i.amount,'size':i.size,}).then((value) {detailOrder.doc(value.id).update({'idDetailOrder':value.id});});
+    }
+  }
+  void showSuccessDialog(BuildContext context){
+  showDialog(context: context, builder: (context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20),
+          child: Image.asset("assets/images/order_success.png"),
+        ),
+        const Text("Order Successful!",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w700),),
+        const SizedBox(height: 15,),
+        const Text("You have successfully made order",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400),),
+        const SizedBox(height: 30,),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: CustomElevatedButton(onTap: () { 
+            BlocProvider.of<CartBloc>(context).add(LoadCart());
+            Navigator.of(context)..pop()..pop(); 
+            }, text: 'View Order',color: Colors.black,),
+        ),
+        const SizedBox(height: 30,)
+      ],),
+    );
+  },);
+}
+
+void showErrorDialog(BuildContext context){
+  showDialog(context: context, builder: (context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20),
+          child: Image.asset("assets/images/order_error.png"),
+        ),
+        const Text("Order Error!",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w700),),
+        const SizedBox(height: 15,),
+        const Text("Something went wrong.",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400),),
+        const Text("Please, try again.",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400),),
+        const SizedBox(height: 30,),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: CustomElevatedButton(onTap: () {  }, text: 'Try Again',color: Colors.black,),
+        ),
+        const SizedBox(height: 30,)
+      ],),
+    );
+  },);
+}
 }
 
 class TypeShipping {

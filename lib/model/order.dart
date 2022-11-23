@@ -15,8 +15,8 @@ class Order {
   Order({
     this.idOrder,
     this.idUser,
-    this.total,
     this.idAddress,
+    this.total,
     this.state,
     this.idVoucher,
     this.note,
