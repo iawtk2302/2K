@@ -32,7 +32,7 @@ class _ItemProductState extends State<ItemProduct> {
   void moveToDetailProduct(Product product) async {
     final information = await Navigator.push(
       context,
-      CupertinoPageRoute(
+      MaterialPageRoute(
           fullscreenDialog: true,
           builder: (context) => ProductDetail(
                 product: product,
@@ -58,6 +58,7 @@ class _ItemProductState extends State<ItemProduct> {
         isLike = false;
       }
     });
+    // print(widget.animation!.value.toString());
     super.initState();
   }
 

@@ -7,6 +7,8 @@ import 'package:sneaker_app/bloc/address/address_bloc.dart';
 import 'package:sneaker_app/bloc/cart/card_bloc.dart';
 import 'package:sneaker_app/bloc/home/home_bloc.dart';
 import 'package:sneaker_app/bloc/home/user_bloc.dart';
+import 'package:sneaker_app/bloc/list_order/list_order_bloc.dart';
+import 'package:sneaker_app/bloc/my_order/my_order_bloc.dart';
 import 'package:sneaker_app/bloc/order/order_bloc.dart';
 import 'package:sneaker_app/bloc/seach/bloc/search_bloc.dart';
 import 'package:sneaker_app/model/product.dart';
@@ -50,6 +52,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => AddressBloc()),
         BlocProvider(create: (context) => UserBloc()..add(LoadInfoUser())),
         BlocProvider(create: (context) => CartBloc()..add(LoadCart())),
+        BlocProvider(create: (context) => MyOrderBloc()..add(LoadMyOrder())),
+        BlocProvider(create: (context) => ListOrderBloc())
       ],
       child: MaterialApp(
         title: '2K',
@@ -120,11 +124,10 @@ Route? getRoute(RouteSettings settings) {
                 ),
             settings: settings);
       }
-      case Routes.addAddress:
+    case Routes.addAddress:
       {
         return MaterialPageRoute(
-            builder: (context) => const AddAddressPage(),
-            settings: settings);
+            builder: (context) => const AddAddressPage(), settings: settings);
       }
     case Routes.searchResult1:
       {
@@ -135,17 +138,18 @@ Route? getRoute(RouteSettings settings) {
                 ),
             settings: settings);
       }
-      case Routes.checkout:
+    case Routes.checkout:
       {
         final listProduct = settings.arguments as List<ProductCart>;
         return MaterialPageRoute(
             builder: (context) => CheckoutPage(listProduct: listProduct),
             settings: settings);
       }
-      case Routes.chooseAddress:
+    case Routes.chooseAddress:
       {
         return MaterialPageRoute(
-            builder: (context) => const ChooseAddressPage(), settings: settings);
+            builder: (context) => const ChooseAddressPage(),
+            settings: settings);
       }
   }
   return null;

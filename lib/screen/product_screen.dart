@@ -195,10 +195,17 @@ class _ProductScreenState extends State<ProductScreen>
                           // padding: const EdgeInsets.only(top: 0, left: 12, right: 12),
                           physics: const BouncingScrollPhysics(),
                           scrollDirection: Axis.vertical,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            mainAxisSpacing: 20,
+                            childAspectRatio: 0.65,
+                            crossAxisSpacing: 10,
+                            crossAxisCount: 2,
+                          ),
                           children: List<Widget>.generate(
                             state.listProduct.length,
                             (int index) {
-                              final int count = 10;
+                              final int count = 6;
                               final Animation<double> animation =
                                   Tween<double>(begin: 0.0, end: 1.0).animate(
                                 CurvedAnimation(
@@ -216,13 +223,6 @@ class _ProductScreenState extends State<ProductScreen>
                                 product: state.listProduct[index],
                               );
                             },
-                          ),
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                            mainAxisSpacing: 20,
-                            childAspectRatio: 0.65,
-                            crossAxisSpacing: 10,
-                            crossAxisCount: 2,
                           ),
                         )),
                   ),

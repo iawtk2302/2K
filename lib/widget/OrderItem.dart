@@ -29,7 +29,7 @@ class _OrderItemState extends State<OrderItem> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical:8.0),
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Container(
         decoration: BoxDecoration(
             color: Colors.white,
@@ -70,17 +70,17 @@ class _OrderItemState extends State<OrderItem> {
                         ),
                       )),
                   Expanded(
-                    flex: 3,
+                      flex: 3,
                       child: Row(
-                    children: [
-                      Text(
-                        'Size = ' + '${widget.product.size}',
-                        style: TextStyle(
-                            fontFamily: 'Urbanist',
-                            fontWeight: FontWeight.w500),
-                      )
-                    ],
-                  )),
+                        children: [
+                          Text(
+                            'Size = ' + '${widget.product.size}',
+                            style: TextStyle(
+                                fontFamily: 'Urbanist',
+                                fontWeight: FontWeight.w500),
+                          )
+                        ],
+                      )),
                   Expanded(
                       flex: 3,
                       child: Row(
@@ -106,7 +106,7 @@ class _OrderItemState extends State<OrderItem> {
                                   // color: Color(0xFFF3F3F3),
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(50))),
-                              child: Row(children: [                             
+                              child: Row(children: [
                                 Expanded(
                                   child: Center(
                                       child: Text(
