@@ -3,14 +3,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Order {
   String? idOrder;
   String? idUser;
-  int? total;
+  double? total;
   String? idAddress;
   String? state;
   String? idVoucher;
   String? note;
   Timestamp? dateCreated;
   Timestamp? dateCompleted;
-  String? dateCanceled;
+  Timestamp? dateCanceled;
 
   Order({
     this.idOrder,
@@ -28,14 +28,14 @@ class Order {
   Order.fromJson(Map<String, dynamic> json) {
     idOrder = json['idOrder'];
     idUser = json['idUser'];
-    total = json['idAddress'];
-    total = json['total'];
+    idAddress = json['idAddress'];
+    total = double.tryParse(json['total'].toString());
     state = json['state'];
     idVoucher = json['idVoucher'];
     note = json['note'];
     dateCreated = json['dateCreated'];
     dateCompleted = json['dateCompleted'];
-    dateCompleted = json['dateCanceled'];
+    dateCanceled = json['dateCanceled'];
   }
 
   Map<String, dynamic> toJson() {
