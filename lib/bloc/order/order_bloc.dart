@@ -39,6 +39,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     });
     on<ChooseAddress>((event, emit) async{
       final state=this.state as OrderLoaded;
+      emit(OrderLoading());
       Address selectedAddress=state.selectedAddress!;
       Address tempAddress=event.newAddress;
       final totalProduct=state.totalProduct;
@@ -50,6 +51,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     });
     on<ApplyAddress>((event, emit) async{
       final state=this.state as OrderLoaded;
+      emit(OrderLoading());
       Address selectedAddress=state.tempAddress!;
       Address tempAddress=state.tempAddress!;
       final totalProduct=state.totalProduct;
