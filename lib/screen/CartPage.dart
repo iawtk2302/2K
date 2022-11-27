@@ -22,7 +22,17 @@ class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('My Cart')),
+      appBar: AppBar(
+          backgroundColor: Theme.of(context).canvasColor,
+          elevation: 0.5,
+          title: Text(
+            'My Cart',
+            style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 22,
+                fontFamily: 'Urbanist'),
+          )),
       body: BlocBuilder<CartBloc, CartState>(
         builder: (context, state) {
           if (state is CartLoading) {
@@ -84,9 +94,11 @@ class _CartPageState extends State<CartPage> {
                               height: 55,
                               child: CustomTextButton(
                                 onPressed: () {
-                                  if(state.cart.products.isNotEmpty){
-                                    Navigator.pushNamed(context, Routes.checkout,arguments: state.cart.products);
-                                  }  
+                                  if (state.cart.products.isNotEmpty) {
+                                    Navigator.pushNamed(
+                                        context, Routes.checkout,
+                                        arguments: state.cart.products);
+                                  }
                                 },
                                 text: 'Checkout',
                                 hasLeftIcon: false,

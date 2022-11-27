@@ -4,6 +4,8 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:http/http.dart';
+import 'package:sneaker_app/bloc/my_order/my_order_bloc.dart';
 import 'package:sneaker_app/model/detail_order.dart';
 import 'package:sneaker_app/model/detail_product.dart';
 import 'package:sneaker_app/model/order.dart';
@@ -49,31 +51,6 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
     BlocProvider.of<ListOrderBloc>(context)
         .add(LoadListOrder(order: widget.order));
     super.initState();
-  }
-
-  solveStatus() {
-    switch (widget.order.state) {
-      case 'packing':
-        {
-          statusNum = 0;
-          break;
-        }
-      case 'delivery':
-        {
-          statusNum = 1;
-          break;
-        }
-      case 'delivered':
-        {
-          statusNum = 2;
-          break;
-        }
-      case 'completed':
-        {
-          statusNum = 3;
-          break;
-        }
-    }
   }
 
   // getDetailProduct() async {
@@ -148,7 +125,7 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
                               fontFamily: 'Urbanist'),
                         ),
                         Text(
-                          '\$${widget.order.total}.00',
+                          '\$${(widget.order.total)?.toStringAsFixed(2)}',
                           style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.w700,
@@ -220,12 +197,42 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
         ));
   }
 
-  getText() {
+  solveStatus() {
     switch (widget.order.state) {
-      case 'completed':
-      case 'canceled':
-        return 'Re-Order';
       case 'packing':
+        {
+          statusNum = 0;
+          break;
+        }
+      case 'delivery':
+        {
+          statusNum = 1;
+          break;
+        }
+      case 'delivered':
+        {
+          statusNum = 2;
+          break;
+        }
+      case 'completed':
+        {
+          statusNum = 3;
+          break;
+        }
+      case 'canceled':
+        {
+          statusNum = 4;
+          break;
+        }
+    }
+  }
+
+  getText() {
+    switch (statusNum) {
+      case 3:
+      case 4:
+        return 'Re-Order';
+      case 0:
         return 'Cancel';
       default:
         return 'Contact';
@@ -252,11 +259,24 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
             actions: <Widget>[
               TextButton(
                 onPressed: () => Navigator.pop(context, 'Cancel'),
-                child: const Text('Cancel'),
+                child: const Text(
+                  'Cancel',
+                  style: TextStyle(color: Colors.black),
+                ),
               ),
               TextButton(
-                onPressed: () => Navigator.pop(context, 'OK'),
-                child: const Text('OK'),
+                onPressed: () {
+                  context.read<MyOrderBloc>().add(UpdateStateMyOrder(
+                      order: widget.order, state: 'canceled'));
+                  setState(() {
+                    statusNum = 4;
+                  });
+                  Navigator.pop(context, 'Yes');
+                },
+                child: const Text(
+                  'Yes',
+                  style: TextStyle(color: Colors.black),
+                ),
               ),
             ],
           ),
@@ -266,16 +286,27 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
         showDialog<String>(
           context: context,
           builder: (BuildContext context) => AlertDialog(
-            title: const Text('This is show dialog contact'),
+            title: const Text(
+              'This is show dialog contact',
+            ),
             content: const Text('AlertDialog description'),
             actions: <Widget>[
               TextButton(
                 onPressed: () => Navigator.pop(context, 'Cancel'),
-                child: const Text('Cancel'),
+                child: const Text(
+                  'Cancel',
+                  style: TextStyle(color: Colors.black),
+                ),
               ),
               TextButton(
+                style: ButtonStyle(
+                    textStyle: MaterialStateProperty.all(
+                        TextStyle(color: Colors.black))),
                 onPressed: () => Navigator.pop(context, 'OK'),
-                child: const Text('OK'),
+                child: const Text(
+                  'OK',
+                  style: TextStyle(color: Colors.black),
+                ),
               ),
             ],
           ),

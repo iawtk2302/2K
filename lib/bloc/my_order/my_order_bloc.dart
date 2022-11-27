@@ -26,5 +26,8 @@ class MyOrderBloc extends Bloc<MyOrderEvent, MyOrderState> {
 
     on<UpdateMyOrder>(
         (event, emit) => {emit(MyOrderLoaded(listOrder: event.listOrder))});
+
+    on<UpdateStateMyOrder>((event, emit) =>
+        {myOrderRepository.updateStateOrder(event.order, event.state)});
   }
 }

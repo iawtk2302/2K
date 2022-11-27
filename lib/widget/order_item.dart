@@ -105,10 +105,10 @@ class ItemOrderState extends State<ItemOrder> {
                     child: Row(
                       children: [
                         Text(
-                          'Date Created: ' +
-                              '${widget.order.dateCreated!.toDate().day}' +
-                              '/ ${widget.order.dateCreated!.toDate().month}' +
-                              '/ ${widget.order.dateCreated!.toDate().year}',
+                          'Date Created: '
+                          '${widget.order.dateCreated!.toDate().day}'
+                          '/ ${widget.order.dateCreated!.toDate().month}'
+                          '/ ${widget.order.dateCreated!.toDate().year}',
                           style: const TextStyle(
                               fontFamily: 'Urbanist',
                               fontWeight: FontWeight.w500),
@@ -121,17 +121,33 @@ class ItemOrderState extends State<ItemOrder> {
                       child: Row(
                         children: [
                           Text(
-                            'Date Completed: ' +
-                                '${widget.order.dateCompleted!.toDate().day}' +
-                                '/${widget.order.dateCompleted!.toDate().month}' +
-                                '/${widget.order.dateCompleted!.toDate().year}',
+                            'Date Completed: '
+                            '${widget.order.dateCompleted!.toDate().day}'
+                            '/${widget.order.dateCompleted!.toDate().month}'
+                            '/${widget.order.dateCompleted!.toDate().year}',
                             style: const TextStyle(
                                 fontFamily: 'Urbanist',
                                 fontWeight: FontWeight.w500),
                           )
                         ],
                       )),
-                SizedBox(
+                if (widget.order.state == 'canceled')
+                  Expanded(
+                      flex: 3,
+                      child: Row(
+                        children: [
+                          Text(
+                            'Date Canceled: '
+                            '${widget.order.dateCanceled!.toDate().day}'
+                            '/${widget.order.dateCanceled!.toDate().month}'
+                            '/${widget.order.dateCanceled!.toDate().year}',
+                            style: const TextStyle(
+                                fontFamily: 'Urbanist',
+                                fontWeight: FontWeight.w500),
+                          )
+                        ],
+                      )),
+                const SizedBox(
                   height: 2,
                 ),
                 Expanded(
@@ -139,14 +155,14 @@ class ItemOrderState extends State<ItemOrder> {
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 10, vertical: 3),
-                        decoration: BoxDecoration(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 3),
+                        decoration: const BoxDecoration(
                             color: Color(0xFFECECEC),
                             borderRadius: BorderRadius.all(Radius.circular(5))),
                         child: Text(
                           widget.order.state!,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontFamily: 'Urbanist',
                               fontSize: 15,
                               fontWeight: FontWeight.w500),
@@ -154,7 +170,7 @@ class ItemOrderState extends State<ItemOrder> {
                       ),
                     )),
                 Container(
-                  margin: EdgeInsets.symmetric(vertical: 8),
+                  margin: const EdgeInsets.symmetric(vertical: 8),
                   height: 0.5,
                   width: double.infinity,
                   color: Colors.grey,
@@ -180,7 +196,7 @@ class ItemOrderState extends State<ItemOrder> {
                                     RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(18.0),
-                                        side: BorderSide(
+                                        side: const BorderSide(
                                             color: Colors.transparent)))),
                             onPressed: () {
                               // print(imgLink);
@@ -190,7 +206,7 @@ class ItemOrderState extends State<ItemOrder> {
                                 //     builder: ((context) => BottomSheetReview(
                                 //           order: widget.order,
                                 //         )));
-                              } else
+                              } else {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -198,10 +214,11 @@ class ItemOrderState extends State<ItemOrder> {
                                         order: widget.order,
                                       ),
                                     ));
+                              }
                             },
                             child: Text(
                               getText(),
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontFamily: 'Urbanist',
                                 fontWeight: FontWeight.w600,
                               ),

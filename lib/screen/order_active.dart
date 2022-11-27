@@ -45,7 +45,8 @@ class _OrderActiveState extends State<OrderActive> {
           List<Order> listOrder = [];
           listOrder = state.listOrder
               .where(
-                (element) => element.state != 'completed',
+                (element) =>
+                    element.state != 'completed' && element.state != 'canceled',
               )
               .toList();
           if (listOrder.length <= 0)
