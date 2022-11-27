@@ -26,8 +26,8 @@ class _ItemProductWithoutAnimState extends State<ItemProductWithoutAnim> {
     return InkWell(
       borderRadius: BorderRadius.all(Radius.circular(16)),
       onTap: () {
-        // Navigator.push(context,
-        // MaterialPageRoute(builder: ((context) => ProductDetail())));
+        Navigator.push(context,
+        MaterialPageRoute(builder: ((context) => ProductDetail(product: product,))));
       },
       // width: MediaQuery.of(context).size.width / 2,
       // height: 275,

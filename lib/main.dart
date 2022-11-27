@@ -10,6 +10,7 @@ import 'package:sneaker_app/bloc/home/user_bloc.dart';
 import 'package:sneaker_app/bloc/list_order/list_order_bloc.dart';
 import 'package:sneaker_app/bloc/my_order/my_order_bloc.dart';
 import 'package:sneaker_app/bloc/order/order_bloc.dart';
+import 'package:sneaker_app/bloc/review/bloc/review_bloc.dart';
 import 'package:sneaker_app/bloc/seach/bloc/search_bloc.dart';
 import 'package:sneaker_app/model/product.dart';
 import 'package:sneaker_app/model/product_cart.dart';
@@ -27,6 +28,7 @@ import 'package:sneaker_app/screen/LoginPage.dart';
 import 'package:sneaker_app/screen/MainPage.dart';
 import 'package:sneaker_app/screen/Register.dart';
 import 'package:sneaker_app/screen/PageTest.dart';
+import 'package:sneaker_app/screen/ReviewPage.dart';
 import 'package:sneaker_app/screen/SearchPage.dart';
 import 'package:sneaker_app/screen/SearchResultPage.dart';
 import 'package:sneaker_app/screen/SplashScreen.dart';
@@ -54,7 +56,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => UserBloc()..add(LoadInfoUser())),
         BlocProvider(create: (context) => CartBloc()..add(LoadCart())),
         BlocProvider(create: (context) => MyOrderBloc()..add(LoadMyOrder())),
-        BlocProvider(create: (context) => ListOrderBloc())
+        BlocProvider(create: (context) => ListOrderBloc()),
+        BlocProvider(create: (context) => ReviewBloc())
       ],
       child: MaterialApp(
         title: '2K',
@@ -152,10 +155,16 @@ Route? getRoute(RouteSettings settings) {
             builder: (context) => const ChooseAddressPage(),
             settings: settings);
       }
-      case Routes.chooseVoucher:
+    case Routes.chooseVoucher:
       {
         return MaterialPageRoute(
             builder: (context) => const ChooseVoucherPage(), settings: settings);
+      }
+    case Routes.review:
+      {
+        final product = settings.arguments as Product;
+        return MaterialPageRoute(
+            builder: (context) => ReviewPage(product: product,), settings: settings);
       }
   }
   return null;

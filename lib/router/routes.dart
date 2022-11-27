@@ -10,6 +10,7 @@ class Routes{
   static const searchResult='/SearchResultPage';
   static const searchResult1='/PageTest';
   static const checkout='/CheckoutPage';
+  static const review='/ReviewPage';
   static const addAddress='/AddAddressPage';
   static const chooseAddress='/ChooseAddressPage';
   static const chooseVoucher='/ChooseVoucherPage';

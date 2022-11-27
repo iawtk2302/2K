@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/product/product_bloc.dart';
 import '../model/product.dart';
+import '../router/routes.dart';
 
 class ProductDetailHeader extends StatelessWidget {
   const ProductDetailHeader({
@@ -43,39 +44,44 @@ class ProductDetailHeader extends StatelessWidget {
                 icon: Icon(!isLiked ? Icons.favorite_border : Icons.favorite))
           ],
         ),
-        Row(
-          children: [
-            Container(
-              decoration: const BoxDecoration(
-                  color: Color(0xFFECEDEC),
-                  borderRadius: BorderRadius.all(Radius.circular(10))),
-              child: const Padding(
-                padding: EdgeInsets.all(6.0),
-                child: Text(
-                  '7.483 sold',
-                  style: TextStyle(fontSize: 12, fontFamily: 'Urbanist'),
+        InkWell(
+          onTap: () {
+            Navigator.pushNamed(context, Routes.review,arguments: product);
+          },
+          child: Row(
+            children: [
+              Container(
+                decoration: const BoxDecoration(
+                    color: Color(0xFFECEDEC),
+                    borderRadius: BorderRadius.all(Radius.circular(10))),
+                child: const Padding(
+                  padding: EdgeInsets.all(6.0),
+                  child: Text(
+                    '7.483 sold',
+                    style: TextStyle(fontSize: 12, fontFamily: 'Urbanist'),
+                  ),
                 ),
               ),
-            ),
-            SizedBox(
-              width: 20,
-            ),
-            const Icon(
-              Icons.star,
-              size: 20,
-            ),
-            const Text(
-              '4.5',
-              style: TextStyle(fontSize: 16, fontFamily: 'Urbanist'),
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            const Text(
-              '(6,573 reviews)',
-              style: TextStyle(fontSize: 15, fontFamily: 'Urbanist'),
-            ),
-          ],
+              SizedBox(
+                width: 20,
+              ),
+              const Icon(
+                Icons.star,
+                size: 20,
+              ),
+              const Text(
+                '4.5',
+                style: TextStyle(fontSize: 16, fontFamily: 'Urbanist'),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              const Text(
+                '(6,573 reviews)',
+                style: TextStyle(fontSize: 15, fontFamily: 'Urbanist'),
+              ),
+            ],
+          ),
         ),
       ],
     );
