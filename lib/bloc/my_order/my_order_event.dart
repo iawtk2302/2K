@@ -14,10 +14,21 @@ class LoadMyOrder extends MyOrderEvent {
 }
 
 class UpdateMyOrder extends MyOrderEvent {
-  List<Order> listOrder;
-  UpdateMyOrder({
+  final List<Order> listOrder;
+  const UpdateMyOrder({
     required this.listOrder,
   });
   @override
-  List<Object> get props => [];
+  List<Object> get props => [listOrder];
+}
+
+class UpdateStateMyOrder extends MyOrderEvent {
+  final Order order;
+  final String state;
+  const UpdateStateMyOrder({
+    required this.order,
+    required this.state,
+  });
+  @override
+  List<Object> get props => [order, state];
 }

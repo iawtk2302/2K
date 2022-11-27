@@ -54,22 +54,35 @@ class OrderTracking extends StatelessWidget {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [Text('Date Delivered'), Text('JHJS3724EFJAWE')],
+            children: [Text('Date Delivered'), Text('27/11/2022')],
           ),
           SizedBox(
             height: 8,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('Date Completed'),
-              Text(
-                '${order.dateCompleted!.toDate().day}' +
-                    '/${order.dateCompleted!.toDate().month}' +
-                    '/${order.dateCompleted!.toDate().year}',
-              )
-            ],
-          ),
+          if (order.state == 'completed')
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Date Completed'),
+                Text(
+                  '${order.dateCompleted!.toDate().day}' +
+                      '/${order.dateCompleted!.toDate().month}' +
+                      '/${order.dateCompleted!.toDate().year}',
+                )
+              ],
+            ),
+          if (order.state == 'canceled')
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Date Canceled'),
+                Text(
+                  '${order.dateCanceled!.toDate().day}' +
+                      '/${order.dateCanceled!.toDate().month}' +
+                      '/${order.dateCanceled!.toDate().year}',
+                )
+              ],
+            ),
         ],
       ),
     );

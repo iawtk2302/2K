@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sneaker_app/router/routes.dart';
 import 'package:sneaker_app/screen/order_active.dart';
+import 'package:sneaker_app/screen/order_canceled.dart';
 import 'package:sneaker_app/screen/order_completed.dart';
 import 'package:sneaker_app/screen/track_order_screen.dart';
 import 'package:sneaker_app/themes/Colors.dart';
@@ -49,13 +50,13 @@ class OrdersPage extends StatelessWidget {
               ],
             ),
             backgroundColor: Theme.of(context).canvasColor,
-            elevation: 0,
+            elevation: 0.5,
           ),
           body: const TabBarView(
             children: [
               OrderActive(),
               OrderCompleted(),
-              OrderCompleted(),
+              OrderCanceled(),
             ],
           ),
         ),

@@ -52,15 +52,17 @@ class OrderState extends StatelessWidget {
   }
 
   String convertText() {
-    switch (order.state) {
-      case 'packing':
+    switch (statusNum) {
+      case 0:
         return 'Package is Packing';
-      case 'delivery':
+      case 1:
         return 'Package in Delivery';
-      case 'delivered':
+      case 2:
         return 'Package is Delivered';
-      case 'completed':
+      case 3:
         return 'Package is Completed';
+      case 4:
+        return 'Package is Canceled';
     }
     return '';
   }
