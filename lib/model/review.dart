@@ -27,7 +27,7 @@ class Review extends Equatable {
     idReview = json['idReview'];
     idUser = json['idUser'];
     fullName = json['fullName'];
-    star = json['star'];
+    star = json['star']+1;
     image = json['image'];
     dateCreated = json['dateCreated'];
   }

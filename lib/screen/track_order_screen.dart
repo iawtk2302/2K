@@ -244,11 +244,7 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
       case 'completed':
       case 'canceled':
         print(state);
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => CheckoutPage(listProduct: state),
-            ));
+        Navigator.pushNamed(context, Routes.checkout,arguments: state);
         break;
       case 'packing':
         showDialog<String>(

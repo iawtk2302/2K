@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sneaker_app/model/order.dart';
 import 'package:sneaker_app/model/product_cart.dart';
 import 'package:sneaker_app/model/review.dart';
@@ -10,6 +11,7 @@ import 'package:sneaker_app/widget/cart_item.dart';
 import 'package:sneaker_app/widget/item_product_trackorder.dart';
 import 'package:sneaker_app/widget/order_item.dart';
 
+import '../bloc/home/user_bloc.dart';
 import 'custom_textbutton.dart';
 
 class BottomSheetReview extends StatefulWidget {
@@ -190,34 +192,47 @@ class BottomSheetReviewState extends State<BottomSheetReview> {
                       Container(
                           // height: 80,
                           width: MediaQuery.of(context).size.width / 3 + 20,
-                          child: CustomTextButton(
-                            onPressed: () async {
-                              if (review == null) {
-                                final docReview = FirebaseFirestore.instance
-                                    .collection('Review');
-                                docReview.add({
-                                  'idProduct':
-                                      widget.productCart.product!.idProduct,
-                                  'star': starNumber,
-                                  'content': _controller.text,
-                                  'idUser':
-                                      FirebaseAuth.instance.currentUser!.uid
-                                }).then((value) => docReview
-                                    .doc(value.id)
-                                    .update({'idReview': value.id}));
-                              } else {
-                                final docReview = FirebaseFirestore.instance
-                                    .collection('Review');
-                                docReview.doc(review!.idReview).update({
-                                  'star': starNumber,
-                                  'content': _controller.text,
-                                });
+                          child: BlocBuilder<UserBloc, UserState>(
+                            builder: (context, state) {
+                              if(state is UserLoading) {
+                                return Container();
                               }
+                              else if (state is UserExist) {
+                                return CustomTextButton(
+                                onPressed: () async {
+                                  if (review == null) {
+                                    final docReview = FirebaseFirestore.instance
+                                        .collection('Review');
+                                    docReview.add({
+                                      'idProduct':
+                                          widget.productCart.product!.idProduct,
+                                      'star': starNumber,
+                                      'content': _controller.text,
+                                      'idUser': FirebaseAuth
+                                          .instance.currentUser!.uid,
+                                      'fullName': state.user.firstName.toString() + ' ' + state.user.lastName.toString(),
+                                      'image': state.user.image,
+                                      'dateCreated': DateTime.now(),
+                                    }).then((value) => docReview
+                                        .doc(value.id)
+                                        .update({'idReview': value.id}));
+                                  } else {
+                                    final docReview = FirebaseFirestore.instance
+                                        .collection('Review');
+                                    docReview.doc(review!.idReview).update({
+                                      'star': starNumber,
+                                      'content': _controller.text,
+                                    });
+                                  }
+                                },
+                                text: 'Submit',
+                                hasLeftIcon: false,
+                                isDark: true,
+                                hasRightIcon: false,
+                              );
+                              }
+                              else return Container();
                             },
-                            text: 'Submit',
-                            hasLeftIcon: false,
-                            isDark: true,
-                            hasRightIcon: false,
                           )),
                     ],
                   ),
