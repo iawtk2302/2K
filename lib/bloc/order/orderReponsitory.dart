@@ -107,7 +107,9 @@ class OrderReponsitory{
     }
   }
   void showSuccessDialog(BuildContext context){
-  showDialog(context: context, builder: (context) {
+  showDialog(context: context, 
+  barrierDismissible: false,
+  builder: (context) {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
 
@@ -128,7 +130,7 @@ class OrderReponsitory{
           child: CustomElevatedButton(onTap: () { 
             BlocProvider.of<CartBloc>(context).add(LoadCart());
             Navigator.of(context)..pop()..pop(); 
-            }, text: 'View Order',color: Colors.black,),
+            }, text: 'Back',color: Colors.black,),
         ),
         const SizedBox(height: 30,)
       ],),
@@ -137,7 +139,9 @@ class OrderReponsitory{
 }
 
 void showErrorDialog(BuildContext context){
-  showDialog(context: context, builder: (context) {
+  showDialog(context: context, 
+  barrierDismissible: false,
+  builder: (context) {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
 

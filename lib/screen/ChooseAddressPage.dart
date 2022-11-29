@@ -25,7 +25,7 @@ class _ChooseAddressPageState extends State<ChooseAddressPage> {
     return Scaffold(
       backgroundColor: Color(0xFFFBFBFB),
       appBar: CustomAppBar(title: "Shipping Address",onTap: (){
-        BlocProvider.of<OrderBloc>(context).add(ChooseAddress(address!));
+        // BlocProvider.of<OrderBloc>(context).add(ChooseAddress(address!));
         Navigator.pop(context);
       },),
       body: BlocBuilder<OrderBloc,OrderState>(
