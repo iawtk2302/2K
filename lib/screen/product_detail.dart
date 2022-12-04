@@ -157,7 +157,7 @@ class _ProductDetailState extends State<ProductDetail> {
                           child: IconButton(
                             icon: Icon(Icons.arrow_back),
                             onPressed: () {
-                              Navigator.pop(context);
+                              Navigator.pop(context, isLiked);
                             },
                           )),
                     ]),
