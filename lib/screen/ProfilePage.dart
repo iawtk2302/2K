@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sneaker_app/router/routes.dart';
+import 'package:sneaker_app/screen/edit_profile.dart';
+import 'package:sneaker_app/screen/help_center.dart';
 import 'package:sneaker_app/service/FirebaseService.dart';
 import 'package:sneaker_app/widget/custom_switch_button.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../bloc/home/user_bloc.dart';
 
@@ -105,17 +109,31 @@ class ProfilePage extends StatelessWidget {
               }
             },
           ),
-          ItemProfile(
-            leftIcon: Icons.person_outline,
-            label: 'Edit Profile',
-            rightIcon: Icons.chevron_right,
-            onPress: () {},
+          BlocBuilder<UserBloc, UserState>(
+            builder: (context, state) {
+              final userState = state as UserExist;
+              final user = userState.user;
+              return ItemProfile(
+                leftIcon: Icons.person_outline,
+                label: 'Edit Profile',
+                rightIcon: Icons.chevron_right,
+                onPress: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditProfile(user: user),
+                      ));
+                },
+              );
+            },
           ),
           ItemProfile(
             leftIcon: Icons.mode_of_travel,
             label: 'Address',
             rightIcon: Icons.chevron_right,
-            onPress: () {},
+            onPress: () {
+              Navigator.pushNamed(context, Routes.chooseAddress);
+            },
           ),
           ItemProfile(
             leftIcon: Icons.language,
@@ -133,19 +151,33 @@ class ProfilePage extends StatelessWidget {
             leftIcon: Icons.lock_outline,
             label: 'Privacy Police',
             rightIcon: Icons.chevron_right,
-            onPress: () {},
+            onPress: () async {
+              final Uri _url = Uri.parse(
+                  'https://agreementservice.svs.nike.com/gb/en_gb/rest/agreement?agreementType=privacyPolicy&uxId=com.nike.unite&country=GB&language=en&requestType=redirect  ');
+              if (!await launchUrl(_url)) {
+                throw 'Could not launch $_url';
+              }
+            },
           ),
           ItemProfile(
             leftIcon: Icons.help_outline,
             label: 'Help Center',
             rightIcon: Icons.chevron_right,
-            onPress: () {},
+            onPress: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => HelpCenter(),
+                  ));
+            },
           ),
           ItemProfile(
-            leftIcon: Icons.lock_outline,
-            label: 'Privacy Police',
+            leftIcon: Icons.logout,
+            label: 'Sign out',
             rightIcon: Icons.chevron_right,
-            onPress: () {},
+            onPress: () {
+              signOut();
+            },
           ),
         ],
       )),
@@ -168,7 +200,9 @@ class ItemProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        onPress();
+      },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child:
@@ -203,7 +237,9 @@ class ItemProfile extends StatelessWidget {
               if (label != 'Dark Mode')
                 IconButton(
                   icon: Icon(rightIcon),
-                  onPressed: () {},
+                  onPressed: () {
+                    onPress();
+                  },
                 )
               else
                 const CustomSwitchButton()

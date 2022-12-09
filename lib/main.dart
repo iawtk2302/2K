@@ -37,7 +37,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -62,6 +62,7 @@ class MyApp extends StatelessWidget {
         home: const SplashScreen(),
         onGenerateRoute: getRoute,
         theme: ThemeData(
+          brightness: Brightness.light,
           fontFamily: "Urbanist",
           textSelectionTheme: const TextSelectionThemeData(
             cursorColor: Colors.black,
@@ -152,10 +153,11 @@ Route? getRoute(RouteSettings settings) {
             builder: (context) => const ChooseAddressPage(),
             settings: settings);
       }
-      case Routes.chooseVoucher:
+    case Routes.chooseVoucher:
       {
         return MaterialPageRoute(
-            builder: (context) => const ChooseVoucherPage(), settings: settings);
+            builder: (context) => const ChooseVoucherPage(),
+            settings: settings);
       }
   }
   return null;
