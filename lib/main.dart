@@ -109,47 +109,8 @@ class MyApp extends StatelessWidget {
         home: const SplashScreen(),
         onGenerateRoute: getRoute,
         theme: Themes.light,
-        darkTheme: ThemeData(
-          scaffoldBackgroundColor: const Color(0xFF181A20),
-          primarySwatch: const MaterialColor(
-            0xFF181A20,
-            <int, Color>{
-              50: Color(0xFF181A20),
-              100: Color(0xFF181A20),
-              200: Color(0xFF181A20),
-              300: Color(0xFF181A20),
-              350: Color(0xFF181A20),
-              400: Color(0xFF181A20),
-              500: Color(0xFF181A20),
-              600: Color(0xFF181A20),
-              700: Color(0xFF181A20),
-              800: Color(0xFF181A20),
-              850: Color(0xFF181A20),
-              900: Color(0xFF181A20),
-            },
-          ),
-          applyElevationOverlayColor: true,
-          backgroundColor: const Color(0xFF35383F),
-          brightness: Brightness.dark,
-          primaryIconTheme: const IconThemeData(color: Colors.white),
-          textTheme: const TextTheme(
-              button: TextStyle(color: Colors.white),
-              bodyText2: TextStyle(color: Colors.white),
-              bodyText1: TextStyle(color: Color(0xFFDEDFDF))),
-          cardColor: const Color(0xFF1F222A),
-          textButtonTheme: TextButtonThemeData(
-            style: ButtonStyle(
-                overlayColor:
-                    MaterialStateProperty.all(const Color(0xFF35383F))),
-          ),
-          elevatedButtonTheme: ElevatedButtonThemeData(
-              style: ButtonStyle(
-                  textStyle: MaterialStateProperty.all(
-                      const TextStyle(color: Colors.white)),
-                  backgroundColor:
-                      MaterialStateProperty.all(const Color(0xFF35383F)))),
-        ),
-        themeMode: ThemeMode.dark,
+        darkTheme: Themes.dark,
+        themeMode: ThemeMode.light,
       ),
     );
   }

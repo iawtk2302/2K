@@ -15,7 +15,10 @@ class Item_Status_Order extends StatelessWidget {
       children: [
         FaIcon(
           icon,
-          color: isActive ? Colors.black : Colors.grey,
+          // color: isActive ? Colors.black : Colors.grey,
+          color: isActive
+              ? Theme.of(context).primaryIconTheme.color
+              : Theme.of(context).backgroundColor,
         ),
         const SizedBox(
           height: 10,

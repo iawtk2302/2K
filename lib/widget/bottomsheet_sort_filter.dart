@@ -41,8 +41,8 @@ class _BottomSheet_Sort_FilterState extends State<BottomSheet_Sort_Filter> {
       builder: (context, state) {
         if (state is ProductLoaded) {
           return Container(
-            decoration: const BoxDecoration(
-                color: Colors.white,
+            decoration: BoxDecoration(
+                color: Theme.of(context).cardColor,
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20))),
@@ -83,7 +83,7 @@ class _BottomSheet_Sort_FilterState extends State<BottomSheet_Sort_Filter> {
                   SizedBox(
                     height: 35,
                     child: RadioListTile<SortBy>(
-                      activeColor: Colors.black,
+                      activeColor: Theme.of(context).primaryIconTheme.color,
                       title: const Text('Featured'),
                       value: SortBy.featured,
                       groupValue: _character,
@@ -98,7 +98,7 @@ class _BottomSheet_Sort_FilterState extends State<BottomSheet_Sort_Filter> {
                   SizedBox(
                     height: 35,
                     child: RadioListTile<SortBy>(
-                      activeColor: Colors.black,
+                      activeColor: Theme.of(context).primaryIconTheme.color,
                       title: const Text('Newest'),
                       value: SortBy.newest,
                       groupValue: _character,
@@ -113,7 +113,7 @@ class _BottomSheet_Sort_FilterState extends State<BottomSheet_Sort_Filter> {
                   SizedBox(
                     height: 35,
                     child: RadioListTile<SortBy>(
-                      activeColor: Colors.black,
+                      activeColor: Theme.of(context).primaryIconTheme.color,
                       title: const Text('Price: Low-High'),
                       value: SortBy.lowHigh,
                       groupValue: _character,
@@ -128,7 +128,7 @@ class _BottomSheet_Sort_FilterState extends State<BottomSheet_Sort_Filter> {
                   SizedBox(
                     height: 35,
                     child: RadioListTile<SortBy>(
-                      activeColor: Colors.black,
+                      activeColor: Theme.of(context).primaryIconTheme.color,
                       title: const Text('Price: High-Low'),
                       value: SortBy.highLow,
                       groupValue: _character,
@@ -164,8 +164,10 @@ class _BottomSheet_Sort_FilterState extends State<BottomSheet_Sort_Filter> {
                     child: Row(
                       children: [
                         Checkbox(
-                          checkColor: Colors.white,
-                          fillColor: MaterialStateProperty.all(Colors.black),
+                          checkColor: Theme.of(context).primaryColor,
+                          activeColor: Theme.of(context).primaryColor,
+                          fillColor: MaterialStateProperty.all(
+                              Theme.of(context).primaryIconTheme.color),
                           value: isChecked['Men'],
                           onChanged: (bool? value) {
                             setState(() {
@@ -185,8 +187,10 @@ class _BottomSheet_Sort_FilterState extends State<BottomSheet_Sort_Filter> {
                     child: Row(
                       children: [
                         Checkbox(
-                          checkColor: Colors.white,
-                          fillColor: MaterialStateProperty.all(Colors.black),
+                          checkColor: Theme.of(context).primaryColor,
+                          activeColor: Theme.of(context).primaryColor,
+                          fillColor: MaterialStateProperty.all(
+                              Theme.of(context).primaryIconTheme.color),
                           value: isChecked['Women'],
                           onChanged: (bool? value) {
                             setState(() {
@@ -206,8 +210,10 @@ class _BottomSheet_Sort_FilterState extends State<BottomSheet_Sort_Filter> {
                     child: Row(
                       children: [
                         Checkbox(
-                          checkColor: Colors.white,
-                          fillColor: MaterialStateProperty.all(Colors.black),
+                          checkColor: Theme.of(context).primaryColor,
+                          activeColor: Theme.of(context).primaryColor,
+                          fillColor: MaterialStateProperty.all(
+                              Theme.of(context).primaryIconTheme.color),
                           value: isChecked['Unisex'],
                           onChanged: (bool? value) {
                             setState(() {

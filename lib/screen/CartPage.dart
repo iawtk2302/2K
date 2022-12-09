@@ -23,12 +23,12 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Theme.of(context).canvasColor,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           elevation: 0.5,
           title: Text(
             'My Cart',
             style: TextStyle(
-                color: Colors.black,
+                // color: Colors.black,
                 fontWeight: FontWeight.bold,
                 fontSize: 22,
                 fontFamily: 'Urbanist'),
@@ -65,7 +65,7 @@ class _CartPageState extends State<CartPage> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Container(
-                      color: Colors.white,
+                      color: Theme.of(context).scaffoldBackgroundColor,
                       height: 80,
                       width: double.infinity,
                       child: Row(
@@ -83,13 +83,14 @@ class _CartPageState extends State<CartPage> {
                                 Text(
                                   '\$${state.cart.calculatePrice()}' + '.00',
                                   style: TextStyle(
-                                      color: Colors.black,
+                                      // color: Colors.black,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 22),
                                 )
                               ],
                             ),
                             Container(
+                              // color: Theme.of(context).scaffoldBackgroundColor,
                               width: 220,
                               height: 55,
                               child: CustomTextButton(

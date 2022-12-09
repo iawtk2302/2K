@@ -1,23 +1,14 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:http/http.dart';
 import 'package:sneaker_app/bloc/my_order/my_order_bloc.dart';
 import 'package:sneaker_app/model/detail_order.dart';
-import 'package:sneaker_app/model/detail_product.dart';
 import 'package:sneaker_app/model/order.dart';
 import 'package:sneaker_app/model/product.dart';
 import 'package:sneaker_app/model/product_cart.dart';
-import 'package:sneaker_app/screen/CheckoutPage.dart';
 import 'package:sneaker_app/widget/Loading.dart';
-import 'package:sneaker_app/widget/OrderItem.dart';
-import 'package:sneaker_app/widget/cart_item.dart';
 import 'package:sneaker_app/widget/custom_textbutton.dart';
 import 'package:sneaker_app/widget/item_product_trackorder.dart';
-import 'package:sneaker_app/widget/order_item.dart';
 
 import '../bloc/list_order/list_order_bloc.dart';
 import '../router/routes.dart';
@@ -62,7 +53,7 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          backgroundColor: Theme.of(context).canvasColor,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           elevation: 0,
           leading: IconButton(
             onPressed: () {
@@ -70,13 +61,13 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
             },
             icon: const Icon(
               Icons.arrow_back,
-              color: Colors.black,
+              // color: Colors.black,
             ),
           ),
           title: const Text(
             'Track Order',
             style: TextStyle(
-                color: Colors.black,
+                // color: Colors.black,
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
                 fontFamily: 'Urbanist'),
@@ -119,7 +110,7 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
                         Text(
                           'Total price: ',
                           style: TextStyle(
-                              color: Colors.black,
+                              // color: Colors.black,
                               fontWeight: FontWeight.w700,
                               fontSize: 16,
                               fontFamily: 'Urbanist'),
@@ -127,7 +118,7 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
                         Text(
                           '\$${(widget.order.total)?.toStringAsFixed(2)}',
                           style: TextStyle(
-                              color: Colors.black,
+                              // color: Colors.black,
                               fontWeight: FontWeight.w700,
                               fontSize: 16,
                               fontFamily: 'Urbanist'),
@@ -149,7 +140,7 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
                       child: Text(
                         'Order status detail',
                         style: TextStyle(
-                            color: Colors.black,
+                            // color: Colors.black,
                             fontWeight: FontWeight.w700,
                             fontSize: 19,
                             fontFamily: 'Urbanist'),
@@ -244,7 +235,7 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
       case 'completed':
       case 'canceled':
         print(state);
-        Navigator.pushNamed(context, Routes.checkout,arguments: state);
+        Navigator.pushNamed(context, Routes.checkout, arguments: state);
         break;
       case 'packing':
         showDialog<String>(

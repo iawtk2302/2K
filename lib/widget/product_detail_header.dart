@@ -26,40 +26,43 @@ class ProductDetailHeader extends StatefulWidget {
 class _ProductDetailHeaderState extends State<ProductDetailHeader> {
   final review = FirebaseFirestore.instance.collection('Review');
   final detailOrder = FirebaseFirestore.instance.collection('DetailOrder');
-  int totalRate=0;
-  double rate=0;
-  int totalSold=0;
+  int totalRate = 0;
+  double rate = 0;
+  int totalSold = 0;
   @override
   void initState() {
     getReview();
     getSold();
     super.initState();
   }
-  getReview()async{
-    double total=0;
+
+  getReview() async {
+    double total = 0;
     late double length;
-        await review.where('idProduct',isEqualTo: widget.product.idProduct).get().then((value) {
-      value.docs.forEach((element) { 
-        total+=element.get('star')+1;
+    await review
+        .where('idProduct', isEqualTo: widget.product.idProduct)
+        .get()
+        .then((value) {
+      value.docs.forEach((element) {
+        total += element.get('star') + 1;
       });
-      if(value.docs.length!=0){
-        totalRate=value.docs.length;
-        rate=total/totalRate;
+      if (value.docs.length != 0) {
+        totalRate = value.docs.length;
+        rate = total / totalRate;
       }
-      
-      
-      
-      // rate=total/length;
     });
-    setState(() {
-      
+    setState(() {});
+  }
+
+  getSold() async {
+    await detailOrder
+        .where('idProduct', isEqualTo: widget.product.idProduct)
+        .get()
+        .then((value) {
+      totalSold = value.docs.length;
     });
   }
-  getSold()async{
-    await detailOrder.where('idProduct',isEqualTo: widget.product.idProduct).get().then((value) {
-      totalSold=value.docs.length;
-    });
-  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -85,23 +88,25 @@ class _ProductDetailHeaderState extends State<ProductDetailHeader> {
                       ));
                   widget.onPressed();
                 },
-                icon: Icon(!widget.isLiked ? Icons.favorite_border : Icons.favorite))
+                icon: Icon(
+                    !widget.isLiked ? Icons.favorite_border : Icons.favorite))
           ],
         ),
         InkWell(
           onTap: () {
-            Navigator.pushNamed(context, Routes.review,arguments: widget.product);
+            Navigator.pushNamed(context, Routes.review,
+                arguments: widget.product);
           },
           child: Row(
             children: [
               Container(
-                decoration: const BoxDecoration(
-                    color: Color(0xFFECEDEC),
+                decoration: BoxDecoration(
+                    color: Theme.of(context).backgroundColor,
                     borderRadius: BorderRadius.all(Radius.circular(10))),
                 child: Padding(
                   padding: EdgeInsets.all(6.0),
-                  child: Text(totalSold.toString()+
-                    ' sold',
+                  child: Text(
+                    totalSold.toString() + ' sold',
                     style: TextStyle(fontSize: 12, fontFamily: 'Urbanist'),
                   ),
                 ),
@@ -120,7 +125,7 @@ class _ProductDetailHeaderState extends State<ProductDetailHeader> {
               SizedBox(
                 width: 10,
               ),
-               Text(
+              Text(
                 '(${totalRate.toString()} reviews)',
                 style: TextStyle(fontSize: 15, fontFamily: 'Urbanist'),
               ),

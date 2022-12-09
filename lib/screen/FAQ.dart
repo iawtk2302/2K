@@ -52,8 +52,8 @@ class ItemFAQ extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       child: Card(
         shape: RoundedRectangleBorder(
-          side: const BorderSide(
-            color: Colors.white,
+          side: BorderSide(
+            color: Theme.of(context).primaryColor,
           ),
           borderRadius: BorderRadius.circular(10.0), //<-- SEE HERE
         ),
@@ -66,7 +66,8 @@ class ItemFAQ extends StatelessWidget {
                 scrollOnExpand: true,
                 scrollOnCollapse: false,
                 child: ExpandablePanel(
-                  theme: const ExpandableThemeData(
+                  theme: ExpandableThemeData(
+                      iconColor: Theme.of(context).iconTheme.color,
                       expandIcon: Icons.arrow_drop_down,
                       collapseIcon: Icons.arrow_drop_down,
                       headerAlignment: ExpandablePanelHeaderAlignment.center,
@@ -78,7 +79,7 @@ class ItemFAQ extends StatelessWidget {
                       child: Text(
                         "What is Shoes",
                         style: TextStyle(
-                            color: Colors.black,
+                            // color: Colors.black,
                             fontWeight: FontWeight.w600,
                             fontSize: 17,
                             fontFamily: 'Urbanist'),

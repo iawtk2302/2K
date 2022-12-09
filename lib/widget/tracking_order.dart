@@ -10,8 +10,10 @@ class OrderTracking extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-      color: Colors.white,
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      decoration: BoxDecoration(
+          color: Theme.of(context).cardColor,
+          borderRadius: BorderRadius.all(Radius.circular(15))),
       child: Column(
         children: [
           Row(
@@ -20,7 +22,7 @@ class OrderTracking extends StatelessWidget {
               Text(
                 'ID Order',
                 style: TextStyle(
-                    color: Colors.black,
+                    // color: Colors.black,
                     fontWeight: FontWeight.w700,
                     fontSize: 15,
                     fontFamily: 'Urbanist'),
@@ -28,7 +30,7 @@ class OrderTracking extends StatelessWidget {
               Text(
                 '#' + order.idOrder!,
                 style: TextStyle(
-                    color: Colors.black,
+                    // color: Colors.black,
                     fontWeight: FontWeight.w700,
                     fontSize: 15,
                     fontFamily: 'Urbanist'),

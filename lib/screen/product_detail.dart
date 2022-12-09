@@ -241,7 +241,7 @@ class _ProductDetailState extends State<ProductDetail> {
                                 width: 20,
                               ),
                               Material(
-                                color: Color(0xFFF3F3F3),
+                                color: Theme.of(context).backgroundColor,
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(25)),
                                 child: Container(

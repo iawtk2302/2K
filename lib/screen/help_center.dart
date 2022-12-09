@@ -14,12 +14,12 @@ class HelpCenter extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Theme.of(context).canvasColor,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           elevation: 0,
           leading: IconButton(
             icon: const Icon(
               Icons.arrow_back,
-              color: Colors.black,
+              // color: Colors.black,
             ),
             onPressed: () {
               Navigator.pop(context);
@@ -28,14 +28,14 @@ class HelpCenter extends StatelessWidget {
           title: const Text(
             'Help Center',
             style: TextStyle(
-                color: Colors.black,
+                // color: Colors.black,
                 fontWeight: FontWeight.bold,
                 fontSize: 22,
                 fontFamily: 'Urbanist'),
           ),
-          bottom: const TabBar(
-            indicatorColor: Colors.black,
-            labelColor: Colors.black,
+          bottom: TabBar(
+            indicatorColor: Theme.of(context).primaryIconTheme.color,
+            // labelColor: Colors.black,
             labelStyle: TextStyle(
                 fontFamily: 'Urbanist',
                 fontWeight: FontWeight.w600,

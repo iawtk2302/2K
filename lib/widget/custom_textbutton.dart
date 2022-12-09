@@ -30,9 +30,10 @@ class CustomTextButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(30.0),
             )),
             foregroundColor: MaterialStateProperty.all(Colors.transparent),
-            backgroundColor: isDark
-                ? MaterialStateProperty.all(Colors.black)
-                : MaterialStateProperty.all(Colors.white)),
+            backgroundColor: !isDark
+                ? MaterialStateProperty.all(Theme.of(context).backgroundColor)
+                : MaterialStateProperty.all(
+                    Theme.of(context).primaryIconTheme.color)),
         onPressed: () {
           onPressed();
         },
@@ -44,7 +45,7 @@ class CustomTextButton extends StatelessWidget {
                     children: [
                       Icon(
                         Icons.local_mall,
-                        color: Colors.white,
+                        color: Theme.of(context).primaryColor,
                       ),
                       SizedBox(
                         width: 10,
@@ -57,7 +58,10 @@ class CustomTextButton extends StatelessWidget {
               style: TextStyle(
                   fontFamily: 'Urbanist',
                   fontSize: 18,
-                  color: isDark ? Colors.white : Colors.black,
+                  // color: isDark ? Colors.white : Colors.black,
+                  color: isDark
+                      ? Theme.of(context).primaryColor
+                      : Theme.of(context).primaryIconTheme.color,
                   fontWeight: FontWeight.w600),
             ),
             hasRightIcon
@@ -65,7 +69,7 @@ class CustomTextButton extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 8.0),
                     child: Icon(
                       Icons.double_arrow,
-                      color: Colors.white,
+                      color: Theme.of(context).primaryColor,
                     ),
                   )
                 : SizedBox()

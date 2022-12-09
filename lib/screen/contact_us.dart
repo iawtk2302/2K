@@ -79,7 +79,7 @@ class ItemContact extends StatelessWidget {
       style: ButtonStyle(
         overlayColor:
             MaterialStateProperty.all(Color.fromARGB(255, 225, 224, 224)),
-        backgroundColor: MaterialStateProperty.all(Colors.white),
+        backgroundColor: MaterialStateProperty.all(Theme.of(context).cardColor),
         padding: MaterialStateProperty.all(
             const EdgeInsets.symmetric(horizontal: 16.0, vertical: 22)),
       ),
@@ -89,7 +89,7 @@ class ItemContact extends StatelessWidget {
       child: Row(children: [
         Icon(
           icon,
-          color: Colors.black,
+          // color: Colors.black,
         ),
         const SizedBox(
           width: 16,
@@ -97,7 +97,7 @@ class ItemContact extends StatelessWidget {
         Text(
           text,
           style: const TextStyle(
-              color: Colors.black,
+              // color: Colors.black,
               fontWeight: FontWeight.w600,
               fontSize: 17,
               fontFamily: 'Urbanist'),

@@ -8,8 +8,11 @@ class DeliveryAddress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
-      padding: EdgeInsets.symmetric(vertical: 16),
+      decoration: BoxDecoration(
+        color: Theme.of(context).cardColor,
+        borderRadius: BorderRadius.all(Radius.circular(15)),
+      ),
+      padding: EdgeInsets.symmetric(vertical: 16, horizontal: 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

@@ -42,7 +42,7 @@ class OrderState extends StatelessWidget {
         Text(
           convertText(),
           style: TextStyle(
-              color: Colors.black,
+              // color: Colors.black,
               fontWeight: FontWeight.w600,
               fontSize: 17,
               fontFamily: 'Urbanist'),

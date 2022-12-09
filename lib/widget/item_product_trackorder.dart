@@ -22,8 +22,8 @@ class Item_Product_TrackOrder extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 5.0),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
-          // borderRadius: BorderRadius.all(Radius.circular(30)),
+          color: Theme.of(context).cardColor,
+          borderRadius: BorderRadius.all(Radius.circular(15)),
         ),
         height: 140,
         width: double.infinity,
