@@ -103,6 +103,7 @@ class MyApp extends StatelessWidget {
         home: const SplashScreen(),
         onGenerateRoute: getRoute,
         theme: ThemeData(
+          brightness: Brightness.light,
           fontFamily: "Urbanist",
           textSelectionTheme: const TextSelectionThemeData(
             cursorColor: Colors.black,
@@ -196,7 +197,8 @@ Route? getRoute(RouteSettings settings) {
     case Routes.chooseVoucher:
       {
         return MaterialPageRoute(
-            builder: (context) => const ChooseVoucherPage(), settings: settings);
+            builder: (context) => const ChooseVoucherPage(),
+            settings: settings);
       }
     case Routes.review:
       {
