@@ -50,14 +50,12 @@ class SearchReponsitory{
       //     });
     }
     else if(brand!="All"&&gender!="All"){
-      print("vô");
       if(sort=='Price High')
         result=listSearch.where((element) => element.price!>=priceRange.start&&element.price!<=priceRange.end&&element.categoryName==brand&&element.gender!.contains(gender)).toList()..sort((a, b) => a.price!.compareTo(b.price as int),);
       else
         result=listSearch.where((element) => element.price!>=priceRange.start&&element.price!<=priceRange.end&&element.categoryName==brand&&element.gender!.contains(gender)).toList()..sort((a, b) => b.price!.compareTo(a.price as int),);
     }
     else{
-      print("ra");
       if(sort=='Price High')
       result=listSearch.where((element) => element.price!>=priceRange.start&&element.price!<=priceRange.end&&element.categoryName==brand&&checkGender(element.gender!, gender)).toList()..sort((a, b) => a.price!.compareTo(b.price as int),);
       else

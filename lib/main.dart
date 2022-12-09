@@ -1,4 +1,6 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -34,11 +36,47 @@ import 'package:sneaker_app/screen/SearchResultPage.dart';
 import 'package:sneaker_app/screen/SplashScreen.dart';
 
 import 'bloc/product/product_bloc.dart';
-
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await showFlutterNotification(message);
+}
+Future<void> showFlutterNotification(RemoteMessage message) async {
+  print(message.data);
+    await AwesomeNotifications().createNotification(
+        content: NotificationContent(
+            
+            id: -1, // -1 is replaced by a random number
+            channelKey: 'alerts',
+            title: message.data['title'],
+            body: message.data['body'],
+            // bigPicture: 'https://storage.googleapis.com/cms-storage-bucket/d406c736e7c4c57f5f61.png',
+            largeIcon: message.data['url'],
+            //'asset://assets/images/balloons-in-sky.jpg',
+            notificationLayout: NotificationLayout.BigPicture,
+            ),
+       );
+  }
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   await Firebase.initializeApp();
+  Future<String?> messaging = FirebaseMessaging.instance.getToken().then((value) {print(value);});
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  await AwesomeNotifications().initialize(
+        null, //'resource://drawable/res_app_icon',//
+        [
+          NotificationChannel(
+              channelKey: 'alerts',
+              channelName: 'Alerts',
+              channelDescription: 'Notification tests as alerts',
+              playSound: true,
+              onlyAlertOnce: true,
+              importance: NotificationImportance.High,
+              defaultPrivacy: NotificationPrivacy.Private,
+              defaultColor: Colors.black,
+              ledColor: Colors.black)
+        ],
+        debug: true);
+  FirebaseMessaging.onMessage.listen(_firebaseMessagingBackgroundHandler);
   runApp(MyApp());
 }
 

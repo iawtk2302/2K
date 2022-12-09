@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:sneaker_app/router/routes.dart';
 import 'package:sneaker_app/screen/FillProfilePage.dart';
+import 'package:sneaker_app/screen/NotificationPage.dart';
 import 'package:sneaker_app/widget/Loading.dart';
 
 import '../bloc/home/home_bloc.dart';
@@ -121,7 +122,9 @@ class _HomePageState extends State<HomePage> {
           actions: [
             IconButton(
               splashRadius: 10,
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => NotificationPage(),));
+              },
               icon: Icon(
                 Ionicons.notifications_outline,
                 size: 25,
