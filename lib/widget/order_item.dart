@@ -50,8 +50,8 @@ class ItemOrderState extends State<ItemOrder> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-          color: Colors.white,
+      decoration: BoxDecoration(
+          color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.all(Radius.circular(30))),
       height: widget.order.state != 'completed' ? 170 : 190,
       width: double.infinity,
@@ -156,10 +156,11 @@ class ItemOrderState extends State<ItemOrder> {
                       alignment: Alignment.centerLeft,
                       child: Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 3),
-                        decoration: const BoxDecoration(
-                            color: Color(0xFFECECEC),
-                            borderRadius: BorderRadius.all(Radius.circular(5))),
+                            horizontal: 10, vertical: 5),
+                        decoration: BoxDecoration(
+                            color: Theme.of(context).backgroundColor,
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(5))),
                         child: Text(
                           widget.order.state!,
                           style: const TextStyle(
@@ -189,13 +190,13 @@ class ItemOrderState extends State<ItemOrder> {
                         ),
                         ElevatedButton(
                             style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.all(Colors.black),
+                                // backgroundColor: MaterialStateProperty.all(
+                                //     Color(0xFFECECEC)),
                                 shape: MaterialStateProperty.all<
                                         RoundedRectangleBorder>(
                                     RoundedRectangleBorder(
                                         borderRadius:
-                                            BorderRadius.circular(18.0),
+                                            BorderRadius.circular(12.0),
                                         side: const BorderSide(
                                             color: Colors.transparent)))),
                             onPressed: () {
@@ -218,9 +219,11 @@ class ItemOrderState extends State<ItemOrder> {
                             },
                             child: Text(
                               getText(),
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontFamily: 'Urbanist',
                                 fontWeight: FontWeight.w600,
+                                color:
+                                    Theme.of(context).textTheme.button!.color,
                               ),
                             ))
                       ],

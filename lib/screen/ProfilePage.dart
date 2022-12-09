@@ -16,12 +16,12 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Theme.of(context).canvasColor,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           elevation: 0,
           title: const Text(
             'Profile',
             style: TextStyle(
-                color: Colors.black,
+                // color: Colors.black,
                 fontWeight: FontWeight.bold,
                 fontSize: 22,
                 fontFamily: 'Urbanist'),
@@ -56,20 +56,20 @@ class ProfilePage extends StatelessWidget {
                             child: Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
-                                color: Colors.black,
+                                color: Theme.of(context).primaryIconTheme.color,
                               ),
                               height: 22,
                               width: 22,
                               child: IconButton(
-                                  focusColor: Colors.black,
+                                  // focusColor: Colors.black,
                                   padding: EdgeInsets.zero,
                                   iconSize: 15,
                                   onPressed: () {},
                                   splashRadius: 15,
                                   // style: ButtonStyle(),
-                                  icon: const Icon(
+                                  icon: Icon(
                                     Icons.border_color,
-                                    color: Colors.white,
+                                    color: Theme.of(context).primaryColor,
                                   )),
                             ))
                       ]),
@@ -80,7 +80,7 @@ class ProfilePage extends StatelessWidget {
                     Text(
                       '${state.user.firstName!} ${state.user.lastName!}',
                       style: const TextStyle(
-                          color: Colors.black,
+                          // color: Colors.black,
                           fontWeight: FontWeight.w600,
                           fontSize: 22,
                           fontFamily: 'Urbanist'),
@@ -88,7 +88,7 @@ class ProfilePage extends StatelessWidget {
                     Text(
                       state.user.phone!,
                       style: const TextStyle(
-                          color: Colors.black,
+                          // color: Colors.black,
                           // fontWeight: FontWeight.w600,
                           fontSize: 15,
                           fontFamily: 'Urbanist'),
@@ -132,7 +132,7 @@ class ProfilePage extends StatelessWidget {
             label: 'Address',
             rightIcon: Icons.chevron_right,
             onPress: () {
-              Navigator.pushNamed(context, Routes.chooseAddress);
+              // Navigator.pushNamed(context, Routes.chooseAddress);
             },
           ),
           ItemProfile(
@@ -216,7 +216,7 @@ class ItemProfile extends StatelessWidget {
               Text(
                 label,
                 style: const TextStyle(
-                    color: Colors.black,
+                    // color: Colors.black,
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
                     fontFamily: 'Urbanist'),
@@ -229,7 +229,7 @@ class ItemProfile extends StatelessWidget {
                 const Text(
                   'English (US)',
                   style: TextStyle(
-                      color: Colors.black,
+                      // color: Colors.black,
                       fontWeight: FontWeight.w500,
                       fontSize: 16,
                       fontFamily: 'Urbanist'),

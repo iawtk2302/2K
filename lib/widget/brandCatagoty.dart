@@ -32,7 +32,7 @@ class BrandCatagory extends StatelessWidget {
             }
           },
           elevation: 2.0,
-          fillColor: Color(0xFFECECEC),
+          fillColor: Theme.of(context).backgroundColor,
           child: Image(
             height: 30,
             width: 30,

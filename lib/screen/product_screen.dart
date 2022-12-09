@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -57,9 +58,10 @@ class _ProductScreenState extends State<ProductScreen>
       builder: (context, state) {
         if (state is ProductLoading) {
           return Scaffold(
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
               appBar: AppBar(
                 elevation: 0,
-                backgroundColor: Theme.of(context).cardColor,
+                backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                 leading: IconButton(
                   onPressed: () {
                     Navigator.pop(context);
@@ -67,29 +69,29 @@ class _ProductScreenState extends State<ProductScreen>
                   },
                   icon: const Icon(
                     Icons.arrow_back,
-                    color: Colors.black,
+                    // color: Colors.white,
                   ),
                 ),
                 title: Text(
                   widget.brand.name!.toUpperCase(),
-                  style: TextStyle(color: Colors.black),
+                  // style: TextStyle(color: Colors.black),
                 ),
                 actions: [
                   Padding(
                     padding: const EdgeInsets.only(right: 8.0),
                     child: IconButton(
                       onPressed: () {
-                        showModalBottomSheet(
-                            isScrollControlled: true,
-                            backgroundColor: Colors.transparent,
-                            context: context,
-                            builder: (context) {
-                              return BottomSheet_Sort_Filter(
-                                index: isChoose,
-                                listGender: [],
-                                sortBy: SortBy.featured,
-                              );
-                            });
+                        // showModalBottomSheet(
+                        //     isScrollControlled: true,
+                        //     backgroundColor: Colors.transparent,
+                        //     context: context,
+                        //     builder: (context) {
+                        //       return BottomSheet_Sort_Filter(
+                        //         index: isChoose,
+                        //         listGender: [],
+                        //         sortBy: SortBy.featured,
+                        //       );
+                        //     });
                       },
                       icon: const Icon(
                         Icons.search,
@@ -104,7 +106,16 @@ class _ProductScreenState extends State<ProductScreen>
           return Scaffold(
               appBar: AppBar(
                 elevation: 0,
-                backgroundColor: Theme.of(context).cardColor,
+                // systemOverlayStyle: SystemUiOverlayStyle(
+                //   // Status bar color
+                //   statusBarColor: Theme.of(context).scaffoldBackgroundColor,
+
+                //   // Status bar brightness (optional)
+                //   statusBarIconBrightness:
+                //       Brightness.dark, // For Android (dark icons)
+                //   statusBarBrightness: Brightness.light, // For iOS (dark icons)
+                // ),
+                backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                 leading: IconButton(
                   onPressed: () {
                     Navigator.pop(context);
@@ -112,12 +123,12 @@ class _ProductScreenState extends State<ProductScreen>
                   },
                   icon: const Icon(
                     Icons.arrow_back,
-                    color: Colors.black,
+                    // color: Colors.black,
                   ),
                 ),
                 title: Text(
                   widget.brand.name!.toUpperCase(),
-                  style: TextStyle(color: Colors.black),
+                  // style: TextStyle(color: Colors.black),
                 ),
                 actions: [
                   Padding(
@@ -138,7 +149,7 @@ class _ProductScreenState extends State<ProductScreen>
                       },
                       icon: const Icon(
                         Icons.search,
-                        color: Colors.black,
+                        // color: Colors.black,
                       ),
                     ),
                   )

@@ -16,7 +16,7 @@ class _CustomSwitchButtonState extends State<CustomSwitchButton> {
     return Switch(
       // This bool value toggles the switch.
       value: light,
-      activeColor: Colors.black,
+      activeColor: Colors.white,
       onChanged: (bool value) {
         // This is called when the user toggles the switch.
         setState(() {

@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:sneaker_app/router/routes.dart';
@@ -55,9 +56,18 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Theme.of(context).canvasColor,
+        // backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: AppBar(
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          systemOverlayStyle: SystemUiOverlayStyle(
+            // Status bar color
+            statusBarColor: Theme.of(context).scaffoldBackgroundColor,
+
+            // Status bar brightness (optional)
+            statusBarIconBrightness:
+                Brightness.dark, // For Android (dark icons)
+            statusBarBrightness: Brightness.light, // For iOS (dark icons)
+          ),
           elevation: 0,
           leading: Padding(
             padding: const EdgeInsets.only(left: 16.0),
@@ -87,7 +97,8 @@ class _HomePageState extends State<HomePage> {
                 Text(
                   quote!,
                   style: TextStyle(
-                      color: Color(0xFF757475),
+                      // color: Color(0xFF757475),
+                      color: Theme.of(context).textTheme.bodyText1!.color,
                       fontSize: 16,
                       fontFamily: 'Urbanist',
                       fontWeight: FontWeight.w600),
@@ -99,7 +110,6 @@ class _HomePageState extends State<HomePage> {
                       return Text(
                         state.user.firstName.toString(),
                         style: TextStyle(
-                            color: Colors.black,
                             fontFamily: 'Urbanist',
                             fontWeight: FontWeight.w500,
                             fontSize: 19),
@@ -123,12 +133,16 @@ class _HomePageState extends State<HomePage> {
             IconButton(
               splashRadius: 10,
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => NotificationPage(),));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => NotificationPage(),
+                    ));
               },
               icon: Icon(
                 Ionicons.notifications_outline,
                 size: 25,
-                color: Colors.black,
+                // color: Colors.black,
               ),
             ),
             IconButton(
@@ -137,7 +151,7 @@ class _HomePageState extends State<HomePage> {
               icon: Icon(
                 Ionicons.heart_outline,
                 size: 25,
-                color: Colors.black,
+                // color: Colors.black,
               ),
             ),
           ],
@@ -145,12 +159,13 @@ class _HomePageState extends State<HomePage> {
         body: SingleChildScrollView(
           child: BlocBuilder<HomeBloc, HomeState>(
             builder: (context, state) {
-              if (state is HomeLoading)
+              if (state is HomeLoading) {
                 return HomeLoad();
-              else if (state is HomeLoaded)
+              } else if (state is HomeLoaded) {
                 return HomeLoadCompleted(state);
-              else
-                return Scaffold();
+              } else {
+                return const Scaffold();
+              }
             },
           ),
         ));
@@ -219,9 +234,9 @@ class _HomePageState extends State<HomePage> {
                     fontSize: 22,
                     fontFamily: 'Urbanist')),
             TextButton(
-              style: ButtonStyle(
-                  overlayColor: MaterialStateProperty.all(
-                      Color.fromARGB(255, 238, 234, 234))),
+              // style: ButtonStyle(
+              //     overlayColor: MaterialStateProperty.all(
+              //         Color.fromARGB(255, 238, 234, 234))),
               onPressed: () {
                 // print('aa');
               },
@@ -300,8 +315,12 @@ class _HomePageState extends State<HomePage> {
           padding: const EdgeInsets.only(top: 16.0),
           child: CustomSearch(
             hintText: 'Search',
-            prefixIcon: Icon(Icons.search),
-            suffixIcon: Icon(Icons.tune),
+            prefixIcon: Icon(
+              Icons.search,
+              color: Theme.of(context).primaryIconTheme.color,
+            ),
+            suffixIcon: Icon(Icons.tune,
+                color: Theme.of(context).primaryIconTheme.color),
             onTap: () => _onTapSearchbar(context),
           ),
         ),
@@ -317,9 +336,6 @@ class _HomePageState extends State<HomePage> {
                     fontSize: 22,
                     fontFamily: 'Urbanist')),
             TextButton(
-              style: ButtonStyle(
-                  overlayColor: MaterialStateProperty.all(
-                      Color.fromARGB(255, 238, 234, 234))),
               onPressed: () {
                 Navigator.push(
                     context,
@@ -329,10 +345,11 @@ class _HomePageState extends State<HomePage> {
               },
               child: Text('See all',
                   style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      fontFamily: 'Urbanist',
-                      color: Colors.black)),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    fontFamily: 'Urbanist',
+                    color: Theme.of(context).textTheme.bodyText2!.color,
+                  )),
             )
           ],
         ),
@@ -366,10 +383,11 @@ class _HomePageState extends State<HomePage> {
               },
               child: Text('See all',
                   style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      fontFamily: 'Urbanist',
-                      color: Colors.black)),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    fontFamily: 'Urbanist',
+                    color: Theme.of(context).textTheme.bodyText2!.color,
+                  )),
             )
           ],
         ),

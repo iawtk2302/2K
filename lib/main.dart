@@ -34,50 +34,56 @@ import 'package:sneaker_app/screen/ReviewPage.dart';
 import 'package:sneaker_app/screen/SearchPage.dart';
 import 'package:sneaker_app/screen/SearchResultPage.dart';
 import 'package:sneaker_app/screen/SplashScreen.dart';
+import 'package:sneaker_app/themes/Colors.dart';
 
 import 'bloc/product/product_bloc.dart';
+
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await showFlutterNotification(message);
 }
+
 Future<void> showFlutterNotification(RemoteMessage message) async {
   print(message.data);
-    await AwesomeNotifications().createNotification(
-        content: NotificationContent(
-            
-            id: -1, // -1 is replaced by a random number
-            channelKey: 'alerts',
-            title: message.data['title'],
-            body: message.data['body'],
-            // bigPicture: 'https://storage.googleapis.com/cms-storage-bucket/d406c736e7c4c57f5f61.png',
-            largeIcon: message.data['url'],
-            //'asset://assets/images/balloons-in-sky.jpg',
-            notificationLayout: NotificationLayout.BigPicture,
-            ),
-       );
-  }
+  await AwesomeNotifications().createNotification(
+    content: NotificationContent(
+      id: -1, // -1 is replaced by a random number
+      channelKey: 'alerts',
+      title: message.data['title'],
+      body: message.data['body'],
+      // bigPicture: 'https://storage.googleapis.com/cms-storage-bucket/d406c736e7c4c57f5f61.png',
+      largeIcon: message.data['url'],
+      //'asset://assets/images/balloons-in-sky.jpg',
+      notificationLayout: NotificationLayout.BigPicture,
+    ),
+  );
+}
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   await Firebase.initializeApp();
-  Future<String?> messaging = FirebaseMessaging.instance.getToken().then((value) {print(value);});
+  Future<String?> messaging =
+      FirebaseMessaging.instance.getToken().then((value) {
+    print(value);
+  });
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   await AwesomeNotifications().initialize(
-        null, //'resource://drawable/res_app_icon',//
-        [
-          NotificationChannel(
-              channelKey: 'alerts',
-              channelName: 'Alerts',
-              channelDescription: 'Notification tests as alerts',
-              playSound: true,
-              onlyAlertOnce: true,
-              importance: NotificationImportance.High,
-              defaultPrivacy: NotificationPrivacy.Private,
-              defaultColor: Colors.black,
-              ledColor: Colors.black)
-        ],
-        debug: true);
+      null, //'resource://drawable/res_app_icon',//
+      [
+        NotificationChannel(
+            channelKey: 'alerts',
+            channelName: 'Alerts',
+            channelDescription: 'Notification tests as alerts',
+            playSound: true,
+            onlyAlertOnce: true,
+            importance: NotificationImportance.High,
+            defaultPrivacy: NotificationPrivacy.Private,
+            defaultColor: Colors.black,
+            ledColor: Colors.black)
+      ],
+      debug: true);
   FirebaseMessaging.onMessage.listen(_firebaseMessagingBackgroundHandler);
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -102,15 +108,48 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: const SplashScreen(),
         onGenerateRoute: getRoute,
-        theme: ThemeData(
-          brightness: Brightness.light,
-          fontFamily: "Urbanist",
-          textSelectionTheme: const TextSelectionThemeData(
-            cursorColor: Colors.black,
-            selectionColor: Colors.black,
-            selectionHandleColor: Colors.black,
+        theme: Themes.light,
+        darkTheme: ThemeData(
+          scaffoldBackgroundColor: const Color(0xFF181A20),
+          primarySwatch: const MaterialColor(
+            0xFF181A20,
+            <int, Color>{
+              50: Color(0xFF181A20),
+              100: Color(0xFF181A20),
+              200: Color(0xFF181A20),
+              300: Color(0xFF181A20),
+              350: Color(0xFF181A20),
+              400: Color(0xFF181A20),
+              500: Color(0xFF181A20),
+              600: Color(0xFF181A20),
+              700: Color(0xFF181A20),
+              800: Color(0xFF181A20),
+              850: Color(0xFF181A20),
+              900: Color(0xFF181A20),
+            },
           ),
+          applyElevationOverlayColor: true,
+          backgroundColor: const Color(0xFF35383F),
+          brightness: Brightness.dark,
+          primaryIconTheme: const IconThemeData(color: Colors.white),
+          textTheme: const TextTheme(
+              button: TextStyle(color: Colors.white),
+              bodyText2: TextStyle(color: Colors.white),
+              bodyText1: TextStyle(color: Color(0xFFDEDFDF))),
+          cardColor: const Color(0xFF1F222A),
+          textButtonTheme: TextButtonThemeData(
+            style: ButtonStyle(
+                overlayColor:
+                    MaterialStateProperty.all(const Color(0xFF35383F))),
+          ),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ButtonStyle(
+                  textStyle: MaterialStateProperty.all(
+                      const TextStyle(color: Colors.white)),
+                  backgroundColor:
+                      MaterialStateProperty.all(const Color(0xFF35383F)))),
         ),
+        themeMode: ThemeMode.dark,
       ),
     );
   }
@@ -204,7 +243,10 @@ Route? getRoute(RouteSettings settings) {
       {
         final product = settings.arguments as Product;
         return MaterialPageRoute(
-            builder: (context) => ReviewPage(product: product,), settings: settings);
+            builder: (context) => ReviewPage(
+                  product: product,
+                ),
+            settings: settings);
       }
   }
   return null;

@@ -12,54 +12,51 @@ class OrdersPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: DefaultTabController(
-        length: 3,
-        child: Scaffold(
-          resizeToAvoidBottomInset: false,
-          appBar: AppBar(
-            title: Text(
-              'My orders',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 22,
-                  fontFamily: 'Urbanist'),
-            ),
-            actions: [
-              IconButton(
-                icon: Icon(
-                  Icons.search,
-                  color: Colors.black,
-                ),
-                onPressed: () {},
-              )
-            ],
-            bottom: const TabBar(
-              indicatorColor: Colors.black,
-              labelColor: Colors.black,
-              labelStyle: TextStyle(fontSize: 16),
-              tabs: [
-                Tab(text: 'Active'),
-                Tab(
-                  text: 'Completed',
-                ),
-                Tab(
-                  text: 'Canceled',
-                ),
-              ],
-            ),
-            backgroundColor: Theme.of(context).canvasColor,
-            elevation: 0.5,
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          title: Text(
+            'My orders',
+            style: TextStyle(
+                // color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 22,
+                fontFamily: 'Urbanist'),
           ),
-          body: const TabBarView(
-            children: [
-              OrderActive(),
-              OrderCompleted(),
-              OrderCanceled(),
+          actions: [
+            IconButton(
+              icon: Icon(
+                Icons.search,
+                // color: Colors.black,
+              ),
+              onPressed: () {},
+            )
+          ],
+          bottom: TabBar(
+            indicatorColor: Theme.of(context).textTheme.bodyText2!.color,
+            // labelColor: Colors.black,
+            labelStyle: const TextStyle(fontSize: 16),
+            tabs: const [
+              Tab(text: 'Active'),
+              Tab(
+                text: 'Completed',
+              ),
+              Tab(
+                text: 'Canceled',
+              ),
             ],
           ),
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          elevation: 0.5,
+        ),
+        body: const TabBarView(
+          children: [
+            OrderActive(),
+            OrderCompleted(),
+            OrderCanceled(),
+          ],
         ),
       ),
     );

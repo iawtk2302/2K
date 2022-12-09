@@ -80,7 +80,7 @@ class _ProductDetailState extends State<ProductDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      // backgroundColor: Colors.white,
       // appBar: AppBar(
       //     elevation: 0,
       //     backgroundColor: Theme.of(context).cardColor,
@@ -155,7 +155,10 @@ class _ProductDetailState extends State<ProductDetail> {
                           left: 0,
                           // right: 0,
                           child: IconButton(
-                            icon: Icon(Icons.arrow_back),
+                            icon: Icon(
+                              Icons.arrow_back,
+                              color: Theme.of(context).primaryColor,
+                            ),
                             onPressed: () {
                               Navigator.pop(context, isLiked);
                             },

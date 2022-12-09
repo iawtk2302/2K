@@ -4,15 +4,14 @@ import 'package:sneaker_app/router/routes.dart';
 import '../screen/SearchScreen.dart';
 
 class CustomSearch extends StatelessWidget {
-   CustomSearch({
-    super.key,
-    required this.hintText,
-    required this.prefixIcon,
-    this.suffixIcon,
-    this.onTap,
-    this.controller,
-    this.onSubmitted
-  });
+  CustomSearch(
+      {super.key,
+      required this.hintText,
+      required this.prefixIcon,
+      this.suffixIcon,
+      this.onTap,
+      this.controller,
+      this.onSubmitted});
   final String hintText;
   final Icon prefixIcon;
   final Icon? suffixIcon;
@@ -31,24 +30,30 @@ class CustomSearch extends StatelessWidget {
                 ),
           ),
           child: Material(
-            color: Color(0xFFF5F5F5),
+            color: Theme.of(context).backgroundColor,
             child: TextField(
                 controller: controller,
                 onSubmitted: onSubmitted,
-                onTap:onTap,
+                onTap: onTap,
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
-                  focusColor: Colors.black,
+                  // focusColor: Colors.black,
+
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide(width: 1, color: Colors.black),
+                    borderSide: BorderSide(
+                      width: 1,
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                    ),
                   ),
                   prefixIcon: prefixIcon,
                   suffixIcon: suffixIcon,
                   hintText: hintText,
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(width: 1, color: Colors.white),
+                    borderSide: BorderSide(
+                        width: 1,
+                        color: Theme.of(context).scaffoldBackgroundColor),
                   ),
                 )),
           ),

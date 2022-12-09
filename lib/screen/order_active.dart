@@ -82,25 +82,29 @@ class _OrderActiveState extends State<OrderActive> {
               ],
             );
           else
-            return SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(
-                    listOrder.length,
-                    (index) => RefreshIndicator(
-                          onRefresh: _refreshRandomNumbers,
-                          child: Column(
-                            children: [
-                              ItemOrder(
-                                order: listOrder[index],
-                              ),
-                              SizedBox(
-                                height: 16,
-                              )
-                            ],
-                          ),
-                        )),
+            return Container(
+              padding: EdgeInsets.only(top: 20),
+              color: Theme.of(context).scaffoldBackgroundColor,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(
+                      listOrder.length,
+                      (index) => RefreshIndicator(
+                            onRefresh: _refreshRandomNumbers,
+                            child: Column(
+                              children: [
+                                ItemOrder(
+                                  order: listOrder[index],
+                                ),
+                                SizedBox(
+                                  height: 16,
+                                )
+                              ],
+                            ),
+                          )),
+                ),
               ),
             );
         } else
