@@ -32,7 +32,7 @@ class _OrderItemState extends State<OrderItem> {
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Container(
         decoration: BoxDecoration(
-            color: Colors.white,
+            color: Theme.of(context).cardColor,
             borderRadius: BorderRadius.all(Radius.circular(30))),
         height: 160,
         width: double.infinity,
@@ -97,7 +97,7 @@ class _OrderItemState extends State<OrderItem> {
                             width: 10,
                           ),
                           Material(
-                            color: Color(0xFFF3F3F3),
+                            color: Theme.of(context).backgroundColor,
                             borderRadius: BorderRadius.all(Radius.circular(20)),
                             child: Container(
                               width: 35,

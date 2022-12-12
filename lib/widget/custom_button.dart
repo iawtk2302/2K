@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
+import 'package:sneaker_app/themes/ThemeService.dart';
 
 class CustomElevatedButton extends StatelessWidget {
   const CustomElevatedButton({super.key, required this.text, required this.onTap, this.color, this.colorText});
@@ -11,15 +12,15 @@ class CustomElevatedButton extends StatelessWidget {
   Widget build(BuildContext context) { 
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: color,
+        backgroundColor: ThemeService().theme==ThemeMode.dark?Colors.white:Colors.black,
         elevation: 0,
-        minimumSize: Size(327,50),
+        minimumSize: Size(350,50),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(50))
         )
       ),
       onPressed: onTap,
-      child: Text(text,style: TextStyle(color: colorText, fontSize: 16, fontWeight: FontWeight.w700),),
+      child: Text(text,style: TextStyle(color: ThemeService().theme!=ThemeMode.dark?Colors.white:Colors.black, fontSize: 16, fontWeight: FontWeight.w700),),
     );
   }
 }

@@ -39,13 +39,13 @@ class CustomSearch extends StatelessWidget {
                 decoration: InputDecoration(
                   // focusColor: Colors.black,
 
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide(
-                      width: 1,
-                      color: Theme.of(context).scaffoldBackgroundColor,
-                    ),
-                  ),
+                  // focusedBorder: OutlineInputBorder(
+                  //   borderRadius: BorderRadius.circular(15),
+                  //   borderSide: BorderSide(
+                  //     width: 1,
+                  //     color: Theme.of(context).scaffoldBackgroundColor,
+                  //   ),
+                  // ),
                   prefixIcon: prefixIcon,
                   suffixIcon: suffixIcon,
                   hintText: hintText,

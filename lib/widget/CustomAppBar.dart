@@ -7,15 +7,15 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget{
   @override
   Widget build(BuildContext context) {
     return AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
         leading: InkWell(
           onTap: onTap,
-          child: Icon(Icons.chevron_left,color: Colors.black,size: 26,),
+          child: Icon(Icons.chevron_left,size: 26,),
         ),
         title: Text(
           title,
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
+          style: TextStyle( fontWeight: FontWeight.w600),
         ),
       );
   }

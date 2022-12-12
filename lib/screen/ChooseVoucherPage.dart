@@ -25,7 +25,7 @@ class _ChooseVoucherPageState extends State<ChooseVoucherPage> {
   Widget build(BuildContext context) {
     Size size=MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Color(0xFFFBFBFB),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: CustomAppBar(title: "Voucher",onTap: (){
         BlocProvider.of<OrderBloc>(context).add(ChooseVoucher(null));
         Navigator.pop(context);
@@ -41,7 +41,7 @@ class _ChooseVoucherPageState extends State<ChooseVoucherPage> {
             }
             return SingleChildScrollView(
               child: Container(
-                color: Color(0xFFFBFBFB),
+                // color: Color(0xFFFBFBFB),
                 child: Column(
                   children: [
                     ListView.builder(

@@ -3,6 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sneaker_app/bloc/address/address_bloc.dart';
@@ -35,6 +37,7 @@ import 'package:sneaker_app/screen/SearchPage.dart';
 import 'package:sneaker_app/screen/SearchResultPage.dart';
 import 'package:sneaker_app/screen/SplashScreen.dart';
 import 'package:sneaker_app/themes/Colors.dart';
+import 'package:sneaker_app/themes/ThemeService.dart';
 
 import 'bloc/product/product_bloc.dart';
 
@@ -62,6 +65,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   await Firebase.initializeApp();
+  await GetStorage.init();
   Future<String?> messaging =
       FirebaseMessaging.instance.getToken().then((value) {
     print(value);
@@ -88,8 +92,10 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+  
   @override
   Widget build(BuildContext context) {
+    
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => HomeBloc()..add(LoadHome())),
@@ -103,14 +109,14 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => ListOrderBloc()),
         BlocProvider(create: (context) => ReviewBloc())
       ],
-      child: MaterialApp(
+      child: GetMaterialApp(
         title: '2K',
         debugShowCheckedModeBanner: false,
         home: const SplashScreen(),
         onGenerateRoute: getRoute,
         theme: Themes.light,
         darkTheme: Themes.dark,
-        themeMode: ThemeMode.light,
+        themeMode: ThemeService().theme,
       ),
     );
   }

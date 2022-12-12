@@ -8,6 +8,7 @@ import 'package:sneaker_app/widget/custom_switch_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../bloc/home/user_bloc.dart';
+import '../themes/ThemeService.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -145,7 +146,9 @@ class ProfilePage extends StatelessWidget {
             leftIcon: Icons.dark_mode,
             label: 'Dark Mode',
             rightIcon: Icons.chevron_right,
-            onPress: () {},
+            onPress: () {
+              ThemeService().switchTheme();
+            },
           ),
           ItemProfile(
             leftIcon: Icons.lock_outline,

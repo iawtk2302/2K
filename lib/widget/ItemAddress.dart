@@ -12,7 +12,7 @@ class ItemAddress extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical:8.0),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.circular(20)
         ),
         child: Padding(
@@ -54,7 +54,7 @@ class ItemAddress extends StatelessWidget {
                       padding: const EdgeInsets.only(left:6.0),
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Color(0xFFEDEDED),
+                          color: Theme.of(context).backgroundColor,
                           borderRadius: BorderRadius.circular(6)
                         ),
                         child:address.isDefault==true ? const Padding(

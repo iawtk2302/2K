@@ -23,7 +23,7 @@ class _ChooseAddressPageState extends State<ChooseAddressPage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Color(0xFFFBFBFB),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: CustomAppBar(title: "Shipping Address",onTap: (){
         // BlocProvider.of<OrderBloc>(context).add(ChooseAddress(address!));
         Navigator.pop(context);
@@ -36,7 +36,7 @@ class _ChooseAddressPageState extends State<ChooseAddressPage> {
             address = state.selectedAddress;
             return SingleChildScrollView(
               child: Container(
-                color: Color(0xFFFBFBFB),
+                // color: Color(0xFFFBFBFB),
                 child: Column(
                   children: [
                     ListView.builder(
@@ -82,7 +82,7 @@ class _ChooseAddressPageState extends State<ChooseAddressPage> {
                               .add(ApplyAddress());
                         },
                         color: Colors.black,
-                        colorText: Colors.white,
+                        colorText: Colors.black,
                       ),
                     )
                   ],

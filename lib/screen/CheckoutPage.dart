@@ -6,6 +6,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sneaker_app/model/product_cart.dart';
 import 'package:sneaker_app/router/routes.dart';
+import 'package:sneaker_app/themes/ThemeService.dart';
 import 'package:sneaker_app/widget/ItemAddress.dart';
 import 'package:sneaker_app/widget/Loading.dart';
 import 'package:sneaker_app/widget/OrderItem.dart';
@@ -33,9 +34,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFBFBFB),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
         leading: InkWell(
             onTap: () {
@@ -43,12 +44,11 @@ class _CheckoutPageState extends State<CheckoutPage> {
             },
             child: Icon(
               Icons.chevron_left,
-              color: Colors.black,
             )),
         title: Text(
           "Checkout",
           style: TextStyle(
-              color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold),
+               fontSize: 22, fontWeight: FontWeight.bold),
         ),
       ),
       body: BlocBuilder<OrderBloc, OrderState>(
@@ -144,20 +144,21 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                     hintText: 'Enter Note',
                                     hintStyle: TextStyle(
                                       color: Color(0xFF9F9E9E),
+                                      fontSize: 14
                                     ),
                                   ),
                                 ),
                               ),
                             ),
                             decoration: BoxDecoration(
-                                color: Color(0xFFF9F9FA),
+                                color: Theme.of(context).cardColor,
                                 borderRadius: BorderRadius.circular(16)),
                           ),
                     ),
                     Container(
                         height: 150,
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: Theme.of(context).cardColor,
                           borderRadius: BorderRadius.circular(20)),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 8),
@@ -167,7 +168,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                Text('Amount',style: TextStyle(color: Color(0xFF605F5D), fontWeight: FontWeight.w600),),
+                                Text('Amount',style: TextStyle( fontWeight: FontWeight.w600),),
                                 Text(state.totalProduct.toStringAsFixed(2))
                               ],),
                             ),
@@ -176,7 +177,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                Text('Shipping',style: TextStyle(color: Color(0xFF605F5D), fontWeight: FontWeight.w600),),
+                                Text('Shipping',style: TextStyle( fontWeight: FontWeight.w600),),
                                 Text(state.priceShipping.toStringAsFixed(2))
                               ],),
                             ),
@@ -185,7 +186,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                Text('Promo',style: TextStyle(color: Color(0xFF605F5D), fontWeight: FontWeight.w600),),
+                                Text('Promo',style: TextStyle( fontWeight: FontWeight.w600),),
                                 Text("-"+state.priceVoucher.toStringAsFixed(2))
                               ],),
                             ):Container(),
@@ -195,7 +196,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                Text('Total',style: TextStyle(color: Color(0xFF605F5D), fontWeight: FontWeight.w600),),
+                                Text('Total',style: TextStyle( fontWeight: FontWeight.w600),),
                                 Text(state.total.toStringAsFixed(2))
                               ],),
                             ),
@@ -207,7 +208,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         child: Center(
                           child: CustomElevatedButton(text: "Payment", onTap: (){
                             BlocProvider.of<OrderBloc>(context).add(CreateOrder(_note.text,context));
-                          },color: Colors.black,),
+                          },colorText: ThemeService().theme==ThemeMode.dark?Colors.black:Colors.white,),
                         ),
                       ),
                   ]),
@@ -281,7 +282,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
         child: Container(
           height: 70,
           decoration: BoxDecoration(
-              color: Colors.white, borderRadius: BorderRadius.circular(20)),
+              color: Theme.of(context).cardColor, borderRadius: BorderRadius.circular(20)),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             child: Row(
@@ -294,7 +295,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       SizedBox(width: 10),
                       Text("Choose voucher",
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 18))
+                              fontWeight: FontWeight.w500, fontSize: 16))
                     ],
                   ),
                   Icon(
@@ -309,7 +310,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
   return Container(
     height: 55,
     decoration: BoxDecoration(
-      color: Colors.black,
+      color: Theme.of(context).cardColor,
       borderRadius: BorderRadius.circular(20)
     ),
     child: Padding(

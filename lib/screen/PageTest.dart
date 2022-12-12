@@ -41,17 +41,19 @@ class _PageTest extends State<PageTest> {
   }
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
-      backgroundColor: Colors.white,
+      // backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
+        
         elevation: 0,
-        backgroundColor: Colors.white,
-        leading: IconButton(icon: Icon(Icons.chevron_left,color: Colors.black,),onPressed: (){Navigator.pop(context);},),
-        title: Center(child: Text(widget.searchText,style: TextStyle(color: Colors.black),)),
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        leading: IconButton(icon: Icon(Icons.chevron_left),onPressed: (){Navigator.pop(context);},),
+        title: Center(child: Text(widget.searchText,style: TextStyle(color: Theme.of(context).textTheme.bodyText2!.color),)),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16),
-            child: IconButton(icon: Icon(Icons.tune,color: Colors.black,),onPressed: _showBottomSheetFilter),
+            child: IconButton(icon: Icon(Icons.tune,),onPressed: _showBottomSheetFilter),
           )
         ],
       ),
@@ -121,7 +123,7 @@ class _PageTest extends State<PageTest> {
         return Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.only(topLeft: Radius.circular(40),topRight: Radius.circular(40)),
-          color: Colors.white
+          color: Theme.of(context).primaryColor
         ),
         height: size.height*0.72,
         child: Column(children: [
@@ -164,7 +166,7 @@ class _PageTest extends State<PageTest> {
                   onTap: (){state(() {
                     currentCategory=index;
                   });},
-                  child: FilerItem(name: searchLoaded!.listBrand[index], isChoose: currentCategory, index: index));
+                  child: FilerItemDark(name: searchLoaded!.listBrand[index], isChoose: currentCategory, index: index));
               },),
             ),
               ],
@@ -189,7 +191,7 @@ class _PageTest extends State<PageTest> {
                   onTap: (){state(() {
                     currentGender=index;
                   });},
-                  child: FilerItem(name: searchLoaded!.listGender[index], isChoose: currentGender, index: index));
+                  child: FilerItemDark(name: searchLoaded!.listGender[index], isChoose: currentGender, index: index));
               },),
             ),
               ],
@@ -209,8 +211,8 @@ class _PageTest extends State<PageTest> {
               min: 0,
               max: 1500,
               divisions: 10,
-              activeColor: Colors.black,
-              inactiveColor: Color(0xFFE6E6E6),
+              activeColor:  Brightness.dark==Brightness.dark?Colors.white:Colors.black,
+              inactiveColor: Brightness.dark==Brightness.dark?Color(0xFF35383F):Color(0xFFE6E6E6),
               labels: rangeLabels,
               onChanged: (value) {
                 state(() {
@@ -235,7 +237,7 @@ class _PageTest extends State<PageTest> {
                   onTap: (){state(() {
                     currentSort=index;
                   });},
-                  child: FilerItem(name: searchLoaded!.listSort[index], isChoose: currentSort, index: index));
+                  child: FilerItemDark(name: searchLoaded!.listSort[index], isChoose: currentSort, index: index));
               },),
             ),
               ],
@@ -339,8 +341,8 @@ class FilerItem extends StatelessWidget {
         margin: EdgeInsets.only(right: 8),
         alignment: Alignment.center,
         decoration: BoxDecoration(
-            border: Border.all(color: Colors.black, width: 1.9),
-            color: isChoose == index ? Colors.black : Colors.white,
+            border: Border.all(color: Theme.of(context).cardColor, width: 1.9),
+            color: isChoose == index ? Theme.of(context).cardColor: Theme.of(context).backgroundColor,
             borderRadius: BorderRadius.all(Radius.circular(20))),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 18),
@@ -348,6 +350,38 @@ class FilerItem extends StatelessWidget {
             name,
             style: TextStyle(
                 color: isChoose == index ? Colors.white : Colors.black,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Urbanist',
+                fontSize: 16),
+          ),
+        ));
+  }
+}
+class FilerItemDark extends StatelessWidget {
+  const FilerItemDark({
+    Key? key,
+    required this.name,
+    required this.isChoose,
+    required this.index,
+  }) : super(key: key);
+  final String name;
+  final int isChoose;
+  final int index;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        margin: EdgeInsets.only(right: 8),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+            border: Border.all(color: Color(0xFF35383F), width: 1.5),
+            color: isChoose == index ? Color(0xFF35383F): Theme.of(context).primaryColor,
+            borderRadius: BorderRadius.all(Radius.circular(20))),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 18),
+          child: Text(
+            name,
+            style: TextStyle(
+                color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Urbanist',
                 fontSize: 16),

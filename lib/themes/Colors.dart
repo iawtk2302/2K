@@ -25,10 +25,10 @@ class Themes {
     applyElevationOverlayColor: true,
     backgroundColor: const Color(0xFF35383F),
     brightness: Brightness.dark,
-    primaryIconTheme: const IconThemeData(color: Colors.white),
+    primaryIconTheme: const IconThemeData(color: Color(0xFFFBFBFB)),
     textTheme: const TextTheme(
-        button: TextStyle(color: Colors.white),
-        bodyText2: TextStyle(color: Colors.white),
+        button: TextStyle(color: Color(0xFFFBFBFB)),
+        bodyText2: TextStyle(color: Color(0xFFFBFBFB)),
         bodyText1: TextStyle(color: Color(0xFFDEDFDF))),
     cardColor: const Color(0xFF1F222A),
     textButtonTheme: TextButtonThemeData(
