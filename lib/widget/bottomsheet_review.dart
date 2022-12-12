@@ -62,7 +62,7 @@ class BottomSheetReviewState extends State<BottomSheetReview> {
         height:
             WidgetsBinding.instance.window.viewInsets.bottom <= 0.0 ? 550 : 500,
         decoration: const BoxDecoration(
-            color: Colors.white,
+            // color: Colors.white,
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(20), topRight: Radius.circular(20))),
         child: Padding(
@@ -194,44 +194,48 @@ class BottomSheetReviewState extends State<BottomSheetReview> {
                           width: MediaQuery.of(context).size.width / 3 + 20,
                           child: BlocBuilder<UserBloc, UserState>(
                             builder: (context, state) {
-                              if(state is UserLoading) {
+                              if (state is UserLoading) {
                                 return Container();
-                              }
-                              else if (state is UserExist) {
+                              } else if (state is UserExist) {
                                 return CustomTextButton(
-                                onPressed: () async {
-                                  if (review == null) {
-                                    final docReview = FirebaseFirestore.instance
-                                        .collection('Review');
-                                    docReview.add({
-                                      'idProduct':
-                                          widget.productCart.product!.idProduct,
-                                      'star': starNumber,
-                                      'content': _controller.text,
-                                      'idUser': FirebaseAuth
-                                          .instance.currentUser!.uid,
-                                      'fullName': state.user.firstName.toString() + ' ' + state.user.lastName.toString(),
-                                      'image': state.user.image,
-                                      'dateCreated': DateTime.now(),
-                                    }).then((value) => docReview
-                                        .doc(value.id)
-                                        .update({'idReview': value.id}));
-                                  } else {
-                                    final docReview = FirebaseFirestore.instance
-                                        .collection('Review');
-                                    docReview.doc(review!.idReview).update({
-                                      'star': starNumber,
-                                      'content': _controller.text,
-                                    });
-                                  }
-                                },
-                                text: 'Submit',
-                                hasLeftIcon: false,
-                                isDark: true,
-                                hasRightIcon: false,
-                              );
-                              }
-                              else return Container();
+                                  onPressed: () async {
+                                    if (review == null) {
+                                      final docReview = FirebaseFirestore
+                                          .instance
+                                          .collection('Review');
+                                      docReview.add({
+                                        'idProduct': widget
+                                            .productCart.product!.idProduct,
+                                        'star': starNumber,
+                                        'content': _controller.text,
+                                        'idUser': FirebaseAuth
+                                            .instance.currentUser!.uid,
+                                        'fullName':
+                                            state.user.firstName.toString() +
+                                                ' ' +
+                                                state.user.lastName.toString(),
+                                        'image': state.user.image,
+                                        'dateCreated': DateTime.now(),
+                                      }).then((value) => docReview
+                                          .doc(value.id)
+                                          .update({'idReview': value.id}));
+                                    } else {
+                                      final docReview = FirebaseFirestore
+                                          .instance
+                                          .collection('Review');
+                                      docReview.doc(review!.idReview).update({
+                                        'star': starNumber,
+                                        'content': _controller.text,
+                                      });
+                                    }
+                                  },
+                                  text: 'Submit',
+                                  hasLeftIcon: false,
+                                  isDark: true,
+                                  hasRightIcon: false,
+                                );
+                              } else
+                                return Container();
                             },
                           )),
                     ],

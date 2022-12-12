@@ -18,13 +18,13 @@ class _SpecialOfferState extends State<SpecialOffer> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          iconTheme: IconThemeData(color: Colors.black),
-          backgroundColor: Theme.of(context).canvasColor,
+          // iconTheme: IconThemeData(color: Colors.black),
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           elevation: 0,
           title: Text(
             'Special Offers',
             style: TextStyle(
-                color: Colors.black,
+                // color: Colors.black,
                 fontWeight: FontWeight.w600,
                 fontFamily: 'Urbanist'),
           )),

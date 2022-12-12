@@ -96,8 +96,8 @@ class Item_Product_TrackOrder extends StatelessWidget {
                           if (!isInModal && order.state == 'completed')
                             ElevatedButton(
                                 style: ButtonStyle(
-                                    backgroundColor:
-                                        MaterialStateProperty.all(Colors.black),
+                                    // backgroundColor:
+                                    //     MaterialStateProperty.all(Colors.black),
                                     shape: MaterialStateProperty.all<
                                             RoundedRectangleBorder>(
                                         RoundedRectangleBorder(
@@ -138,6 +138,10 @@ class Item_Product_TrackOrder extends StatelessWidget {
                                   style: TextStyle(
                                     fontFamily: 'Urbanist',
                                     fontWeight: FontWeight.w600,
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .button!
+                                        .color,
                                   ),
                                 ))
                           // Material(
