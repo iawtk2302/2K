@@ -19,11 +19,11 @@ class BottomSheet_Sort_Filter extends StatefulWidget {
 }
 
 class _BottomSheet_Sort_FilterState extends State<BottomSheet_Sort_Filter> {
-  SortBy? _character = SortBy.featured;
+  SortBy? _character = SortBy.none;
   Map<String, bool> isChecked = {
     "Men": false,
     "Women": false,
-    "Unisex": false,
+    // "Unisex": false,
   };
   @override
   void initState() {
@@ -46,7 +46,7 @@ class _BottomSheet_Sort_FilterState extends State<BottomSheet_Sort_Filter> {
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20))),
-            height: 500,
+            height: 400,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Stack(children: [
@@ -80,36 +80,36 @@ class _BottomSheet_Sort_FilterState extends State<BottomSheet_Sort_Filter> {
                   const SizedBox(
                     height: 10,
                   ),
-                  SizedBox(
-                    height: 35,
-                    child: RadioListTile<SortBy>(
-                      activeColor: Theme.of(context).primaryIconTheme.color,
-                      title: const Text('Featured'),
-                      value: SortBy.featured,
-                      groupValue: _character,
-                      contentPadding: const EdgeInsets.all(0),
-                      onChanged: (SortBy? value) {
-                        setState(() {
-                          _character = value;
-                        });
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    height: 35,
-                    child: RadioListTile<SortBy>(
-                      activeColor: Theme.of(context).primaryIconTheme.color,
-                      title: const Text('Newest'),
-                      value: SortBy.newest,
-                      groupValue: _character,
-                      contentPadding: const EdgeInsets.all(0),
-                      onChanged: (SortBy? value) {
-                        setState(() {
-                          _character = value;
-                        });
-                      },
-                    ),
-                  ),
+                  // SizedBox(
+                  //   height: 35,
+                  //   child: RadioListTile<SortBy>(
+                  //     activeColor: Theme.of(context).primaryIconTheme.color,
+                  //     title: const Text('Featured'),
+                  //     value: SortBy.featured,
+                  //     groupValue: _character,
+                  //     contentPadding: const EdgeInsets.all(0),
+                  //     onChanged: (SortBy? value) {
+                  //       setState(() {
+                  //         _character = value;
+                  //       });
+                  //     },
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   height: 35,
+                  //   child: RadioListTile<SortBy>(
+                  //     activeColor: Theme.of(context).primaryIconTheme.color,
+                  //     title: const Text('Newest'),
+                  //     value: SortBy.newest,
+                  //     groupValue: _character,
+                  //     contentPadding: const EdgeInsets.all(0),
+                  //     onChanged: (SortBy? value) {
+                  //       setState(() {
+                  //         _character = value;
+                  //       });
+                  //     },
+                  //   ),
+                  // ),
                   SizedBox(
                     height: 35,
                     child: RadioListTile<SortBy>(
@@ -205,29 +205,29 @@ class _BottomSheet_Sort_FilterState extends State<BottomSheet_Sort_Filter> {
                       ],
                     ),
                   ),
-                  SizedBox(
-                    height: 30,
-                    child: Row(
-                      children: [
-                        Checkbox(
-                          checkColor: Theme.of(context).primaryColor,
-                          activeColor: Theme.of(context).primaryColor,
-                          fillColor: MaterialStateProperty.all(
-                              Theme.of(context).primaryIconTheme.color),
-                          value: isChecked['Unisex'],
-                          onChanged: (bool? value) {
-                            setState(() {
-                              isChecked['Unisex'] = value!;
-                            });
-                          },
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text('Unisex')
-                      ],
-                    ),
-                  ),
+                  // SizedBox(
+                  //   height: 30,
+                  //   child: Row(
+                  //     children: [
+                  //       Checkbox(
+                  //         checkColor: Theme.of(context).primaryColor,
+                  //         activeColor: Theme.of(context).primaryColor,
+                  //         fillColor: MaterialStateProperty.all(
+                  //             Theme.of(context).primaryIconTheme.color),
+                  //         value: isChecked['Unisex'],
+                  //         onChanged: (bool? value) {
+                  //           setState(() {
+                  //             isChecked['Unisex'] = value!;
+                  //           });
+                  //         },
+                  //       ),
+                  //       SizedBox(
+                  //         width: 10,
+                  //       ),
+                  //       Text('Unisex')
+                  //     ],
+                  //   ),
+                  // ),
                 ]),
                 Positioned(
                   bottom: 0,

@@ -19,7 +19,7 @@ class LoadProduct extends ProductEvent {
       required this.context,
       required this.idBrand});
   @override
-  List<Object> get props => [idBrand, context];
+  List<Object> get props => [idBrand, context, sortBy, gender];
 }
 
 class ReLoadProduct extends ProductEvent {
@@ -35,7 +35,7 @@ class ReLoadProduct extends ProductEvent {
       required this.context,
       required this.idCategory});
   @override
-  List<Object> get props => [idCategory];
+  List<Object> get props => [idCategory, context, listCategory, sortBy, gender];
 }
 
 class ReactProduct extends ProductEvent {
@@ -63,5 +63,6 @@ class Sort_Filter_Product extends ProductEvent {
     required this.gender,
   });
   @override
-  List<Object> get props => [sortBy, gender];
+  List<Object> get props =>
+      [sortBy, gender, context, listProduct, listCategory];
 }

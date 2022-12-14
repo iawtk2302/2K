@@ -166,7 +166,7 @@ class ProfilePage extends StatelessWidget {
             rightIcon: Icons.chevron_right,
             onPress: () async {
               final Uri _url = Uri.parse(
-                  'https://agreementservice.svs.nike.com/gb/en_gb/rest/agreement?agreementType=privacyPolicy&uxId=com.nike.unite&country=GB&language=en&requestType=redirect  ');
+                  'https://agreementservice.svs.nike.com/gb/en_gb/rest/agreement?agreementType=privacyPolicy&uxId=com.nike.unite&country=GB&language=en&requestType=redirect');
               if (!await launchUrl(_url)) {
                 throw 'Could not launch $_url';
               }

@@ -38,7 +38,7 @@ class _ItemProductWithoutAnimState extends State<ItemProductWithoutAnim> {
       // height: 275,
       child: Column(children: [
         Expanded(
-          flex: 2,
+          flex: 4,
           child: Stack(children: [
             Container(
               // decoration: const BoxDecoration(color: Color(0xFFF3F3F3)),

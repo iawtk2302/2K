@@ -129,13 +129,23 @@ class _SearchPageState extends State<SearchPage> {
                     },
                   ),
                 ),
-                InkWell(
-                  onTap: () {
-                    Navigator.of(context).pop();
-                  },
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8.0),
                   child: Container(
                     decoration: BoxDecoration(),
-                    child: Center(child: Text("Back")),
+                    child: Center(child: RawMaterialButton(
+  onPressed: () {
+    Navigator.pop(context);
+  },
+  elevation: 2.0,
+  fillColor: Theme.of(context).cardColor,
+  child: Icon(
+    Icons.close,
+    size: 35.0,
+  ),
+  padding: EdgeInsets.all(12.0),
+  shape: CircleBorder(),
+)),
                   ),
                 )
               ]),

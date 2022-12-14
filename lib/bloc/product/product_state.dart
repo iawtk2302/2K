@@ -6,7 +6,7 @@ abstract class ProductState extends Equatable {
   List<Object> get props => [];
 }
 
-enum SortBy { featured, newest, lowHigh, highLow }
+enum SortBy { none, lowHigh, highLow }
 
 class ProductLoading extends ProductState {}
 
@@ -24,5 +24,5 @@ class ProductLoaded extends ProductState {
   //
 
   @override
-  List<Object> get props => [listProduct, listCategory];
+  List<Object> get props => [listProduct, listCategory, sortBy, gender];
 }
