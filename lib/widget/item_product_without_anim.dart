@@ -38,7 +38,7 @@ class _ItemProductWithoutAnimState extends State<ItemProductWithoutAnim> {
       // height: 275,
       child: Column(children: [
         Expanded(
-          flex: 2,
+          flex: 4,
           child: Stack(children: [
             Container(
               // decoration: const BoxDecoration(color: Color(0xFFF3F3F3)),
@@ -99,34 +99,34 @@ class _ItemProductWithoutAnimState extends State<ItemProductWithoutAnim> {
                 ),
               ),
               // const Spacer(),
-              Expanded(
-                child: Row(
-                  children: [
-                    const Icon(
-                      Icons.star,
-                      size: 20,
-                    ),
-                    const Spacer(),
-                    const Text(
-                      '4.5 |',
-                      style: TextStyle(fontSize: 12),
-                    ),
-                    const Spacer(),
-                    Container(
-                      decoration: const BoxDecoration(
-                          color: Color(0xFFECEDEC),
-                          borderRadius: BorderRadius.all(Radius.circular(10))),
-                      child: const Padding(
-                        padding: EdgeInsets.all(6.0),
-                        child: Text(
-                          '7.483 sold',
-                          style: TextStyle(fontSize: 12),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
+              // Expanded(
+              //   child: Row(
+              //     children: [
+              //       const Icon(
+              //         Icons.star,
+              //         size: 20,
+              //       ),
+              //       const Spacer(),
+              //       const Text(
+              //         '4.5 |',
+              //         style: TextStyle(fontSize: 12),
+              //       ),
+              //       const Spacer(),
+              //       Container(
+              //         decoration: const BoxDecoration(
+              //             color: Color(0xFFECEDEC),
+              //             borderRadius: BorderRadius.all(Radius.circular(10))),
+              //         child: const Padding(
+              //           padding: EdgeInsets.all(6.0),
+              //           child: Text(
+              //             '7.483 sold',
+              //             style: TextStyle(fontSize: 12),
+              //           ),
+              //         ),
+              //       )
+              //     ],
+              //   ),
+              // ),
               // const Spacer(),
               Expanded(
                 child: Align(

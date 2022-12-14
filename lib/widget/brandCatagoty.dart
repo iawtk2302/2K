@@ -22,7 +22,7 @@ class BrandCatagory extends StatelessWidget {
                   idBrand: brand.id!,
                   context: context,
                   gender: ["Women", "Men"],
-                  sortBy: SortBy.featured));
+                  sortBy: SortBy.none));
               Navigator.push(
                   context,
                   MaterialPageRoute(

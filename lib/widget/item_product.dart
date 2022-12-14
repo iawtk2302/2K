@@ -86,7 +86,7 @@ class _ItemProductState extends State<ItemProduct> {
                 // height: 275,
                 child: Column(children: [
                   Expanded(
-                    flex: 2,
+                    flex: 4,
                     child: Stack(children: [
                       Container(
                         // decoration: const BoxDecoration(color: Color(0xFFF3F3F3)),
@@ -142,6 +142,9 @@ class _ItemProductState extends State<ItemProduct> {
                       )
                     ]),
                   ),
+                  // SizedBox(
+                  //   height: 10,
+                  // ),
                   SizedBox(
                     height: 10,
                   ),

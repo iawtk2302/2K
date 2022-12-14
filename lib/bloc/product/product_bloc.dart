@@ -91,7 +91,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
                 }));
       }
 
-      print(event.gender);
+      // print(event.gender);
 
       List<Product> rsListProduct = [];
 
@@ -101,8 +101,13 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
           rsListProduct.add(element);
         }
       });
+      if (event.sortBy == SortBy.lowHigh) {
+        rsListProduct.sort(((a, b) => a.price!.compareTo(b.price!)));
+      } else if (event.sortBy == SortBy.highLow) {
+        rsListProduct.sort(((a, b) => b.price!.compareTo(a.price!)));
+      } else {}
 
-      // print(event.sortBy);
+      print(event.sortBy);
       emit(ProductLoaded(
           gender: event.gender,
           listCategory: event.listCategory,

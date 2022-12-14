@@ -162,7 +162,7 @@ class _HomePageState extends State<HomePage> {
               if (state is HomeLoading) {
                 return HomeLoad();
               } else if (state is HomeLoaded) {
-                return HomeLoadCompleted(state);
+                return homeLoadCompleted(state);
               } else {
                 return const Scaffold();
               }
@@ -307,7 +307,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Padding HomeLoadCompleted(HomeLoaded state) {
+  Padding homeLoadCompleted(HomeLoaded state) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(mainAxisSize: MainAxisSize.min, children: [
@@ -430,9 +430,9 @@ class _HomePageState extends State<HomePage> {
                 child: GridView.count(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    mainAxisSpacing: 20,
-                    childAspectRatio: 0.65,
-                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 25,
+                    childAspectRatio: 0.8,
+                    crossAxisSpacing: 15,
                     crossAxisCount: 2,
                     children: state.listProduct
                         .map((e) => ItemProductWithoutAnim(
