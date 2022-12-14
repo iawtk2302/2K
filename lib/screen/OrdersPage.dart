@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sneaker_app/router/routes.dart';
 import 'package:sneaker_app/screen/order_active.dart';
@@ -15,8 +16,18 @@ class OrdersPage extends StatelessWidget {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
+        
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
+          systemOverlayStyle: SystemUiOverlayStyle(
+            // Status bar color
+            statusBarColor: Theme.of(context).scaffoldBackgroundColor,
+
+            // Status bar brightness (optional)
+            statusBarIconBrightness:
+                Brightness.dark, // For Android (dark icons)
+            statusBarBrightness: Brightness.light, // For iOS (dark icons)
+          ),
           title: Text(
             'My orders',
             style: TextStyle(

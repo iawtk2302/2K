@@ -11,18 +11,18 @@ class CustomSwitchButton extends StatefulWidget {
 }
 
 class _CustomSwitchButtonState extends State<CustomSwitchButton> {
-  bool light = true;
+  bool light = ThemeService().theme==ThemeMode.light;
   @override
   Widget build(BuildContext context) {
     return Switch(
       // This bool value toggles the switch.
-      value: light,
+      value: !light,
       activeColor: Colors.white,
       onChanged: (bool value) {
         ThemeService().switchTheme();
         // This is called when the user toggles the switch.
         setState(() {
-          light = value;
+          light = !value;
         });
       },
     );
