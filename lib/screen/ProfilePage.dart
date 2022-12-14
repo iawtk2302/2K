@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sneaker_app/router/routes.dart';
 import 'package:sneaker_app/screen/edit_profile.dart';
@@ -17,6 +18,15 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        systemOverlayStyle: SystemUiOverlayStyle(
+            // Status bar color
+            statusBarColor: Theme.of(context).scaffoldBackgroundColor,
+
+            // Status bar brightness (optional)
+            statusBarIconBrightness:
+                Brightness.dark, // For Android (dark icons)
+            statusBarBrightness: Brightness.light, // For iOS (dark icons)
+          ),
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           elevation: 0,
           title: const Text(
