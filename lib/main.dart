@@ -37,6 +37,7 @@ import 'package:sneaker_app/screen/SearchPage.dart';
 import 'package:sneaker_app/screen/SearchResultPage.dart';
 import 'package:sneaker_app/screen/SplashScreen.dart';
 import 'package:sneaker_app/themes/Colors.dart';
+import 'package:sneaker_app/themes/LanguageService.dart';
 import 'package:sneaker_app/themes/ThemeService.dart';
 
 import 'bloc/product/product_bloc.dart';
@@ -63,6 +64,7 @@ Future<void> showFlutterNotification(RemoteMessage message) async {
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // await EasyLocalization.ensureInitialized();
   await Hive.initFlutter();
   await Firebase.initializeApp();
   await GetStorage.init();
@@ -87,7 +89,9 @@ Future<void> main() async {
       ],
       debug: true);
   FirebaseMessaging.onMessage.listen(_firebaseMessagingBackgroundHandler);
-  runApp(const MyApp());
+  runApp(
+    const MyApp()
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -110,6 +114,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => ReviewBloc())
       ],
       child: GetMaterialApp(
+        
+        translations: LocalizationService(),
+        locale: LocalizationService().locale,
         title: '2K',
         debugShowCheckedModeBanner: false,
         home: const SplashScreen(),

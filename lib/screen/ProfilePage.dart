@@ -1,10 +1,13 @@
+// import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:sneaker_app/router/routes.dart';
 import 'package:sneaker_app/screen/edit_profile.dart';
 import 'package:sneaker_app/screen/help_center.dart';
 import 'package:sneaker_app/service/FirebaseService.dart';
+import 'package:sneaker_app/themes/LanguageService.dart';
 import 'package:sneaker_app/widget/custom_switch_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -148,9 +151,11 @@ class ProfilePage extends StatelessWidget {
           ),
           ItemProfile(
             leftIcon: Icons.language,
-            label: 'Language',
+            label: 'hello'.tr,
             rightIcon: Icons.chevron_right,
-            onPress: () {},
+            onPress: () {
+             LocalizationService().switchLang();
+            },
           ),
           ItemProfile(
             leftIcon: Icons.dark_mode,
