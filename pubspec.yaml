@@ -65,6 +65,7 @@ dependencies:
   expandable: ^5.0.1
   get: ^4.6.5
   get_storage: ^2.0.3
+  pin_code_fields: ^7.4.0
 
 dev_dependencies:
   flutter_test:

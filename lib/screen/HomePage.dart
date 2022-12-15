@@ -8,6 +8,7 @@ import 'package:ionicons/ionicons.dart';
 import 'package:sneaker_app/router/routes.dart';
 import 'package:sneaker_app/screen/FillProfilePage.dart';
 import 'package:sneaker_app/screen/NotificationPage.dart';
+import 'package:sneaker_app/screen/set_fingerprint.dart';
 import 'package:sneaker_app/widget/Loading.dart';
 
 import '../bloc/home/home_bloc.dart';
@@ -19,6 +20,7 @@ import '../widget/custom_searchbar.dart';
 import '../widget/item_SpecialOffer.dart';
 import 'SearchScreen.dart';
 import 'SpecialOffer.dart';
+import 'create_pin_code.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -147,7 +149,13 @@ class _HomePageState extends State<HomePage> {
             ),
             IconButton(
               splashRadius: 10,
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SetFingerPrint(),
+                    ));
+              },
               icon: Icon(
                 Ionicons.heart_outline,
                 size: 25,

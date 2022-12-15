@@ -23,7 +23,7 @@ class Item_Product_TrackOrder extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: Theme.of(context).cardColor,
-          borderRadius: BorderRadius.all(Radius.circular(15)),
+          borderRadius: const BorderRadius.all(Radius.circular(15)),
         ),
         height: 140,
         width: double.infinity,
@@ -31,7 +31,7 @@ class Item_Product_TrackOrder extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 20),
           child: Row(children: [
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   // borderRadius: BorderRadius.all(Radius.circular(30)),
                   ),
               child: ClipRRect(
@@ -40,7 +40,7 @@ class Item_Product_TrackOrder extends StatelessWidget {
                     fit: BoxFit.cover, imageUrl: product.product!.image![0]),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 15,
             ),
             Expanded(
@@ -54,7 +54,7 @@ class Item_Product_TrackOrder extends StatelessWidget {
                           product.product!.name!,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontFamily: 'Urbanist',
                               fontWeight: FontWeight.bold,
                               fontSize: 16),
@@ -66,13 +66,13 @@ class Item_Product_TrackOrder extends StatelessWidget {
                         children: [
                           Text(
                             'Size = ' + '${product.size}',
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontFamily: 'Urbanist',
                                 fontWeight: FontWeight.w500),
                           ),
                           Text(
                             ' | Qty = ' + '${product.amount}',
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontFamily: 'Urbanist',
                                 fontWeight: FontWeight.w500),
                           ),
@@ -124,10 +124,10 @@ class Item_Product_TrackOrder extends StatelessWidget {
                                   showModalBottomSheet(
                                       context: context,
                                       isScrollControlled: true,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20.0),
-                                      ),
+                                      shape: const RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(20),
+                                              topRight: Radius.circular(20))),
                                       builder: ((context) => BottomSheetReview(
                                             order: order,
                                             productCart: product,

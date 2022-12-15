@@ -28,8 +28,8 @@ class Themes {
     primaryIconTheme: const IconThemeData(color: Color(0xFFFBFBFB)),
     textTheme: const TextTheme(
         button: TextStyle(color: Color(0xFFFBFBFB)),
-        bodyText2: TextStyle(color: Color(0xFFFBFBFB)),
-        bodyText1: TextStyle(color: Color(0xFFDEDFDF))),
+        bodyText2: TextStyle(color: Color(0xFFFBFBFB), fontFamily: 'Urbanist'),
+        bodyText1: TextStyle(color: Color(0xFFDEDFDF), fontFamily: 'Urbanist')),
     cardColor: const Color(0xFF1F222A),
     textButtonTheme: TextButtonThemeData(
       style: ButtonStyle(
@@ -66,8 +66,9 @@ class Themes {
       primaryIconTheme: const IconThemeData(color: Colors.black),
       textTheme: const TextTheme(
           button: TextStyle(color: Colors.white),
-          bodyText2: TextStyle(color: Colors.black),
-          bodyText1: TextStyle(color: Color(0xFF9f9f9f))),
+          bodyText2: TextStyle(color: Colors.black, fontFamily: 'Urbanist'),
+          bodyText1:
+              TextStyle(color: Color(0xFF9f9f9f), fontFamily: 'Urbanist')),
       backgroundColor: const Color(0xFFECECEC),
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
