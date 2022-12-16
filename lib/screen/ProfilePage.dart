@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:sneaker_app/router/routes.dart';
 import 'package:sneaker_app/screen/edit_profile.dart';
 import 'package:sneaker_app/screen/help_center.dart';
+import 'package:sneaker_app/screen/security.dart';
 import 'package:sneaker_app/service/FirebaseService.dart';
 import 'package:sneaker_app/themes/LanguageService.dart';
 import 'package:sneaker_app/widget/custom_switch_button.dart';
@@ -21,7 +22,7 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        systemOverlayStyle: SystemUiOverlayStyle(
+          systemOverlayStyle: SystemUiOverlayStyle(
             // Status bar color
             statusBarColor: Theme.of(context).scaffoldBackgroundColor,
 
@@ -150,11 +151,20 @@ class ProfilePage extends StatelessWidget {
             },
           ),
           ItemProfile(
+            leftIcon: Icons.security,
+            label: 'Security',
+            rightIcon: Icons.chevron_right,
+            onPress: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: ((context) => const Security())));
+            },
+          ),
+          ItemProfile(
             leftIcon: Icons.language,
             label: 'hello'.tr,
             rightIcon: Icons.chevron_right,
             onPress: () {
-             LocalizationService().switchLang();
+              LocalizationService().switchLang();
             },
           ),
           ItemProfile(

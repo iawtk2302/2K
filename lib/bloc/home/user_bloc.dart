@@ -29,17 +29,43 @@ class UserBloc extends Bloc<UserEvent, UserState> {
             gender: value.get('gender').toString(),
             phone: value.get('phone').toString(),
             email: value.get('email').toString(),
+            pin: value.get('pin'),
             dateOfbirth: value.get('dateOfbirth').toString(),
           );
-          emit(UserExist(user));
+          if (user.pin != null) {
+            print(user.pin);
+            emit(UserExist(user));
+          } else {
+            emit(UserExistExceptPinCode(user: user));
+          }
+          // emit(UserExist(user));
         } else {
-          emit(UserNotExist());
+          emit(const UserNotExist());
         }
       });
     });
-    on<SubmitInfoUser>((event, emit) {
+    on<SubmitInfoUser>((event, emit) async {
       emit(UserLoading());
-      emit(UserExist(event.user));
+      if (event.user.pin != null) {
+        await FirebaseFirestore.instance
+            .collection('User')
+            .doc(event.user.idUser)
+            .update({
+          'pin': event.user.pin,
+        }).then((value) => emit(UserExist(event.user)));
+      } else {
+        emit(UserExistExceptPinCode(user: event.user));
+      }
+    });
+    on<UpdatePinUser>((event, emit) async {
+      if (event.user.pin != null || event.user.pin == '') {
+        await FirebaseFirestore.instance
+            .collection('User')
+            .doc(event.user.idUser)
+            .update({
+          'pin': event.user.pin,
+        }).then((value) => emit(UserExist(event.user)));
+      }
     });
   }
 }

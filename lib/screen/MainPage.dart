@@ -5,6 +5,7 @@ import 'package:sneaker_app/screen/FillProfilePage.dart';
 import 'package:sneaker_app/screen/HomePage.dart';
 import 'package:sneaker_app/screen/OrdersPage.dart';
 import 'package:sneaker_app/screen/ProfilePage.dart';
+import 'package:sneaker_app/screen/enter_pin_code.dart';
 
 import '../bloc/home/user_bloc.dart';
 import '../widget/Loading.dart';
@@ -22,7 +23,10 @@ class _MainPageState extends State<MainPage> {
     const CartPage(),
     const OrdersPage(),
     const ProfilePage(),
-    const FillProfilePage()
+    const FillProfilePage(),
+    const EnterPinCode(
+      text: 'Add a Pin number to make your account more secure',
+    )
   ];
   // final FirebaseFirestore firestore = FirebaseFirestore.instance;
   // bool firstAuth=false;
@@ -72,6 +76,10 @@ class _MainPageState extends State<MainPage> {
       builder: (context, state) {
         if (state is UserInitial) {
           return Loading();
+        } else if (state is UserExistExceptPinCode) {
+          return const EnterPinCode(
+            text: 'Add a Pin number to make your account more secure',
+          );
         } else if (state is UserNotExist) {
           return FillProfilePage();
         } else if (state is UserExist) {

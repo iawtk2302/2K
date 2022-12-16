@@ -36,6 +36,7 @@ import 'package:sneaker_app/screen/ReviewPage.dart';
 import 'package:sneaker_app/screen/SearchPage.dart';
 import 'package:sneaker_app/screen/SearchResultPage.dart';
 import 'package:sneaker_app/screen/SplashScreen.dart';
+import 'package:sneaker_app/screen/enter_pin_code.dart';
 import 'package:sneaker_app/themes/Colors.dart';
 import 'package:sneaker_app/themes/LanguageService.dart';
 import 'package:sneaker_app/themes/ThemeService.dart';
@@ -89,17 +90,14 @@ Future<void> main() async {
       ],
       debug: true);
   FirebaseMessaging.onMessage.listen(_firebaseMessagingBackgroundHandler);
-  runApp(
-    const MyApp()
-  );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
-    
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => HomeBloc()..add(LoadHome())),
@@ -114,7 +112,6 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => ReviewBloc())
       ],
       child: GetMaterialApp(
-        
         translations: LocalizationService(),
         locale: LocalizationService().locale,
         title: '2K',
@@ -219,6 +216,15 @@ Route? getRoute(RouteSettings settings) {
         return MaterialPageRoute(
             builder: (context) => ReviewPage(
                   product: product,
+                ),
+            settings: settings);
+      }
+    case Routes.enterPin:
+      {
+        final text = settings.arguments as String;
+        return MaterialPageRoute(
+            builder: (context) => EnterPinCode(
+                  text: text,
                 ),
             settings: settings);
       }

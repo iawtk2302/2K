@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:sneaker_app/model/User.dart';
 import 'package:sneaker_app/router/routes.dart';
 import 'package:sneaker_app/screen/FillProfilePage.dart';
 import 'package:sneaker_app/screen/NotificationPage.dart';
@@ -20,7 +21,7 @@ import '../widget/custom_searchbar.dart';
 import '../widget/item_SpecialOffer.dart';
 import 'SearchScreen.dart';
 import 'SpecialOffer.dart';
-import 'create_pin_code.dart';
+import 'enter_pin_code.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -141,7 +142,7 @@ class _HomePageState extends State<HomePage> {
                       builder: (context) => NotificationPage(),
                     ));
               },
-              icon: Icon(
+              icon: const Icon(
                 Ionicons.notifications_outline,
                 size: 25,
                 // color: Colors.black,
@@ -150,13 +151,11 @@ class _HomePageState extends State<HomePage> {
             IconButton(
               splashRadius: 10,
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const SetFingerPrint(),
-                    ));
+                Customer user =
+                    (context.read<UserBloc>().state as UserExist).user;
+                print(user.pin);
               },
-              icon: Icon(
+              icon: const Icon(
                 Ionicons.heart_outline,
                 size: 25,
                 // color: Colors.black,

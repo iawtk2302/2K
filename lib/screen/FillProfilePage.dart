@@ -314,6 +314,7 @@ class _FillProfilePageState extends State<FillProfilePage> {
   }
 
   Future _submit() async {
+    // Navigator.pushNamed(context, Routes.createPin);
     try {
       final task = await storage.child("$id.jpg").putFile(_file!);
       final linkImage = await task.ref.getDownloadURL();
@@ -328,6 +329,7 @@ class _FillProfilePageState extends State<FillProfilePage> {
           phone: _phoneController.text);
       await firestore.collection('User').doc(id).set(user.toJson());
       // ignore: use_build_context_synchronously
+
       BlocProvider.of<UserBloc>(context).add(SubmitInfoUser(user: user));
     } on FirebaseException catch (e) {
       print(e);
