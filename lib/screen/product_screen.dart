@@ -94,8 +94,8 @@ class _ProductScreenState extends State<ProductScreen>
                         //     });
                       },
                       icon: const Icon(
-                        Icons.search,
-                        color: Colors.black,
+                        Icons.tune,
+                        // color: Colors.black,
                       ),
                     ),
                   )
@@ -148,7 +148,7 @@ class _ProductScreenState extends State<ProductScreen>
                             });
                       },
                       icon: const Icon(
-                        Icons.search,
+                        Icons.tune,
                         // color: Colors.black,
                       ),
                     ),

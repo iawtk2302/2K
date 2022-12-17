@@ -24,17 +24,20 @@ class OrderState extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Item_Status_Order(
-                icon: FontAwesomeIcons.box, isActive: !(statusNum < 0)),
+                icon: FontAwesomeIcons.box,
+                isActive: !(statusNum < 0) && statusNum != 4),
             const Text('__'),
             Item_Status_Order(
-                icon: FontAwesomeIcons.truck, isActive: !(statusNum < 1)),
+                icon: FontAwesomeIcons.truck,
+                isActive: !(statusNum < 1) && statusNum != 4),
             const Text('__'),
             Item_Status_Order(
                 icon: FontAwesomeIcons.peopleCarryBox,
-                isActive: !(statusNum < 2)),
+                isActive: !(statusNum < 2) && statusNum != 4),
             const Text('__'),
             Item_Status_Order(
-                icon: FontAwesomeIcons.boxOpen, isActive: !(statusNum < 3)),
+                icon: FontAwesomeIcons.boxOpen,
+                isActive: !(statusNum < 3) && statusNum != 4),
           ],
         ),
         const SizedBox(

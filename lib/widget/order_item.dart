@@ -238,7 +238,7 @@ class ItemOrderState extends State<ItemOrder> {
   }
 
   String getText() {
-    return widget.order.state != 'completed'
+    return widget.order.state != 'completed' && widget.order.state != 'canceled'
         ? 'Track Order'
         : widget.order.dateCompleted!
                     .toDate()

@@ -36,15 +36,15 @@ class OrdersPage extends StatelessWidget {
                 fontSize: 22,
                 fontFamily: 'Urbanist'),
           ),
-          actions: [
-            IconButton(
-              icon: Icon(
-                Icons.search,
-                // color: Colors.black,
-              ),
-              onPressed: () {},
-            )
-          ],
+          // actions: [
+          //   IconButton(
+          //     icon: Icon(
+          //       Icons.search,
+          //       // color: Colors.black,
+          //     ),
+          //     onPressed: () {},
+          //   )
+          // ],
           bottom: TabBar(
             indicatorColor: Theme.of(context).textTheme.bodyText2!.color,
             // labelColor: Colors.black,

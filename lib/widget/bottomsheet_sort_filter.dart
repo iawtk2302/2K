@@ -243,7 +243,17 @@ class _BottomSheet_Sort_FilterState extends State<BottomSheet_Sort_Filter> {
                         Container(
                             width: MediaQuery.of(context).size.width / 3 + 20,
                             child: CustomTextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                context.read<ProductBloc>().add(ReLoadProduct(
+                                    context: context,
+                                    gender: ['Men', 'Women'],
+                                    listCategory: state.listCategory,
+                                    sortBy: SortBy.none,
+                                    idCategory: state
+                                        .listCategory[widget.index].idCategory
+                                        .toString()));
+                                Navigator.pop(context);
+                              },
                               text: 'Reset'.tr,
                               hasLeftIcon: false,
                               isDark: false,
