@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:sneaker_app/model/order.dart';
 
 import '../screen/track_order_screen.dart';
@@ -40,7 +41,7 @@ class OrderState extends StatelessWidget {
           height: 20,
         ),
         Text(
-          convertText(),
+          convertText().tr,
           style: TextStyle(
               // color: Colors.black,
               fontWeight: FontWeight.w600,

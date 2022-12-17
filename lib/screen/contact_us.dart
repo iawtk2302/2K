@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 
 class ContactUs extends StatefulWidget {
   const ContactUs({super.key});
@@ -17,7 +18,7 @@ class _ContactUsState extends State<ContactUs> {
         children: [
           ItemContact(
             icon: Icons.headset,
-            text: 'Customer Service',
+            text: 'Customer Service'.tr,
             onPress: () {
               print('object');
             },

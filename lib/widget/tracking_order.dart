@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../model/order.dart';
 
 class OrderTracking extends StatelessWidget {
@@ -20,7 +21,7 @@ class OrderTracking extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'ID Order',
+                'ID Order'.tr,
                 style: TextStyle(
                     // color: Colors.black,
                     fontWeight: FontWeight.w700,
@@ -43,7 +44,7 @@ class OrderTracking extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Date Created'),
+              Text('Date Created'.tr),
               Text(
                 '${order.dateCreated!.toDate().day}' +
                     '/${order.dateCreated!.toDate().month}' +
@@ -56,7 +57,7 @@ class OrderTracking extends StatelessWidget {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [Text('Date Delivered'), Text('27/11/2022')],
+            children: [Text('Date Delivered'.tr), Text('27/11/2022')],
           ),
           SizedBox(
             height: 8,
@@ -65,7 +66,7 @@ class OrderTracking extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Date Completed'),
+                Text('Date Completed'.tr),
                 Text(
                   '${order.dateCompleted!.toDate().day}' +
                       '/${order.dateCompleted!.toDate().month}' +

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:sneaker_app/router/routes.dart';
 import 'package:sneaker_app/screen/order_active.dart';
 import 'package:sneaker_app/screen/order_canceled.dart';
@@ -28,7 +29,7 @@ class OrdersPage extends StatelessWidget {
             statusBarBrightness: Brightness.light, // For iOS (dark icons)
           ),
           title: Text(
-            'My orders',
+            'My orders'.tr,
             style: TextStyle(
                 // color: Colors.black,
                 fontWeight: FontWeight.bold,
@@ -48,13 +49,13 @@ class OrdersPage extends StatelessWidget {
             indicatorColor: Theme.of(context).textTheme.bodyText2!.color,
             // labelColor: Colors.black,
             labelStyle: const TextStyle(fontSize: 16),
-            tabs: const [
-              Tab(text: 'Active'),
+            tabs: [
+              Tab(text: 'Active'.tr),
               Tab(
-                text: 'Completed',
+                text: 'Completed'.tr,
               ),
               Tab(
-                text: 'Canceled',
+                text: 'Canceled'.tr,
               ),
             ],
           ),

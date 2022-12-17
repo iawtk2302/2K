@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 import 'package:sneaker_app/model/order.dart';
 import 'package:sneaker_app/model/product.dart';
 import 'package:sneaker_app/model/product_cart.dart';
@@ -65,13 +66,13 @@ class Item_Product_TrackOrder extends StatelessWidget {
                       child: Row(
                         children: [
                           Text(
-                            'Size = ' + '${product.size}',
+                            'Size'.tr + ': ' + '${product.size}',
                             style: const TextStyle(
                                 fontFamily: 'Urbanist',
                                 fontWeight: FontWeight.w500),
                           ),
                           Text(
-                            ' | Qty = ' + '${product.amount}',
+                            ' | Qty = '.tr + '${product.amount}',
                             style: const TextStyle(
                                 fontFamily: 'Urbanist',
                                 fontWeight: FontWeight.w500),
@@ -134,7 +135,7 @@ class Item_Product_TrackOrder extends StatelessWidget {
                                           )));
                                 },
                                 child: Text(
-                                  'Review',
+                                  'Review'.tr,
                                   style: TextStyle(
                                     fontFamily: 'Urbanist',
                                     fontWeight: FontWeight.w600,

@@ -33,9 +33,9 @@ class ProfilePage extends StatelessWidget {
           ),
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           elevation: 0,
-          title: const Text(
-            'Profile',
-            style: TextStyle(
+          title: Text(
+            'Profile'.tr,
+            style: const TextStyle(
                 // color: Colors.black,
                 fontWeight: FontWeight.bold,
                 fontSize: 22,
@@ -130,7 +130,7 @@ class ProfilePage extends StatelessWidget {
               final user = userState.user;
               return ItemProfile(
                 leftIcon: Icons.person_outline,
-                label: 'Edit Profile',
+                label: 'Edit Profile'.tr,
                 rightIcon: Icons.chevron_right,
                 onPress: () {
                   Navigator.push(
@@ -144,7 +144,7 @@ class ProfilePage extends StatelessWidget {
           ),
           ItemProfile(
             leftIcon: Icons.mode_of_travel,
-            label: 'Address',
+            label: 'Address'.tr,
             rightIcon: Icons.chevron_right,
             onPress: () {
               // Navigator.pushNamed(context, Routes.chooseAddress);
@@ -152,7 +152,7 @@ class ProfilePage extends StatelessWidget {
           ),
           ItemProfile(
             leftIcon: Icons.security,
-            label: 'Security',
+            label: 'Security'.tr,
             rightIcon: Icons.chevron_right,
             onPress: () {
               Navigator.push(context,
@@ -161,7 +161,7 @@ class ProfilePage extends StatelessWidget {
           ),
           ItemProfile(
             leftIcon: Icons.language,
-            label: 'hello'.tr,
+            label: 'Language'.tr,
             rightIcon: Icons.chevron_right,
             onPress: () {
               LocalizationService().switchLang();
@@ -169,7 +169,7 @@ class ProfilePage extends StatelessWidget {
           ),
           ItemProfile(
             leftIcon: Icons.dark_mode,
-            label: 'Dark Mode',
+            label: 'Dark Mode'.tr,
             rightIcon: Icons.chevron_right,
             onPress: () {
               ThemeService().switchTheme();
@@ -177,7 +177,7 @@ class ProfilePage extends StatelessWidget {
           ),
           ItemProfile(
             leftIcon: Icons.lock_outline,
-            label: 'Privacy Police',
+            label: 'Privacy Police'.tr,
             rightIcon: Icons.chevron_right,
             onPress: () async {
               final Uri _url = Uri.parse(
@@ -189,7 +189,7 @@ class ProfilePage extends StatelessWidget {
           ),
           ItemProfile(
             leftIcon: Icons.help_outline,
-            label: 'Help Center',
+            label: 'Help Center'.tr,
             rightIcon: Icons.chevron_right,
             onPress: () {
               Navigator.push(
@@ -201,7 +201,7 @@ class ProfilePage extends StatelessWidget {
           ),
           ItemProfile(
             leftIcon: Icons.logout,
-            label: 'Sign out',
+            label: 'Sign out'.tr,
             rightIcon: Icons.chevron_right,
             onPress: () {
               signOut();
@@ -253,16 +253,16 @@ class ItemProfile extends StatelessWidget {
           ),
           Row(
             children: [
-              if (label == 'Language')
-                const Text(
-                  'English (US)',
+              if (label == 'Language' || label == 'Ngôn ngữ')
+                Text(
+                  label == 'Language' ? 'English (US)' : 'Vietnamese (VN)',
                   style: TextStyle(
                       // color: Colors.black,
                       fontWeight: FontWeight.w500,
                       fontSize: 16,
                       fontFamily: 'Urbanist'),
                 ),
-              if (label != 'Dark Mode')
+              if (label != 'Dark Mode' && label != 'Chế độ tối')
                 IconButton(
                   icon: Icon(rightIcon),
                   onPressed: () {

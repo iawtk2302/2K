@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 
 import '../bloc/product/product_bloc.dart';
 import '../model/product.dart';
@@ -106,7 +107,7 @@ class _ProductDetailHeaderState extends State<ProductDetailHeader> {
                 child: Padding(
                   padding: EdgeInsets.all(6.0),
                   child: Text(
-                    totalSold.toString() + ' sold',
+                    totalSold.toString() + ' sold'.tr,
                     style: TextStyle(fontSize: 12, fontFamily: 'Urbanist'),
                   ),
                 ),
@@ -126,7 +127,7 @@ class _ProductDetailHeaderState extends State<ProductDetailHeader> {
                 width: 10,
               ),
               Text(
-                '(${totalRate.toString()} reviews)',
+                '(${totalRate.toString()} ' + 'reviews)'.tr,
                 style: TextStyle(fontSize: 15, fontFamily: 'Urbanist'),
               ),
             ],

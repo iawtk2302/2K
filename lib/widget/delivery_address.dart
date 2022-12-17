@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class DeliveryAddress extends StatelessWidget {
   const DeliveryAddress({
@@ -26,7 +27,7 @@ class DeliveryAddress extends StatelessWidget {
                 width: 8,
               ),
               Text(
-                'Delivery Address',
+                'Delivery Address'.tr,
                 style: TextStyle(
                     fontFamily: 'Urbanist',
                     fontWeight: FontWeight.w600,

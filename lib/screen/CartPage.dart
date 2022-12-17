@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:sneaker_app/widget/Loading.dart';
 import 'package:sneaker_app/widget/custom_textbutton.dart';
 
@@ -24,7 +25,7 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        systemOverlayStyle: SystemUiOverlayStyle(
+          systemOverlayStyle: SystemUiOverlayStyle(
             // Status bar color
             statusBarColor: Theme.of(context).scaffoldBackgroundColor,
 
@@ -36,7 +37,7 @@ class _CartPageState extends State<CartPage> {
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           elevation: 0.5,
           title: Text(
-            'My Cart',
+            'My Cart'.tr,
             style: TextStyle(
                 // color: Colors.black,
                 fontWeight: FontWeight.bold,
@@ -87,7 +88,7 @@ class _CartPageState extends State<CartPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Total price',
+                                  'Total price'.tr,
                                   style: TextStyle(),
                                 ),
                                 Text(
@@ -111,7 +112,7 @@ class _CartPageState extends State<CartPage> {
                                         arguments: state.cart.products);
                                   }
                                 },
-                                text: 'Checkout',
+                                text: 'Checkout'.tr,
                                 hasLeftIcon: false,
                                 isDark: true,
                                 hasRightIcon: true,

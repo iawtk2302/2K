@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:sneaker_app/model/detail_order.dart';
 import 'package:sneaker_app/model/order.dart';
 import 'package:sneaker_app/model/product.dart';
@@ -105,10 +106,10 @@ class ItemOrderState extends State<ItemOrder> {
                     child: Row(
                       children: [
                         Text(
-                          'Date Created: '
-                          '${widget.order.dateCreated!.toDate().day}'
-                          '/ ${widget.order.dateCreated!.toDate().month}'
-                          '/ ${widget.order.dateCreated!.toDate().year}',
+                          'Date Created: '.tr +
+                              '${widget.order.dateCreated!.toDate().day}'
+                                  '/ ${widget.order.dateCreated!.toDate().month}'
+                                  '/ ${widget.order.dateCreated!.toDate().year}',
                           style: const TextStyle(
                               fontFamily: 'Urbanist',
                               fontWeight: FontWeight.w500),
@@ -121,10 +122,10 @@ class ItemOrderState extends State<ItemOrder> {
                       child: Row(
                         children: [
                           Text(
-                            'Date Completed: '
-                            '${widget.order.dateCompleted!.toDate().day}'
-                            '/${widget.order.dateCompleted!.toDate().month}'
-                            '/${widget.order.dateCompleted!.toDate().year}',
+                            'Date Completed: '.tr +
+                                '${widget.order.dateCompleted!.toDate().day}'
+                                    '/${widget.order.dateCompleted!.toDate().month}'
+                                    '/${widget.order.dateCompleted!.toDate().year}',
                             style: const TextStyle(
                                 fontFamily: 'Urbanist',
                                 fontWeight: FontWeight.w500),
@@ -151,7 +152,7 @@ class ItemOrderState extends State<ItemOrder> {
                   height: 2,
                 ),
                 Expanded(
-                    flex: 3,
+                    flex: 4,
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Container(
@@ -162,7 +163,7 @@ class ItemOrderState extends State<ItemOrder> {
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(5))),
                         child: Text(
-                          widget.order.state!,
+                          widget.order.state!.tr,
                           style: const TextStyle(
                               fontFamily: 'Urbanist',
                               fontSize: 15,
@@ -218,7 +219,7 @@ class ItemOrderState extends State<ItemOrder> {
                               }
                             },
                             child: Text(
-                              getText(),
+                              getText().tr,
                               style: TextStyle(
                                 fontFamily: 'Urbanist',
                                 fontWeight: FontWeight.w600,

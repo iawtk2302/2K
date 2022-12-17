@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:sneaker_app/widget/custom_textbutton.dart';
 
 import '../bloc/product/product_bloc.dart';
@@ -51,11 +52,11 @@ class _BottomSheet_Sort_FilterState extends State<BottomSheet_Sort_Filter> {
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Stack(children: [
                 Column(children: [
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 12.0),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 12.0),
                     child: Text(
-                      'Sort & Filter',
-                      style: TextStyle(
+                      'Sort & Filter'.tr,
+                      style: const TextStyle(
                           fontFamily: 'Urbanist',
                           fontWeight: FontWeight.bold,
                           fontSize: 22),
@@ -68,11 +69,11 @@ class _BottomSheet_Sort_FilterState extends State<BottomSheet_Sort_Filter> {
                   const SizedBox(
                     height: 10,
                   ),
-                  const Align(
+                  Align(
                       alignment: Alignment.topLeft,
                       child: Text(
-                        'Sort by',
-                        style: TextStyle(
+                        'Sort by'.tr,
+                        style: const TextStyle(
                             fontFamily: 'Urbanist',
                             fontWeight: FontWeight.bold,
                             fontSize: 18),
@@ -114,7 +115,7 @@ class _BottomSheet_Sort_FilterState extends State<BottomSheet_Sort_Filter> {
                     height: 35,
                     child: RadioListTile<SortBy>(
                       activeColor: Theme.of(context).primaryIconTheme.color,
-                      title: const Text('Price: Low-High'),
+                      title: Text('Price: Low-High'.tr),
                       value: SortBy.lowHigh,
                       groupValue: _character,
                       contentPadding: const EdgeInsets.all(0),
@@ -129,7 +130,7 @@ class _BottomSheet_Sort_FilterState extends State<BottomSheet_Sort_Filter> {
                     height: 35,
                     child: RadioListTile<SortBy>(
                       activeColor: Theme.of(context).primaryIconTheme.color,
-                      title: const Text('Price: High-Low'),
+                      title: Text('Price: High-Low'.tr),
                       value: SortBy.highLow,
                       groupValue: _character,
                       contentPadding: const EdgeInsets.all(0),
@@ -150,11 +151,11 @@ class _BottomSheet_Sort_FilterState extends State<BottomSheet_Sort_Filter> {
                       ),
                     ),
                   ),
-                  const Align(
+                  Align(
                       alignment: Alignment.topLeft,
                       child: Text(
-                        'Gender',
-                        style: TextStyle(
+                        'Gender'.tr,
+                        style: const TextStyle(
                             fontFamily: 'Urbanist',
                             fontWeight: FontWeight.bold,
                             fontSize: 18),
@@ -178,7 +179,7 @@ class _BottomSheet_Sort_FilterState extends State<BottomSheet_Sort_Filter> {
                         SizedBox(
                           width: 10,
                         ),
-                        Text('Men')
+                        Text('Men'.tr)
                       ],
                     ),
                   ),
@@ -201,7 +202,7 @@ class _BottomSheet_Sort_FilterState extends State<BottomSheet_Sort_Filter> {
                         SizedBox(
                           width: 10,
                         ),
-                        Text('Women')
+                        Text('Women'.tr)
                       ],
                     ),
                   ),
@@ -243,7 +244,7 @@ class _BottomSheet_Sort_FilterState extends State<BottomSheet_Sort_Filter> {
                             width: MediaQuery.of(context).size.width / 3 + 20,
                             child: CustomTextButton(
                               onPressed: () {},
-                              text: 'Reset',
+                              text: 'Reset'.tr,
                               hasLeftIcon: false,
                               isDark: false,
                               hasRightIcon: false,
@@ -277,7 +278,7 @@ class _BottomSheet_Sort_FilterState extends State<BottomSheet_Sort_Filter> {
                                     //       context: context)
                                     );
                               },
-                              text: 'Apply',
+                              text: 'Apply'.tr,
                               hasLeftIcon: false,
                               isDark: true,
                               hasRightIcon: false,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 import 'package:sneaker_app/screen/FAQ.dart';
 
 import 'contact_us.dart';
@@ -25,8 +26,8 @@ class HelpCenter extends StatelessWidget {
               Navigator.pop(context);
             },
           ),
-          title: const Text(
-            'Help Center',
+          title: Text(
+            'Help Center'.tr,
             style: TextStyle(
                 // color: Colors.black,
                 fontWeight: FontWeight.bold,
@@ -45,7 +46,7 @@ class HelpCenter extends StatelessWidget {
                 text: 'FAQ',
               ),
               Tab(
-                text: 'Contact us',
+                text: 'Contact us'.tr,
               ),
             ],
           ),

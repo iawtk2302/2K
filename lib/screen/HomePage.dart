@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:sneaker_app/model/User.dart';
 import 'package:sneaker_app/router/routes.dart';
@@ -98,7 +99,7 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  quote!,
+                  quote!.tr,
                   style: TextStyle(
                       // color: Color(0xFF757475),
                       color: Theme.of(context).textTheme.bodyText1!.color,
@@ -196,7 +197,7 @@ class _HomePageState extends State<HomePage> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Special Offers',
+            Text('Special Offers'.tr,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 22,
@@ -321,7 +322,7 @@ class _HomePageState extends State<HomePage> {
         Padding(
           padding: const EdgeInsets.only(top: 16.0),
           child: CustomSearch(
-            hintText: 'Search',
+            hintText: 'Search'.tr,
             prefixIcon: Icon(
               Icons.search,
               color: Theme.of(context).primaryIconTheme.color,
@@ -337,7 +338,7 @@ class _HomePageState extends State<HomePage> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Special Offers',
+            Text('Special Offers'.tr,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 22,
@@ -350,7 +351,7 @@ class _HomePageState extends State<HomePage> {
                         builder: (context) =>
                             SpecialOffer(listBanner: state.banner)));
               },
-              child: Text('See all',
+              child: Text('See all'.tr,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
@@ -376,7 +377,7 @@ class _HomePageState extends State<HomePage> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('More Popular',
+            Text('More Popular'.tr,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 22,
@@ -388,7 +389,7 @@ class _HomePageState extends State<HomePage> {
               onPressed: () {
                 // print('aa');
               },
-              child: Text('See all',
+              child: Text('See all'.tr,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
@@ -554,7 +555,7 @@ class BrandItem extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Text(
-            name,
+            name.tr,
             style: TextStyle(
                 color: isChoose == index ? Colors.white : Colors.black,
                 fontWeight: FontWeight.bold,

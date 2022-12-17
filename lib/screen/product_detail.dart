@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:sneaker_app/model/detail_product.dart';
 import 'package:sneaker_app/model/product_cart.dart';
 
@@ -231,7 +232,7 @@ class _ProductDetailState extends State<ProductDetail> {
                           Row(
                             children: [
                               Text(
-                                'Quantity',
+                                'Quantity'.tr,
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20,
@@ -324,7 +325,7 @@ class _ProductDetailState extends State<ProductDetail> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('Total price'),
+                        Text('Total price'.tr),
                         SizedBox(
                           height: 5,
                         ),
@@ -358,8 +359,8 @@ class _ProductDetailState extends State<ProductDetail> {
                                 //Show snackbar
                                 final snackBar = SnackBar(
                                   // backgroundColor: Colors.grey,
-                                  content: const Text(
-                                    'Product successfully added to cart',
+                                  content: Text(
+                                    'Product successfully added to cart'.tr,
                                     // style: TextStyle(color: Colors.black),
                                   ),
                                   // action: SnackBarAction(
@@ -372,7 +373,7 @@ class _ProductDetailState extends State<ProductDetail> {
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(snackBar);
                               },
-                              text: 'Add to Card',
+                              text: 'Add to Card'.tr,
                               isDark: true,
                               hasRightIcon: false,
                             ),
@@ -419,7 +420,7 @@ class _ProductDetailState extends State<ProductDetail> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Size',
+          'Size'.tr,
           style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 20,

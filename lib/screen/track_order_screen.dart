@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:sneaker_app/bloc/my_order/my_order_bloc.dart';
 import 'package:sneaker_app/model/detail_order.dart';
 import 'package:sneaker_app/model/order.dart';
@@ -64,9 +65,9 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
               // color: Colors.black,
             ),
           ),
-          title: const Text(
-            'Track Order',
-            style: TextStyle(
+          title: Text(
+            'Track Order'.tr,
+            style: const TextStyle(
                 // color: Colors.black,
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
@@ -108,7 +109,7 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Total price: ',
+                          'Total price: '.tr,
                           style: TextStyle(
                               // color: Colors.black,
                               fontWeight: FontWeight.w700,
@@ -135,11 +136,11 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
                     const SizedBox(
                       height: 20,
                     ),
-                    const Align(
+                    Align(
                       alignment: Alignment.topLeft,
                       child: Text(
-                        'Order status detail',
-                        style: TextStyle(
+                        'Order status detail'.tr,
+                        style: const TextStyle(
                             // color: Colors.black,
                             fontWeight: FontWeight.w700,
                             fontSize: 19,
@@ -174,7 +175,7 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
                             //           listProduct: state.listProduct),
                             //     ));
                           },
-                          text: getText(),
+                          text: getText().tr,
                           hasLeftIcon: false,
                           isDark: true,
                           hasRightIcon: false),
@@ -218,7 +219,7 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
     }
   }
 
-  getText() {
+  String getText() {
     switch (statusNum) {
       case 3:
       case 4:

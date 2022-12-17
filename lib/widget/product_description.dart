@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ProductDescription extends StatefulWidget {
   const ProductDescription({super.key, required this.description});
@@ -17,7 +18,7 @@ class _ProductDescriptionState extends State<ProductDescription> {
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 10.0),
           child: Text(
-            'Description',
+            'Description'.tr,
             style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
@@ -43,7 +44,7 @@ class _ProductDescriptionState extends State<ProductDescription> {
                   });
                 },
                 child: Text(
-                  !isExpand ? "See more..." : "See less...",
+                  !isExpand ? "See more...".tr : "See less...".tr,
                   style: TextStyle(color: Colors.blue, fontFamily: 'Urbanist'),
                 ),
               ),
