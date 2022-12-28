@@ -12,6 +12,8 @@ import 'package:sneaker_app/widget/Loading.dart';
 import 'package:sneaker_app/widget/OrderItem.dart';
 import 'package:sneaker_app/widget/custom_button.dart';
 
+import '../bloc/cart/card_bloc.dart';
+import '../bloc/order/orderReponsitory.dart';
 import '../bloc/order/order_bloc.dart';
 import '../model/voucher.dart';
 
@@ -245,34 +247,43 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 15),
                         child: Center(
-                          child: CustomElevatedButton(
-                            text: "Payment",
-                            onTap: () {
-                              // print('object');
+                          // child: CustomElevatedButton(
+                          //   text: "Payment",
+                          //   onTap: () {
+                          //     // print('object');
 
-                              showModalBottomSheet<bool>(
-                                isScrollControlled: true,
-                                context: context,
-                                useRootNavigator: true,
-                                builder: (BuildContext context) {
-                                  return const BottomSheetEnterPin();
-                                },
-                              ).then((value) {
-                                if (value != null) {
-                                  if (value) {
-                                    debugPrint('check successful');
-                                    // BlocProvider.of<OrderBloc>(context)
-                                    //     .add(CreateOrder(_note.text, context));
-                                  } else {
-                                    debugPrint('check fail');
-                                  }
-                                }
-                              });
-                            },
-                            colorText: ThemeService().theme == ThemeMode.dark
-                                ? Colors.black
-                                : Colors.white,
-                          ),
+                          //     showModalBottomSheet<bool>(
+                          //       isScrollControlled: true,
+                          //       context: context,
+                          //       useRootNavigator: true,
+                          //       builder: (BuildContext context) {
+                          //         return const BottomSheetEnterPin();
+                          //       },
+                          //     ).then((value) {
+                          //       if (value != null) {
+                          //         if (value) {
+                          //           debugPrint('check successful');
+                          //           // BlocProvider.of<OrderBloc>(context)
+                          //           //     .add(CreateOrder(_note.text, context));
+                          //         } else {
+                          //           debugPrint('check fail');
+                          //         }
+                          //       }
+                          //     });
+                          //   },
+                          //   colorText: ThemeService().theme == ThemeMode.dark
+                          //       ? Colors.black
+                          //       : Colors.white,
+                          // ),
+                          child: CustomElevatedButton(text: "Continue to Payment", onTap: (){
+                            // BlocProvider.of<OrderBloc>(context).add(CreateOrder(_note.text,context));
+                            if(state.selectedAddress!=null){
+                              Navigator.pushNamed(context, Routes.choosePayment,arguments: _note.text.trim());
+                            }
+                            else{
+                              OrderReponsitory().showErrorDialog(context);
+                            }
+                          },colorText: ThemeService().theme==ThemeMode.dark?Colors.black:Colors.white,),
                         ),
                       ),
                     ]),

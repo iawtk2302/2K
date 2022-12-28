@@ -87,14 +87,8 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     });
     on<CreateOrder>((event, emit) async {
       final state=this.state as OrderLoaded;
-      if(state.selectedAddress==null){
-        OrderReponsitory().showErrorDialog(event.context);
-      }
-      else{
-        await OrderReponsitory().createOrder(state.listProduct, state.selectedVoucher==null?"":state.selectedVoucher!.idVoucher!, state.total, event.note,state.selectedAddress!.idAddress!.toString());
-        await OrderReponsitory().clearProduct();
-        OrderReponsitory().showSuccessDialog(event.context);
-      }
+      await OrderReponsitory().createOrder(state.listProduct, state.selectedVoucher==null?"":state.selectedVoucher!.idVoucher!, state.total, event.note,state.selectedAddress!.idAddress!.toString(),event.methodPayment,event.context);
+      await OrderReponsitory().clearProduct();
     });
   }
 }

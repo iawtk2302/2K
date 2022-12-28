@@ -12,6 +12,12 @@ class LoadOrder extends OrderEvent {
   List<Object> get props => [];
 }
 
+class LoadOrderParameter extends OrderEvent {
+  const LoadOrderParameter();
+  @override
+  List<Object> get props => [];
+}
+
 class ChooseAddress extends OrderEvent {
   const ChooseAddress(this.newAddress);
   final Address newAddress;
@@ -45,8 +51,9 @@ class RemoveVoucher extends OrderEvent {
 }
 
 class CreateOrder extends OrderEvent {
-  const CreateOrder(this.note, this.context);
+  const CreateOrder(this.note, this.methodPayment, this.context);
   final String note;
+  final String methodPayment;
   final BuildContext context;
   @override
   List<Object> get props => [];

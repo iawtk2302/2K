@@ -115,8 +115,23 @@ class LocalizationService extends Translations {
           "Help Center": "Trung tâm trợ giúp",
           "Contact us": "Liên hệ",
           "Customer Service": "Chăm sóc khách hàng",
+          "hello":"xin chào",
+      "Search":"Tìm kiếm",
+      "Recent":"Gần đây",
+      "Clear All":"Xóa tất cả",
+      "Results for":"Kết quả cho",
+      "found":"kết quả",
+      "Men":"Nam",
+      "Women":"Nữ",
+      "Price High":"Giá Tằng",
+      "Price Low":"Giá Giảm",
+      "Reset":"Đặt lại",
+      "Apply":"Áp dụng",
+      "All":"Tất cả"
         },
       };
+
+  }
   final _box = GetStorage();
   final _key = 'lang';
   _saveLangToBox(String lang) => _box.write(_key, lang);
@@ -140,4 +155,4 @@ class LocalizationService extends Translations {
     _saveLangToBox(
         _loadLanguageForBox() == Locale("vi", "VN") ? "en-US" : "vi-VN");
   }
-}
+

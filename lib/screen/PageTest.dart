@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:sneaker_app/bloc/seach/bloc/search_bloc.dart';
 import 'package:sneaker_app/widget/Loading.dart';
 import 'package:sneaker_app/widget/item_product_without_anim.dart';
@@ -166,7 +167,7 @@ class _PageTest extends State<PageTest> {
                   onTap: (){state(() {
                     currentCategory=index;
                   });},
-                  child: FilerItemDark(name: searchLoaded!.listBrand[index], isChoose: currentCategory, index: index));
+                  child:Theme.of(context).brightness==Brightness.light?FilerItem(name: searchLoaded!.listBrand[index].tr, isChoose: currentCategory, index: index): FilerItemDark(name: searchLoaded!.listBrand[index].tr, isChoose: currentCategory, index: index));
               },),
             ),
               ],
@@ -191,7 +192,7 @@ class _PageTest extends State<PageTest> {
                   onTap: (){state(() {
                     currentGender=index;
                   });},
-                  child: FilerItemDark(name: searchLoaded!.listGender[index], isChoose: currentGender, index: index));
+                  child:Theme.of(context).brightness==Brightness.light?FilerItem(name: searchLoaded!.listGender[index].tr, isChoose: currentGender, index: index): FilerItemDark(name: searchLoaded!.listGender[index].tr, isChoose: currentGender, index: index));
               },),
             ),
               ],
@@ -211,8 +212,8 @@ class _PageTest extends State<PageTest> {
               min: 0,
               max: 1500,
               divisions: 10,
-              activeColor:  Brightness.dark==Brightness.dark?Colors.white:Colors.black,
-              inactiveColor: Brightness.dark==Brightness.dark?Color(0xFF35383F):Color(0xFFE6E6E6),
+              activeColor:  Theme.of(context).brightness==Brightness.dark?Colors.white:Colors.black,
+              inactiveColor: Theme.of(context).brightness==Brightness.dark?Color(0xFF35383F):Color(0xFFE6E6E6),
               labels: rangeLabels,
               onChanged: (value) {
                 state(() {
@@ -237,7 +238,7 @@ class _PageTest extends State<PageTest> {
                   onTap: (){state(() {
                     currentSort=index;
                   });},
-                  child: FilerItemDark(name: searchLoaded!.listSort[index], isChoose: currentSort, index: index));
+                  child:Theme.of(context).brightness==Brightness.light?FilerItem(name: searchLoaded!.listSort[index].tr, isChoose: currentSort, index: index): FilerItemDark(name: searchLoaded!.listSort[index].tr, isChoose: currentSort, index: index));
               },),
             ),
               ],
@@ -263,7 +264,7 @@ class _PageTest extends State<PageTest> {
                 child: Container(
                   height: 60,
                   width: 170,
-                  child: Center(child: Text('Reset',style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),)),
+                  child: Center(child: Text('Reset'.tr,style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),)),
                   decoration: BoxDecoration(
                     color: Color(0xFFE6E6E6),
                     borderRadius: BorderRadius.circular(30)
@@ -275,7 +276,7 @@ class _PageTest extends State<PageTest> {
                 child: Container(
                   height: 60,
                   width: 170,
-                  child: Center(child: Text('Apply',style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),)),
+                  child: Center(child: Text('Apply'.tr,style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),)),
                   decoration: BoxDecoration(
                     color: Colors.black,
                     borderRadius: BorderRadius.circular(30)
@@ -303,8 +304,8 @@ class _PageTest extends State<PageTest> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text('Results for '+'"'+"${widget.searchText}"+'"',style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
-                  state.listSearch.length==1?Text(state.listSearch.length.toString()+' found',style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)):Text(state.listSearch.length.toString()+' founds',style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                  Text('Results for'.tr+" "+'"'+"${widget.searchText}"+'"',style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                  state.listSearch.length==1?Text(state.listSearch.length.toString()+" "+'found'.tr,style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)):Text(state.listSearch.length.toString()+" "+'found'.tr,style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
                 ],
               ),
             ),
@@ -341,8 +342,8 @@ class FilerItem extends StatelessWidget {
         margin: EdgeInsets.only(right: 8),
         alignment: Alignment.center,
         decoration: BoxDecoration(
-            border: Border.all(color: Theme.of(context).cardColor, width: 1.9),
-            color: isChoose == index ? Theme.of(context).cardColor: Theme.of(context).backgroundColor,
+            border: Border.all(color: Colors.black, width: 1.9),
+            color: isChoose == index ? Colors.black: Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(20))),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 18),

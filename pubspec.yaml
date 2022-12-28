@@ -68,6 +68,8 @@ dependencies:
   pin_code_fields: ^7.4.0
   local_auth: ^2.1.2
 
+  sprintf: "^7.0.0"
+  crypto: ^3.0.2
 dev_dependencies:
   flutter_test:
     sdk: flutter

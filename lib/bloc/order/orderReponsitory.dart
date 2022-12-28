@@ -2,10 +2,12 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sneaker_app/bloc/cart/card_bloc.dart';
+import 'package:sneaker_app/bloc/payment/payment.dart';
 import 'package:sneaker_app/model/order.dart';
 import '../../model/address.dart';
 import '../../model/product_cart.dart';
@@ -15,8 +17,9 @@ import '../../widget/custom_button.dart';
 class OrderReponsitory{
   final order = FirebaseFirestore.instance.collection('Order');
   final detailOrder = FirebaseFirestore.instance.collection('DetailOrder');
+  static const MethodChannel platform = MethodChannel('flutter.native/channelPayOrder');
   caculateTotalProduct(List<ProductCart> listProduct){
-    final totalProduct=listProduct.map((e) => e.product!.price).reduce((value, element) => value!+element!)!.toDouble();
+    final totalProduct=listProduct.map((e) => e.product!.price!*e.amount!).reduce((value, element) => value+element).toDouble();
     return totalProduct;
   }
   clearProduct()async{
@@ -89,7 +92,7 @@ class OrderReponsitory{
     
     return listTypeShipping;
   }
-  createOrder(List<ProductCart> list,String idVoucher, double totalPrice, String note, String idAddress)async{
+  createOrder(List<ProductCart> list,String idVoucher, double totalPrice, String note, String idAddress, String methodPayment,BuildContext context)async{
     String? idOrder;
     await order.add({'idUser':FirebaseAuth.instance.currentUser!.uid,
     'idAddress':idAddress,
@@ -105,6 +108,28 @@ class OrderReponsitory{
     for(ProductCart i in list){
       detailOrder.add({'idOrder':idOrder,'idProduct':i.product!.idProduct,'amount':i.amount,'size':i.size,}).then((value) {detailOrder.doc(value.id).update({'idDetailOrder':value.id});});
     }
+    if(methodPayment=="ZaloPay"){
+      String zpTransToken="";
+      var result = await createOrderZaloPay(totalPrice.toInt());
+               if (result != null) {
+                zpTransToken = result.zptranstoken;
+                String response = "";
+            try {
+              final String result = await platform.invokeMethod('payOrder', {"zptoken": zpTransToken});
+              response = result;
+              
+            } on PlatformException catch (e) {         
+              response = "Thanh toán thất bại";
+            }
+            print(response);
+             Navigator.popUntil(context, (Route<dynamic> predicate) => predicate.isFirst);
+    BlocProvider.of<CartBloc>(context).add(LoadCart());
+    clearProduct();
+    }
+    }
+    // Navigator.popUntil(context, (Route<dynamic> predicate) => predicate.isFirst);
+    // BlocProvider.of<CartBloc>(context).add(LoadCart());
+    // clearProduct();
   }
   void showSuccessDialog(BuildContext context){
   showDialog(context: context, 
