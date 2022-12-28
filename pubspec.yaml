@@ -65,7 +65,8 @@ dependencies:
   expandable: ^5.0.1
   get: ^4.6.5
   get_storage: ^2.0.3
-
+  sprintf: "^7.0.0"
+  crypto: ^3.0.2
 dev_dependencies:
   flutter_test:
     sdk: flutter

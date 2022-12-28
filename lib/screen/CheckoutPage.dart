@@ -13,6 +13,7 @@ import 'package:sneaker_app/widget/OrderItem.dart';
 import 'package:sneaker_app/widget/custom_button.dart';
 
 import '../bloc/cart/card_bloc.dart';
+import '../bloc/order/orderReponsitory.dart';
 import '../bloc/order/order_bloc.dart';
 import '../model/voucher.dart';
 import '../widget/cart_item.dart';
@@ -206,8 +207,14 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 15),
                         child: Center(
-                          child: CustomElevatedButton(text: "Payment", onTap: (){
-                            BlocProvider.of<OrderBloc>(context).add(CreateOrder(_note.text,context));
+                          child: CustomElevatedButton(text: "Continue to Payment", onTap: (){
+                            // BlocProvider.of<OrderBloc>(context).add(CreateOrder(_note.text,context));
+                            if(state.selectedAddress!=null){
+                              Navigator.pushNamed(context, Routes.choosePayment,arguments: _note.text.trim());
+                            }
+                            else{
+                              OrderReponsitory().showErrorDialog(context);
+                            }
                           },colorText: ThemeService().theme==ThemeMode.dark?Colors.black:Colors.white,),
                         ),
                       ),

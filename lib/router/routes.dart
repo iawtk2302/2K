@@ -14,4 +14,5 @@ class Routes{
   static const addAddress='/AddAddressPage';
   static const chooseAddress='/ChooseAddressPage';
   static const chooseVoucher='/ChooseVoucherPage';
+  static const choosePayment='/MethodPaymentPage';
 }

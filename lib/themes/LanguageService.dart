@@ -24,10 +24,48 @@ class LocalizationService extends Translations {
   // TODO: implement keys
   Map<String, Map<String, String>> get keys => {
     "en_US":{
-      "hello":"hello"
+      "hello":"hello",
+      "Search":"Search",
+      "Recent":"Recent",
+      "Clear All":"Clear All",
+      "Results for":"Result for",
+      "found":"found",
+      "Men":"Men",
+      "Women":"Women",
+      "Price High":"Price High",
+      "Price Low":"Price Low",
+      "Reset":"Reset",
+      "Apply":"Apply",
+      "All":"All",
+      "Check out":"Check out",
+      "Shipping Address":"Shipping Address",
+      "Order List":"Order List",
+      "Promo":"Promo",
+      "Note":"Note",
+      "Choose address":"Choose address",
+      "Choose voucher":"Choose voucher",
+      "Enter note":"Enter note",
+      "Amount":"Amount",
+      "Shipping":"Shipping",
+      "Total":"Total",
+      "Continue to Payment":"Continue to Payment",
+      "Add New Address":"Add New Address",
+      "New Address":"Name Address"
     },
     "vi_VN":{
-      "hello":"xin chào"
+      "hello":"xin chào",
+      "Search":"Tìm kiếm",
+      "Recent":"Gần đây",
+      "Clear All":"Xóa tất cả",
+      "Results for":"Kết quả cho",
+      "found":"kết quả",
+      "Men":"Nam",
+      "Women":"Nữ",
+      "Price High":"Giá Tằng",
+      "Price Low":"Giá Giảm",
+      "Reset":"Đặt lại",
+      "Apply":"Áp dụng",
+      "All":"Tất cả"
     }
   };
   final _box = GetStorage();

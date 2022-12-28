@@ -30,6 +30,7 @@ import 'package:sneaker_app/screen/ForgotPassPage.dart';
 import 'package:sneaker_app/screen/HomePage.dart';
 import 'package:sneaker_app/screen/LoginPage.dart';
 import 'package:sneaker_app/screen/MainPage.dart';
+import 'package:sneaker_app/screen/MethodPaymentPage.dart';
 import 'package:sneaker_app/screen/Register.dart';
 import 'package:sneaker_app/screen/PageTest.dart';
 import 'package:sneaker_app/screen/ReviewPage.dart';
@@ -205,6 +206,13 @@ Route? getRoute(RouteSettings settings) {
       {
         return MaterialPageRoute(
             builder: (context) => const ChooseAddressPage(),
+            settings: settings);
+      }
+    case Routes.choosePayment:
+      {
+        final note = settings.arguments as String;
+        return MaterialPageRoute(
+            builder: (context) => MethodPaymentPage(note: note,),
             settings: settings);
       }
     case Routes.chooseVoucher:

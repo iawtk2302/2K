@@ -74,4 +74,5 @@ dependencies {
     implementation 'com.facebook.android:facebook-login:latest.release'
     implementation 'com.android.support:multidex:1.0.3'
     implementation 'com.google.firebase:firebase-analytics'
+    implementation (name:'zpdk-release-v3.1', ext:'aar')
 }
