@@ -8,6 +8,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sneaker_app/bloc/address/address_bloc.dart';
+import 'package:sneaker_app/bloc/biometric_auth/biometric_auth_bloc.dart';
 import 'package:sneaker_app/bloc/cart/card_bloc.dart';
 import 'package:sneaker_app/bloc/home/home_bloc.dart';
 import 'package:sneaker_app/bloc/home/user_bloc.dart';
@@ -109,7 +110,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => CartBloc()..add(LoadCart())),
         BlocProvider(create: (context) => MyOrderBloc()..add(LoadMyOrder())),
         BlocProvider(create: (context) => ListOrderBloc()),
-        BlocProvider(create: (context) => ReviewBloc())
+        BlocProvider(create: (context) => ReviewBloc()),
+        BlocProvider(
+            create: (context) => BiometricAuthBloc()..add(LoadBiometricAuth())),
       ],
       child: GetMaterialApp(
         translations: LocalizationService(),
