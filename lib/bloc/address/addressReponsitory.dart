@@ -3,10 +3,21 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:sneaker_app/bloc/order/order_bloc.dart';
 import 'package:sneaker_app/model/address.dart';
 import 'package:http/http.dart' as http;
 class AddressReponsitory{
   final addresses = FirebaseFirestore.instance.collection('Address');
+  chooseAddress(Address address)async{
+    await addresses
+      .where('idUser',isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+      .where('isDefault',isEqualTo: true).get().then((value){
+        value.docs.forEach((element) { 
+          addresses.doc(element.id).update({'isDefault':false});
+        });
+      });
+      await addresses.doc(address.idAddress).update({"isDefault":true});
+  }
   getDataAddress()async{
     final List<Address> listAddress=[];
     await addresses.orderBy('isDefault',descending: true).where('idUser',isEqualTo: FirebaseAuth.instance.currentUser!.uid)

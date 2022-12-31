@@ -54,12 +54,10 @@ class _EditProfileState extends State<EditProfile> {
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
-          title: const Center(
-            child: Text(
-              "Edit Your Profile",
-              style:
-                  TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
-            ),
+          title: Text(
+            "Edit Your Profile",
+            style:
+                TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
           ),
         ),
         body: Container(

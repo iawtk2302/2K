@@ -37,6 +37,27 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
       final total=shipping+totalProduct;
       emit(OrderLoaded(selectedAddress,selectedAddress,listAddress,totalProduct,shipping,total,listProduct,listTypeShipping,null,null,listVoucher,0));
     });
+     on<LoadOrderParameter>((event, emit) async {
+      emit(OrderLoading());
+      // final shipping=await OrderReponsitory().caculateShipping(selectedAddress);
+      List<Voucher>listVoucher=await VoucherRepository().getVoucher();
+      List<Address> listAddress=await AddressReponsitory().getDataAddress();
+      Address? selectedAddress=await AddressReponsitory().getAddressDefault();
+      List<ProductCart> listProduct=event.listProduct;
+      // await OrderReponsitory().getTypeShipping(selectedAddress!);
+      double shipping=0;
+      List<TypeShipping> listTypeShipping=[];
+      if(selectedAddress==null){
+        shipping=0;
+      }
+      else{
+        listTypeShipping=await OrderReponsitory().getTypeShipping(selectedAddress);
+        shipping=await OrderReponsitory().caculateShipping(selectedAddress,listTypeShipping[0])/10000; 
+      } 
+      final totalProduct=OrderReponsitory().caculateTotalProduct(listProduct);
+      final total=shipping+totalProduct;
+      emit(OrderLoaded(selectedAddress,selectedAddress,listAddress,totalProduct,shipping,total,listProduct,listTypeShipping,null,null,listVoucher,0));
+    });
     on<ChooseAddress>((event, emit) async{
       final state=this.state as OrderLoaded;
       emit(OrderLoading());

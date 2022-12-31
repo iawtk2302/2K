@@ -33,7 +33,7 @@ class CheckoutPage extends StatefulWidget {
 class _CheckoutPageState extends State<CheckoutPage> {
   @override
   void initState() {
-    BlocProvider.of<OrderBloc>(context).add(LoadOrder());
+    BlocProvider.of<OrderBloc>(context).add(LoadOrderParameter(widget.listProduct));
     super.initState();
   }
 

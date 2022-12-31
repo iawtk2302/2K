@@ -13,7 +13,8 @@ class LoadOrder extends OrderEvent {
 }
 
 class LoadOrderParameter extends OrderEvent {
-  const LoadOrderParameter();
+  const LoadOrderParameter(this.listProduct);
+  final List<ProductCart> listProduct;
   @override
   List<Object> get props => [];
 }

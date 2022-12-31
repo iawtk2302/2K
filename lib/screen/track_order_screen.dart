@@ -168,12 +168,6 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
                           onPressed: () {
                             List<ProductCart> tempList = state.listProduct;
                             solvePrimaryButton(state.listProduct);
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //       builder: (context) => CheckoutPage(
-                            //           listProduct: state.listProduct),
-                            //     ));
                           },
                           text: getText().tr,
                           hasLeftIcon: false,
@@ -236,7 +230,7 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
       case 'completed':
       case 'canceled':
         print(state);
-        Navigator.pushNamed(context, Routes.checkout, arguments: state);
+        Navigator.pushNamed(context, Routes.checkout,arguments: state);
         break;
       case 'packing':
         showDialog<String>(

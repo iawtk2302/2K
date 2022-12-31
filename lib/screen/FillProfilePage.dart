@@ -44,11 +44,9 @@ class _FillProfilePageState extends State<FillProfilePage> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: Center(
-          child: Text(
-            "Fill Your Profile",
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
-          ),
+        title: Text(
+          "Fill Your Profile",
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
         ),
       ),
       body: Container(

@@ -36,3 +36,4 @@ class CartProductUpdate extends CartEvent {
   @override
   List<Object> get props => [];
 }
+

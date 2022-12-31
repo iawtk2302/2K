@@ -130,10 +130,16 @@ class LocalizationService extends Translations {
       "All":"Tất cả"
         },
       };
-
-  }
-  final _box = GetStorage();
+   final _box = GetStorage();
   final _key = 'lang';
+  Locale get locale => _loadLanguageForBox();
+  void switchLang() {
+    Get.updateLocale(_loadLanguageForBox() == Locale("vi", "VN")
+        ? Locale("en", "US")
+        : Locale("vi", "VN"));
+    _saveLangToBox(
+        _loadLanguageForBox() == Locale("vi", "VN") ? "en-US" : "vi-VN");
+  }
   _saveLangToBox(String lang) => _box.write(_key, lang);
   Locale _loadLanguageForBox() {
     if (_box.read(_key) == null) {
@@ -145,14 +151,10 @@ class LocalizationService extends Translations {
         return Locale("en", "US");
       }
     }
+    
   }
+  }
+ 
 
-  Locale get locale => _loadLanguageForBox();
-  void switchLang() {
-    Get.updateLocale(_loadLanguageForBox() == Locale("vi", "VN")
-        ? Locale("en", "US")
-        : Locale("vi", "VN"));
-    _saveLangToBox(
-        _loadLanguageForBox() == Locale("vi", "VN") ? "en-US" : "vi-VN");
-  }
+  
 
