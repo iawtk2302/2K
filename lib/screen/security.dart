@@ -59,7 +59,8 @@ class _SecurityState extends State<Security> {
             children: [
               BlocBuilder<BiometricAuthBloc, BiometricAuthState>(
                 builder: (context, state) {
-                  if (state is BiometricAutLoading) {
+                  if (state is BiometricAutLoading ||
+                      state is BiometricAutNotExist) {
                     return const SizedBox();
                   } else if (state is BiometricAuthLoaded) {
                     return Row(

@@ -8,6 +8,8 @@ abstract class BiometricAuthState extends Equatable {
 
 class BiometricAutLoading extends BiometricAuthState {}
 
+class BiometricAutNotExist extends BiometricAuthState {}
+
 class BiometricAuthLoaded extends BiometricAuthState {
   final bool authenticated;
 
