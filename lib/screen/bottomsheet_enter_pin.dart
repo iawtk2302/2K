@@ -31,8 +31,9 @@ class _BottomSheetEnterPinState extends State<BottomSheetEnterPin> {
   @override
   void didChangeDependencies() async {
     final prefs = await SharedPreferences.getInstance();
-    bool useBiometric = prefs.getBool('useBiometric')!;
-    if (useBiometric) {
+    bool? useBiometric = prefs.getBool('useBiometric');
+    if (useBiometric == null) {
+    } else if (useBiometric) {
       authenticated = await auth.authenticate(
         localizedReason:
             'Scan your fingerprint (or face or whatever) to authenticate',
