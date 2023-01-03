@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sneaker_app/themes/ThemeService.dart';
 
 import '../router/routes.dart';
 
@@ -55,7 +56,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                       quotes[currentIndex],
                       style: GoogleFonts.urbanist(
                         textStyle: const TextStyle(
-                            color: Colors.black,
+                     
                             fontSize: 34,
                             fontWeight: FontWeight.bold),
                       ),
@@ -77,12 +78,12 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                       padding: const EdgeInsets.symmetric(horizontal: 3),
                       child: Container(
                         height: 8,
-                        width: index == currentIndex ? 30 : 8,
+                        width: index == currentIndex ? 35 : 8,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(50),
                             color: index == currentIndex
                                 ? Colors.black
-                                : const Color(0xFFE1E1E1)),
+                                : Color.fromARGB(255, 186, 185, 185)),
                       ),
                     )),
           ),
@@ -103,11 +104,12 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
               height: 55,
               width: size.width * 0.9,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30), color: Colors.black),
+                  borderRadius: BorderRadius.circular(30),color: Colors.black,),
+                  
               child: Center(
                   child: Text(status[currentIndex],
-                      style: const TextStyle(
-                          color: Colors.white,
+                      style: TextStyle(
+                          color:Theme.of(context).primaryColor,
                           fontSize: 18,
                           fontWeight: FontWeight.bold))),
             ),

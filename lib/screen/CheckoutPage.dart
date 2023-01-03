@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:sneaker_app/model/product_cart.dart';
 import 'package:sneaker_app/router/routes.dart';
@@ -55,7 +56,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
               Icons.chevron_left,
             )),
         title: Text(
-          "Checkout",
+          "Checkout".tr,
           style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
         ),
       ),
@@ -73,7 +74,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         child: Text(
-                          "Shipping Address",
+                          "Shipping Address".tr,
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 20),
                         ),
@@ -100,7 +101,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 16),
                         child: Text(
-                          "Order List",
+                          "Order List".tr,
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 20),
                         ),
@@ -123,7 +124,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 16),
                         child: Text(
-                          "Promo",
+                          "Promo".tr,
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 20),
                         ),
@@ -139,7 +140,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         ),
                       ),
                       Text(
-                        "Note",
+                        "Note".tr,
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 20),
                       ),
@@ -155,7 +156,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                 controller: _note,
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
-                                  hintText: 'Enter Note',
+                                  hintText: 'Enter Note'.tr,
                                   hintStyle: TextStyle(
                                       color: Color(0xFF9F9E9E), fontSize: 14),
                                 ),
@@ -183,7 +184,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    'Amount',
+                                    'Amount'.tr,
                                     style:
                                         TextStyle(fontWeight: FontWeight.w600),
                                   ),
@@ -198,7 +199,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    'Shipping',
+                                    'Shipping'.tr,
                                     style:
                                         TextStyle(fontWeight: FontWeight.w600),
                                   ),
@@ -214,7 +215,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          'Promo',
+                                          'Promo'.tr,
                                           style: TextStyle(
                                               fontWeight: FontWeight.w600),
                                         ),
@@ -233,7 +234,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    'Total',
+                                    'Total'.tr,
                                     style:
                                         TextStyle(fontWeight: FontWeight.w600),
                                   ),
@@ -245,7 +246,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 15),
+                        padding: const EdgeInsets.symmetric(vertical: 20),
                         child: Center(
                           // child: CustomElevatedButton(
                           //   text: "Payment",
@@ -275,7 +276,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                           //       ? Colors.black
                           //       : Colors.white,
                           // ),
-                          child: CustomElevatedButton(text: "Continue to Payment", onTap: (){
+                          child: CustomElevatedButton(text: "Continue to Payment".tr, onTap: (){
                             // BlocProvider.of<OrderBloc>(context).add(CreateOrder(_note.text,context));
                             if(state.selectedAddress!=null){
                               Navigator.pushNamed(context, Routes.choosePayment,arguments: _note.text.trim());
@@ -335,7 +336,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         ),
                       ),
                       SizedBox(width: 10),
-                      Text("Add New Address",
+                      Text("Add New Address".tr,
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 18))
                     ],
@@ -369,7 +370,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     children: [
                       Icon(Icons.confirmation_number),
                       SizedBox(width: 10),
-                      Text("Choose voucher",
+                      Text("Choose voucher".tr,
                           style: TextStyle(
                               fontWeight: FontWeight.w500, fontSize: 16))
                     ],

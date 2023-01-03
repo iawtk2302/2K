@@ -78,6 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                       child: Text(
                         "Login To Your Account",
                         style: TextStyle(
+                          color: Colors.black,
                             fontSize: 28, fontWeight: FontWeight.w700),
                       ),
                     ),
@@ -114,6 +115,7 @@ class _LoginPageState extends State<LoginPage> {
                                       prefixIcon: const Icon(
                                         Icons.email,
                                       ),
+                                      hintStyle: TextStyle(color: Color(0xFF9E9E9E)),
                                       focusedBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(10),
                                         borderSide: const BorderSide(
@@ -154,6 +156,7 @@ class _LoginPageState extends State<LoginPage> {
                                   },
                                   textAlignVertical: TextAlignVertical.center,
                                   decoration: InputDecoration(
+                                    hintStyle: TextStyle(color: Color(0xFF9E9E9E)),
                                     border: OutlineInputBorder(
                                         borderRadius:
                                             BorderRadius.circular(10)),
@@ -311,7 +314,7 @@ class _LoginPageState extends State<LoginPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Text(
-                            "Don't have an account? ",
+                            "Don't have an account? ",style:TextStyle(color: Color(0xFF9E9E9E)),
                           ),
                           InkWell(
                             onTap: () {

@@ -116,6 +116,7 @@ class LocalizationService extends Translations {
           "Contact us": "Liên hệ",
           "Customer Service": "Chăm sóc khách hàng",
           "hello":"xin chào",
+          //search screen
       "Search":"Tìm kiếm",
       "Recent":"Gần đây",
       "Clear All":"Xóa tất cả",
@@ -127,7 +128,56 @@ class LocalizationService extends Translations {
       "Price Low":"Giá Giảm",
       "Reset":"Đặt lại",
       "Apply":"Áp dụng",
-      "All":"Tất cả"
+      "All":"Tất cả",
+      "Categories":"Danh mục",
+      "Gender":"Giới tính",
+      "Sort by":"Xếp theo",
+      'Sort & Filter':"Sắp xếp & Lọc",
+      'Price Range':"Phạm vi giá",
+      "Checkout":"Thanh toán",
+      "Shipping Address":"Địa chỉ giao hàng",
+      "Order List":"Danh sách sản phẩm",
+      "Promo":"Khuyến mãi",
+      "Note":"Ghi chú",
+      'Enter Note':"Nhập ghi chú",
+      'Amount':"Tiền sản phẩm",
+      'Shipping':"Phí vận chuyển",
+      'Total':"Tổng cộng",
+      "Continue to Payment":"Tiếp tục thanh toán",
+      "Add New Address":"Thêm địa chỉ mới",
+      "Choose voucher":"Chọn khuyến mãi",
+      //Voucher page
+      "Voucher":"Khuyến mãi",
+      //method payment
+      "Payment Methods":"Phương thức thanh toán",
+      "Select the payment method you want to use.":"Chọn phương thức thanh toán mà bạn muốn sử dụng.",
+      "Cash":"Tiền mặt",
+      "Confirm Payment":"Xác nhận thanh toán",
+      //add address page
+      "New Address":"Địa chỉ mới",
+      "Name":"Tên",
+      "Phone":"Số điện thoại",
+      "Province":"Tỉnh/Thành phố",
+      "District":"Quận/Huyện",
+      "Ward":"Phường/Xã",
+      "Detail":"Chi tiết",
+      "Set as default":"Đặt làm mặc định",
+      "Submit":"Hoàn thành",
+      "Required":"Bắt buộc",
+      "You haven't selected a payment method!":"Bạn chưa chọn phương thức thanh toán!",
+      //update address screen
+      "Update Address":"Cập nhật địa chỉ",
+      "Delete":"Xóa",
+      "Invalid phone":"Số điện thoại không hợp lệ",
+      //Main
+      "Home":"Trang chủ",
+      "Cart":"Giỏ hàng",
+      "Orders":"Đơn hàng",
+      "Profile":"Cá nhân",
+      //Home
+      "Good Morning":"Chào buổi sáng",
+      "Good Afternoon":"Chào buổi trưa",
+      "Good Everning":"Chào buổi chiều"
         },
       };
    final _box = GetStorage();

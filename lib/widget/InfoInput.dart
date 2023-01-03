@@ -52,7 +52,7 @@ class InfoInput extends StatelessWidget {
                       const BorderSide(width: 0, color: Color(0xFFFAFAFA), style: BorderStyle.none),
                 ),
                 filled: true,
-                fillColor: const Color(0xFFFAFAFA)),
+                fillColor: Theme.of(context).cardColor),
           ),
         ),
       ),

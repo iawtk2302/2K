@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:sneaker_app/screen/CartPage.dart';
 import 'package:sneaker_app/screen/FillProfilePage.dart';
 import 'package:sneaker_app/screen/HomePage.dart';
@@ -94,15 +95,15 @@ class _MainPageState extends State<MainPage> {
                 selectedItemColor: Theme.of(context).textTheme.bodyText2!.color,
                 unselectedItemColor: Colors.grey,
                 showUnselectedLabels: true,
-                items: const [
+                items:  [
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.home), label: "Home"),
+                      icon: Icon(Icons.home), label: "Home".tr),
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.shopping_bag), label: "Cart"),
+                      icon: Icon(Icons.shopping_bag), label: "Cart".tr),
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.shopping_cart), label: "Orders"),
+                      icon: Icon(Icons.shopping_cart), label: "Orders".tr),
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.person), label: "Profile"),
+                      icon: Icon(Icons.person), label: "Profile".tr),
                 ]),
           );
         } else {

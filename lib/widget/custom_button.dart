@@ -12,7 +12,7 @@ class CustomElevatedButton extends StatelessWidget {
   Widget build(BuildContext context) { 
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: ThemeService().theme==ThemeMode.dark?Colors.white:Colors.black,
+        backgroundColor:text=="Delete"?Color.fromARGB(255, 232, 75, 88): ThemeService().theme==ThemeMode.dark?Colors.white:Colors.black,
         elevation: 0,
         minimumSize: Size(350,50),
         shape: const RoundedRectangleBorder(
@@ -20,7 +20,7 @@ class CustomElevatedButton extends StatelessWidget {
         )
       ),
       onPressed: onTap,
-      child: Text(text,style: TextStyle(color: ThemeService().theme!=ThemeMode.dark?Colors.white:Colors.black, fontSize: 16, fontWeight: FontWeight.w700),),
+      child: Text(text,style: TextStyle(color:text=="Delete"?Colors.white: ThemeService().theme!=ThemeMode.dark?Colors.white:Colors.black, fontSize: 16, fontWeight: FontWeight.w700),),
     );
   }
 }

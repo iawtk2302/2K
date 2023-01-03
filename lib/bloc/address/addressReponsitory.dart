@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sneaker_app/bloc/order/order_bloc.dart';
 import 'package:sneaker_app/model/address.dart';
@@ -78,6 +79,22 @@ class AddressReponsitory{
     });
     return listWard;
   }
+  removeAddress(Address address)async{
+    await addresses.doc(address.idAddress).delete();
+  }
+  updateAddress(Address address)async{
+    if(address.isDefault!){
+      await addresses
+      .where('idUser',isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+      .where('isDefault',isEqualTo: true).get().then((value){
+        value.docs.forEach((element) { 
+          addresses.doc(element.id).update({'isDefault':false});
+        });
+      });
+      await addresses.doc(address.idAddress).update(address.toJson());
+    }
+    await addresses.doc(address.idAddress).update(address.toJson());
+  }
   addAddress(Address address)async{
     if(address.isDefault!){
       await addresses
@@ -120,11 +137,14 @@ String removeDiacritics(String str) {
   return str;
 }
 
-class Province {
+class Province extends Equatable{
   int? provinceID;
   String? provinceName;
 
-  Province({this.provinceID, this.provinceName});
+  Province(int? provinceID, String? provinceName){
+    this.provinceID=provinceID;
+    this.provinceName=provinceName;
+  }
 
   Province.fromJson(Map<String, dynamic> json) {
     provinceID = json['ProvinceID'];
@@ -133,16 +153,23 @@ class Province {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['ProvinceID'] = this.provinceID;
-    data['ProvinceName'] = this.provinceName;
+    data['provinceID'] = this.provinceID;
+    data['provinceName'] = this.provinceName;
     return data;
   }
+  
+  @override
+  // TODO: implement props
+  List<Object?> get props => [provinceID,provinceName];
 }
-class District {
+class District extends Equatable{
   int? districtID;
   String? districtName;
 
-  District({this.districtID, this.districtName});
+  District(int? districtID,String? districtName){
+    this.districtID=districtID;
+    this.districtName=districtName;
+  }
 
   District.fromJson(Map<String, dynamic> json) {
     districtID = json['DistrictID'];
@@ -155,12 +182,19 @@ class District {
     data['DistrictName'] = this.districtName;
     return data;
   }
+  
+  @override
+  // TODO: implement props
+  List<Object?> get props => [districtID,districtName];
 }
-class Ward {
+class Ward extends Equatable{
   String? wardName;
   String? wardCode;
 
-  Ward({this.wardName});
+  Ward( String? wardCode,String? wardName,){
+    this.wardCode=wardCode;
+    this.wardName=wardName;
+  }
 
   Ward.fromJson(Map<String, dynamic> json) {
     wardName = removeDiacritics(json['WardName']);
@@ -173,4 +207,8 @@ class Ward {
     data['WardCode'] = this.wardCode;
     return data;
   }
+  
+  @override
+  // TODO: implement props
+  List<Object?> get props => [wardName,wardCode];
 }

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:sneaker_app/widget/Loading.dart';
 
 import '../bloc/cart/card_bloc.dart';
@@ -51,7 +52,7 @@ class _MethodPaymentPageState extends State<MethodPaymentPage> {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: CustomAppBar(
-        title: "Payment Methods",
+        title: "Payment Methods".tr,
         onTap: () {
           Navigator.pop(context);
         },
@@ -69,7 +70,7 @@ class _MethodPaymentPageState extends State<MethodPaymentPage> {
               SizedBox(
                 height: 10,
               ),
-              Text("Select the payment method you want to use."),
+              Text("Select the payment method you want to use.".tr),
               SizedBox(
                 height: 20,
               ),
@@ -102,7 +103,7 @@ class _MethodPaymentPageState extends State<MethodPaymentPage> {
                               width: 10,
                             ),
                             Text(
-                              "Cash",
+                              "Cash".tr,
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 16),
                             )
@@ -164,9 +165,19 @@ class _MethodPaymentPageState extends State<MethodPaymentPage> {
               ),
               Spacer(),
               CustomElevatedButton(
-                text: "Confirm Payment",
+                text: "Confirm Payment".tr,
                 onTap: () {
-                  BlocProvider.of<OrderBloc>(context).add(CreateOrder(widget.note,currentIndex==0?"Cash":"ZaloPay",context));
+                  if(currentIndex==-1){
+                    final snackBar = SnackBar(
+            content:  Text("You haven't selected a payment method!".tr),
+            
+          );
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  }
+                  else{
+                    BlocProvider.of<OrderBloc>(context).add(CreateOrder(widget.note,currentIndex==0?"Cash":"ZaloPay",context));
+                  }
+                  
                   // Navigator.pushNamed(context, Routes.choosePayment);
                   
                 },

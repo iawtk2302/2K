@@ -9,7 +9,7 @@ class Loading extends StatelessWidget {
     return Container(
         height: double.infinity,
         width: double.infinity,
-        // color: Colors.white,
+        color: Theme.of(context).scaffoldBackgroundColor,
         child: SpinKitFoldingCube(
           color: Theme.of(context).primaryIconTheme.color,
           size: 50.0,

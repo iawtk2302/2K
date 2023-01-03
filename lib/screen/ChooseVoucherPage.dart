@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:sneaker_app/bloc/address/address_bloc.dart';
 import 'package:sneaker_app/bloc/order/order_bloc.dart';
 import 'package:sneaker_app/widget/CustomAppBar.dart';
@@ -26,7 +27,7 @@ class _ChooseVoucherPageState extends State<ChooseVoucherPage> {
     Size size=MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: CustomAppBar(title: "Voucher",onTap: (){
+      appBar: CustomAppBar(title: "Voucher".tr,onTap: (){
         BlocProvider.of<OrderBloc>(context).add(ChooseVoucher(null));
         Navigator.pop(context);
       },),
@@ -60,7 +61,7 @@ class _ChooseVoucherPageState extends State<ChooseVoucherPage> {
                       }),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16),
-                      child: CustomElevatedButton(text: "Apply", 
+                      child: CustomElevatedButton(text: "Apply".tr, 
                       onTap: (){
                         BlocProvider.of<OrderBloc>(context).add(ApplyVoucher());
                       }, 

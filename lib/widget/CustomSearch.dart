@@ -22,40 +22,43 @@ class CustomSearch extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(10.0),
-      child: Container(
-        child: Theme(
-          data: Theme.of(context).copyWith(
-            colorScheme: ThemeData().colorScheme.copyWith(
-                  primary: Colors.black,
-                ),
-          ),
-          child: Material(
-            color: Theme.of(context).backgroundColor,
-            child: TextField(
-                controller: controller,
-                onSubmitted: onSubmitted,
-                onTap: onTap,
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                  // focusColor: Colors.black,
-
-                  // focusedBorder: OutlineInputBorder(
-                  //   borderRadius: BorderRadius.circular(15),
-                  //   borderSide: BorderSide(
-                  //     width: 1,
-                  //     color: Theme.of(context).scaffoldBackgroundColor,
-                  //   ),
-                  // ),
-                  prefixIcon: prefixIcon,
-                  suffixIcon: suffixIcon,
-                  hintText: hintText,
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(
-                        width: 1,
-                        color: Theme.of(context).scaffoldBackgroundColor),
+      child: InkWell(
+        onTap: onTap,
+        child: Container(
+          child: Theme(
+            data: Theme.of(context).copyWith(
+              colorScheme: ThemeData().colorScheme.copyWith(
+                    primary: Colors.black,
                   ),
-                )),
+            ),
+            child: Material(
+              color: Theme.of(context).backgroundColor,
+              child: TextField(
+                  controller: controller,
+                  onSubmitted: onSubmitted,
+                  enabled: false,
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
+                    // focusColor: Colors.black,
+      
+                    // focusedBorder: OutlineInputBorder(
+                    //   borderRadius: BorderRadius.circular(15),
+                    //   borderSide: BorderSide(
+                    //     width: 1,
+                    //     color: Theme.of(context).scaffoldBackgroundColor,
+                    //   ),
+                    // ),
+                    prefixIcon: prefixIcon,
+                    suffixIcon: suffixIcon,
+                    hintText: hintText,
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(
+                          width: 1,
+                          color: Theme.of(context).scaffoldBackgroundColor),
+                    ),
+                  )),
+            ),
           ),
         ),
       ),

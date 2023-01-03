@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:sneaker_app/router/routes.dart';
+import 'package:sneaker_app/screen/ChooseAddressProfilePage.dart';
 import 'package:sneaker_app/screen/edit_profile.dart';
 import 'package:sneaker_app/screen/help_center.dart';
 import 'package:sneaker_app/screen/security.dart';
@@ -148,6 +149,8 @@ class ProfilePage extends StatelessWidget {
             rightIcon: Icons.chevron_right,
             onPress: () {
               // Navigator.pushNamed(context, Routes.chooseAddress);
+              Navigator.push(context,
+                  MaterialPageRoute(builder: ((context) => const ChooseAddressProfilePage())));
             },
           ),
           ItemProfile(

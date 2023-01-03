@@ -14,6 +14,13 @@ class LoadProductSearch extends SearchEvent {
   List<Object> get props => [query];
 }
 
+class ClearSearch extends SearchEvent {
+  const ClearSearch();
+  @override
+  List<Object> get props => [];
+}
+
+
 class FilterProduct extends SearchEvent {
   const FilterProduct(this.queryText, this.brand, this.gender, this.priceRange, this.sort);
   final String queryText;
