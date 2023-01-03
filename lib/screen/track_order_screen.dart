@@ -19,7 +19,7 @@ import '../widget/tracking_order.dart';
 
 class TrackOrderScreen extends StatefulWidget {
   const TrackOrderScreen({super.key, required this.order});
-  final Order order;
+  final MyOrder order;
   @override
   State<TrackOrderScreen> createState() => _TrackOrderScreenState();
 }

@@ -7,7 +7,7 @@ class OrderTracking extends StatelessWidget {
     Key? key,
     required this.order,
   }) : super(key: key);
-  final Order order;
+  final MyOrder order;
   @override
   Widget build(BuildContext context) {
     return Container(

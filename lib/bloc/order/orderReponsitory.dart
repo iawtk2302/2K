@@ -130,9 +130,9 @@ class OrderReponsitory{
     // clearProduct();
     }
     }
-    // Navigator.popUntil(context, (Route<dynamic> predicate) => predicate.isFirst);
-    // BlocProvider.of<CartBloc>(context).add(LoadCart());
-    // clearProduct();
+    Navigator.popUntil(context, (Route<dynamic> predicate) => predicate.isFirst);
+    BlocProvider.of<CartBloc>(context).add(LoadCart());
+    clearProduct();
   }
   void showSuccessDialog(BuildContext context){
   showDialog(context: context, 
