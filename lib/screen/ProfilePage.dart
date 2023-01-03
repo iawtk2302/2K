@@ -66,28 +66,28 @@ class ProfilePage extends StatelessWidget {
                                 NetworkImage(state.user.image!, scale: 1),
                           ),
                         ),
-                        Positioned(
-                            bottom: 2,
-                            right: 5,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                color: Theme.of(context).primaryIconTheme.color,
-                              ),
-                              height: 22,
-                              width: 22,
-                              child: IconButton(
-                                  // focusColor: Colors.black,
-                                  padding: EdgeInsets.zero,
-                                  iconSize: 15,
-                                  onPressed: () {},
-                                  splashRadius: 15,
-                                  // style: ButtonStyle(),
-                                  icon: Icon(
-                                    Icons.border_color,
-                                    color: Theme.of(context).primaryColor,
-                                  )),
-                            ))
+                        // Positioned(
+                        //     bottom: 2,
+                        //     right: 5,
+                        //     child: Container(
+                        //       decoration: BoxDecoration(
+                        //         borderRadius: BorderRadius.circular(5),
+                        //         color: Theme.of(context).primaryIconTheme.color,
+                        //       ),
+                        //       height: 22,
+                        //       width: 22,
+                        //       child: IconButton(
+                        //           // focusColor: Colors.black,
+                        //           padding: EdgeInsets.zero,
+                        //           iconSize: 15,
+                        //           onPressed: () {},
+                        //           splashRadius: 15,
+                        //           // style: ButtonStyle(),
+                        //           icon: Icon(
+                        //             Icons.border_color,
+                        //             color: Theme.of(context).primaryColor,
+                        //           )),
+                        //     ))
                       ]),
                     ),
                     const SizedBox(
@@ -149,8 +149,11 @@ class ProfilePage extends StatelessWidget {
             rightIcon: Icons.chevron_right,
             onPress: () {
               // Navigator.pushNamed(context, Routes.chooseAddress);
-              Navigator.push(context,
-                  MaterialPageRoute(builder: ((context) => const ChooseAddressProfilePage())));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: ((context) =>
+                          const ChooseAddressProfilePage())));
             },
           ),
           ItemProfile(

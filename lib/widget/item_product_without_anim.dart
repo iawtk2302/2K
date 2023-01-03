@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:sneaker_app/model/product.dart';
 import 'package:sneaker_app/screen/product_detail.dart';
 
@@ -132,7 +133,7 @@ class _ItemProductWithoutAnimState extends State<ItemProductWithoutAnim> {
                 child: Align(
                   alignment: Alignment.bottomLeft,
                   child: Text(
-                    '\$' + '${widget.product.price}' + '.00',
+                    convertPrice(widget.product.price!),
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   ),
                 ),
@@ -143,5 +144,11 @@ class _ItemProductWithoutAnimState extends State<ItemProductWithoutAnim> {
         )
       ]),
     );
+  }
+
+  String convertPrice(double price) {
+    final format = NumberFormat("###,###.###", "tr_TR");
+
+    return format.format(price);
   }
 }

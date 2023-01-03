@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:sneaker_app/model/detail_product.dart';
 import 'package:sneaker_app/model/product_cart.dart';
 
@@ -158,7 +159,7 @@ class _ProductDetailState extends State<ProductDetail> {
                           child: IconButton(
                             icon: Icon(
                               Icons.arrow_back,
-                              color: Theme.of(context).primaryColor,
+                              color: Theme.of(context).iconTheme.color,
                             ),
                             onPressed: () {
                               Navigator.pop(context, isLiked);
@@ -330,10 +331,10 @@ class _ProductDetailState extends State<ProductDetail> {
                           height: 5,
                         ),
                         Text(
-                          '\$${widget.product.price}' '.00',
+                          '${convertPrice(widget.product.price!)}',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 25,
+                              fontSize: 22,
                               fontFamily: 'Urbanist'),
                         )
                       ],
@@ -414,6 +415,11 @@ class _ProductDetailState extends State<ProductDetail> {
   //     ],
   //   );
   // }
+  String convertPrice(double price) {
+    final format = NumberFormat("###,###.###", "tr_TR");
+
+    return format.format(price);
+  }
 
   Widget getCategorySize() {
     return Column(

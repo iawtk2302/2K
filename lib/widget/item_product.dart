@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:sneaker_app/model/product.dart';
 
@@ -198,7 +199,7 @@ class _ItemProductState extends State<ItemProduct> {
                           child: Align(
                             alignment: Alignment.topLeft,
                             child: Text(
-                              '\$' + '${widget.product.price}' + '.00',
+                              convertPrice(widget.product.price!),
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 18),
                             ),
@@ -213,5 +214,11 @@ class _ItemProductState extends State<ItemProduct> {
         );
       },
     );
+  }
+
+  String convertPrice(double price) {
+    final format = NumberFormat("###,###.###", "tr_TR");
+
+    return format.format(price);
   }
 }

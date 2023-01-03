@@ -25,16 +25,19 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
                 name: element.get('name'),
                 imageUrl: element.get('imageUrl')));
           }));
-      await docProduct.limit(6).get().then((value) => value.docs.forEach((element) {
-            tempProduct.add(Product(
-                gender: element.get('gender') as List<dynamic>,
-                            idCategory: element.get('idCategory'),
-                            description: element.get('description'),
-                            name: element.get('name'),
-                            idProduct: element.get('idProduct'),
-                            image: element.get('image') as List<dynamic>,
-                            price: element.get('price')));
-          }));
+      await docProduct
+          .limit(6)
+          .get()
+          .then((value) => value.docs.forEach((element) {
+                tempProduct.add(Product(
+                    gender: element.get('gender') as List<dynamic>,
+                    idCategory: element.get('idCategory'),
+                    description: element.get('description'),
+                    name: element.get('name'),
+                    idProduct: element.get('idProduct'),
+                    image: element.get('image') as List<dynamic>,
+                    price: element.get('price')));
+              }));
       await docBanner
           // .limit(1)
           .get()
@@ -48,7 +51,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           id: 'jasfw',
           name: 'More',
           imageUrl: 'https://cdn-icons-png.flaticon.com/512/8469/8469246.png'));
-      emit(HomeLoaded(listBrand: tempList, banner: tempBanner, listProduct: tempProduct));
+      emit(HomeLoaded(
+          listBrand: tempList, banner: tempBanner, listProduct: tempProduct));
     });
   }
 }
