@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:sneaker_app/bloc/address/addressReponsitory.dart';
+import 'package:sneaker_app/bloc/home/user_bloc.dart';
 import 'package:sneaker_app/bloc/order/orderReponsitory.dart';
 import 'package:sneaker_app/bloc/order/voucherRepository.dart';
 import 'package:sneaker_app/model/product_cart.dart';
@@ -107,8 +108,9 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
       emit(OrderLoaded(state.selectedAddress,state.tempAddress,state.listAddress,totalProduct,state.priceShipping,totalProduct+state.priceShipping,state.listProduct,state.listTypeShipping,null,null,state.listVoucher,0));
     });
     on<CreateOrder>((event, emit) async {
+      final user=UserBloc().state as UserExist;
       final state=this.state as OrderLoaded;
-      await OrderReponsitory().createOrder(state.listProduct, state.selectedVoucher==null?"":state.selectedVoucher!.idVoucher!, state.total, event.note,state.selectedAddress!.idAddress!.toString(),event.methodPayment,event.context);
+      await OrderReponsitory().createOrder(state.listProduct, state.selectedVoucher==null?"":state.selectedVoucher!.idVoucher!, state.total, event.note,state.selectedAddress!,event.methodPayment,event.context);
       await OrderReponsitory().clearProduct();
     });
   }

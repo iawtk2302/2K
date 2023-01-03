@@ -5,7 +5,11 @@ packages:
     dependency: transitive
     description:
       name: _flutterfire_internals
+<<<<<<< HEAD
       sha256: "2f428053492f92303e42c9afa8e3a78ad1886760e7b594e2b5a6b6ee47376360"
+=======
+      sha256: "3ff770dfff04a67b0863dff205a0936784de1b87a5e99b11c693fc10e66a9ce3"
+>>>>>>> choose_address_profile
       url: "https://pub.dev"
     source: hosted
     version: "1.0.12"
@@ -93,7 +97,11 @@ packages:
     dependency: "direct main"
     description:
       name: cloud_firestore
+<<<<<<< HEAD
       sha256: "9194bf1845ee073bea64ec94e72c9dcf5d15f755e96496d8ccfee9def38b666f"
+=======
+      sha256: a851106a2169c15614047b75ea10d0346650352c6669ab482306572aa4ed9a7d
+>>>>>>> choose_address_profile
       url: "https://pub.dev"
     source: hosted
 <<<<<<< HEAD
@@ -105,7 +113,11 @@ packages:
     dependency: transitive
     description:
       name: cloud_firestore_platform_interface
+<<<<<<< HEAD
       sha256: d023142c18c28b2610c23c196e829c96976569cc2aa2f8e45328ae8a64c428d1
+=======
+      sha256: "1fac512fef2bfe84ca7f372defbd9dd8efb108be96854db9023739a5b2aa9977"
+>>>>>>> choose_address_profile
       url: "https://pub.dev"
     source: hosted
     version: "5.10.1"
@@ -113,7 +125,11 @@ packages:
     dependency: transitive
     description:
       name: cloud_firestore_web
+<<<<<<< HEAD
       sha256: "3d7d4fa8c1dc5a1f7cb33985ae0ab9924d33d76d4959fe26aed84b7d282887e3"
+=======
+      sha256: "3fd9581c1447b6e8db6d0f19d0140b196a70ecf582bd1f71e7141fe9abf10ddb"
+>>>>>>> choose_address_profile
       url: "https://pub.dev"
     source: hosted
     version: "3.2.1"
@@ -193,7 +209,11 @@ packages:
     dependency: "direct main"
     description:
       name: firebase_auth
+<<<<<<< HEAD
       sha256: ca3034d35d6ca894487ec80aa1162a135fef7c5d0abef8154789cbeea3a6deaf
+=======
+      sha256: "7367433993439cff038d99f5da708048218f8c080cec008d06acb81750b61744"
+>>>>>>> choose_address_profile
       url: "https://pub.dev"
     source: hosted
 <<<<<<< HEAD
@@ -205,7 +225,11 @@ packages:
     dependency: transitive
     description:
       name: firebase_auth_platform_interface
+<<<<<<< HEAD
       sha256: ab20ecbc411726e139250a49fa03fe1ae0105fd990c5330b2a148ec08dfb140b
+=======
+      sha256: "325d934e21826b3e7030f5018ef61927e2083b4c4fb25218ddef6ffc0012b717"
+>>>>>>> choose_address_profile
       url: "https://pub.dev"
     source: hosted
 <<<<<<< HEAD
@@ -217,7 +241,11 @@ packages:
     dependency: transitive
     description:
       name: firebase_auth_web
+<<<<<<< HEAD
       sha256: bbe4f4fffcc378ca05c3d8ff33853be86dd27d0fafc85a953acaf5190531b6f9
+=======
+      sha256: "3fb9fafcd3541005a309c1a696f7df6294893a0c44f010f4ed1b0ded4793c858"
+>>>>>>> choose_address_profile
       url: "https://pub.dev"
     source: hosted
 <<<<<<< HEAD
@@ -229,7 +257,11 @@ packages:
     dependency: "direct main"
     description:
       name: firebase_core
+<<<<<<< HEAD
       sha256: "4f1d7c13a909e82ff026679c9b8493cdeb35a9c76bc46c42bf9e2240c9e57e80"
+=======
+      sha256: c129209ba55f3d4272c89fb4a4994c15bea77fb6de63a82d45fb6bc5c94e4355
+>>>>>>> choose_address_profile
       url: "https://pub.dev"
     source: hosted
 <<<<<<< HEAD
@@ -249,7 +281,11 @@ packages:
     dependency: transitive
     description:
       name: firebase_core_web
+<<<<<<< HEAD
       sha256: "839f1b48032a61962792cea1225fae030d4f27163867f181d6d2072dd40acbee"
+=======
+      sha256: "18b35ce111b0a4266abf723c825bcf9d4e2519d13638cc7f06f2a8dd960c75bc"
+>>>>>>> choose_address_profile
       url: "https://pub.dev"
     source: hosted
     version: "2.1.0"
@@ -257,7 +293,11 @@ packages:
     dependency: "direct main"
     description:
       name: firebase_messaging
+<<<<<<< HEAD
       sha256: "6126f8f6f3bba6e3ffff05300711615c388eb31e0a7431cebe5514f6572cbdff"
+=======
+      sha256: dc010a6436333029fba858415fe65887c3fe44d8f6e6ea162bb8d3dd764fbcb6
+>>>>>>> choose_address_profile
       url: "https://pub.dev"
     source: hosted
     version: "14.2.1"
@@ -265,7 +305,11 @@ packages:
     dependency: transitive
     description:
       name: firebase_messaging_platform_interface
+<<<<<<< HEAD
       sha256: "71f120e8b405a172cb0088a2cd62fd8b77be0f0c942a5bda411b80268c1702f8"
+=======
+      sha256: abda2d766486096eb1c568c7b20aef46180596c8b0708190b929133ff03e0a8d
+>>>>>>> choose_address_profile
       url: "https://pub.dev"
     source: hosted
     version: "4.2.10"
@@ -273,7 +317,11 @@ packages:
     dependency: transitive
     description:
       name: firebase_messaging_web
+<<<<<<< HEAD
       sha256: b7c5e019c4ecf3a512c4a0f00a4a9c1f260eb11872380a91f35983387488ce94
+=======
+      sha256: "7a0ce957bd2210e8636325152234728874dad039f1c7271ba1be5c752fdc5888"
+>>>>>>> choose_address_profile
       url: "https://pub.dev"
     source: hosted
     version: "3.2.11"
@@ -281,7 +329,11 @@ packages:
     dependency: "direct main"
     description:
       name: firebase_storage
+<<<<<<< HEAD
       sha256: "1fe46462c9632db0f62db5b9f1abcb8d4232a6d3e7098d745f5790b71dedc822"
+=======
+      sha256: "1801785c8bce9b0b262f5daf36e1a48907620147b8065a25e3ad7ae2e890fc11"
+>>>>>>> choose_address_profile
       url: "https://pub.dev"
     source: hosted
 <<<<<<< HEAD
@@ -293,7 +345,11 @@ packages:
     dependency: transitive
     description:
       name: firebase_storage_platform_interface
+<<<<<<< HEAD
       sha256: a4a1bed8764baf9b6d377d9870ebb2c65e13a38bc813cfaaf0ac2a37d422bcdd
+=======
+      sha256: "3abc5b687731b7e221ea2b867ddc40ed2f6bdb510dcc3d6cd5d73b25ad750485"
+>>>>>>> choose_address_profile
       url: "https://pub.dev"
     source: hosted
 <<<<<<< HEAD
@@ -305,7 +361,11 @@ packages:
     dependency: transitive
     description:
       name: firebase_storage_web
+<<<<<<< HEAD
       sha256: "791516c9170ab6643282807913cf89ebb950d66206eb92ed154a847438047587"
+=======
+      sha256: "6ac00cd227fb863fcf3ab67991cbaafcd0993da88f63be552e4e636bb0928a3c"
+>>>>>>> choose_address_profile
       url: "https://pub.dev"
     source: hosted
 <<<<<<< HEAD
