@@ -92,7 +92,7 @@ class _CartPageState extends State<CartPage> {
                                   style: TextStyle(),
                                 ),
                                 Text(
-                                  '\$${state.cart.calculatePrice()}' + '.00',
+                                  '${state.cart.calculatePrice()}',
                                   style: TextStyle(
                                       // color: Colors.black,
                                       fontWeight: FontWeight.bold,

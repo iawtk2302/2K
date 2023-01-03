@@ -4,7 +4,7 @@ class Product extends Equatable {
   String? idProduct;
   String? idCategory;
   String? name;
-  int? price;
+  double? price;
   List<dynamic>? image;
   String? description;
   List<dynamic>? gender;
@@ -24,7 +24,7 @@ class Product extends Equatable {
     idProduct = json['idProduct'];
     idCategory = json['idCategory'];
     name = json['name'];
-    price = json['price'];
+    price = double.tryParse(json['price'].toString());
     image = json['image'];
     description = json['description'];
     gender = json['gender'];

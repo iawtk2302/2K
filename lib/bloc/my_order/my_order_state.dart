@@ -10,7 +10,7 @@ abstract class MyOrderState extends Equatable {
 class MyOrderLoading extends MyOrderState {}
 
 class MyOrderLoaded extends MyOrderState {
-  final List<Order> listOrder;
+  final List<MyOrder> listOrder;
   const MyOrderLoaded({
     required this.listOrder,
   });

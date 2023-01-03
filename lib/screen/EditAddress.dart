@@ -1,24 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:sneaker_app/bloc/address/address_bloc.dart';
-import 'package:sneaker_app/bloc/address/addressReponsitory.dart';
-import 'package:sneaker_app/widget/Loading.dart';
+import 'package:sneaker_app/bloc/addressProfile/bloc/address_profile_bloc.dart';
+import 'package:sneaker_app/model/address.dart';
 
-import '../bloc/address/address_state.dart';
-import '../bloc/order/order_bloc.dart';
+import '../bloc/address/addressReponsitory.dart';
 import '../widget/InfoInput.dart';
+import '../widget/Loading.dart';
 import '../widget/custom_button.dart';
 
-class AddAddressPage extends StatefulWidget {
-  const AddAddressPage({super.key});
-
+class EditAddressPage extends StatefulWidget {
+  const EditAddressPage({super.key, required this.address});
+  final Address address;
   @override
-  State<AddAddressPage> createState() => _AddAddressPageState();
+  State<EditAddressPage> createState() => _EditAddressPageState();
 }
 
-class _AddAddressPageState extends State<AddAddressPage> {
+class _EditAddressPageState extends State<EditAddressPage> {
   final _nameController = TextEditingController();
   final _phoneController = TextEditingController();
   final _detailController = TextEditingController();
@@ -27,21 +25,28 @@ class _AddAddressPageState extends State<AddAddressPage> {
   District? district;
   Ward? ward;
   bool isDefault = false;
-
   @override
   void initState() {
-    BlocProvider.of<AddressBloc>(context).add(LoadAddress());
+    // BlocProvider.of<AddressProfileBloc>(context).add(LoadAddressProfile());
+    province=Province(int.parse(widget.address.provinceID.toString()),widget.address.province);
+    district=District(int.parse(widget.address.districtID.toString()),widget.address.district);
+    ward=Ward(widget.address.wardCode,widget.address.ward);
+    isDefault=widget.address.isDefault!;
+    _nameController.text=widget.address.name!;
+    _phoneController.text=widget.address.phone!;
+    _detailController.text=widget.address.detail!;
+    BlocProvider.of<AddressProfileBloc>(context).add(LoadAddressProfile(district!,province!));
     super.initState();
+    
   }
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return BlocBuilder<AddressBloc, AddressState>(
+    return BlocBuilder<AddressProfileBloc, AddressProfileState>(
       builder: (context, state) {
-        if (state is AddressLoading) {
+        if (state is AddressProfileLoading) {
           return Loading();
-        } else if (state is AddressLoaded) {
+        } else if (state is AddressProfileLoaded) {
           return Scaffold(
             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             appBar: AppBar(
@@ -50,14 +55,16 @@ class _AddAddressPageState extends State<AddAddressPage> {
               leading: IconButton(
                 icon: Icon(
                   Icons.chevron_left,
+                  
                 ),
                 onPressed: () {
-                  BlocProvider.of<OrderBloc>(context).add(LoadOrder());
+                  BlocProvider.of<AddressProfileBloc>(context).add(Clear());
                   Navigator.pop(context);
                 },
               ),
               title: Text(
-                "New Address".tr,
+                "Update Address".tr,
+               
               ),
             ),
             body: Container(
@@ -96,7 +103,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
                             }
                             if (!RegExp(r"(84|0[3|5|7|8|9])+([0-9]{8})")
                                 .hasMatch(value)) {
-                              return "Invalid phone";
+                              return "Invalid phone".tr;
                             }
                             return null;
                           }),
@@ -122,9 +129,9 @@ class _AddAddressPageState extends State<AddAddressPage> {
                                     child: Icon(Icons.keyboard_arrow_down),
                                   ),
                                   isExpanded: true,
-                                  onChanged: (value) {
-                                    BlocProvider.of<AddressBloc>(context)
-                                        .add(ChooseProvince(value!));
+                                  onChanged: (value) async{
+                                    BlocProvider.of<AddressProfileBloc>(context).add(ChooseProvince(value!));
+                                    print(value);
                                     setState(() {
                                       province = value;
                                       district = null;
@@ -170,9 +177,8 @@ class _AddAddressPageState extends State<AddAddressPage> {
                                     child: Icon(Icons.keyboard_arrow_down),
                                   ),
                                   isExpanded: true,
-                                  onChanged: (value) {
-                                    BlocProvider.of<AddressBloc>(context)
-                                        .add(ChooseDistrict(value!));
+                                  onChanged: (value) async{
+                                    BlocProvider.of<AddressProfileBloc>(context).add(ChooseDistrict(value!));
                                     setState(() {
                                       district = value;
                                       ward = null;
@@ -252,7 +258,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
                         },
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10.0),
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: SizedBox(
                           width: size.width * 0.85,
                           child: Row(
@@ -264,8 +270,8 @@ class _AddAddressPageState extends State<AddAddressPage> {
                                     fontSize: 16, fontWeight: FontWeight.w600),
                               ),
                               Switch(
-                                activeColor: Colors.black,
-                                onChanged: (bool value) {
+                                activeColor: Theme.of(context).textTheme.bodyText1!.color,
+                                onChanged:widget.address.isDefault!?null: (bool value) {
                                   setState(() {
                                     isDefault = value;
                                   });
@@ -277,24 +283,25 @@ class _AddAddressPageState extends State<AddAddressPage> {
                           ),
                         ),
                       ),
+                      !widget.address.isDefault!?
                       Padding(
-                        padding: const EdgeInsets.only(top: 20.0,bottom: 20),
+                        padding: const EdgeInsets.only(top: 10.0,bottom: 10),
                         child: CustomElevatedButton(
-                            color: Colors.black,
+                            text: "Delete".tr,
+                            onTap: () async{
+                              await AddressReponsitory().removeAddress(widget.address);
+                            }),
+                      ):Container(),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10,bottom: 25),
+                        child: CustomElevatedButton(
                             text: "Submit".tr,
                             onTap: () {
                               if (_formKey.currentState!.validate()) {
-                              BlocProvider.of<AddressBloc>(context).add(
-                                  AddAddress(
-                                      _nameController.text,
-                                      _phoneController.text,
-                                      province!,
-                                      district!,
-                                      ward!,
-                                      _detailController.text,
-                                      state.isCheck == false
-                                          ? true
-                                          : isDefault));
+                                Address temp=Address(widget.address.idAddress, widget.address.idUser, _nameController.text, _phoneController.text, province!.provinceName.toString(), province!.provinceID, district!.districtName, district!.districtID, ward!.wardName, ward!.wardCode, _detailController.text,isDefault);
+                              BlocProvider.of<AddressProfileBloc>(context).add(UpdateAddress(temp));
+                              BlocProvider.of<AddressProfileBloc>(context).add(Clear());
+                              Navigator.pop(context);
                                           }
                             }),
                       )
@@ -305,7 +312,9 @@ class _AddAddressPageState extends State<AddAddressPage> {
             ),
           );
         } else {
-          return Container();
+          return Container(
+            color: Colors.white,
+          );
         }
       },
     );

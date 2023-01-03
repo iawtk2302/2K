@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:sneaker_app/widget/Loading.dart';
 
 import '../bloc/cart/card_bloc.dart';
@@ -52,7 +53,7 @@ class _MethodPaymentPageState extends State<MethodPaymentPage> {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: CustomAppBar(
-        title: "Payment Methods",
+        title: "Payment Methods".tr,
         onTap: () {
           Navigator.pop(context);
         },

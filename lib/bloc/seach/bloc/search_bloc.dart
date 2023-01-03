@@ -30,5 +30,15 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       List<Product> listProduct=await SearchReponsitory().filterProduct(event.queryText,event.brand,event.gender,event.priceRange,event.sort);
       emit(SearchLoaded(listProduct, state.listBrand, state.listGender, state.listSort));
     });
+    on<ClearSearch>((event, emit) async {
+      emit(SearchLoading());
+      List<String> listBrand=['All'];
+      List<String> listGender=['All','Men','Women'];
+      List<String> listSort=['Price High','Price Low'];
+      await FirebaseFirestore.instance.collection('Brand').get().then((value) {
+        listBrand.addAll(value.docs.map((e) => Brand.fromJson(e.data()).name.toString()).toList());});
+      List<Product> listProduct=[];
+      emit(SearchLoaded(listProduct, listBrand, listGender, listSort));
+    });
   }
 }

@@ -14,7 +14,7 @@ class LoadMyOrder extends MyOrderEvent {
 }
 
 class UpdateMyOrder extends MyOrderEvent {
-  final List<Order> listOrder;
+  final List<MyOrder> listOrder;
   const UpdateMyOrder({
     required this.listOrder,
   });
@@ -23,7 +23,7 @@ class UpdateMyOrder extends MyOrderEvent {
 }
 
 class UpdateStateMyOrder extends MyOrderEvent {
-  final Order order;
+  final MyOrder order;
   final String state;
   const UpdateStateMyOrder({
     required this.order,

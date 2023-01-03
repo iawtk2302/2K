@@ -26,7 +26,7 @@ class _OrderCanceledState extends State<OrderCanceled> {
         if (state is MyOrderLoading) {
           return Loading();
         } else if (state is MyOrderLoaded) {
-          List<Order> listOrder = [];
+          List<MyOrder> listOrder = [];
           listOrder = state.listOrder
               .where(
                 (element) => element.state == 'canceled',

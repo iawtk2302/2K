@@ -17,7 +17,7 @@ import 'bottomsheet_remove_product.dart';
 
 class ItemOrder extends StatefulWidget {
   const ItemOrder({super.key, required this.order});
-  final Order order;
+  final MyOrder order;
   @override
   State<ItemOrder> createState() => ItemOrderState();
 }

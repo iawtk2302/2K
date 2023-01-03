@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:sneaker_app/bloc/address/address_bloc.dart';
 import 'package:sneaker_app/bloc/order/order_bloc.dart';
 import 'package:sneaker_app/widget/CustomAppBar.dart';
@@ -24,7 +25,7 @@ class _ChooseAddressPageState extends State<ChooseAddressPage> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: CustomAppBar(title: "Shipping Address",onTap: (){
+      appBar: CustomAppBar(title: "Shipping Address".tr,onTap: (){
         // BlocProvider.of<OrderBloc>(context).add(ChooseAddress(address!));
         Navigator.pop(context);
       },),
@@ -65,7 +66,7 @@ class _ChooseAddressPageState extends State<ChooseAddressPage> {
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       child: CustomElevatedButton(
-                        text: "Add New Address",
+                        text: "Add New Address".tr,
                         onTap: () {
                           Navigator.pushNamed(context, Routes.addAddress);
                         },
@@ -76,7 +77,7 @@ class _ChooseAddressPageState extends State<ChooseAddressPage> {
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       child: CustomElevatedButton(
-                        text: "Apply",
+                        text: "Apply".tr,
                         onTap: () async {
                           BlocProvider.of<OrderBloc>(context)
                               .add(ApplyAddress());

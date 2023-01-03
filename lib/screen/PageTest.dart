@@ -49,7 +49,9 @@ class _PageTest extends State<PageTest> {
         
         elevation: 0,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        leading: IconButton(icon: Icon(Icons.chevron_left),onPressed: (){Navigator.pop(context);},),
+        leading: IconButton(icon: Icon(Icons.chevron_left),onPressed: (){Navigator.pop(context);
+        BlocProvider.of<SearchBloc>(context).add(ClearSearch());
+        },),
         title: Center(child: Text(widget.searchText,style: TextStyle(color: Theme.of(context).textTheme.bodyText2!.color),)),
         actions: [
           Padding(
@@ -113,7 +115,8 @@ class _PageTest extends State<PageTest> {
       );
   }
   _showBottomSheetFilter(){
-    showModalBottomSheet(
+    if(searchLoaded?.listSearch!=null&&searchLoaded!.listSearch.length>0){
+      showModalBottomSheet(
       backgroundColor: Colors.transparent,
       context: context,
       isScrollControlled: true,
@@ -138,7 +141,7 @@ class _PageTest extends State<PageTest> {
             ),
           ),
           SizedBox(height: 20),
-          Text('Sort & Filter',style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold),),
+          Text('Sort & Filter'.tr,style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold),),
           SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -155,7 +158,7 @@ class _PageTest extends State<PageTest> {
               children: [
                 Align(
               alignment: Alignment.centerLeft,
-              child: Text('Categories', style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),)),
+              child: Text('Categories'.tr, style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),)),
             SizedBox(height: 15),
             Container(
               height: 38,
@@ -180,7 +183,7 @@ class _PageTest extends State<PageTest> {
               children: [
                 Align(
               alignment: Alignment.centerLeft,
-              child: Text('Gender', style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),)),
+              child: Text('Gender'.tr, style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),)),
             SizedBox(height: 15),
             Container(
               height: 38,
@@ -203,7 +206,7 @@ class _PageTest extends State<PageTest> {
             padding: const EdgeInsets.only(left: 20),
             child: Align(
               alignment: Alignment.centerLeft,
-              child: Text('Price Range', style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),)),
+              child: Text('Price Range'.tr, style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),)),
           ),
           SizedBox(height: 15),
             
@@ -226,7 +229,7 @@ class _PageTest extends State<PageTest> {
               children: [
                 Align(
               alignment: Alignment.centerLeft,
-              child: Text('Sort by', style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),)),
+              child: Text('Sort by'.tr, style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),)),
             SizedBox(height: 15),
             Container(
               height: 38,
@@ -264,7 +267,7 @@ class _PageTest extends State<PageTest> {
                 child: Container(
                   height: 60,
                   width: 170,
-                  child: Center(child: Text('Reset'.tr,style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),)),
+                  child: Center(child: Text('Reset'.tr.tr,style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),)),
                   decoration: BoxDecoration(
                     color: Color(0xFFE6E6E6),
                     borderRadius: BorderRadius.circular(30)
@@ -276,7 +279,7 @@ class _PageTest extends State<PageTest> {
                 child: Container(
                   height: 60,
                   width: 170,
-                  child: Center(child: Text('Apply'.tr,style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),)),
+                  child: Center(child: Text('Apply'.tr.tr,style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),)),
                   decoration: BoxDecoration(
                     color: Colors.black,
                     borderRadius: BorderRadius.circular(30)
@@ -289,6 +292,7 @@ class _PageTest extends State<PageTest> {
       );
       },);
      });
+    }
   }
   _filter(){
     BlocProvider.of<SearchBloc>(context).add(FilterProduct(widget.searchText.toString(),searchLoaded!.listBrand[currentCategory] , searchLoaded!.listGender[currentGender], values, searchLoaded!.listSort[currentSort]));

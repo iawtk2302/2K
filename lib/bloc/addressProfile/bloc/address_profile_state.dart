@@ -9,14 +9,15 @@ abstract class AddressProfileState extends Equatable {
 
 class AddressProfileInitial extends AddressProfileState {}
 
-class AddressLoading extends AddressProfileState {}
+class AddressProfileLoading extends AddressProfileState {}
 
-class AddressLoaded extends AddressProfileState {
-  const AddressLoaded(this.listProvince, this.listDistrict, this.listWard, this.isCheck);
+class AddressProfileLoaded extends AddressProfileState {
+  const AddressProfileLoaded(this.listProvince, this.listDistrict, this.listWard, this.isCheck);
   final List<Province> listProvince;
   final List<District> listDistrict;
   final List<Ward> listWard;
   final bool isCheck;
+
   @override
-  List<Object> get props => [listProvince,listDistrict,listWard];
+  List<Object> get props => [listProvince,listDistrict,listWard,];
 }

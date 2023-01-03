@@ -5,17 +5,17 @@ import 'package:sneaker_app/model/detail_order.dart';
 import '../model/order.dart';
 
 class MyOrderRepository {
-  Stream<List<Order>> loadMyOrder() {
+  Stream<List<MyOrder>> loadMyOrder() {
     return FirebaseFirestore.instance
         .collection('Order')
         .where('idUser', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
         .snapshots()
         .map((event) {
-      return event.docs.map((e) => Order.fromJson(e.data())).toList();
+      return event.docs.map((e) => MyOrder.fromJson(e.data())).toList();
     });
   }
 
-  void updateStateOrder(Order order, String state) {
+  void updateStateOrder(MyOrder order, String state) {
     try {
       FirebaseFirestore.instance.collection('Order').doc(order.idOrder).update({
         'state': state,

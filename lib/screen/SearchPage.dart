@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:sneaker_app/bloc/seach/bloc/search_bloc.dart';
 import 'package:sneaker_app/model/historySearch.dart';
 import 'package:sneaker_app/router/routes.dart';
@@ -60,14 +61,14 @@ class _SearchPageState extends State<SearchPage> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding:  EdgeInsets.symmetric(horizontal: 16),
           child: Column(
               // mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  padding:  EdgeInsets.symmetric(vertical: 20),
                   child: CustomSearch(
-                    hintText: "Seach",
+                    hintText: "Seach".tr,
                     prefixIcon: Icon(Icons.search),
                     // suffixIcon: Icon(Icons.tune),
                     onSubmitted: _onSubmitted,
@@ -80,7 +81,7 @@ class _SearchPageState extends State<SearchPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      "Recent",
+                      "Recent".tr,
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
@@ -91,7 +92,7 @@ class _SearchPageState extends State<SearchPage> {
                               .doc(FirebaseAuth.instance.currentUser!.uid)
                               .update({'search': []});
                         },
-                        child: Text('Clear All',
+                        child: Text('Clear All'.tr,
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold)))
                   ],

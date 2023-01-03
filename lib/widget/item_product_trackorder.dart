@@ -15,7 +15,7 @@ class Item_Product_TrackOrder extends StatelessWidget {
       required this.order,
       required this.isInModal});
   final ProductCart product;
-  final Order order;
+  final MyOrder order;
   final bool isInModal;
   @override
   Widget build(BuildContext context) {

@@ -7,12 +7,20 @@ abstract class AddressProfileEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class LoadAddress extends AddressProfileEvent {
-  const LoadAddress();
-
+class LoadAddressProfile extends AddressProfileEvent {
+  const LoadAddressProfile(this.district, this.province);
+  final District district;
+  final Province province;
   @override
   List<Object> get props => [];
 }
+
+class Clear extends AddressProfileEvent {
+  const Clear();
+  @override
+  List<Object> get props => [];
+}
+
 
 class ChooseProvince extends AddressProfileEvent {
   const ChooseProvince(this.province);
@@ -41,9 +49,9 @@ class AddAddress extends AddressProfileEvent {
   List<Object> get props => [name,phone,province,district,ward,detail,isDefault];
 }
 
-class ChooseAddress extends AddressProfileEvent{
-  const ChooseAddress(this.address);
-  final AddAddress address;
+class UpdateAddress extends AddressProfileEvent{
+  const UpdateAddress(this.address);
+  final Address address;
   @override
   List<Object> get props => [address];
 }

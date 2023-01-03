@@ -26,6 +26,7 @@ import 'package:sneaker_app/screen/CartPage.dart';
 import 'package:sneaker_app/screen/CheckoutPage.dart';
 import 'package:sneaker_app/screen/ChooseAddressPage.dart';
 import 'package:sneaker_app/screen/ChooseVoucherPage.dart';
+import 'package:sneaker_app/screen/EditAddress.dart';
 import 'package:sneaker_app/screen/FillProfilePage.dart';
 import 'package:sneaker_app/screen/ForgotPassPage.dart';
 import 'package:sneaker_app/screen/HomePage.dart';
@@ -43,7 +44,9 @@ import 'package:sneaker_app/themes/Colors.dart';
 import 'package:sneaker_app/themes/LanguageService.dart';
 import 'package:sneaker_app/themes/ThemeService.dart';
 
+import 'bloc/addressProfile/bloc/address_profile_bloc.dart';
 import 'bloc/product/product_bloc.dart';
+import 'model/address.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await showFlutterNotification(message);
@@ -112,6 +115,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => MyOrderBloc()..add(LoadMyOrder())),
         BlocProvider(create: (context) => ListOrderBloc()),
         BlocProvider(create: (context) => ReviewBloc()),
+        BlocProvider(create: (context) => AddressProfileBloc()),
         BlocProvider(
             create: (context) => BiometricAuthBloc()..add(LoadBiometricAuth())),
       ],
@@ -213,6 +217,13 @@ Route? getRoute(RouteSettings settings) {
         final note = settings.arguments as String;
         return MaterialPageRoute(
             builder: (context) => MethodPaymentPage(note: note,),
+            settings: settings);
+      }
+      case Routes.editAddress:
+      {
+        final temp = settings.arguments as Address;
+        return MaterialPageRoute(
+            builder: (context) => EditAddressPage(address: temp,),
             settings: settings);
       }
     case Routes.chooseVoucher:

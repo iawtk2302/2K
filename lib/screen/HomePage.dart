@@ -49,11 +49,11 @@ class _HomePageState extends State<HomePage> {
 
   _checkTime() {
     if (time > 6 && time <= 12) {
-      quote = "Good Morning";
+      quote = "Good Morning".tr;
     } else if (time > 12 && time < 18) {
-      quote = "Good Afternoon";
+      quote = "Good Afternoon".tr;
     } else {
-      quote = "Good Everning";
+      quote = "Good Everning".tr;
     }
   }
 
