@@ -4,7 +4,7 @@ class Product extends Equatable {
   String? idProduct;
   String? idCategory;
   String? name;
-  int? price;
+  double? price;
   List<dynamic>? image;
   String? description;
   List<dynamic>? gender;

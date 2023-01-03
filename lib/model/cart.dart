@@ -3,15 +3,14 @@ import 'package:equatable/equatable.dart';
 import 'package:sneaker_app/model/product_cart.dart';
 import 'package:sneaker_app/screen/product_detail.dart';
 
-
 class Cart extends Equatable {
   final List<ProductCart> products;
   const Cart({required this.products});
 
-  int calculatePrice() {
-    int totalPrice = 0;
+  double calculatePrice() {
+    double totalPrice = 0;
     products.forEach((element) {
-      totalPrice += element.product!.price! * element.amount!;
+      totalPrice += element.product!.price! * (element.amount)!;
     });
     print(totalPrice);
 
