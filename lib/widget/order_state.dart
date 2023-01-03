@@ -14,7 +14,7 @@ class OrderState extends StatelessWidget {
   }) : super(key: key);
 
   final int statusNum;
-  final Order order;
+  final MyOrder order;
 
   @override
   Widget build(BuildContext context) {

@@ -8,7 +8,7 @@ abstract class ListOrderEvent extends Equatable {
 }
 
 class LoadListOrder extends ListOrderEvent {
-  final Order order;
+  final MyOrder order;
 
   LoadListOrder({required this.order});
 

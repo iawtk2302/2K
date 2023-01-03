@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Order {
+class MyOrder {
   String? idOrder;
   String? idUser;
   double? total;
@@ -12,7 +12,7 @@ class Order {
   Timestamp? dateCompleted;
   Timestamp? dateCanceled;
 
-  Order({
+  MyOrder({
     this.idOrder,
     this.idUser,
     this.idAddress,
@@ -25,7 +25,7 @@ class Order {
     this.dateCanceled,
   });
 
-  Order.fromJson(Map<String, dynamic> json) {
+  MyOrder.fromJson(Map<String, dynamic> json) {
     idOrder = json['idOrder'];
     idUser = json['idUser'];
     idAddress = json['idAddress'];

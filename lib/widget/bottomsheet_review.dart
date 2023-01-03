@@ -17,7 +17,7 @@ import 'custom_textbutton.dart';
 class BottomSheetReview extends StatefulWidget {
   const BottomSheetReview(
       {super.key, required this.order, required this.productCart});
-  final Order order;
+  final MyOrder order;
   final ProductCart productCart;
   @override
   State<BottomSheetReview> createState() => BottomSheetReviewState();
