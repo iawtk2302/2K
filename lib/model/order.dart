@@ -11,6 +11,7 @@ class MyOrder {
   Timestamp? dateCreated;
   Timestamp? dateCompleted;
   Timestamp? dateCanceled;
+  String? detailAddress;
 
   MyOrder({
     this.idOrder,
@@ -23,6 +24,7 @@ class MyOrder {
     this.dateCreated,
     this.dateCompleted,
     this.dateCanceled,
+    this.detailAddress
   });
 
   MyOrder.fromJson(Map<String, dynamic> json) {
@@ -36,6 +38,7 @@ class MyOrder {
     dateCreated = json['dateCreated'];
     dateCompleted = json['dateCompleted'];
     dateCanceled = json['dateCanceled'];
+    detailAddress=json['detailAddress'];
   }
 
   Map<String, dynamic> toJson() {
@@ -50,7 +53,7 @@ class MyOrder {
     data['dateCreated'] = this.dateCreated;
     data['dateCompleted'] = this.dateCompleted;
     data['dateCompleted'] = this.dateCanceled;
-
+    data['detailAddress']=this.detailAddress;
     return data;
   }
 }

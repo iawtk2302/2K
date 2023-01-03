@@ -7,8 +7,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sneaker_app/bloc/cart/card_bloc.dart';
+import 'package:sneaker_app/bloc/home/user_bloc.dart';
 import 'package:sneaker_app/bloc/payment/payment.dart';
 import 'package:sneaker_app/model/order.dart';
+import '../../model/User.dart';
 import '../../model/address.dart';
 import '../../model/product_cart.dart';
 import '../../router/routes.dart';
@@ -92,15 +94,16 @@ class OrderReponsitory{
     
     return listTypeShipping;
   }
-  createOrder(List<ProductCart> list,String idVoucher, double totalPrice, String note, String idAddress, String methodPayment,BuildContext context)async{
+  createOrder(List<ProductCart> list,String idVoucher, double totalPrice, String note, Address address, String methodPayment,BuildContext context)async{
     String? idOrder;
     await order.add({'idUser':FirebaseAuth.instance.currentUser!.uid,
-    'idAddress':idAddress,
+    'idAddress':address.idAddress,
     'idVoucher':idVoucher,
     'state':'packing','note':note,
     'dateCreated':DateTime.now(),
     'dateCompleted':DateTime.now(),
     'dateCanceled':DateTime.now(),
+    'detailAddress':"${address.detail}, ${address.ward}, ${address.district}, ${address.province}",
     'total':totalPrice}).then((value) {
       idOrder=value.id;
       order.doc(value.id).update({'idOrder':value.id});
