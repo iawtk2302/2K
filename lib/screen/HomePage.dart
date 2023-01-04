@@ -140,44 +140,23 @@ class _HomePageState extends State<HomePage> {
               builder: (context, state) {
                 if (state is UserExist) {
                   return Center(
-                    child: Badge(
-                      badgeContent: Text(state.notification.toString()),
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const NotificationPage(),
-                              ));
-                        },
-                        child: const Icon(
-                          Ionicons.notifications_outline,
-                          size: 25,
-                          // color: Colors.black,
-                        ),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => NotificationPage(),
+                            ));
+                      },
+                      child: const Icon(
+                        Ionicons.notifications_outline,
+                        size: 25,
+                        // color: Colors.black,
                       ),
                     ),
                   );
                 } else {
-                  return Center(
-                    child: Badge(
-                      badgeContent: Text("2"),
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => NotificationPage(),
-                              ));
-                        },
-                        child: const Icon(
-                          Ionicons.notifications_outline,
-                          size: 25,
-                          // color: Colors.black,
-                        ),
-                      ),
-                    ),
-                  );
+                  return Container();
                 }
               },
             ),

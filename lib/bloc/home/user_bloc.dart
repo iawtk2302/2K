@@ -39,7 +39,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           );
           if (user.pin != null && user.pin!.isNotEmpty) {
             print(user.pin);
-            emit(UserExist(user,amount));
+            emit(UserExist(user));
           } else {
             emit(UserExistExceptPinCode(user: user));
           }
@@ -61,7 +61,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
             .doc(event.user.idUser)
             .update({
           'pin': event.user.pin,
-        }).then((value) => emit(UserExist(event.user,amount)));
+        }).then((value) => emit(UserExist(event.user)));
       } else {
         emit(UserExistExceptPinCode(user: event.user));
       }
@@ -77,7 +77,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
             .doc(event.user.idUser)
             .update({
           'pin': event.user.pin,
-        }).then((value) => emit(UserExist(event.user,amount)));
+        }).then((value) => emit(UserExist(event.user)));
       }
     });
   }

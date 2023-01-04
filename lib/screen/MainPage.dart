@@ -112,11 +112,15 @@ class _MainPageState extends State<MainPage> {
                                 state.cart.products.length < 10) {
                               return Badge(
                                   badgeContent: Text(
-                                      state.cart.products.length.toString()),
+                                      state.cart.products.length.toString(),
+                                      style: TextStyle(color: Colors.white)),
                                   child: Icon(Icons.shopping_bag));
                             } else {
                               return Badge(
-                                  badgeContent: Text("9+"),
+                                  badgeContent: Text(
+                                    "9+",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
                                   child: Icon(Icons.shopping_bag));
                             }
                           } else {
