@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:badges/badges.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -139,45 +140,24 @@ class _HomePageState extends State<HomePage> {
               builder: (context, state) {
                 if(state is UserExist){
                   return Center(
-                  child: Badge(
-                    label: Text(state.notification.toString()),
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => NotificationPage(),
-                            ));
-                      },
-                      child: const Icon(
-                        Ionicons.notifications_outline,
-                        size: 25,
-                        // color: Colors.black,
-                      ),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => NotificationPage(),
+                          ));
+                    },
+                    child: const Icon(
+                      Ionicons.notifications_outline,
+                      size: 25,
+                      // color: Colors.black,
                     ),
                   ),
                 );
                 }
                 else{
-                  return Center(
-                  child: Badge(
-                    label: Text("2"),
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => NotificationPage(),
-                            ));
-                      },
-                      child: const Icon(
-                        Ionicons.notifications_outline,
-                        size: 25,
-                        // color: Colors.black,
-                      ),
-                    ),
-                  ),
-                );
+                  return Container();
                 }
               },
             ),

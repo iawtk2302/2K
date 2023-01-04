@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -109,12 +110,12 @@ class _MainPageState extends State<MainPage> {
                               return Icon(Icons.shopping_bag);
                             }else if(state.cart.products.length>0&&state.cart.products.length<10){
                               return Badge(
-                              label: Text(state.cart.products.length.toString()),
+                              badgeContent: Text(state.cart.products.length.toString(),style: TextStyle(color: Colors.white)),
                               child: Icon(Icons.shopping_bag));
                             }
                             else{
                               return Badge(
-                              label: Text("9+"),
+                              badgeContent: Text("9+",style: TextStyle(color: Colors.white),),
                               child: Icon(Icons.shopping_bag));
                             }
                           }

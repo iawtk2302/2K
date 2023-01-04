@@ -67,10 +67,10 @@ dependencies:
   get_storage: ^2.0.3
   pin_code_fields: ^7.4.0
   local_auth: ^2.1.2
-
+  badges: ^2.0.3
   sprintf: "^7.0.0"
   crypto: ^3.0.2
-  badges: ^2.0.3
+ 
 dev_dependencies:
   flutter_test:
     sdk: flutter
