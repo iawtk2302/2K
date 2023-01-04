@@ -27,11 +27,7 @@ class _ForgotPassPageState extends State<ForgotPassPage> {
           onTap: () {
             Navigator.pushReplacementNamed(context, Routes.login);
           },
-          child: const Icon(
-            Icons.chevron_left,
-            color: Colors.black,
-            size: 42
-          ),
+          child: const Icon(Icons.chevron_left, color: Colors.black, size: 42),
         ),
       ),
       body: Form(
@@ -56,8 +52,8 @@ class _ForgotPassPageState extends State<ForgotPassPage> {
               child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text("Password",
-                      style:
-                          TextStyle(fontSize: 32, fontWeight: FontWeight.w700))),
+                      style: TextStyle(
+                          fontSize: 32, fontWeight: FontWeight.w700))),
             ),
             const SizedBox(height: 20),
             const Padding(
@@ -118,29 +114,37 @@ class _ForgotPassPageState extends State<ForgotPassPage> {
               height: 20,
             ),
             Padding(
-                  padding: const EdgeInsets.only(top: 25,),
-                  child: InkWell(
-                    onTap: () {
-                      if (_formKey.currentState!.validate()) {
-                        showDialog(context: context, builder: (context) => const Center(child: CircularProgressIndicator(color: Colors.black),),);
-                        FirebaseService().resetPass(_emailController.text.trim(), context);
-                        Navigator.pushReplacementNamed(context, Routes.login);
-                      }
-                    },
-                    child: Container(                
-                      child: Center(
-                          child: Text("Reset Password",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.white))),
-                      height: 50,
-                      width: size.width * 0.8,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: Colors.black),
-                    ),
-                  ),
+              padding: const EdgeInsets.only(
+                top: 25,
+              ),
+              child: InkWell(
+                onTap: () {
+                  if (_formKey.currentState!.validate()) {
+                    showDialog(
+                      context: context,
+                      builder: (context) => const Center(
+                        child: CircularProgressIndicator(color: Colors.black),
+                      ),
+                    );
+                    FirebaseService()
+                        .resetPass(_emailController.text.trim(), context);
+                    Navigator.pushReplacementNamed(context, Routes.login);
+                  }
+                },
+                child: Container(
+                  child: Center(
+                      child: Text("Reset Password",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              color: Colors.white))),
+                  height: 50,
+                  width: size.width * 0.8,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      color: Colors.black),
                 ),
+              ),
+            ),
           ]),
         ),
       ),

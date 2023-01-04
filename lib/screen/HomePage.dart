@@ -472,7 +472,7 @@ class _HomePageState extends State<HomePage> {
               scrollDirection: Axis.horizontal,
               itemCount: state.listBrand.length,
               itemBuilder: ((context, index) =>
-                  BrandCatagory(brand: state.listBrand[index]))),
+                  BrandCategory(brand: state.listBrand[index]))),
         ),
       ),
     ]);
