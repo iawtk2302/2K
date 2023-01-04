@@ -9,6 +9,7 @@ import 'package:sneaker_app/screen/set_fingerprint.dart';
 import 'package:sneaker_app/widget/custom_textbutton.dart';
 
 import '../bloc/biometric_auth/biometric_auth_bloc.dart';
+import 'change_password.dart';
 import 'change_pin_code.dart';
 
 class Security extends StatefulWidget {
@@ -110,12 +111,12 @@ class _SecurityState extends State<Security> {
                 height: 16,
               ),
               CustomTextButton(
-                  onPressed: () async {
-                    final prefs = SharedPreferences.getInstance();
-                    prefs.then((value) {
-                      print(value.getBool('useBiometric')!);
-                      print('light' + light.toString());
-                    });
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ChangePassword(),
+                        ));
                   },
                   text: 'Change Password',
                   hasLeftIcon: false,

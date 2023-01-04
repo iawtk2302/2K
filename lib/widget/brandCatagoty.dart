@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sneaker_app/model/brand.dart';
+import 'package:sneaker_app/screen/brand_screen.dart';
 import 'package:sneaker_app/screen/product_screen.dart';
 
 import '../bloc/product/product_bloc.dart';
 
-class BrandCatagory extends StatelessWidget {
-  const BrandCatagory({
+class BrandCategory extends StatelessWidget {
+  const BrandCategory({
     Key? key,
     required this.brand,
   }) : super(key: key);
@@ -29,6 +30,11 @@ class BrandCatagory extends StatelessWidget {
                       builder: ((context) => ProductScreen(
                             brand: brand,
                           ))));
+            } else {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: ((context) => const BrandScreen())));
             }
           },
           elevation: 2.0,
