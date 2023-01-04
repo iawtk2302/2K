@@ -8,4 +8,10 @@ abstract class FavoriteState extends Equatable {
 
 class FavoriteLoading extends FavoriteState {}
 
-class FavoriteLoaded extends FavoriteState {}
+class FavoriteLoaded extends FavoriteState {
+  final List<Product> products;
+
+  FavoriteLoaded(this.products);
+  @override
+  List<Object> get props => [products];
+}

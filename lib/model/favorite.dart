@@ -12,7 +12,7 @@ class Favorite {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['idFavorite'] = this.idFavorite;
     data['idUser'] = this.idUser;
     data['idProduct'] = this.idProduct;

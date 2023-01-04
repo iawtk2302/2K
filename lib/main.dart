@@ -10,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sneaker_app/bloc/address/address_bloc.dart';
 import 'package:sneaker_app/bloc/biometric_auth/biometric_auth_bloc.dart';
 import 'package:sneaker_app/bloc/cart/card_bloc.dart';
+import 'package:sneaker_app/bloc/favorite/favorite_bloc.dart';
 import 'package:sneaker_app/bloc/home/home_bloc.dart';
 import 'package:sneaker_app/bloc/home/user_bloc.dart';
 import 'package:sneaker_app/bloc/list_order/list_order_bloc.dart';
@@ -118,6 +119,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => AddressProfileBloc()),
         BlocProvider(
             create: (context) => BiometricAuthBloc()..add(LoadBiometricAuth())),
+        BlocProvider(create: (context) => FavoriteBloc()),
       ],
       child: GetMaterialApp(
         translations: LocalizationService(),
@@ -216,14 +218,18 @@ Route? getRoute(RouteSettings settings) {
       {
         final note = settings.arguments as String;
         return MaterialPageRoute(
-            builder: (context) => MethodPaymentPage(note: note,),
+            builder: (context) => MethodPaymentPage(
+                  note: note,
+                ),
             settings: settings);
       }
-      case Routes.editAddress:
+    case Routes.editAddress:
       {
         final temp = settings.arguments as Address;
         return MaterialPageRoute(
-            builder: (context) => EditAddressPage(address: temp,),
+            builder: (context) => EditAddressPage(
+                  address: temp,
+                ),
             settings: settings);
       }
     case Routes.chooseVoucher:
