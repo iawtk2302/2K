@@ -8,6 +8,7 @@ import 'package:sneaker_app/screen/ChooseAddressProfilePage.dart';
 import 'package:sneaker_app/screen/edit_profile.dart';
 import 'package:sneaker_app/screen/help_center.dart';
 import 'package:sneaker_app/screen/security.dart';
+import 'package:sneaker_app/screen/update_profile.dart';
 import 'package:sneaker_app/service/FirebaseService.dart';
 import 'package:sneaker_app/themes/LanguageService.dart';
 import 'package:sneaker_app/widget/custom_switch_button.dart';
@@ -137,7 +138,7 @@ class ProfilePage extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => EditProfile(user: user),
+                        builder: (context) => UpdateProfile(user: user),
                       ));
                 },
               );

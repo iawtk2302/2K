@@ -75,7 +75,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return BlocBuilder<UserBloc, UserState>(
       builder: (context, state) {
-        if (state is UserInitial) {
+        if (state is UserLoading) {
           return Loading();
         } else if (state is UserExistExceptPinCode) {
           return const EnterPinCode(
@@ -95,7 +95,7 @@ class _MainPageState extends State<MainPage> {
                 selectedItemColor: Theme.of(context).textTheme.bodyText2!.color,
                 unselectedItemColor: Colors.grey,
                 showUnselectedLabels: true,
-                items:  [
+                items: [
                   BottomNavigationBarItem(
                       icon: Icon(Icons.home), label: "Home".tr),
                   BottomNavigationBarItem(

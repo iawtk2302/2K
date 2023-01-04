@@ -7,7 +7,7 @@ abstract class UserState extends Equatable {
   List<Object> get props => [];
 }
 
-class UserInitial extends UserState {}
+// class UserInitial extends UserState {}
 
 class UserLoading extends UserState {}
 

@@ -418,7 +418,7 @@ class _ProductDetailState extends State<ProductDetail> {
   String convertPrice(double price) {
     final format = NumberFormat("###,###.###", "tr_TR");
 
-    return format.format(price);
+    return format.format(price) + 'đ';
   }
 
   Widget getCategorySize() {

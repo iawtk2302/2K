@@ -23,6 +23,7 @@ import '../widget/item_SpecialOffer.dart';
 import 'SearchScreen.dart';
 import 'SpecialOffer.dart';
 import 'enter_pin_code.dart';
+import 'favorite_screen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -154,7 +155,11 @@ class _HomePageState extends State<HomePage> {
               onPressed: () {
                 Customer user =
                     (context.read<UserBloc>().state as UserExist).user;
-                print(user.pin);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => FavoriteScreen(),
+                    ));
               },
               icon: const Icon(
                 Ionicons.heart_outline,

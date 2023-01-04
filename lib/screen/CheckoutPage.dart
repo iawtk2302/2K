@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:sneaker_app/model/product_cart.dart';
 import 'package:sneaker_app/router/routes.dart';
@@ -34,8 +35,15 @@ class CheckoutPage extends StatefulWidget {
 class _CheckoutPageState extends State<CheckoutPage> {
   @override
   void initState() {
-    BlocProvider.of<OrderBloc>(context).add(LoadOrderParameter(widget.listProduct));
+    BlocProvider.of<OrderBloc>(context)
+        .add(LoadOrderParameter(widget.listProduct));
     super.initState();
+  }
+
+  String convertPrice(double price) {
+    final format = NumberFormat("###,###.###", "tr_TR");
+
+    return format.format(price) + 'đ';
   }
 
   final LocalAuthentication auth = LocalAuthentication();
@@ -188,7 +196,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                     style:
                                         TextStyle(fontWeight: FontWeight.w600),
                                   ),
-                                  Text(state.totalProduct.toStringAsFixed(2))
+                                  Text(convertPrice(state.totalProduct))
                                 ],
                               ),
                             ),
@@ -203,7 +211,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                     style:
                                         TextStyle(fontWeight: FontWeight.w600),
                                   ),
-                                  Text(state.priceShipping.toStringAsFixed(2))
+                                  Text(convertPrice(state.priceShipping))
                                 ],
                               ),
                             ),
@@ -220,8 +228,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                               fontWeight: FontWeight.w600),
                                         ),
                                         Text("-" +
-                                            state.priceVoucher
-                                                .toStringAsFixed(2))
+                                            convertPrice(state.priceVoucher))
                                       ],
                                     ),
                                   )
@@ -238,7 +245,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                     style:
                                         TextStyle(fontWeight: FontWeight.w600),
                                   ),
-                                  Text(state.total.toStringAsFixed(2))
+                                  Text(convertPrice(state.total))
                                 ],
                               ),
                             ),
@@ -276,15 +283,22 @@ class _CheckoutPageState extends State<CheckoutPage> {
                           //       ? Colors.black
                           //       : Colors.white,
                           // ),
-                          child: CustomElevatedButton(text: "Continue to Payment".tr, onTap: (){
-                            // BlocProvider.of<OrderBloc>(context).add(CreateOrder(_note.text,context));
-                            if(state.selectedAddress!=null){
-                              Navigator.pushNamed(context, Routes.choosePayment,arguments: _note.text.trim());
-                            }
-                            else{
-                              OrderReponsitory().showErrorDialog(context);
-                            }
-                          },colorText: ThemeService().theme==ThemeMode.dark?Colors.black:Colors.white,),
+                          child: CustomElevatedButton(
+                            text: "Continue to Payment".tr,
+                            onTap: () {
+                              // BlocProvider.of<OrderBloc>(context).add(CreateOrder(_note.text,context));
+                              if (state.selectedAddress != null) {
+                                Navigator.pushNamed(
+                                    context, Routes.choosePayment,
+                                    arguments: _note.text.trim());
+                              } else {
+                                OrderReponsitory().showErrorDialog(context);
+                              }
+                            },
+                            colorText: ThemeService().theme == ThemeMode.dark
+                                ? Colors.black
+                                : Colors.white,
+                          ),
                         ),
                       ),
                     ]),

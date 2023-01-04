@@ -63,6 +63,13 @@ class LocalizationService extends Translations {
           "Track Order": "Theo dõi",
           "Re-Order": "Đặt lại",
           "View Detail": "Xem chi tiết",
+          "You don\'t have an order yet": "Bạn chưa có đơn hàng nào",
+          "You don\'t have an active orders at this time":
+              "Hiện tại bạn chưa có đơn hàng nào giao",
+          "You don\'t have a complete orders at this time":
+              "Hiện tại bạn chưa có đơn hàng nào hoàn thành",
+          "You don\'t have a cancel orders at this time":
+              "Hiện tại bạn chưa có đơn hàng nào đã hủy",
           // Track order
           "Package is Packing": "Đơn hàng đang đóng gói",
           "Package in Delivery": "Đơn hàng đang vận chuyển",
@@ -90,6 +97,9 @@ class LocalizationService extends Translations {
           "Privacy Police": "Chính sách riêng tư",
           "Help Center": "Trung tâm trợ giúp",
           "Sign out": "Đăng xuất",
+          "Biometric ID": "Bảo mật vân tay",
+          "Change PIN": "Thay đổi mã PIN",
+          "Change Password": "Thay đổi mật khẩu",
           // Product Screen
           "All": "Tât cả",
           "Sort & Filter": "Sắp xếp & lọc",
@@ -115,72 +125,74 @@ class LocalizationService extends Translations {
           "Help Center": "Trung tâm trợ giúp",
           "Contact us": "Liên hệ",
           "Customer Service": "Chăm sóc khách hàng",
-          "hello":"xin chào",
+          "hello": "xin chào",
           //search screen
-      "Search":"Tìm kiếm",
-      "Recent":"Gần đây",
-      "Clear All":"Xóa tất cả",
-      "Results for":"Kết quả cho",
-      "found":"kết quả",
-      "Men":"Nam",
-      "Women":"Nữ",
-      "Price High":"Giá Tằng",
-      "Price Low":"Giá Giảm",
-      "Reset":"Đặt lại",
-      "Apply":"Áp dụng",
-      "All":"Tất cả",
-      "Categories":"Danh mục",
-      "Gender":"Giới tính",
-      "Sort by":"Xếp theo",
-      'Sort & Filter':"Sắp xếp & Lọc",
-      'Price Range':"Phạm vi giá",
-      "Checkout":"Thanh toán",
-      "Shipping Address":"Địa chỉ giao hàng",
-      "Order List":"Danh sách sản phẩm",
-      "Promo":"Khuyến mãi",
-      "Note":"Ghi chú",
-      'Enter Note':"Nhập ghi chú",
-      'Amount':"Tiền sản phẩm",
-      'Shipping':"Phí vận chuyển",
-      'Total':"Tổng cộng",
-      "Continue to Payment":"Tiếp tục thanh toán",
-      "Add New Address":"Thêm địa chỉ mới",
-      "Choose voucher":"Chọn khuyến mãi",
-      //Voucher page
-      "Voucher":"Khuyến mãi",
-      //method payment
-      "Payment Methods":"Phương thức thanh toán",
-      "Select the payment method you want to use.":"Chọn phương thức thanh toán mà bạn muốn sử dụng.",
-      "Cash":"Tiền mặt",
-      "Confirm Payment":"Xác nhận thanh toán",
-      //add address page
-      "New Address":"Địa chỉ mới",
-      "Name":"Tên",
-      "Phone":"Số điện thoại",
-      "Province":"Tỉnh/Thành phố",
-      "District":"Quận/Huyện",
-      "Ward":"Phường/Xã",
-      "Detail":"Chi tiết",
-      "Set as default":"Đặt làm mặc định",
-      "Submit":"Hoàn thành",
-      "Required":"Bắt buộc",
-      "You haven't selected a payment method!":"Bạn chưa chọn phương thức thanh toán!",
-      //update address screen
-      "Update Address":"Cập nhật địa chỉ",
-      "Delete":"Xóa",
-      "Invalid phone":"Số điện thoại không hợp lệ",
-      //Main
-      "Home":"Trang chủ",
-      "Cart":"Giỏ hàng",
-      "Orders":"Đơn hàng",
-      "Profile":"Cá nhân",
-      //Home
-      "Good Morning":"Chào buổi sáng",
-      "Good Afternoon":"Chào buổi trưa",
-      "Good Everning":"Chào buổi chiều"
+          "Search": "Tìm kiếm",
+          "Recent": "Gần đây",
+          "Clear All": "Xóa tất cả",
+          "Results for": "Kết quả cho",
+          "found": "kết quả",
+          "Men": "Nam",
+          "Women": "Nữ",
+          "Price High": "Giá Tằng",
+          "Price Low": "Giá Giảm",
+          "Reset": "Đặt lại",
+          "Apply": "Áp dụng",
+          "All": "Tất cả",
+          "Categories": "Danh mục",
+          "Gender": "Giới tính",
+          "Sort by": "Xếp theo",
+          'Sort & Filter': "Sắp xếp & Lọc",
+          'Price Range': "Phạm vi giá",
+          "Checkout": "Thanh toán",
+          "Shipping Address": "Địa chỉ giao hàng",
+          "Order List": "Danh sách sản phẩm",
+          "Promo": "Khuyến mãi",
+          "Note": "Ghi chú",
+          'Enter Note': "Nhập ghi chú",
+          'Amount': "Tiền sản phẩm",
+          'Shipping': "Phí vận chuyển",
+          'Total': "Tổng cộng",
+          "Continue to Payment": "Tiếp tục thanh toán",
+          "Add New Address": "Thêm địa chỉ mới",
+          "Choose voucher": "Chọn khuyến mãi",
+          //Voucher page
+          "Voucher": "Khuyến mãi",
+          //method payment
+          "Payment Methods": "Phương thức thanh toán",
+          "Select the payment method you want to use.":
+              "Chọn phương thức thanh toán mà bạn muốn sử dụng.",
+          "Cash": "Tiền mặt",
+          "Confirm Payment": "Xác nhận thanh toán",
+          //add address page
+          "New Address": "Địa chỉ mới",
+          "Name": "Tên",
+          "Phone": "Số điện thoại",
+          "Province": "Tỉnh/Thành phố",
+          "District": "Quận/Huyện",
+          "Ward": "Phường/Xã",
+          "Detail": "Chi tiết",
+          "Set as default": "Đặt làm mặc định",
+          "Submit": "Hoàn thành",
+          "Required": "Bắt buộc",
+          "You haven't selected a payment method!":
+              "Bạn chưa chọn phương thức thanh toán!",
+          //update address screen
+          "Update Address": "Cập nhật địa chỉ",
+          "Delete": "Xóa",
+          "Invalid phone": "Số điện thoại không hợp lệ",
+          //Main
+          "Home": "Trang chủ",
+          "Cart": "Giỏ hàng",
+          "Orders": "Đơn hàng",
+          "Profile": "Cá nhân",
+          //Home
+          "Good Morning": "Chào buổi sáng",
+          "Good Afternoon": "Chào buổi trưa",
+          "Good Everning": "Chào buổi chiều"
         },
       };
-   final _box = GetStorage();
+  final _box = GetStorage();
   final _key = 'lang';
   Locale get locale => _loadLanguageForBox();
   void switchLang() {
@@ -190,6 +202,7 @@ class LocalizationService extends Translations {
     _saveLangToBox(
         _loadLanguageForBox() == Locale("vi", "VN") ? "en-US" : "vi-VN");
   }
+
   _saveLangToBox(String lang) => _box.write(_key, lang);
   Locale _loadLanguageForBox() {
     if (_box.read(_key) == null) {
@@ -201,10 +214,5 @@ class LocalizationService extends Translations {
         return Locale("en", "US");
       }
     }
-    
   }
-  }
- 
-
-  
-
+}

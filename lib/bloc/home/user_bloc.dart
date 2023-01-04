@@ -11,7 +11,7 @@ part 'user_event.dart';
 part 'user_state.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
-  UserBloc() : super(UserInitial()) {
+  UserBloc() : super(UserLoading()) {
     on<LoadInfoUser>((event, emit) async {
       emit(UserLoading());
       await FirebaseFirestore.instance
@@ -32,7 +32,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
             pin: value.get('pin'),
             dateOfbirth: value.get('dateOfbirth').toString(),
           );
-          if (user.pin != null) {
+          if (user.pin != null && user.pin!.isNotEmpty) {
             print(user.pin);
             emit(UserExist(user));
           } else {
@@ -46,7 +46,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     });
     on<SubmitInfoUser>((event, emit) async {
       emit(UserLoading());
-      if (event.user.pin != null) {
+      if (event.user.pin != null && event.user.pin!.isNotEmpty) {
         await FirebaseFirestore.instance
             .collection('User')
             .doc(event.user.idUser)
@@ -58,7 +58,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       }
     });
     on<UpdatePinUser>((event, emit) async {
-      if (event.user.pin != null || event.user.pin == '') {
+      if (event.user.pin != null && event.user.pin!.isNotEmpty) {
         await FirebaseFirestore.instance
             .collection('User')
             .doc(event.user.idUser)

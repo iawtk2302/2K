@@ -1,9 +1,16 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:sneaker_app/model/order.dart';
+
+import '../bloc/home/user_bloc.dart';
 
 class DeliveryAddress extends StatelessWidget {
+  final MyOrder order;
   const DeliveryAddress({
     Key? key,
+    required this.order,
   }) : super(key: key);
 
   @override
@@ -35,19 +42,29 @@ class DeliveryAddress extends StatelessWidget {
               ),
             ],
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 35, vertical: 8),
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text('Nguyen Ba Khanh'),
-              Text('+84 396891589'),
-              Text(
-                'Nha van hoa sinh vien, Linh Trung, Thu Duc, Ho Chi Minh',
-                // maxLines: 3,
-                // textAlign: TextAlign.left,
-                // overflow: TextOverflow.ellipsis,
-              )
-            ]),
+          BlocBuilder<UserBloc, UserState>(
+            builder: (context, state) {
+              if (state is UserExist) {
+                return Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 35, vertical: 8),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                            state.user.firstName! + " " + state.user.lastName!),
+                        Text(state.user.phone!),
+                        Text(
+                          order.detailAddress!,
+                          // maxLines: 3,
+                          // textAlign: TextAlign.left,
+                          // overflow: TextOverflow.ellipsis,
+                        )
+                      ]),
+                );
+              } else {
+                return SizedBox();
+              }
+            },
           )
         ],
       ),

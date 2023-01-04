@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:sneaker_app/bloc/my_order/my_order_bloc.dart';
 import 'package:sneaker_app/model/detail_order.dart';
 import 'package:sneaker_app/model/order.dart';
@@ -48,6 +49,11 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
   // getDetailProduct() async {
   //   final docDetailOrder = FirebaseFirestore.instance.collection('DetailOrder');
   // }
+  String convertPrice(double price) {
+    final format = NumberFormat("###,###.###", "tr_TR");
+
+    return format.format(price) + 'đ';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -117,7 +123,7 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
                               fontFamily: 'Urbanist'),
                         ),
                         Text(
-                          '\$${(widget.order.total)?.toStringAsFixed(2)}',
+                          convertPrice(widget.order.total!) + 'đ',
                           style: TextStyle(
                               // color: Colors.black,
                               fontWeight: FontWeight.w700,
@@ -154,7 +160,7 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
                     // const SizedBox(
                     //   height: 40,
                     // ),
-                    DeliveryAddress(),
+                    DeliveryAddress(order: widget.order),
                     const SizedBox(
                       height: 16,
                     ),
@@ -230,7 +236,7 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
       case 'completed':
       case 'canceled':
         print(state);
-        Navigator.pushNamed(context, Routes.checkout,arguments: state);
+        Navigator.pushNamed(context, Routes.checkout, arguments: state);
         break;
       case 'packing':
         showDialog<String>(

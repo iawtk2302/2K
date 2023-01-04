@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:sneaker_app/widget/cart_item.dart';
 import 'package:sneaker_app/widget/order_item.dart';
 
@@ -32,24 +33,58 @@ class _OrderCanceledState extends State<OrderCanceled> {
                 (element) => element.state == 'canceled',
               )
               .toList();
-          return SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+          if (listOrder.isEmpty) {
+            return Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(
-                  listOrder.length,
-                  (index) => Column(
-                        children: [
-                          ItemOrder(
-                            order: listOrder[index],
-                          ),
-                          SizedBox(
-                            height: 16,
-                          )
-                        ],
-                      )),
-            ),
-          );
+              children: [
+                const Image(
+                    image: AssetImage('assets/images/clipboard.png'),
+                    width: 250,
+                    height: 250,
+                    fit: BoxFit.contain),
+                const SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  'You don\'t have an order yet'.tr,
+                  style: const TextStyle(
+                      // color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      fontFamily: 'Urbanist'),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  'You don\'t have a cancel orders at this time'.tr,
+                  style: const TextStyle(
+                      // color: Colors.black,
+                      fontSize: 16,
+                      fontFamily: 'Urbanist'),
+                )
+              ],
+            );
+          } else {
+            return SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(
+                    listOrder.length,
+                    (index) => Column(
+                          children: [
+                            ItemOrder(
+                              order: listOrder[index],
+                            ),
+                            SizedBox(
+                              height: 16,
+                            )
+                          ],
+                        )),
+              ),
+            );
+          }
         } else
           return SizedBox();
       },

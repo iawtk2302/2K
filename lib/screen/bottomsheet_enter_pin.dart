@@ -106,11 +106,16 @@ class _BottomSheetEnterPinState extends State<BottomSheetEnterPin> {
                 length: 4,
 
                 onCompleted: (value) {
-                  Customer user =
-                      (context.read<UserBloc>().state as UserExist).user;
-                  if (value == user.pin) {
-                    Navigator.pop(context, true);
-                  } else {}
+                  UserState userState = context.read<UserBloc>().state;
+                  if (userState is UserLoading) {
+                    print('ngu');
+                    return;
+                  } else if (userState is UserExist) {
+                    Customer user = userState.user;
+                    if (value == user.pin) {
+                      Navigator.pop(context, true);
+                    } else {}
+                  }
                 },
                 onChanged: (value) {
                   print(controller.text);

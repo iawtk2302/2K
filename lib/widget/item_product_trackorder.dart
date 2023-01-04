@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:sneaker_app/model/order.dart';
 import 'package:sneaker_app/model/product.dart';
 import 'package:sneaker_app/model/product_cart.dart';
@@ -17,6 +18,12 @@ class Item_Product_TrackOrder extends StatelessWidget {
   final ProductCart product;
   final MyOrder order;
   final bool isInModal;
+  String convertPrice(double price) {
+    final format = NumberFormat("###,###.###", "tr_TR");
+
+    return format.format(price) + 'đ';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -85,7 +92,7 @@ class Item_Product_TrackOrder extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            '\$${(product.product!.price)?.toStringAsFixed(2)}',
+                            '${product.product!.price} đ',
                             style: TextStyle(
                                 fontFamily: 'Urbanist',
                                 fontWeight: FontWeight.bold,

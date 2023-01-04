@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:sneaker_app/model/detail_order.dart';
 import 'package:sneaker_app/model/order.dart';
 import 'package:sneaker_app/model/product.dart';
@@ -46,6 +47,12 @@ class ItemOrderState extends State<ItemOrder> {
     });
 
     super.initState();
+  }
+
+  String convertPrice(double price) {
+    final format = NumberFormat("###,###.###", "tr_TR");
+
+    return format.format(price);
   }
 
   @override
@@ -183,7 +190,7 @@ class ItemOrderState extends State<ItemOrder> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '\$${(widget.order.total)?.toStringAsFixed(2)}',
+                          convertPrice(widget.order.total!) + 'đ',
                           style: const TextStyle(
                               fontFamily: 'Urbanist',
                               fontWeight: FontWeight.bold,
