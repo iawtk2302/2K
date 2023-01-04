@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sneaker_app/router/routes.dart';
@@ -67,8 +68,8 @@ class _SecurityState extends State<Security> {
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          'Biometric ID',
+                        Text(
+                          'Biometric ID'.tr,
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.w500),
                         ),
@@ -103,7 +104,7 @@ class _SecurityState extends State<Security> {
                           builder: (context) => ChangePinCode(),
                         ));
                   },
-                  text: 'Change PIN',
+                  text: 'Change PIN'.tr,
                   hasLeftIcon: false,
                   isDark: true,
                   hasRightIcon: false),
@@ -118,7 +119,7 @@ class _SecurityState extends State<Security> {
                           builder: (context) => ChangePassword(),
                         ));
                   },
-                  text: 'Change Password',
+                  text: 'Change Password'.tr,
                   hasLeftIcon: false,
                   isDark: true,
                   hasRightIcon: false)

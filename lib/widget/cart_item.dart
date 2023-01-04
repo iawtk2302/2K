@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:sneaker_app/model/product.dart';
 import 'package:sneaker_app/model/product_cart.dart';
 import 'package:sneaker_app/screen/product_detail.dart';
@@ -37,14 +38,14 @@ class _CartItemState extends State<CartItem> {
       child: Container(
         decoration: BoxDecoration(
             color: Theme.of(context).cardColor,
-            borderRadius: BorderRadius.all(Radius.circular(30))),
+            borderRadius: const BorderRadius.all(Radius.circular(30))),
         height: 160,
         width: double.infinity,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 20),
           child: Row(children: [
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(30))),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16.0),
@@ -53,7 +54,7 @@ class _CartItemState extends State<CartItem> {
                     imageUrl: widget.product.product!.image![0]),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 15,
             ),
             Expanded(
@@ -72,8 +73,13 @@ class _CartItemState extends State<CartItem> {
                               maxLines: 2,
                               textAlign: TextAlign.left,
                               overflow: TextOverflow.ellipsis,
+<<<<<<< HEAD
                               style: TextStyle(
                                   
+=======
+                              style: const TextStyle(
+                                  fontFamily: 'Urbanist',
+>>>>>>> 36fce546461b38355d14a4ff334ea33c1f9ad6db
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16),
                             ),
@@ -93,7 +99,7 @@ class _CartItemState extends State<CartItem> {
                                                 product: widget.product,
                                               )));
                                     },
-                                    icon: Icon(Icons.delete))),
+                                    icon: const Icon(Icons.delete))),
                           )
                         ],
                       )),
@@ -103,8 +109,13 @@ class _CartItemState extends State<CartItem> {
                         children: [
                           Text(
                             'Size = ' + '${widget.product.size}',
+<<<<<<< HEAD
                             style: TextStyle(
                                 
+=======
+                            style: const TextStyle(
+                                fontFamily: 'Urbanist',
+>>>>>>> 36fce546461b38355d14a4ff334ea33c1f9ad6db
                                 fontWeight: FontWeight.w500),
                           )
                         ],
@@ -115,22 +126,29 @@ class _CartItemState extends State<CartItem> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
+<<<<<<< HEAD
                             '\$${(widget.product.product!.price)?.toStringAsFixed(2)}',
                             style: TextStyle(
                                 
+=======
+                            convertPrice(widget.product.product!.price!) + 'đ',
+                            style: const TextStyle(
+                                fontFamily: 'Urbanist',
+>>>>>>> 36fce546461b38355d14a4ff334ea33c1f9ad6db
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
                           Material(
                             color: Theme.of(context).backgroundColor,
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(20)),
                             child: Container(
                               width: 100,
                               height: 35,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                   // color: Color(0xFFF3F3F3),
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(20))),
@@ -140,7 +158,7 @@ class _CartItemState extends State<CartItem> {
                                     builder: (context, state) {
                                       return IconButton(
                                         splashRadius: 17,
-                                        icon: Icon(
+                                        icon: const Icon(
                                           Icons.horizontal_rule,
                                           size: 18,
                                         ),
@@ -166,7 +184,7 @@ class _CartItemState extends State<CartItem> {
                                   child: Center(
                                       child: Text(
                                     quantity.toString(),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
                                         fontFamily: 'Urbanist'),
@@ -177,7 +195,7 @@ class _CartItemState extends State<CartItem> {
                                     builder: (context, state) {
                                       return IconButton(
                                         splashRadius: 17,
-                                        icon: Icon(
+                                        icon: const Icon(
                                           Icons.add,
                                           size: 18,
                                         ),
@@ -206,5 +224,11 @@ class _CartItemState extends State<CartItem> {
         ),
       ),
     );
+  }
+
+  String convertPrice(double price) {
+    final format = NumberFormat("###,###.###", "tr_TR");
+
+    return format.format(price);
   }
 }

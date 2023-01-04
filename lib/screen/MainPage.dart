@@ -76,7 +76,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return BlocBuilder<UserBloc, UserState>(
       builder: (context, state) {
-        if (state is UserInitial) {
+        if (state is UserLoading) {
           return Loading();
         } else if (state is UserExistExceptPinCode) {
           return const EnterPinCode(

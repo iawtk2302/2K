@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:sneaker_app/model/product.dart';
 import 'package:sneaker_app/model/product_cart.dart';
 import 'package:sneaker_app/screen/product_detail.dart';
@@ -24,6 +25,12 @@ class _OrderItemState extends State<OrderItem> {
   void initState() {
     quantity = widget.product.amount!;
     super.initState();
+  }
+
+  String convertPrice(double price) {
+    final format = NumberFormat("###,###.###", "tr_TR");
+
+    return format.format(price) + 'đ';
   }
 
   @override
@@ -87,11 +94,15 @@ class _OrderItemState extends State<OrderItem> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            '\$${(widget.product.product!.price)?.toStringAsFixed(2)}',
+                            '${convertPrice(widget.product.product!.price!)}',
                             style: TextStyle(
+<<<<<<< HEAD
                                 
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16),
+=======
+                                fontWeight: FontWeight.bold, fontSize: 16),
+>>>>>>> 36fce546461b38355d14a4ff334ea33c1f9ad6db
                           ),
                           SizedBox(
                             width: 10,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:sneaker_app/widget/Loading.dart';
 import 'package:sneaker_app/widget/order_item.dart';
 
@@ -32,7 +33,7 @@ final ProductCart productCart =
 
 class _OrderActiveState extends State<OrderActive> {
   Future<void> _refreshRandomNumbers() =>
-      Future.delayed(Duration(seconds: 2), () {
+      Future.delayed(const Duration(seconds: 2), () {
         setState(() {});
       });
   @override
@@ -40,7 +41,7 @@ class _OrderActiveState extends State<OrderActive> {
     return BlocBuilder<MyOrderBloc, MyOrderState>(
       builder: (context, state) {
         if (state is MyOrderLoading) {
-          return Loading();
+          return const Loading();
         } else if (state is MyOrderLoaded) {
           List<MyOrder> listOrder = [];
           listOrder = state.listOrder
@@ -49,41 +50,41 @@ class _OrderActiveState extends State<OrderActive> {
                     element.state != 'completed' && element.state != 'canceled',
               )
               .toList();
-          if (listOrder.length <= 0)
+          if (listOrder.isEmpty) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image(
+                const Image(
                     image: AssetImage('assets/images/clipboard.png'),
                     width: 250,
                     height: 250,
                     fit: BoxFit.contain),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Text(
-                  'You don\'t have an order yet',
-                  style: TextStyle(
-                      color: Colors.black,
+                  'You don\'t have an order yet'.tr,
+                  style: const TextStyle(
+                      // color: Colors.black,
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
                       fontFamily: 'Urbanist'),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Text(
-                  'You don\'t have an active orders at this time',
-                  style: TextStyle(
-                      color: Colors.black,
+                  'You don\'t have an active orders at this time'.tr,
+                  style: const TextStyle(
+                      // color: Colors.black,
                       fontSize: 16,
                       fontFamily: 'Urbanist'),
                 )
               ],
             );
-          else
+          } else {
             return Container(
-              padding: EdgeInsets.only(top: 20),
+              padding: const EdgeInsets.only(top: 20),
               color: Theme.of(context).scaffoldBackgroundColor,
               child: SingleChildScrollView(
                 child: Column(
@@ -98,7 +99,7 @@ class _OrderActiveState extends State<OrderActive> {
                                 ItemOrder(
                                   order: listOrder[index],
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 16,
                                 )
                               ],
@@ -107,8 +108,10 @@ class _OrderActiveState extends State<OrderActive> {
                 ),
               ),
             );
-        } else
-          return SizedBox();
+          }
+        } else {
+          return const SizedBox();
+        }
       },
     );
   }

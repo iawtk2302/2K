@@ -149,6 +149,6 @@ class _ItemProductWithoutAnimState extends State<ItemProductWithoutAnim> {
   String convertPrice(double price) {
     final format = NumberFormat("###,###.###", "tr_TR");
 
-    return format.format(price);
+    return format.format(price) + 'đ';
   }
 }
