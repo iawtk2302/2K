@@ -51,15 +51,11 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     });
     on<SubmitInfoUser>((event, emit) async {
       emit(UserLoading());
-<<<<<<< HEAD
       final notifications=FirebaseFirestore.instance.collection("Notification");
   List<NotificationCustom> listNotification=[];
   await notifications.get().then((value) => listNotification.addAll(value.docs.map((e) => NotificationCustom.fromJson(e.data())).toList()));
   int amount=listNotification.length;
       if (event.user.pin != null) {
-=======
-      if (event.user.pin != null && event.user.pin!.isNotEmpty) {
->>>>>>> 36fce546461b38355d14a4ff334ea33c1f9ad6db
         await FirebaseFirestore.instance
             .collection('User')
             .doc(event.user.idUser)
@@ -71,15 +67,11 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       }
     });
     on<UpdatePinUser>((event, emit) async {
-<<<<<<< HEAD
       final notifications=FirebaseFirestore.instance.collection("Notification");
   List<NotificationCustom> listNotification=[];
   await notifications.get().then((value) => listNotification.addAll(value.docs.map((e) => NotificationCustom.fromJson(e.data())).toList()));
   int amount=listNotification.length;
       if (event.user.pin != null || event.user.pin == '') {
-=======
-      if (event.user.pin != null && event.user.pin!.isNotEmpty) {
->>>>>>> 36fce546461b38355d14a4ff334ea33c1f9ad6db
         await FirebaseFirestore.instance
             .collection('User')
             .doc(event.user.idUser)

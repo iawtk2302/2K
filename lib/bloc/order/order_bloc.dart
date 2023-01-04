@@ -31,18 +31,8 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
         listTypeShipping =
             await OrderReponsitory().getTypeShipping(selectedAddress);
         shipping = await OrderReponsitory()
-                .caculateShipping(selectedAddress, listTypeShipping[0]) /
-            10000;
+                .caculateShipping(selectedAddress, listTypeShipping[0]);
       }
-<<<<<<< HEAD
-      else{
-        listTypeShipping=await OrderReponsitory().getTypeShipping(selectedAddress);
-        shipping=await OrderReponsitory().caculateShipping(selectedAddress,listTypeShipping[0]); 
-      } 
-      final totalProduct=OrderReponsitory().caculateTotalProduct(listProduct);
-      final total=shipping+totalProduct;
-      emit(OrderLoaded(selectedAddress,selectedAddress,listAddress,totalProduct,shipping,total,listProduct,listTypeShipping,null,null,listVoucher,0));
-=======
       final totalProduct = OrderReponsitory().caculateTotalProduct(listProduct);
       final total = shipping + totalProduct;
       emit(OrderLoaded(
@@ -58,7 +48,6 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
           null,
           listVoucher,
           0));
->>>>>>> 36fce546461b38355d14a4ff334ea33c1f9ad6db
     });
     on<LoadOrderParameter>((event, emit) async {
       emit(OrderLoading());
@@ -76,18 +65,8 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
         listTypeShipping =
             await OrderReponsitory().getTypeShipping(selectedAddress);
         shipping = await OrderReponsitory()
-                .caculateShipping(selectedAddress, listTypeShipping[0]) /
-            10000;
+                .caculateShipping(selectedAddress, listTypeShipping[0]);
       }
-<<<<<<< HEAD
-      else{
-        listTypeShipping=await OrderReponsitory().getTypeShipping(selectedAddress);
-        shipping=await OrderReponsitory().caculateShipping(selectedAddress,listTypeShipping[0]); 
-      } 
-      final totalProduct=OrderReponsitory().caculateTotalProduct(listProduct);
-      final total=shipping+totalProduct;
-      emit(OrderLoaded(selectedAddress,selectedAddress,listAddress,totalProduct,shipping,total,listProduct,listTypeShipping,null,null,listVoucher,0));
-=======
       final totalProduct = OrderReponsitory().caculateTotalProduct(listProduct);
       final total = shipping + totalProduct;
       emit(OrderLoaded(
@@ -103,7 +82,6 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
           null,
           listVoucher,
           0));
->>>>>>> 36fce546461b38355d14a4ff334ea33c1f9ad6db
     });
     on<ChooseAddress>((event, emit) async {
       final state = this.state as OrderLoaded;
@@ -217,10 +195,6 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
           0));
     });
     on<CreateOrder>((event, emit) async {
-<<<<<<< HEAD
-      final state=this.state as OrderLoaded;
-      await OrderReponsitory().createOrder(state.listProduct, state.selectedVoucher==null?"":state.selectedVoucher!.idVoucher!, state.total, event.note,state.selectedAddress!,event.methodPayment,event.context);
-=======
       // final user=UserBloc().state as UserExist;
       final state = this.state as OrderLoaded;
       await OrderReponsitory().createOrder(
@@ -233,7 +207,6 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
           state.selectedAddress!,
           event.methodPayment,
           event.context);
->>>>>>> 36fce546461b38355d14a4ff334ea33c1f9ad6db
       await OrderReponsitory().clearProduct();
     });
   }

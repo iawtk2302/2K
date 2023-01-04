@@ -127,7 +127,6 @@ class LocalizationService extends Translations {
           "Customer Service": "Chăm sóc khách hàng",
           "hello": "xin chào",
           //search screen
-<<<<<<< HEAD
       "Search":"Tìm kiếm",
       "Recent":"Gần đây",
       "Clear All":"Xóa tất cả",
@@ -191,8 +190,7 @@ class LocalizationService extends Translations {
       //Home
       "Good Morning":"Chào buổi sáng",
       "Good Afternoon":"Chào buổi trưa",
-      "Good Everning":"Chào buổi chiều"
-=======
+      "Good Everning":"Chào buổi chiều",
           "Search": "Tìm kiếm",
           "Recent": "Gần đây",
           "Clear All": "Xóa tất cả",
@@ -256,7 +254,6 @@ class LocalizationService extends Translations {
           "Good Morning": "Chào buổi sáng",
           "Good Afternoon": "Chào buổi trưa",
           "Good Everning": "Chào buổi chiều"
->>>>>>> 36fce546461b38355d14a4ff334ea33c1f9ad6db
         },
       };
   final _box = GetStorage();

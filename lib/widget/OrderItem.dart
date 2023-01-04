@@ -96,13 +96,7 @@ class _OrderItemState extends State<OrderItem> {
                           Text(
                             '${convertPrice(widget.product.product!.price!)}',
                             style: TextStyle(
-<<<<<<< HEAD
-                                
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16),
-=======
                                 fontWeight: FontWeight.bold, fontSize: 16),
->>>>>>> 36fce546461b38355d14a4ff334ea33c1f9ad6db
                           ),
                           SizedBox(
                             width: 10,
@@ -125,7 +119,7 @@ class _OrderItemState extends State<OrderItem> {
                                     style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
-                                        fontFamily: 'Urbanist'),
+                                        ),
                                   )),
                                 ),
                               ]),

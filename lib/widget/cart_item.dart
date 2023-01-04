@@ -73,13 +73,7 @@ class _CartItemState extends State<CartItem> {
                               maxLines: 2,
                               textAlign: TextAlign.left,
                               overflow: TextOverflow.ellipsis,
-<<<<<<< HEAD
-                              style: TextStyle(
-                                  
-=======
                               style: const TextStyle(
-                                  fontFamily: 'Urbanist',
->>>>>>> 36fce546461b38355d14a4ff334ea33c1f9ad6db
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16),
                             ),
@@ -109,13 +103,7 @@ class _CartItemState extends State<CartItem> {
                         children: [
                           Text(
                             'Size = ' + '${widget.product.size}',
-<<<<<<< HEAD
-                            style: TextStyle(
-                                
-=======
                             style: const TextStyle(
-                                fontFamily: 'Urbanist',
->>>>>>> 36fce546461b38355d14a4ff334ea33c1f9ad6db
                                 fontWeight: FontWeight.w500),
                           )
                         ],
@@ -126,15 +114,8 @@ class _CartItemState extends State<CartItem> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-<<<<<<< HEAD
-                            '\$${(widget.product.product!.price)?.toStringAsFixed(2)}',
-                            style: TextStyle(
-                                
-=======
                             convertPrice(widget.product.product!.price!) + 'đ',
                             style: const TextStyle(
-                                fontFamily: 'Urbanist',
->>>>>>> 36fce546461b38355d14a4ff334ea33c1f9ad6db
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16),
                           ),
