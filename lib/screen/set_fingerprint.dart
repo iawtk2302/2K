@@ -38,7 +38,7 @@ class _SetFingerPrintState extends State<SetFingerPrint> {
             child: Text(
               'Add a Fingerprint to make your account more secure',
               textAlign: TextAlign.center,
-              style: TextStyle(fontFamily: 'Urbanist', fontSize: 16),
+              style: TextStyle( fontSize: 16),
             ),
           ),
           const Expanded(
@@ -52,7 +52,7 @@ class _SetFingerPrintState extends State<SetFingerPrint> {
             child: Text(
               'Please put your finger on the fingerprint scanner to get started',
               textAlign: TextAlign.center,
-              style: TextStyle(fontFamily: 'Urbanist', fontSize: 16),
+              style: TextStyle( fontSize: 16),
             ),
           ),
           const SizedBox(

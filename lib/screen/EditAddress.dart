@@ -286,9 +286,18 @@ class _EditAddressPageState extends State<EditAddressPage> {
                       !widget.address.isDefault!?
                       Padding(
                         padding: const EdgeInsets.only(top: 10.0,bottom: 10),
-                        child: CustomElevatedButton(
-                            text: "Delete".tr,
-                            onTap: () async{
+                        child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+        backgroundColor:Colors.transparent,
+        elevation: 0,
+        minimumSize: Size(350,50),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(50)),
+          side: BorderSide(color: Color.fromARGB(255, 244, 108, 98), width: 2)
+        )
+      ),
+                            child: Text("Delete".tr, style: TextStyle(fontWeight: FontWeight.bold,color: Color.fromARGB(255, 244, 108, 98), fontSize: 16),),
+                            onPressed: () async{
                               await AddressReponsitory().removeAddress(widget.address);
                             }),
                       ):Container(),

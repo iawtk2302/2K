@@ -78,7 +78,7 @@ class _ChangePinCodeState extends State<ChangePinCode> {
                       text,
                       textAlign: TextAlign.center,
                       style: const TextStyle(
-                          fontFamily: 'Urbanist',
+                          
                           fontSize: 18,
                           fontWeight: FontWeight.w600),
                     ),

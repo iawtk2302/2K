@@ -21,7 +21,8 @@ class UserExistExceptPinCode extends UserState {
 
 class UserExist extends UserState {
   final Customer user;
-  const UserExist(this.user);
+  final int notification;
+  const UserExist(this.user, this.notification);
 
   @override
   List<Object> get props => [user];

@@ -73,7 +73,7 @@ class _CartItemState extends State<CartItem> {
                               textAlign: TextAlign.left,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
-                                  fontFamily: 'Urbanist',
+                                  
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16),
                             ),
@@ -104,7 +104,7 @@ class _CartItemState extends State<CartItem> {
                           Text(
                             'Size = ' + '${widget.product.size}',
                             style: TextStyle(
-                                fontFamily: 'Urbanist',
+                                
                                 fontWeight: FontWeight.w500),
                           )
                         ],
@@ -117,7 +117,7 @@ class _CartItemState extends State<CartItem> {
                           Text(
                             '\$${(widget.product.product!.price)?.toStringAsFixed(2)}',
                             style: TextStyle(
-                                fontFamily: 'Urbanist',
+                                
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16),
                           ),

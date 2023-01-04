@@ -27,7 +27,7 @@ class Track_delivery extends StatelessWidget {
                       'Order in transit - Dec 17',
                       style: TextStyle(
                           fontWeight: FontWeight.w600,
-                          fontFamily: 'Urbanist',
+                          
                           fontSize: 16),
                     ),
                     const Text('15:20 pm'),
@@ -67,7 +67,7 @@ class Track_delivery extends StatelessWidget {
                       'Order in transit - Dec 17',
                       style: TextStyle(
                           fontWeight: FontWeight.w600,
-                          fontFamily: 'Urbanist',
+                          
                           fontSize: 16),
                     ),
                     const Text('15:20 pm'),
@@ -107,7 +107,7 @@ class Track_delivery extends StatelessWidget {
                       'Order in transit - Dec 17',
                       style: TextStyle(
                           fontWeight: FontWeight.w600,
-                          fontFamily: 'Urbanist',
+                          
                           fontSize: 16),
                     ),
                     const Text('15:20 pm'),
@@ -147,7 +147,7 @@ class Track_delivery extends StatelessWidget {
                       'Order in transit - Dec 17',
                       style: TextStyle(
                           fontWeight: FontWeight.w600,
-                          fontFamily: 'Urbanist',
+                          
                           fontSize: 16),
                     ),
                     const Text('15:20 pm'),

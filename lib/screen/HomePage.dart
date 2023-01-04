@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,6 +16,7 @@ import 'package:sneaker_app/widget/Loading.dart';
 
 import '../bloc/home/home_bloc.dart';
 import '../bloc/home/user_bloc.dart';
+import '../model/notification.dart';
 import '../widget/CustomSearch.dart';
 import '../widget/item_product_without_anim.dart';
 import '../widget/brandCatagoty.dart';
@@ -34,6 +36,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final time = DateTime.now().hour;
   String? quote;
+  getAmountNoti() async {}
+  late int amountNoti = 0;
   @override
   void initState() {
     // BlocProvider.of<UserBloc>(context).add(LoadInfoUser());
@@ -104,7 +108,6 @@ class _HomePageState extends State<HomePage> {
                       // color: Color(0xFF757475),
                       color: Theme.of(context).textTheme.bodyText1!.color,
                       fontSize: 16,
-                      fontFamily: 'Urbanist',
                       fontWeight: FontWeight.w600),
                 ),
                 BlocBuilder<UserBloc, UserState>(
@@ -114,16 +117,13 @@ class _HomePageState extends State<HomePage> {
                       return Text(
                         state.user.firstName.toString(),
                         style: TextStyle(
-                            fontFamily: 'Urbanist',
-                            fontWeight: FontWeight.w500,
-                            fontSize: 19),
+                            fontWeight: FontWeight.w500, fontSize: 19),
                       );
                     } else if (state is UserLoading) {
                       return Text(
                         "",
                         style: TextStyle(
                             color: Colors.black,
-                            fontFamily: 'Urbanist',
                             fontWeight: FontWeight.w500,
                             fontSize: 19),
                       );
@@ -134,20 +134,51 @@ class _HomePageState extends State<HomePage> {
                 )
               ]),
           actions: [
-            IconButton(
-              splashRadius: 10,
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => NotificationPage(),
-                    ));
+            BlocBuilder<UserBloc, UserState>(
+              builder: (context, state) {
+                if(state is UserExist){
+                  return Center(
+                  child: Badge(
+                    label: Text(state.notification.toString()),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => NotificationPage(),
+                            ));
+                      },
+                      child: const Icon(
+                        Ionicons.notifications_outline,
+                        size: 25,
+                        // color: Colors.black,
+                      ),
+                    ),
+                  ),
+                );
+                }
+                else{
+                  return Center(
+                  child: Badge(
+                    label: Text("2"),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => NotificationPage(),
+                            ));
+                      },
+                      child: const Icon(
+                        Ionicons.notifications_outline,
+                        size: 25,
+                        // color: Colors.black,
+                      ),
+                    ),
+                  ),
+                );
+                }
               },
-              icon: const Icon(
-                Ionicons.notifications_outline,
-                size: 25,
-                // color: Colors.black,
-              ),
             ),
             IconButton(
               splashRadius: 10,
@@ -199,9 +230,9 @@ class _HomePageState extends State<HomePage> {
           children: [
             Text('Special Offers'.tr,
                 style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 22,
-                    fontFamily: 'Urbanist')),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 22,
+                )),
             TextButton(
               style: ButtonStyle(
                   overlayColor: MaterialStateProperty.all(
@@ -211,7 +242,6 @@ class _HomePageState extends State<HomePage> {
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
-                      fontFamily: 'Urbanist',
                       color: Colors.black)),
             )
           ],
@@ -252,7 +282,6 @@ class _HomePageState extends State<HomePage> {
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
-                      fontFamily: 'Urbanist',
                       color: Colors.black)),
             )
           ],
@@ -340,9 +369,9 @@ class _HomePageState extends State<HomePage> {
           children: [
             Text('Special Offers'.tr,
                 style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 22,
-                    fontFamily: 'Urbanist')),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 22,
+                )),
             TextButton(
               onPressed: () {
                 Navigator.push(
@@ -355,7 +384,6 @@ class _HomePageState extends State<HomePage> {
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
-                    fontFamily: 'Urbanist',
                     color: Theme.of(context).textTheme.bodyText2!.color,
                   )),
             )
@@ -393,7 +421,6 @@ class _HomePageState extends State<HomePage> {
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
-                    fontFamily: 'Urbanist',
                     color: Theme.of(context).textTheme.bodyText2!.color,
                   )),
             )
@@ -559,7 +586,6 @@ class BrandItem extends StatelessWidget {
             style: TextStyle(
                 color: isChoose == index ? Colors.white : Colors.black,
                 fontWeight: FontWeight.bold,
-                fontFamily: 'Urbanist',
                 fontSize: 16),
           ),
         ));

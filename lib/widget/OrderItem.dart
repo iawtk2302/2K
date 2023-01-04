@@ -64,7 +64,7 @@ class _OrderItemState extends State<OrderItem> {
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
-                              fontFamily: 'Urbanist',
+                              
                               fontWeight: FontWeight.bold,
                               fontSize: 16),
                         ),
@@ -76,7 +76,7 @@ class _OrderItemState extends State<OrderItem> {
                           Text(
                             'Size = ' + '${widget.product.size}',
                             style: TextStyle(
-                                fontFamily: 'Urbanist',
+                                
                                 fontWeight: FontWeight.w500),
                           )
                         ],
@@ -89,7 +89,7 @@ class _OrderItemState extends State<OrderItem> {
                           Text(
                             '\$${(widget.product.product!.price)?.toStringAsFixed(2)}',
                             style: TextStyle(
-                                fontFamily: 'Urbanist',
+                                
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16),
                           ),

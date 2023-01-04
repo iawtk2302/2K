@@ -38,7 +38,7 @@ class HelpCenter extends StatelessWidget {
             indicatorColor: Theme.of(context).primaryIconTheme.color,
             // labelColor: Colors.black,
             labelStyle: TextStyle(
-                fontFamily: 'Urbanist',
+                
                 fontWeight: FontWeight.w600,
                 fontSize: 16),
             tabs: [

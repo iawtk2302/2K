@@ -29,7 +29,7 @@ class DeliveryAddress extends StatelessWidget {
               Text(
                 'Delivery Address'.tr,
                 style: TextStyle(
-                    fontFamily: 'Urbanist',
+                    
                     fontWeight: FontWeight.w600,
                     fontSize: 16),
               ),

@@ -94,7 +94,7 @@ class ItemOrderState extends State<ItemOrder> {
                             textAlign: TextAlign.left,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
-                                fontFamily: 'Urbanist',
+                                
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16),
                           ),
@@ -111,7 +111,7 @@ class ItemOrderState extends State<ItemOrder> {
                                   '/ ${widget.order.dateCreated!.toDate().month}'
                                   '/ ${widget.order.dateCreated!.toDate().year}',
                           style: const TextStyle(
-                              fontFamily: 'Urbanist',
+                              
                               fontWeight: FontWeight.w500),
                         )
                       ],
@@ -127,7 +127,7 @@ class ItemOrderState extends State<ItemOrder> {
                                     '/${widget.order.dateCompleted!.toDate().month}'
                                     '/${widget.order.dateCompleted!.toDate().year}',
                             style: const TextStyle(
-                                fontFamily: 'Urbanist',
+                                
                                 fontWeight: FontWeight.w500),
                           )
                         ],
@@ -143,7 +143,7 @@ class ItemOrderState extends State<ItemOrder> {
                             '/${widget.order.dateCanceled!.toDate().month}'
                             '/${widget.order.dateCanceled!.toDate().year}',
                             style: const TextStyle(
-                                fontFamily: 'Urbanist',
+                                
                                 fontWeight: FontWeight.w500),
                           )
                         ],
@@ -165,7 +165,7 @@ class ItemOrderState extends State<ItemOrder> {
                         child: Text(
                           widget.order.state!.tr,
                           style: const TextStyle(
-                              fontFamily: 'Urbanist',
+                              
                               fontSize: 15,
                               fontWeight: FontWeight.w500),
                         ),
@@ -185,7 +185,7 @@ class ItemOrderState extends State<ItemOrder> {
                         Text(
                           '\$${(widget.order.total)?.toStringAsFixed(2)}',
                           style: const TextStyle(
-                              fontFamily: 'Urbanist',
+                              
                               fontWeight: FontWeight.bold,
                               fontSize: 20),
                         ),
@@ -221,7 +221,7 @@ class ItemOrderState extends State<ItemOrder> {
                             child: Text(
                               getText().tr,
                               style: TextStyle(
-                                fontFamily: 'Urbanist',
+                                
                                 fontWeight: FontWeight.w600,
                                 color:
                                     Theme.of(context).textTheme.button!.color,

@@ -32,7 +32,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
       }
       else{
         listTypeShipping=await OrderReponsitory().getTypeShipping(selectedAddress);
-        shipping=await OrderReponsitory().caculateShipping(selectedAddress,listTypeShipping[0])/10000; 
+        shipping=await OrderReponsitory().caculateShipping(selectedAddress,listTypeShipping[0]); 
       } 
       final totalProduct=OrderReponsitory().caculateTotalProduct(listProduct);
       final total=shipping+totalProduct;
@@ -53,7 +53,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
       }
       else{
         listTypeShipping=await OrderReponsitory().getTypeShipping(selectedAddress);
-        shipping=await OrderReponsitory().caculateShipping(selectedAddress,listTypeShipping[0])/10000; 
+        shipping=await OrderReponsitory().caculateShipping(selectedAddress,listTypeShipping[0]); 
       } 
       final totalProduct=OrderReponsitory().caculateTotalProduct(listProduct);
       final total=shipping+totalProduct;
@@ -108,7 +108,6 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
       emit(OrderLoaded(state.selectedAddress,state.tempAddress,state.listAddress,totalProduct,state.priceShipping,totalProduct+state.priceShipping,state.listProduct,state.listTypeShipping,null,null,state.listVoucher,0));
     });
     on<CreateOrder>((event, emit) async {
-      final user=UserBloc().state as UserExist;
       final state=this.state as OrderLoaded;
       await OrderReponsitory().createOrder(state.listProduct, state.selectedVoucher==null?"":state.selectedVoucher!.idVoucher!, state.total, event.note,state.selectedAddress!,event.methodPayment,event.context);
       await OrderReponsitory().clearProduct();

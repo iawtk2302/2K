@@ -48,7 +48,7 @@ class _EnterPinCodeState extends State<EnterPinCode> {
                       widget.text,
                       textAlign: TextAlign.center,
                       style:
-                          const TextStyle(fontFamily: 'Urbanist', fontSize: 16),
+                          const TextStyle( fontSize: 16),
                     ),
                   ),
                   BlocBuilder<UserBloc, UserState>(

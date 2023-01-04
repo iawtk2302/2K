@@ -134,6 +134,9 @@ class LocalizationService extends Translations {
       "Sort by":"Xếp theo",
       'Sort & Filter':"Sắp xếp & Lọc",
       'Price Range':"Phạm vi giá",
+      'Not found':"Không tìm thấy",
+      'Sorry, the keyword you entered can\'t be found. Please check again or search with another keyword':"Rất tiếc, không thể tìm thấy từ khóa bạn đã nhập. Vui lòng kiểm tra lại hoặc tìm với từ khóa khác",
+      //checkout screen
       "Checkout":"Thanh toán",
       "Shipping Address":"Địa chỉ giao hàng",
       "Order List":"Danh sách sản phẩm",

@@ -32,7 +32,7 @@ class BottomSheet_RemoveProductState extends State<BottomSheet_RemoveProduct> {
             Text(
               'Remove From Cart',
               style: TextStyle(
-                  fontFamily: 'Urbanist',
+                  
                   fontWeight: FontWeight.bold,
                   fontSize: 22),
             ),

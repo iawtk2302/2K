@@ -57,7 +57,7 @@ class _BottomSheet_Sort_FilterState extends State<BottomSheet_Sort_Filter> {
                     child: Text(
                       'Sort & Filter'.tr,
                       style: const TextStyle(
-                          fontFamily: 'Urbanist',
+                          
                           fontWeight: FontWeight.bold,
                           fontSize: 22),
                     ),
@@ -74,7 +74,7 @@ class _BottomSheet_Sort_FilterState extends State<BottomSheet_Sort_Filter> {
                       child: Text(
                         'Sort by'.tr,
                         style: const TextStyle(
-                            fontFamily: 'Urbanist',
+                            
                             fontWeight: FontWeight.bold,
                             fontSize: 18),
                       )),
@@ -156,7 +156,7 @@ class _BottomSheet_Sort_FilterState extends State<BottomSheet_Sort_Filter> {
                       child: Text(
                         'Gender'.tr,
                         style: const TextStyle(
-                            fontFamily: 'Urbanist',
+                            
                             fontWeight: FontWeight.bold,
                             fontSize: 18),
                       )),

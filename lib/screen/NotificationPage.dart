@@ -32,11 +32,9 @@ class _NotificationPageState extends State<NotificationPage> {
           return Center(child: Loading());
         }
         if (snapshot.hasData) {
-          return ListView.builder(
+          return ListView.separated(
             itemCount: snapshot.data!.length,
-            itemBuilder: (context, index) {
-            return ItemNotification(notification: snapshot.data![index],);
-          },);
+            separatorBuilder: (BuildContext context, int index) { return Divider(height: 1,); }, itemBuilder: (BuildContext context, int index) { return ItemNotification(notification: snapshot.data![index],); },);
         }
         return Container();
         },),

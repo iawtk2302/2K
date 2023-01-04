@@ -56,7 +56,7 @@ class CustomTextButton extends StatelessWidget {
             Text(
               text,
               style: TextStyle(
-                  fontFamily: 'Urbanist',
+                  
                   fontSize: 18,
                   // color: isDark ? Colors.white : Colors.black,
                   color: isDark

@@ -80,7 +80,7 @@ class BottomSheetReviewState extends State<BottomSheetReview> {
                 Text(
                   'Leave a review',
                   style: TextStyle(
-                      fontFamily: 'Urbanist',
+                      
                       fontWeight: FontWeight.bold,
                       fontSize: 22),
                 ),
@@ -116,7 +116,7 @@ class BottomSheetReviewState extends State<BottomSheetReview> {
                 Text(
                   'How is your order?',
                   style: TextStyle(
-                      fontFamily: 'Urbanist',
+                      
                       fontWeight: FontWeight.bold,
                       fontSize: 22),
                 ),

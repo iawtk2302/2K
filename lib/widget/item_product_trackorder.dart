@@ -56,7 +56,7 @@ class Item_Product_TrackOrder extends StatelessWidget {
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
-                              fontFamily: 'Urbanist',
+                              
                               fontWeight: FontWeight.bold,
                               fontSize: 16),
                         ),
@@ -68,13 +68,13 @@ class Item_Product_TrackOrder extends StatelessWidget {
                           Text(
                             'Size'.tr + ': ' + '${product.size}',
                             style: const TextStyle(
-                                fontFamily: 'Urbanist',
+                                
                                 fontWeight: FontWeight.w500),
                           ),
                           Text(
                             ' | Qty = '.tr + '${product.amount}',
                             style: const TextStyle(
-                                fontFamily: 'Urbanist',
+                                
                                 fontWeight: FontWeight.w500),
                           ),
                         ],
@@ -87,7 +87,7 @@ class Item_Product_TrackOrder extends StatelessWidget {
                           Text(
                             '\$${(product.product!.price)?.toStringAsFixed(2)}',
                             style: TextStyle(
-                                fontFamily: 'Urbanist',
+                                
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16),
                           ),
@@ -137,7 +137,7 @@ class Item_Product_TrackOrder extends StatelessWidget {
                                 child: Text(
                                   'Review'.tr,
                                   style: TextStyle(
-                                    fontFamily: 'Urbanist',
+                                    
                                     fontWeight: FontWeight.w600,
                                     color: Theme.of(context)
                                         .textTheme

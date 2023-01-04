@@ -93,14 +93,14 @@ class _PageTest extends State<PageTest> {
               image: AssetImage('assets/images/clipboard.png')),
             Spacer(),
             Text(
-              'Not found',
+              'Not found'.tr,
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
             ),
             Spacer(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
-                'Sorry, the keyword you entered can\'t be found. Please check again or search with another keyword',
+                'Sorry, the keyword you entered can\'t be found. Please check again or search with another keyword'.tr,
                 style: TextStyle(fontSize: 16),
                 textAlign: TextAlign.center,
               ),
@@ -356,7 +356,6 @@ class FilerItem extends StatelessWidget {
             style: TextStyle(
                 color: isChoose == index ? Colors.white : Colors.black,
                 fontWeight: FontWeight.bold,
-                fontFamily: 'Urbanist',
                 fontSize: 16),
           ),
         ));
@@ -388,7 +387,6 @@ class FilerItemDark extends StatelessWidget {
             style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
-                fontFamily: 'Urbanist',
                 fontSize: 16),
           ),
         ));

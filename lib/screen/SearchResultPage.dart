@@ -355,7 +355,7 @@ class FilerItem extends StatelessWidget {
             style: TextStyle(
                 color: isChoose == index ? Colors.white : Colors.black,
                 fontWeight: FontWeight.bold,
-                fontFamily: 'Urbanist',
+                
                 fontSize: 16),
           ),
         ));

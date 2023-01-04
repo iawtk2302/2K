@@ -6,6 +6,7 @@ import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../model/User.dart';
+import '../../model/notification.dart';
 
 part 'user_event.dart';
 part 'user_state.dart';
@@ -14,6 +15,10 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   UserBloc() : super(UserInitial()) {
     on<LoadInfoUser>((event, emit) async {
       emit(UserLoading());
+      final notifications=FirebaseFirestore.instance.collection("Notification");
+  List<NotificationCustom> listNotification=[];
+  await notifications.get().then((value) => listNotification.addAll(value.docs.map((e) => NotificationCustom.fromJson(e.data())).toList()));
+  int amount=listNotification.length;
       await FirebaseFirestore.instance
           .collection('User')
           .doc(FirebaseAuth.instance.currentUser!.uid)
@@ -34,7 +39,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           );
           if (user.pin != null) {
             print(user.pin);
-            emit(UserExist(user));
+            emit(UserExist(user,amount));
           } else {
             emit(UserExistExceptPinCode(user: user));
           }
@@ -46,25 +51,33 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     });
     on<SubmitInfoUser>((event, emit) async {
       emit(UserLoading());
+      final notifications=FirebaseFirestore.instance.collection("Notification");
+  List<NotificationCustom> listNotification=[];
+  await notifications.get().then((value) => listNotification.addAll(value.docs.map((e) => NotificationCustom.fromJson(e.data())).toList()));
+  int amount=listNotification.length;
       if (event.user.pin != null) {
         await FirebaseFirestore.instance
             .collection('User')
             .doc(event.user.idUser)
             .update({
           'pin': event.user.pin,
-        }).then((value) => emit(UserExist(event.user)));
+        }).then((value) => emit(UserExist(event.user,amount)));
       } else {
         emit(UserExistExceptPinCode(user: event.user));
       }
     });
     on<UpdatePinUser>((event, emit) async {
+      final notifications=FirebaseFirestore.instance.collection("Notification");
+  List<NotificationCustom> listNotification=[];
+  await notifications.get().then((value) => listNotification.addAll(value.docs.map((e) => NotificationCustom.fromJson(e.data())).toList()));
+  int amount=listNotification.length;
       if (event.user.pin != null || event.user.pin == '') {
         await FirebaseFirestore.instance
             .collection('User')
             .doc(event.user.idUser)
             .update({
           'pin': event.user.pin,
-        }).then((value) => emit(UserExist(event.user)));
+        }).then((value) => emit(UserExist(event.user,amount)));
       }
     });
   }
