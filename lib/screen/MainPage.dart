@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -104,28 +105,28 @@ class _MainPageState extends State<MainPage> {
                   BottomNavigationBarItem(
                       icon: BlocBuilder<CartBloc, CartState>(
                         builder: (context, state) {
-                          if(state is CartLoaded){
-                            if(state.cart.products.length==0){
+                          if (state is CartLoaded) {
+                            if (state.cart.products.length == 0) {
                               return Icon(Icons.shopping_bag);
-                            }else if(state.cart.products.length>0&&state.cart.products.length<10){
+                            } else if (state.cart.products.length > 0 &&
+                                state.cart.products.length < 10) {
                               return Badge(
-                              label: Text(state.cart.products.length.toString()),
-                              child: Icon(Icons.shopping_bag));
-                            }
-                            else{
+                                  badgeContent: Text(
+                                      state.cart.products.length.toString()),
+                                  child: Icon(Icons.shopping_bag));
+                            } else {
                               return Badge(
-                              label: Text("9+"),
-                              child: Icon(Icons.shopping_bag));
+                                  badgeContent: Text("9+"),
+                                  child: Icon(Icons.shopping_bag));
                             }
-                          }
-                          else{
+                          } else {
                             return Icon(Icons.shopping_bag);
                           }
                         },
                       ),
                       label: "Cart".tr),
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.shopping_cart), label: "Orders".tr),    
+                      icon: Icon(Icons.shopping_cart), label: "Orders".tr),
                   BottomNavigationBarItem(
                       icon: Icon(Icons.person), label: "Profile".tr),
                 ]),
