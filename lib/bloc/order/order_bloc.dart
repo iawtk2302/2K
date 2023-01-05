@@ -161,7 +161,12 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
       Voucher? selectedVoucher = state.tempVoucher;
       Voucher? tempVoucher = state.tempVoucher;
       final totalProduct = state.totalProduct;
-      final priceVoucher = state.totalProduct * selectedVoucher!.percent!;
+      // final priceVoucher = state.totalProduct * selectedVoucher!.percent!;
+      double priceVoucher=0;
+      priceVoucher=state.totalProduct * selectedVoucher!.percent!;
+      if(priceVoucher>selectedVoucher.maximum!){
+        priceVoucher=selectedVoucher.maximum!;
+      }
       emit(OrderLoaded(
           state.selectedAddress,
           state.tempAddress,
@@ -197,17 +202,18 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     on<CreateOrder>((event, emit) async {
       // final user=UserBloc().state as UserExist;
       final state = this.state as OrderLoaded;
+      emit(OrderSuccess());
       await OrderReponsitory().createOrder(
           state.listProduct,
-          state.selectedVoucher == null
-              ? ""
-              : state.selectedVoucher!.idVoucher!,
+          state.selectedVoucher,
           state.total,
           event.note,
           state.selectedAddress!,
           event.methodPayment,
           event.context);
-      await OrderReponsitory().clearProduct();
+      // await OrderReponsitory().clearProduct();
+      
     });
+    
   }
 }

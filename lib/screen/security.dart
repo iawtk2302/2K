@@ -111,18 +111,18 @@ class _SecurityState extends State<Security> {
               const SizedBox(
                 height: 16,
               ),
-              CustomTextButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ChangePassword(),
-                        ));
-                  },
-                  text: 'Change Password'.tr,
-                  hasLeftIcon: false,
-                  isDark: true,
-                  hasRightIcon: false)
+              // CustomTextButton(
+              //     onPressed: () {
+              //       Navigator.push(
+              //           context,
+              //           MaterialPageRoute(
+              //             builder: (context) => ChangePassword(),
+              //           ));
+              //     },
+              //     text: 'Change Password'.tr,
+              //     hasLeftIcon: false,
+              //     isDark: true,
+              //     hasRightIcon: false)
             ],
           ),
         ),

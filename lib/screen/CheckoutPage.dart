@@ -411,13 +411,13 @@ class _CheckoutPageState extends State<CheckoutPage> {
           Text(
             voucher.name.toString(),
             style: TextStyle(
-                color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500),
+                 fontSize: 16, fontWeight: FontWeight.w500),
           ),
           IconButton(
               onPressed: () {
                 BlocProvider.of<OrderBloc>(context).add(RemoveVoucher());
               },
-              icon: Icon(Icons.close, color: Colors.white))
+              icon: Icon(Icons.close, ))
         ]),
       ),
     );

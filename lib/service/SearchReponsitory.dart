@@ -25,9 +25,9 @@ class SearchReponsitory{
     List<Product>? result;
     if(brand=='All'&&gender=='All'){
       if(sort=='Price High')
-      result=listSearch.where((element) => element.price!>=priceRange.start&&element.price!<=priceRange.end).toList()..sort((a, b) => a.price!.compareTo(b.price as int),);
+      result=listSearch.where((element) => element.price!>=priceRange.start&&element.price!<=priceRange.end).toList()..sort((a, b) => a.price!.compareTo(b.price as double),);
       else
-      result=listSearch.where((element) => element.price!>=priceRange.start&&element.price!<=priceRange.end).toList()..sort((a, b) => b.price!.compareTo(a.price as int),);
+      result=listSearch.where((element) => element.price!>=priceRange.start&&element.price!<=priceRange.end).toList()..sort((a, b) => b.price!.compareTo(a.price as double),);
       // await productRef.where('name',isGreaterThan:queryText)
       //     .where('name',isLessThan:'$queryText\uf8ff');
       // await productRef.where('price',isGreaterThan: priceRange.start)
@@ -51,16 +51,23 @@ class SearchReponsitory{
     }
     else if(brand!="All"&&gender!="All"){
       if(sort=='Price High')
-        result=listSearch.where((element) => element.price!>=priceRange.start&&element.price!<=priceRange.end&&element.categoryName==brand&&element.gender!.contains(gender)).toList()..sort((a, b) => a.price!.compareTo(b.price as int),);
+        result=listSearch.where((element) => element.price!>=priceRange.start&&element.price!<=priceRange.end&&element.categoryName==brand&&element.gender!.contains(gender)).toList()..sort((a, b) => a.price!.compareTo(b.price as double),);
       else
-        result=listSearch.where((element) => element.price!>=priceRange.start&&element.price!<=priceRange.end&&element.categoryName==brand&&element.gender!.contains(gender)).toList()..sort((a, b) => b.price!.compareTo(a.price as int),);
+        result=listSearch.where((element) => element.price!>=priceRange.start&&element.price!<=priceRange.end&&element.categoryName==brand&&element.gender!.contains(gender)).toList()..sort((a, b) => b.price!.compareTo(a.price as double),);
+    }
+    else if(brand!="All"&&gender=="All"){
+      if(sort=='Price High')
+        result=listSearch.where((element) => element.price!>=priceRange.start&&element.price!<=priceRange.end&&element.categoryName==brand&&element.gender!.length==2).toList()..sort((a, b) => a.price!.compareTo(b.price as double),);
+      else
+        result=listSearch.where((element) => element.price!>=priceRange.start&&element.price!<=priceRange.end&&element.categoryName==brand&&element.gender!.length==2).toList()..sort((a, b) => b.price!.compareTo(a.price as double),);
     }
     else{
       if(sort=='Price High')
-      result=listSearch.where((element) => element.price!>=priceRange.start&&element.price!<=priceRange.end&&element.categoryName==brand&&checkGender(element.gender!, gender)).toList()..sort((a, b) => a.price!.compareTo(b.price as int),);
+      result=listSearch.where((element) => element.price!>=priceRange.start&&element.price!<=priceRange.end&&element.categoryName==brand&&checkGender(element.gender!, gender)).toList()..sort((a, b) => a.price!.compareTo(b.price as double),);
       else
-      result=listSearch.where((element) => element.price!>=priceRange.start&&element.price!<=priceRange.end&&element.categoryName==brand&&checkGender(element.gender!, gender)).toList()..sort((a, b) => b.price!.compareTo(a.price as int),);
+      result=listSearch.where((element) => element.price!>=priceRange.start&&element.price!<=priceRange.end&&element.categoryName==brand&&checkGender(element.gender!, gender)).toList()..sort((a, b) => b.price!.compareTo(a.price as double),);
     }
+    
     // print(result);
     return result;   
   }

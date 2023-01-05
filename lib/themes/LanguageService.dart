@@ -253,7 +253,18 @@ class LocalizationService extends Translations {
           //Home
           "Good Morning": "Chào buổi sáng",
           "Good Afternoon": "Chào buổi trưa",
-          "Good Everning": "Chào buổi chiều"
+          "Good Everning": "Chào buổi chiều",
+          //success screen
+          "Order Complete!":"Đơn hàng thành công!",
+          "Your payment was successful!":"Thanh toán của bạn đã thành công!",
+          "Back To Home":"Trở về Trang Chủ",
+          //fail screen
+          "Order Failed!":"Đặt hàng không thành công!",
+          "Oops! An error occured while approving the order. You can try again.":"Rất tiếc! Đã xảy ra lỗi khi phê duyệt đơn đặt hàng. Bạn có thể thử lại.",
+          "Try Again":"Thử Lại",
+          //voucher
+          "Discount ":"Giảm",
+          "Maximum discount ":"Giảm tối đa "
         },
       };
   final _box = GetStorage();

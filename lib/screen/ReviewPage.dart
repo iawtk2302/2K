@@ -25,7 +25,7 @@ class _ReviewPageState extends State<ReviewPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: CustomAppBar(
         title: 'Review',
         onTap: () {
@@ -50,7 +50,7 @@ class _ReviewPageState extends State<ReviewPage> {
                   itemBuilder: (context, index) {
                   return state.listCategory[index]!=state.selectedCategory?_itemCategory(state.listCategory[index],(){
                     BlocProvider.of<ReviewBloc>(context).add(ChooseCategory(state.listCategory[index]));
-                  }):_itemSelectedCategory(state.listCategory[index],(){});
+                  },context):_itemSelectedCategory(state.listCategory[index],(){},context);
                 },),
               ),
             ),
@@ -60,7 +60,7 @@ class _ReviewPageState extends State<ReviewPage> {
                 child: ListView.builder(
                   itemCount: state.listReview.length,
                   itemBuilder: (context, index) {
-                  return _ItemReview(state.listReview[index]);
+                  return _ItemReview(state.listReview[index],context);
                 },),
               ),)
           ],
@@ -75,17 +75,18 @@ class _ReviewPageState extends State<ReviewPage> {
   }
 }
 
-Widget _itemCategory(String category,Function() onTap) {
+Widget _itemCategory(String category,Function() onTap, BuildContext context) {
   return Padding(
     padding: const EdgeInsets.only(right: 8),
     child: InkWell(
+      splashFactory: NoSplash.splashFactory,
       onTap: onTap,
       child: Container(
         height: 35,
         width: 70,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25),
-          border: Border.all(width: 2),
+          border: Border.all(width: 2,color: Theme.of(context).canvasColor),
         ),
         child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -94,18 +95,19 @@ Widget _itemCategory(String category,Function() onTap) {
     ),
   );
 }
-Widget _itemSelectedCategory(String category,Function() onTap) {
+Widget _itemSelectedCategory(String category,Function() onTap,BuildContext context) {
   return Padding(
     padding: const EdgeInsets.only(right: 8),
     child: InkWell(
+      splashFactory: NoSplash.splashFactory,
       onTap: onTap,
       child: Container(
         height: 35,
         width: 75,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25),
-          border: Border.all(width: 2),
-          color: Colors.black
+          border: Border.all(width: 2,color: Theme.of(context).canvasColor),
+          color: Theme.of(context).canvasColor
         ),
         child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -113,6 +115,7 @@ Widget _itemSelectedCategory(String category,Function() onTap) {
       ),
     ),
   );
+  
 }
 
 String readTimestamp(int timestamp) {
@@ -141,12 +144,12 @@ String readTimestamp(int timestamp) {
 
     return time;
   }
-Widget _ItemReview(Review review){
+Widget _ItemReview(Review review, BuildContext context){
   
   return Padding(
     padding: const EdgeInsets.symmetric(vertical: 8),
     child: Container(
-      color: Colors.white,
+      color: Colors.transparent,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -157,11 +160,11 @@ Widget _ItemReview(Review review){
           SizedBox(width:10),
           Text(review.fullName!,style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),],),
           Container(
-          height: 25,
-          width: 50,
+          height: 30,
+          width: 55,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(25),
-            border: Border.all(width: 2),
+            border: Border.all(width: 2,color: Theme.of(context).canvasColor),
           ),
           child: Row(
               mainAxisAlignment: MainAxisAlignment.center,

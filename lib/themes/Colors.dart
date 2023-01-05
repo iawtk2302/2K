@@ -45,6 +45,7 @@ class Themes {
   static final light = ThemeData(
       brightness: Brightness.light,
       scaffoldBackgroundColor: Colors.grey[50],
+      canvasColor: Colors.white,
       primarySwatch: const MaterialColor(
         0xFFFAFAFA,
         <int, Color>{

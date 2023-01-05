@@ -28,6 +28,7 @@ import 'package:sneaker_app/screen/CheckoutPage.dart';
 import 'package:sneaker_app/screen/ChooseAddressPage.dart';
 import 'package:sneaker_app/screen/ChooseVoucherPage.dart';
 import 'package:sneaker_app/screen/EditAddress.dart';
+import 'package:sneaker_app/screen/FailedScreen.dart';
 import 'package:sneaker_app/screen/FillProfilePage.dart';
 import 'package:sneaker_app/screen/ForgotPassPage.dart';
 import 'package:sneaker_app/screen/HomePage.dart';
@@ -40,6 +41,7 @@ import 'package:sneaker_app/screen/ReviewPage.dart';
 import 'package:sneaker_app/screen/SearchPage.dart';
 import 'package:sneaker_app/screen/SearchResultPage.dart';
 import 'package:sneaker_app/screen/SplashScreen.dart';
+import 'package:sneaker_app/screen/SuccessScreen.dart';
 import 'package:sneaker_app/screen/enter_pin_code.dart';
 import 'package:sneaker_app/themes/Colors.dart';
 import 'package:sneaker_app/themes/LanguageService.dart';
@@ -236,6 +238,18 @@ Route? getRoute(RouteSettings settings) {
       {
         return MaterialPageRoute(
             builder: (context) => const ChooseVoucherPage(),
+            settings: settings);
+      }
+      case Routes.success:
+      {
+        return MaterialPageRoute(
+            builder: (context) => const SuccessPage(),
+            settings: settings);
+      }
+      case Routes.failed:
+      {
+        return MaterialPageRoute(
+            builder: (context) => const FailedPage(),
             settings: settings);
       }
     case Routes.review:

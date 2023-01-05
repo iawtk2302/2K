@@ -15,6 +15,7 @@ import 'package:sneaker_app/router/routes.dart';
 import 'package:sneaker_app/screen/FillProfilePage.dart';
 import 'package:sneaker_app/screen/NotificationPage.dart';
 import 'package:sneaker_app/screen/set_fingerprint.dart';
+import 'package:sneaker_app/themes/ThemeService.dart';
 import 'package:sneaker_app/widget/Loading.dart';
 
 import '../bloc/home/home_bloc.dart';
@@ -575,15 +576,15 @@ class BrandItem extends StatelessWidget {
         // margin: EdgeInsets.only(right: 8),
         alignment: Alignment.center,
         decoration: BoxDecoration(
-            border: Border.all(color: Colors.black, width: 1.9),
-            color: isChoose == index ? Colors.black : Colors.white,
+            border: Border.all(color:ThemeService().theme==ThemeMode.light ?Colors.black: Theme.of(context).canvasColor, width: 1.9),
+            color:ThemeService().theme==ThemeMode.light ?isChoose == index ?Colors.black:Colors.transparent: isChoose == index ? Theme.of(context).canvasColor : Colors.transparent,
             borderRadius: BorderRadius.all(Radius.circular(20))),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Text(
             name.tr,
             style: TextStyle(
-                color: isChoose == index ? Colors.white : Colors.black,
+                color:ThemeService().theme==ThemeMode.light ? isChoose == index ? Colors.white : Colors.black:Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 16),
           ),

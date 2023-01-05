@@ -113,87 +113,101 @@ class _CartItemState extends State<CartItem> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            convertPrice(widget.product.product!.price!) + 'đ',
-                            style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16),
+                          Flexible(
+                            // flex: 2,
+                            child: Text(
+                              convertPrice(widget.product.product!.price!) + 'đ',
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16),
+                            ),
                           ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Material(
-                            color: Theme.of(context).backgroundColor,
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(20)),
-                            child: Container(
-                              width: 100,
-                              height: 35,
-                              decoration: const BoxDecoration(
-                                  // color: Color(0xFFF3F3F3),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20))),
-                              child: Row(children: [
-                                Expanded(
-                                  child: BlocBuilder<CartBloc, CartState>(
-                                    builder: (context, state) {
-                                      return IconButton(
-                                        splashRadius: 17,
-                                        icon: const Icon(
-                                          Icons.horizontal_rule,
-                                          size: 18,
+                          // const SizedBox(
+                          //   width: 10,
+                          // ),
+                          Flexible(
+                            // flex: 1,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 8),
+                              child: Material(
+                                color: Theme.of(context).backgroundColor,
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(20)),
+                                child: Container(
+                                
+                                  decoration: const BoxDecoration(
+                                      // color: Color(0xFFF3F3F3),
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(20))),
+                                  child: SizedBox(
+                                    height: 40,
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                      Expanded(
+                                        child: BlocBuilder<CartBloc, CartState>(
+                                          builder: (context, state) {
+                                            return InkWell(
+                                              // splashRadius: 17,
+                                              child: const Icon(
+                                                Icons.horizontal_rule,
+                                                size: 18,
+                                              ),
+                                              onTap: () {
+                                                setState(() {
+                                                  if (quantity > 1) {
+                                                    quantity--;
+                                                    widget.product.amount = quantity;
+                                                    context.read<CartBloc>()
+                                                      ..add(CartProductUpdate(
+                                                          product: widget.product));
+                                                  } else if (quantity > 0) {
+                                                    print(
+                                                        'Are you want to delete item from cart');
+                                                  } else {}
+                                                });
+                                              },
+                                            );
+                                          },
                                         ),
-                                        onPressed: () {
-                                          setState(() {
-                                            if (quantity > 1) {
-                                              quantity--;
-                                              widget.product.amount = quantity;
-                                              context.read<CartBloc>()
-                                                ..add(CartProductUpdate(
-                                                    product: widget.product));
-                                            } else if (quantity > 0) {
-                                              print(
-                                                  'Are you want to delete item from cart');
-                                            } else {}
-                                          });
-                                        },
-                                      );
-                                    },
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          quantity.toString(),
+                                          style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                         ),
+                                         textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: BlocBuilder<CartBloc, CartState>(
+                                          builder: (context, state) {
+                                            return InkWell(
+                                              // splashRadius: 17,
+                                              child: const Icon(
+                                                Icons.add,
+                                                size: 18,
+                                              ),
+                                              onTap: () {
+                                                setState(() {
+                                                  quantity++;
+                                                  widget.product.amount = quantity;
+                                                  context.read<CartBloc>()
+                                                    ..add(CartProductUpdate(
+                                                        product: widget.product));
+                                                });
+                                              },
+                                            );
+                                          },
+                                        ),
+                                      )
+                                    ]),
                                   ),
                                 ),
-                                Expanded(
-                                  child: Center(
-                                      child: Text(
-                                    quantity.toString(),
-                                    style: const TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: 'Urbanist'),
-                                  )),
-                                ),
-                                Expanded(
-                                  child: BlocBuilder<CartBloc, CartState>(
-                                    builder: (context, state) {
-                                      return IconButton(
-                                        splashRadius: 17,
-                                        icon: const Icon(
-                                          Icons.add,
-                                          size: 18,
-                                        ),
-                                        onPressed: () {
-                                          setState(() {
-                                            quantity++;
-                                            widget.product.amount = quantity;
-                                            context.read<CartBloc>()
-                                              ..add(CartProductUpdate(
-                                                  product: widget.product));
-                                          });
-                                        },
-                                      );
-                                    },
-                                  ),
-                                )
-                              ]),
+                              ),
                             ),
                           ),
                         ],
