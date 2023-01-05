@@ -20,7 +20,7 @@ class BottomSheet_RemoveProductState extends State<BottomSheet_RemoveProduct> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 350,
+      height: 360,
       decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
