@@ -149,10 +149,20 @@ class BottomSheetReviewState extends State<BottomSheetReview> {
                       isFocus = true;
                     });
                   },
-                  decoration: const InputDecoration(
+                  cursorColor: Theme.of(context).iconTheme.color,
+                  decoration: InputDecoration(
                     hintText: 'Enter your review',
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(15))),
+                        borderRadius: BorderRadius.all(Radius.circular(15)),
+                        borderSide: const BorderSide(style: BorderStyle.solid)),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(style: BorderStyle.solid),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(style: BorderStyle.solid),
+                    ),
                   ),
                 ),
               ],
