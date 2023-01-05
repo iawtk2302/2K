@@ -70,7 +70,7 @@ dependencies:
   badges: ^2.0.3
   sprintf: "^7.0.0"
   crypto: ^3.0.2
- 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -8,7 +8,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:sneaker_app/bloc/favorite/favorite_bloc.dart';
 import 'package:sneaker_app/model/User.dart';
+import 'package:sneaker_app/model/favorite.dart';
 import 'package:sneaker_app/router/routes.dart';
 import 'package:sneaker_app/screen/FillProfilePage.dart';
 import 'package:sneaker_app/screen/NotificationPage.dart';
@@ -138,34 +140,46 @@ class _HomePageState extends State<HomePage> {
           actions: [
             BlocBuilder<UserBloc, UserState>(
               builder: (context, state) {
-                if(state is UserExist){
+                if (state is UserExist) {
                   return Center(
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => NotificationPage(),
-                          ));
-                    },
-                    child: const Icon(
-                      Ionicons.notifications_outline,
-                      size: 25,
-                      // color: Colors.black,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => NotificationPage(),
+                            ));
+                      },
+                      child: const Icon(
+                        Ionicons.notifications_outline,
+                        size: 25,
+                        // color: Colors.black,
+                      ),
                     ),
-                  ),
-                );
-                }
-                else{
+                  );
+                } else {
                   return Container();
                 }
               },
             ),
             IconButton(
               splashRadius: 10,
-              onPressed: () {
+              onPressed: () async {
+                List<Favorite> favorites = [];
                 Customer user =
                     (context.read<UserBloc>().state as UserExist).user;
+                await FirebaseFirestore.instance
+                    .collection('Favorite')
+                    .where('idUser', isEqualTo: user.idUser)
+                    .get()
+                    .then((value) {
+                  value.docs.forEach((element) {
+                    favorites.add(Favorite.fromJson(element.data()));
+                    print(element.data());
+                  });
+                }).then((value) => context.read<FavoriteBloc>()
+                      ..add(LoadProductFavorite(favorites: favorites)));
+
                 Navigator.push(
                     context,
                     MaterialPageRoute(
