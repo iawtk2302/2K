@@ -22,7 +22,7 @@ class _BottomSheetEnterPinState extends State<BottomSheetEnterPin> {
   TextEditingController controller = TextEditingController();
   final LocalAuthentication auth = LocalAuthentication();
   bool authenticated = false;
-  bool? useBiometric = false;
+  bool useBiometric = false;
   @override
   void initState() {
     super.initState();
@@ -32,7 +32,9 @@ class _BottomSheetEnterPinState extends State<BottomSheetEnterPin> {
   void didChangeDependencies() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
-      useBiometric = prefs.getBool('useBiometric');
+      if (prefs.getBool('useBiometric') != null) {
+        useBiometric = prefs.getBool('useBiometric')!;
+      }
     });
 
     fingerPrintOpen();
@@ -40,8 +42,7 @@ class _BottomSheetEnterPinState extends State<BottomSheetEnterPin> {
   }
 
   fingerPrintOpen() async {
-    if (useBiometric == null) {
-    } else if (useBiometric!) {
+    if (useBiometric) {
       authenticated = await auth.authenticate(
         localizedReason:
             'Scan your fingerprint (or face or whatever) to authenticate',
@@ -132,7 +133,7 @@ class _BottomSheetEnterPinState extends State<BottomSheetEnterPin> {
             const SizedBox(
               height: 32,
             ),
-            if (useBiometric!)
+            if (useBiometric)
               InkWell(
                 onTap: () {
                   fingerPrintOpen();
