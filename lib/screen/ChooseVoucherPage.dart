@@ -65,6 +65,8 @@ class _ChooseVoucherPageState extends State<ChooseVoucherPage> {
                       child: CustomElevatedButton(text: "Apply".tr, 
                       onTap: (){
                         BlocProvider.of<OrderBloc>(context).add(ApplyVoucher());
+                        BlocProvider.of<OrderBloc>(context).add(ChooseVoucher(null));
+                        Navigator.pop(context);
                       }, 
                       color: Colors.black,
                       colorText: Colors.white,

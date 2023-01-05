@@ -81,6 +81,7 @@ class _ChooseAddressPageState extends State<ChooseAddressPage> {
                         onTap: () async {
                           BlocProvider.of<OrderBloc>(context)
                               .add(ApplyAddress());
+                              Navigator.pop(context);
                         },
                         color: Colors.black,
                         colorText: Colors.black,

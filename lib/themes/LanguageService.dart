@@ -263,7 +263,7 @@ class LocalizationService extends Translations {
           "Oops! An error occured while approving the order. You can try again.":"Rất tiếc! Đã xảy ra lỗi khi phê duyệt đơn đặt hàng. Bạn có thể thử lại.",
           "Try Again":"Thử Lại",
           //voucher
-          "Discount ":"Giảm",
+          "Discount ":"Giảm ",
           "Maximum discount ":"Giảm tối đa "
         },
       };

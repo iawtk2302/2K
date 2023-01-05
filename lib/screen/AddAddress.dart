@@ -295,6 +295,8 @@ class _AddAddressPageState extends State<AddAddressPage> {
                                       state.isCheck == false
                                           ? true
                                           : isDefault));
+                                          BlocProvider.of<OrderBloc>(context).add(LoadOrder());
+                                          Navigator.pop(context);
                                           }
                             }),
                       )
