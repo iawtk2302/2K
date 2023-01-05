@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sneaker_app/model/address.dart';
 import 'package:sneaker_app/model/voucher.dart';
 
@@ -49,11 +50,11 @@ class ItemVoucher extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(voucher!.name.toString(),style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
+                  Text("Discount ".tr+voucher!.name.toString()+"%",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
                   SizedBox(height: 4,),
                   Container(
                     width: 180,
-                    child: Text(voucher!.content.toString().toString(),
+                    child: Text("Maximum discount ".tr+voucher!.content.toString()+"k",
                     overflow: TextOverflow.ellipsis,
                     ),
                   )

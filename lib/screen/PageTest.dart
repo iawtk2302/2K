@@ -267,7 +267,7 @@ class _PageTest extends State<PageTest> {
                 onTap: (){},
                 child: Container(
                   height: 60,
-                  width: 170,
+                  width: 160,
                   child: Center(child: Text('Reset'.tr.tr,style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),)),
                   decoration: BoxDecoration(
                     color: Color(0xFFE6E6E6),
@@ -279,7 +279,7 @@ class _PageTest extends State<PageTest> {
                 onTap: (){_filter();},
                 child: Container(
                   height: 60,
-                  width: 170,
+                  width: 160,
                   child: Center(child: Text('Apply'.tr.tr,style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),)),
                   decoration: BoxDecoration(
                     color: Colors.black,

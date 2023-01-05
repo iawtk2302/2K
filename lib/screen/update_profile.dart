@@ -51,16 +51,16 @@ class _UpdateProfileState extends State<UpdateProfile> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           elevation: 0,
           title: Text(
             "Edit Your Profile",
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
+            style: TextStyle( fontWeight: FontWeight.w600),
           ),
         ),
         body: Container(
-          color: Colors.white,
           width: double.infinity,
           height: double.infinity,
           child: SingleChildScrollView(
@@ -186,12 +186,13 @@ class _UpdateProfileState extends State<UpdateProfile> {
                     child: Container(
                         width: size.width * 0.85,
                         decoration: BoxDecoration(
-                            color: const Color(0xFFFAFAFA),
+                            color: Theme.of(context).cardColor,
                             borderRadius: BorderRadius.circular(10)),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(vertical: 2),
                           child: DropdownButtonHideUnderline(
                             child: DropdownButton<String>(
+                              
                               iconSize: 32,
                               icon: const Padding(
                                 padding: EdgeInsets.only(right: 8),

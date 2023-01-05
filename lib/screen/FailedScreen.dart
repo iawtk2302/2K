@@ -34,24 +34,27 @@ class FailedPage extends StatelessWidget {
                 child: Text("Oops! An error occured while approving the order. You can try again.".tr,style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500,),textAlign: TextAlign.center,)),
             ),
             SizedBox(height: 40,),
-            ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFFFF5656),
-                    elevation: 0,
-                    minimumSize: Size(350, 50),
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(50)),
-                    )),
-                child: Text(
-                  "Try Again".tr,
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                      fontSize: 16),
-                ),
-                onPressed: (){
-                  Navigator.pop(context);
-                }),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFFFF5656),
+                      elevation: 0,
+                      minimumSize: Size(350, 50),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(50)),
+                      )),
+                  child: Text(
+                    "Try Again".tr,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontSize: 16),
+                  ),
+                  onPressed: (){
+                    Navigator.pop(context);
+                  }),
+            ),
                 // ElevatedButton(
                 // style: ElevatedButton.styleFrom(
                 //     backgroundColor: Color(0xFF27AE60),

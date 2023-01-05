@@ -15,6 +15,7 @@ import '../bloc/order/order_bloc.dart';
 import '../bloc/payment/payment.dart';
 import '../model/address.dart';
 import '../model/product_cart.dart';
+import '../model/voucher.dart';
 import '../router/routes.dart';
 import '../themes/ThemeService.dart';
 import '../widget/CustomAppBar.dart';
@@ -34,6 +35,7 @@ class _MethodPaymentPageState extends State<MethodPaymentPage> {
   static const MethodChannel platform = MethodChannel('flutter.native/channelPayOrder');
   final order = FirebaseFirestore.instance.collection('Order');
   final detailOrder = FirebaseFirestore.instance.collection('DetailOrder');
+  final vouchers = FirebaseFirestore.instance.collection('Voucher');
   String payResult = "";
   // static const EventChannel eventChannel = EventChannel('flutter.native/channelPayOrder');
 
@@ -60,11 +62,11 @@ class _MethodPaymentPageState extends State<MethodPaymentPage> {
   //   eventChannel.receiveBroadcastStream().listen(_onEvent, onError: _onError);
   //   super.initState();
   // }
-  createOrder(List<ProductCart> list,String? idVoucher, double totalPrice, String note, Address address, String methodPayment,BuildContext context)async{
+  createOrder(List<ProductCart> list,Voucher? voucher, double totalPrice, String note, Address address, String methodPayment,BuildContext context)async{
     String? idOrder;
     await order.add({'idUser':FirebaseAuth.instance.currentUser!.uid,
     'idAddress':address.idAddress,
-    'idVoucher':idVoucher,
+    'idVoucher':voucher==null?"":voucher.idVoucher,
     'state':'packing','note':note,
     'dateCreated':DateTime.now(),
     'dateCompleted':DateTime.now(),
@@ -76,6 +78,13 @@ class _MethodPaymentPageState extends State<MethodPaymentPage> {
     });
     for(ProductCart i in list){
       detailOrder.add({'idOrder':idOrder,'idProduct':i.product!.idProduct,'amount':i.amount,'size':i.size,}).then((value) {detailOrder.doc(value.id).update({'idDetailOrder':value.id});});
+    }
+    if(voucher!=null){
+      Voucher? tempVoucher;
+    await vouchers.doc(voucher!.idVoucher!).get().then((value) => tempVoucher=Voucher.fromJson(value.data()!));
+    if(voucher.idVoucher!=""){
+      await vouchers.doc(voucher.idVoucher).update({"amount":tempVoucher!.amount!-1});
+    }
     }
     if(methodPayment=="ZaloPay"){
       // Navigator.popUntil(context, (Route<dynamic> predicate) => predicate.isFirst);
@@ -276,7 +285,7 @@ class _MethodPaymentPageState extends State<MethodPaymentPage> {
                                 //         widget.note,
                                 //         currentIndex == 0 ? "Cash" : "ZaloPay",
                                 //         context));
-                                createOrder(state.listProduct, state.selectedVoucher?.idVoucher, state.total, widget.note, state.selectedAddress!, currentIndex == 0 ? "Cash" : "ZaloPay", context);
+                                createOrder(state.listProduct, state.selectedVoucher, state.total, widget.note, state.selectedAddress!, currentIndex == 0 ? "Cash" : "ZaloPay", context);
                                 // Navigator.push(context, MaterialPageRoute(builder: (context) => PageTestSecond('hihi'),));
                               } else {
                                 debugPrint('check fail');

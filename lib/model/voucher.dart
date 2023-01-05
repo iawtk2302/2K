@@ -8,14 +8,17 @@ class Voucher extends Equatable {
   Timestamp? dateEnd;
   String? content;
   double? percent;
-
+  double? amount;
+  double? maximum;
   Voucher(
       {this.idVoucher,
       this.name,
       this.dateStart,
       this.dateEnd,
       this.content,
-      this.percent});
+      this.percent,
+      this.amount,
+      this.maximum});
 
   Voucher.fromJson(Map<String, dynamic> json) {
     idVoucher = json['idVoucher'];
@@ -23,7 +26,9 @@ class Voucher extends Equatable {
     dateStart = json['dateStart'];
     dateEnd = json['dateEnd'];
     content = json['content'];
-    percent = json['percent'];
+    percent = double.tryParse(json['percent'].toString());
+    amount = double.tryParse(json['amount'].toString());
+    maximum = double.tryParse(json['maximum'].toString());
   }
 
   Map<String, dynamic> toJson() {
@@ -34,10 +39,12 @@ class Voucher extends Equatable {
     data['dateEnd'] = this.dateEnd;
     data['content'] = this.content;
     data['percent'] = this.percent;
+    data['amount'] = this.content;
+    data['maximum'] = this.percent;
     return data;
   }
   
   @override
   // TODO: implement props
-  List<Object?> get props => [idVoucher,dateStart,dateEnd,content,percent];
+  List<Object?> get props => [idVoucher,dateStart,dateEnd,content,percent,amount,maximum];
 }

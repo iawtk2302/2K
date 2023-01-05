@@ -102,7 +102,7 @@ class _CartPageState extends State<CartPage> {
                             ),
                             Container(
                               // color: Theme.of(context).scaffoldBackgroundColor,
-                              width: 220,
+                              width: 200,
                               height: 55,
                               child: CustomTextButton(
                                 onPressed: () {

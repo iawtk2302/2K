@@ -40,7 +40,8 @@ class _ChooseVoucherPageState extends State<ChooseVoucherPage> {
             if(state.tempVoucher==null){
               BlocProvider.of<OrderBloc>(context).add(ChooseVoucher(state.selectedVoucher));
             }
-            return SingleChildScrollView(
+            if(state.listVoucher.length>0){
+              return SingleChildScrollView(
               child: Container(
                 // color: Color(0xFFFBFBFB),
                 child: Column(
@@ -59,7 +60,7 @@ class _ChooseVoucherPageState extends State<ChooseVoucherPage> {
                           },),),
                         );
                       }),
-                    Padding(
+                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       child: CustomElevatedButton(text: "Apply".tr, 
                       onTap: (){
@@ -73,6 +74,10 @@ class _ChooseVoucherPageState extends State<ChooseVoucherPage> {
                 ),
               ),
             );
+            }
+            else{
+              return NoVoucher();
+            }
           }
           else{
             return Container();
@@ -83,3 +88,13 @@ class _ChooseVoucherPageState extends State<ChooseVoucherPage> {
   }
 }
 
+Widget NoVoucher(){
+  return Center(
+    child: Column(
+      children: [
+      SizedBox(height: 180,),
+      Icon(Icons.confirmation_number,size: 100,),
+      Text("There are no voucher available",style: TextStyle(fontSize: 16),),
+    ]),
+  );
+}

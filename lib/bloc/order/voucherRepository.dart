@@ -28,6 +28,6 @@ class VoucherRepository{
         temp.add(element);
       }
      });
-    return temp;
+    return temp.where((element) => element.amount!>0).toList();
   }
 }

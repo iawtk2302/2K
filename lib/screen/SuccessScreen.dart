@@ -33,24 +33,27 @@ class SuccessPage extends StatelessWidget {
               child: Text("Your payment was successful!".tr,style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500),),
             ),
             SizedBox(height: 40,),
-            ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF27AE60),
-                    elevation: 0,
-                    minimumSize: Size(350, 50),
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(50)),
-                    )),
-                child: Text(
-                  "Back To Home".tr,
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                      fontSize: 16),
-                ),
-                onPressed: (){
-                  Navigator.pushNamed(context, Routes.main);
-                }),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF27AE60),
+                      elevation: 0,
+                      minimumSize: Size(350, 50),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(50)),
+                      )),
+                  child: Text(
+                    "Back To Home".tr,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontSize: 16),
+                  ),
+                  onPressed: (){
+                    Navigator.pushNamed(context, Routes.main);
+                  }),
+            ),
           ],
         ),
       ),
