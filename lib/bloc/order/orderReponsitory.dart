@@ -112,9 +112,9 @@ class OrderReponsitory{
       detailOrder.add({'idOrder':idOrder,'idProduct':i.product!.idProduct,'amount':i.amount,'size':i.size,}).then((value) {detailOrder.doc(value.id).update({'idDetailOrder':value.id});});
     }
     if(methodPayment=="ZaloPay"){
-      Navigator.popUntil(context, (Route<dynamic> predicate) => predicate.isFirst);
-      BlocProvider.of<CartBloc>(context).add(LoadCart());
-      clearProduct(); 
+      // Navigator.popUntil(context, (Route<dynamic> predicate) => predicate.isFirst);
+      // BlocProvider.of<CartBloc>(context).add(LoadCart());
+      // clearProduct(); 
       String zpTransToken="";
       var result = await createOrderZaloPay(totalPrice.toInt());
                if (result != null) {
@@ -133,9 +133,9 @@ class OrderReponsitory{
     // clearProduct();
     }
     }
-    Navigator.popUntil(context, (Route<dynamic> predicate) => predicate.isFirst);
-    BlocProvider.of<CartBloc>(context).add(LoadCart());
-    clearProduct();
+    // Navigator.popUntil(context, (Route<dynamic> predicate) => predicate.isFirst);
+    // BlocProvider.of<CartBloc>(context).add(LoadCart());
+    // clearProduct();
   }
   void showSuccessDialog(BuildContext context){
   showDialog(context: context, 

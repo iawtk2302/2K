@@ -46,3 +46,9 @@ class OrderLoadedParameter extends OrderState {
   @override
   List<Object> get props => [selectedAddress!,tempAddress!,listAddress,tempAddress!,selectedVoucher!,tempVoucher!];
 }
+
+class OrderSuccess extends OrderState {
+  const OrderSuccess();
+  @override
+  List<Object> get props => [];
+}

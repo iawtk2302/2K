@@ -17,4 +17,6 @@ class Routes {
   static const enterPin = '/EnterPin';
   static const choosePayment='/MethodPaymentPage';
   static const editAddress='/EditAddressPage';
+  static const success='/SuccessPage';
+  static const failed='/FailedPage';
 }

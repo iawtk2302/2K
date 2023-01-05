@@ -111,6 +111,9 @@ class _EditProfileState extends State<EditProfile> {
                       if (value!.isEmpty) {
                         return "Required";
                       }
+                      if (!RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%0-9-]').hasMatch(value)) {
+                        return "First Name Invalid";
+                      }
                       return null;
                     },
                   ),
@@ -121,6 +124,9 @@ class _EditProfileState extends State<EditProfile> {
                     validator: (value) {
                       if (value!.isEmpty) {
                         return "Required";
+                      }
+                      if (!RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%0-9-]').hasMatch(value)) {
+                        return "Last Name Invalid";
                       }
                       return null;
                     },

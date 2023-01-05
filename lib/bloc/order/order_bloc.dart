@@ -197,6 +197,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     on<CreateOrder>((event, emit) async {
       // final user=UserBloc().state as UserExist;
       final state = this.state as OrderLoaded;
+      emit(OrderSuccess());
       await OrderReponsitory().createOrder(
           state.listProduct,
           state.selectedVoucher == null
@@ -207,7 +208,9 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
           state.selectedAddress!,
           event.methodPayment,
           event.context);
-      await OrderReponsitory().clearProduct();
+      // await OrderReponsitory().clearProduct();
+      
     });
+    
   }
 }

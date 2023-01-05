@@ -19,7 +19,7 @@ class PageTest extends StatefulWidget {
 class _PageTest extends State<PageTest> {
   bool isLoading=true;
   final firestore=FirebaseFirestore.instance.collection('Product');
-  RangeValues values=const RangeValues(0.0, 1500.0);
+  RangeValues values=const RangeValues(0.0, 10000000.0);
   List<Product>listProduct=[];
   List<Product>listProductCore=[];
   List<String>listBrand=['All'];
@@ -212,8 +212,9 @@ class _PageTest extends State<PageTest> {
             
             RangeSlider(
               values: values, 
+              
               min: 0,
-              max: 1500,
+              max: 10000000,
               divisions: 10,
               activeColor:  Theme.of(context).brightness==Brightness.dark?Colors.white:Colors.black,
               inactiveColor: Theme.of(context).brightness==Brightness.dark?Color(0xFF35383F):Color(0xFFE6E6E6),
