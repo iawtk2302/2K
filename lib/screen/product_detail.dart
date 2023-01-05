@@ -39,11 +39,12 @@ class _ProductDetailState extends State<ProductDetail> {
   int quantity = 1;
   PageController pageController = PageController();
   List<DetailProduct> listDetailProduct = [];
+  double price = 0;
   @override
   void initState() {
     // print(widget.product.idProduct);
     final docFavorite = FirebaseFirestore.instance.collection('Favorite');
-
+    price = widget.product.price!;
     docFavorite
         .where('idProduct', isEqualTo: widget.product.idProduct)
         .get()
@@ -262,7 +263,7 @@ class _ProductDetailState extends State<ProductDetail> {
                                           // print(listDetailProduct[indexSize]
                                           //     .idDetailProduct);
                                           setState(() {
-                                            if (quantity > 0) quantity--;
+                                            if (quantity > 1) quantity--;
                                           });
                                         },
                                       ),
@@ -331,7 +332,7 @@ class _ProductDetailState extends State<ProductDetail> {
                           height: 5,
                         ),
                         Text(
-                          '${convertPrice(widget.product.price!)}',
+                          '${convertPrice(price * quantity)}',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 22,
