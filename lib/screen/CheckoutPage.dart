@@ -408,8 +408,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
         padding: const EdgeInsets.only(left: 16),
         child:
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-          Text(
-            voucher.name.toString(),
+          Text("Discount ".tr+
+            voucher.name.toString()+"%",
             style: TextStyle(
                  fontSize: 16, fontWeight: FontWeight.w500),
           ),
