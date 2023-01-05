@@ -22,7 +22,7 @@ class _BottomSheetEnterPinState extends State<BottomSheetEnterPin> {
   TextEditingController controller = TextEditingController();
   final LocalAuthentication auth = LocalAuthentication();
   bool authenticated = false;
-
+  bool? useBiometric = false;
   @override
   void initState() {
     super.initState();
@@ -31,9 +31,17 @@ class _BottomSheetEnterPinState extends State<BottomSheetEnterPin> {
   @override
   void didChangeDependencies() async {
     final prefs = await SharedPreferences.getInstance();
-    bool? useBiometric = prefs.getBool('useBiometric');
+    setState(() {
+      useBiometric = prefs.getBool('useBiometric');
+    });
+
+    fingerPrintOpen();
+    super.didChangeDependencies();
+  }
+
+  fingerPrintOpen() async {
     if (useBiometric == null) {
-    } else if (useBiometric) {
+    } else if (useBiometric!) {
       authenticated = await auth.authenticate(
         localizedReason:
             'Scan your fingerprint (or face or whatever) to authenticate',
@@ -50,7 +58,6 @@ class _BottomSheetEnterPinState extends State<BottomSheetEnterPin> {
     if (authenticated) {
       Navigator.pop(context, true);
     }
-    super.didChangeDependencies();
   }
 
   @override
@@ -125,16 +132,22 @@ class _BottomSheetEnterPinState extends State<BottomSheetEnterPin> {
             const SizedBox(
               height: 32,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Icon(Icons.fingerprint),
-                SizedBox(
-                  width: 10,
+            if (useBiometric!)
+              InkWell(
+                onTap: () {
+                  fingerPrintOpen();
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Icon(Icons.fingerprint),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text('Unlock with fingerprint')
+                  ],
                 ),
-                Text('Unlock with fingerprint')
-              ],
-            ),
+              ),
             const SizedBox(
               height: 16,
             ),
