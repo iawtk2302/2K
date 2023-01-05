@@ -364,12 +364,12 @@ class _ProductDetailState extends State<ProductDetail> {
                                     'Product successfully added to cart'.tr,
                                     // style: TextStyle(color: Colors.black),
                                   ),
-                                  // action: SnackBarAction(
-                                  //   label: 'Undo',
-                                  //   onPressed: () {
-                                  //     // Some code to undo the change.
-                                  //   },
-                                  // ),
+                                  action: SnackBarAction(
+                                    label: 'Close',
+                                    onPressed: () {
+                                      // Some code to undo the change.
+                                    },
+                                  ),
                                 );
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(snackBar);

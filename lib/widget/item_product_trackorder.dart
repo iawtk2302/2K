@@ -20,8 +20,7 @@ class Item_Product_TrackOrder extends StatelessWidget {
   final bool isInModal;
   String convertPrice(double price) {
     final format = NumberFormat("###,###.###", "tr_TR");
-
-    return format.format(price) + 'đ';
+    return '${format.format(price)}đ';
   }
 
   @override
@@ -63,9 +62,7 @@ class Item_Product_TrackOrder extends StatelessWidget {
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
-                              
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16),
+                              fontWeight: FontWeight.bold, fontSize: 16),
                         ),
                       )),
                   Expanded(
@@ -74,15 +71,11 @@ class Item_Product_TrackOrder extends StatelessWidget {
                         children: [
                           Text(
                             'Size'.tr + ': ' + '${product.size}',
-                            style: const TextStyle(
-                                
-                                fontWeight: FontWeight.w500),
+                            style: const TextStyle(fontWeight: FontWeight.w500),
                           ),
                           Text(
                             ' | Qty = '.tr + '${product.amount}',
-                            style: const TextStyle(
-                                
-                                fontWeight: FontWeight.w500),
+                            style: const TextStyle(fontWeight: FontWeight.w500),
                           ),
                         ],
                       )),
@@ -92,11 +85,9 @@ class Item_Product_TrackOrder extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            '${product.product!.price} đ',
+                            convertPrice(product.product!.price!),
                             style: TextStyle(
-                                
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16),
+                                fontWeight: FontWeight.bold, fontSize: 16),
                           ),
                           SizedBox(
                             width: 10,
@@ -144,7 +135,6 @@ class Item_Product_TrackOrder extends StatelessWidget {
                                 child: Text(
                                   'Review'.tr,
                                   style: TextStyle(
-                                    
                                     fontWeight: FontWeight.w600,
                                     color: Theme.of(context)
                                         .textTheme

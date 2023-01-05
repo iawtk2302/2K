@@ -115,8 +115,14 @@ class _ItemProductState extends State<ItemProduct> {
                           child: IconButton(
                             splashRadius: 20,
                             icon: isLike
-                                ? const Icon(Icons.favorite)
-                                : const Icon(Icons.favorite_border),
+                                ? const Icon(
+                                    Icons.favorite,
+                                    color: Colors.black,
+                                  )
+                                : const Icon(
+                                    Icons.favorite_border,
+                                    color: Colors.black,
+                                  ),
                             onPressed: () {
                               context.read<ProductBloc>().add(ReactProduct(
                                   idProduct: widget.product.idProduct!,

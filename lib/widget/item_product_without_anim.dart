@@ -65,8 +65,14 @@ class _ItemProductWithoutAnimState extends State<ItemProductWithoutAnim> {
                 child: IconButton(
                   splashRadius: 20,
                   icon: isLike
-                      ? const Icon(Icons.favorite)
-                      : const Icon(Icons.favorite_border),
+                      ? const Icon(
+                          Icons.favorite,
+                          color: Colors.black,
+                        )
+                      : const Icon(
+                          Icons.favorite_border,
+                          color: Colors.black,
+                        ),
                   onPressed: () {
                     setState(() {
                       isLike = !isLike;

@@ -79,10 +79,7 @@ class BottomSheetReviewState extends State<BottomSheetReview> {
                 ),
                 Text(
                   'Leave a review',
-                  style: TextStyle(
-                      
-                      fontWeight: FontWeight.bold,
-                      fontSize: 22),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
                 ),
                 SizedBox(
                   height: 10,
@@ -115,10 +112,7 @@ class BottomSheetReviewState extends State<BottomSheetReview> {
                 ),
                 Text(
                   'How is your order?',
-                  style: TextStyle(
-                      
-                      fontWeight: FontWeight.bold,
-                      fontSize: 22),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
                 ),
                 Text(
                   'Please give your rating & also your review...',
@@ -214,6 +208,11 @@ class BottomSheetReviewState extends State<BottomSheetReview> {
                                     }).then((value) => docReview
                                         .doc(value.id)
                                         .update({'idReview': value.id}));
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        const SnackBar(
+                                            content:
+                                                Text('Review successful')));
+                                    Navigator.pop(context);
                                   } else {
                                     final docReview = FirebaseFirestore.instance
                                         .collection('Review');
