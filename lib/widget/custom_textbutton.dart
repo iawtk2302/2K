@@ -58,7 +58,7 @@ class CustomTextButton extends StatelessWidget {
               style: TextStyle(
                   
                   fontSize: 16,
-                  // color: isDark ? Colors.white : Colors.black,
+                  // color: isDark ? Cm olors.white : Colors.black,
                   color: isDark
                       ? Theme.of(context).primaryColor
                       : Theme.of(context).primaryIconTheme.color,

@@ -57,7 +57,7 @@ class OrderTracking extends StatelessWidget {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [Text('Date Delivered'.tr), Text('27/11/2022')],
+            children: [Text('Date Delivered'.tr), Text('27/11/2023')],
           ),
           SizedBox(
             height: 8,
