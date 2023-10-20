@@ -1,13 +1,13 @@
 # 2K App
 
 ## Description
-An e-commerce app for sneakers provides a platform for online shopping, including features such as product listing, shopping cart management, order placement,... It utilizes modern technologies for efficient performance and a user-friendly interface. The application is designed to be easy to navigate, providing users with a seamless shopping experience. The README file includes detailed information on how to install, run, and contribute to the project
+An e-commerce app for sneakers provides a platform for online shopping, including features such as product listing, shopping cart management, order placement,... It utilizes modern technologies for efficient performance and a user-friendly interface. The application is designed to be easy to navigate, providing users with a seamless shopping experience
 
 <div style="display: flex; justify-content: space-around;">
-  <img src="assets/images/screen_1.png" style="width:24%">
-  <img src="assets/images/screen_2.png" style="width:24%">
-  <img src="assets/images/screen_3.png" style="width:24%">
-  <img src="assets/images/screen_4.png" style="width:24%">
+  <img src="assets/images/screen_1.jpg" style="width:24%">
+  <img src="assets/images/screen_2.jpg" style="width:24%">
+  <img src="assets/images/screen_3.jpg" style="width:24%">
+  <img src="assets/images/screen_4.jpg" style="width:24%">
 </div>
 
 ## Installation
